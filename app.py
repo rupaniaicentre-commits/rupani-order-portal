@@ -372,7 +372,7 @@ def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
         order_gid = order_ws.id
 
         # header info rows
-        order_ws.update('A1', [
+        header_rows = [
             ['Rupani Automobiles — Order Sheet'],
             [],
             ['Firm Name',      firm_name],
@@ -381,7 +381,8 @@ def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
             ['Total Items',    len(items)],
             [],
             ['Part No. (AS)', 'Part No. (SAI)', 'Description', 'Vehicle', 'Colour', 'MRP (₹)', 'Qty'],
-        ], value_input_option='USER_ENTERED')
+        ]
+        order_ws.update(range_name='A1', values=header_rows, value_input_option='USER_ENTERED')
 
         data_rows = [[
             i.get('as_part_number', ''),
@@ -393,7 +394,7 @@ def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
             i.get('qty', 0),
         ] for i in items]
         if data_rows:
-            order_ws.update(f'A9', data_rows, value_input_option='USER_ENTERED')
+            order_ws.update(range_name='A9', values=data_rows, value_input_option='USER_ENTERED')
 
         # ── append row to master with hyperlink ──────────
         total_qty = sum(i.get('qty', 0) for i in items)
