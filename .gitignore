@@ -7,3 +7,4 @@ Order_*.xlsx
 .env
 venv/
 .DS_Store
+google_credentials.json

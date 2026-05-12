@@ -11,6 +11,13 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 import tempfile
 from datetime import datetime
 
+try:
+    import gspread
+    from google.oauth2.service_account import Credentials as SACredentials
+    _GSPREAD_AVAILABLE = True
+except ImportError:
+    _GSPREAD_AVAILABLE = False
+
 app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = BASE_DIR  # data files now live alongside app.py
@@ -92,6 +99,8 @@ def load_config():
         data['smtp_pass'] = os.environ['SMTP_PASS']
     if os.environ.get('ORDER_EMAIL'):
         data['order_email'] = os.environ['ORDER_EMAIL']
+    if os.environ.get('GSHEET_ID'):
+        data['gsheet_id'] = os.environ['GSHEET_ID']
     return data
 
 
@@ -149,20 +158,24 @@ def checkout():
     smtp_pass = config.get('smtp_pass', '')
     order_email = config.get('order_email', 'harshrupani@rupaniautomobiles.com')
 
+    email_sent = False
     if smtp_user and smtp_pass:
         try:
             _send_email(config, firm_name, contact_number, items, save_path, fname)
-            return jsonify({'success': True, 'email_sent': True,
-                            'message': f'Order sent successfully to {order_email}',
-                            'download': fname})
+            email_sent = True
+            msg = f'Order sent successfully to {order_email}'
         except Exception as e:
-            return jsonify({'success': True, 'email_sent': False,
-                            'message': f'Order saved. Email failed: {str(e)}',
-                            'download': fname})
+            msg = f'Order saved. Email failed: {str(e)}'
     else:
-        return jsonify({'success': True, 'email_sent': False,
-                        'message': 'Order saved. Configure SMTP to enable auto-email.',
-                        'download': fname})
+        msg = 'Order saved. Configure SMTP to enable auto-email.'
+
+    # Log to Google Sheet (non-blocking, errors are swallowed)
+    try:
+        _log_to_gsheet(config, firm_name, contact_number, items, email_sent)
+    except Exception as e:
+        print(f"[GSheet] Logging failed: {e}")
+
+    return jsonify({'success': True, 'email_sent': email_sent, 'message': msg, 'download': fname})
 
 
 @app.route('/download/<path:filename>')
@@ -309,6 +322,91 @@ def _send_email(config, firm_name, contact_number, items, filepath, fname):
         s.starttls()
         s.login(smtp_user, config['smtp_pass'])
         s.sendmail(smtp_user, recipients, msg.as_string())
+
+
+def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
+    if not _GSPREAD_AVAILABLE:
+        return
+    creds_file = os.path.join(BASE_DIR, 'google_credentials.json')
+    sheet_id   = config.get('gsheet_id', '').strip()
+    if not os.path.exists(creds_file) or not sheet_id:
+        return
+
+    try:
+        scopes = [
+            'https://www.googleapis.com/auth/spreadsheets',
+            'https://www.googleapis.com/auth/drive',
+        ]
+        creds = SACredentials.from_service_account_file(creds_file, scopes=scopes)
+        gc    = gspread.authorize(creds)
+        spreadsheet = gc.open_by_key(sheet_id)
+
+        # ── master Orders sheet ──────────────────────────
+        try:
+            master = spreadsheet.worksheet('Orders')
+        except gspread.WorksheetNotFound:
+            master = spreadsheet.add_worksheet(title='Orders', rows=1000, cols=8)
+            master.append_row(
+                ['Date & Time', 'Firm Name', 'Contact', 'Items', 'Total Qty', 'MRP Total (₹)', 'Email Sent'],
+                value_input_option='USER_ENTERED'
+            )
+            master.format('A1:G1', {
+                'textFormat': {'bold': True},
+                'backgroundColor': {'red': 0.106, 'green': 0.165, 'blue': 0.290}
+            })
+
+        # ── individual order sheet tab ───────────────────
+        now       = datetime.now()
+        tab_name  = f"{now.strftime('%d%m%y_%H%M')}_{firm_name[:18].strip()}"
+        tab_name  = ''.join(c for c in tab_name if c not in r'\/*?[]')[:100]
+
+        # avoid duplicate tab names
+        existing  = [ws.title for ws in spreadsheet.worksheets()]
+        suffix    = 0
+        base_name = tab_name
+        while tab_name in existing:
+            suffix   += 1
+            tab_name  = f"{base_name}_{suffix}"
+
+        order_ws = spreadsheet.add_worksheet(title=tab_name, rows=len(items) + 15, cols=8)
+        order_gid = order_ws.id
+
+        # header info rows
+        order_ws.update('A1', [
+            ['Rupani Automobiles — Order Sheet'],
+            [],
+            ['Firm Name',      firm_name],
+            ['Contact',        contact_number],
+            ['Date & Time',    now.strftime('%d-%m-%Y %H:%M')],
+            ['Total Items',    len(items)],
+            [],
+            ['Part No. (AS)', 'Part No. (SAI)', 'Description', 'Vehicle', 'Colour', 'MRP (₹)', 'Qty'],
+        ], value_input_option='USER_ENTERED')
+
+        data_rows = [[
+            i.get('as_part_number', ''),
+            i.get('sai_part_number', ''),
+            i.get('description', ''),
+            i.get('vehicle', ''),
+            i.get('colour', ''),
+            i.get('mrp', ''),
+            i.get('qty', 0),
+        ] for i in items]
+        if data_rows:
+            order_ws.update(f'A9', data_rows, value_input_option='USER_ENTERED')
+
+        # ── append row to master with hyperlink ──────────
+        total_qty = sum(i.get('qty', 0) for i in items)
+        total_mrp = sum((i.get('mrp') or 0) * i.get('qty', 0) for i in items)
+        hyperlink  = f'=HYPERLINK("#gid={order_gid}","{firm_name.replace(chr(34), "")}")'
+
+        master.append_row(
+            [now.strftime('%d-%m-%Y %H:%M'), hyperlink, contact_number,
+             len(items), total_qty, total_mrp, 'Yes' if email_sent else 'No'],
+            value_input_option='USER_ENTERED'
+        )
+    except Exception as e:
+        print(f"[GSheet] Error: {e}")
 
 
 if __name__ == '__main__':
