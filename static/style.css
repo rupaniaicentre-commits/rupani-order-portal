@@ -488,12 +488,24 @@ mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
 
 /* ─── RESPONSIVE ──────────────────────────── */
 @media (max-width: 600px) {
-  .header-title { font-size: 13px; }
+  .header-title { display: none; }
   .quick-cards { grid-template-columns: 1fr 1fr; }
   .category-grid { grid-template-columns: repeat(2, 1fr); }
   .parts-table thead th:nth-child(4),
   .parts-table tbody td:nth-child(4) { display: none; }
   .basket-btn span:not(.basket-count) { display: none; }
+  /* Search dropdown: full-width fixed panel on mobile */
+  .search-dropdown {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    max-height: 65vh;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  }
+}
+@media (max-width: 400px) {
+  .quick-cards { grid-template-columns: 1fr; }
 }
 @media (max-width: 400px) {
   .quick-cards { grid-template-columns: 1fr; }

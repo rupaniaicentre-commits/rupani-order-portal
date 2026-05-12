@@ -390,6 +390,13 @@ const App = (() => {
         📋 Showing <strong>${sliced.length}</strong> of <strong>${total}</strong> total products.
         Use the search bar above to filter instantly.
       </div>
+
+      <!-- MOBILE CARDS -->
+      <div class="parts-list">
+        ${sliced.map(p => buildPartCard(p)).join('')}
+      </div>
+
+      <!-- DESKTOP TABLE -->
       <div class="parts-table-wrap">
         <table class="parts-table">
           <thead>
