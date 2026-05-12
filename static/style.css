@@ -138,8 +138,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: v
 }
 .header-title { color: #fff; font-weight: 600; font-size: 15px; white-space: nowrap; }
 .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.settings-btn { color: rgba(255,255,255,.7); font-size: 20px; }
-.settings-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+.settings-btn { display: none !important; }
 
 /* Basket Button */
 .basket-btn {
