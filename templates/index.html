@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rupani Automobiles — Order Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ════════════════════ LOGIN SCREEN ════════════════════ -->
+<div id="loginScreen" class="screen active">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-icon">RA</div>
+      <div>
+        <div class="login-brand">Rupani Automobiles</div>
+        <div class="login-sub">Fibre Parts Order Portal</div>
+      </div>
+    </div>
+    <div class="login-form">
+      <div class="form-group">
+        <label>Firm / Shop Name</label>
+        <input id="firmNameInput" type="text" placeholder="Enter your firm name" autocomplete="organization" />
+      </div>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input id="mobileInput" type="tel" placeholder="Enter mobile number" autocomplete="tel" maxlength="10" />
+      </div>
+      <div id="loginError" class="login-error hidden"></div>
+      <button id="loginBtn" class="btn-primary btn-full" onclick="App.login()">
+        Continue to Order Portal →
+      </button>
+    </div>
+    <div class="login-note">Powered by Rupani Automobiles Pvt. Ltd.</div>
+  </div>
+</div>
+
+<!-- ════════════════════ MAIN APP ════════════════════ -->
+<div id="appScreen" class="screen hidden">
+
+  <!-- ── HEADER ── -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="btn-icon back-btn" id="backBtn" onclick="App.goBack()" title="Go Back">
+        ←
+      </button>
+      <div class="header-brand" onclick="App.goHome()">
+        <span class="header-logo">RA</span>
+        <span class="header-title">Rupani Automobiles</span>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-wrap" id="searchWrap">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search parts, vehicle, part no…"
+        autocomplete="off"
+        oninput="App.onSearch(this.value)"
+        onkeydown="App.onSearchKey(event)"
+        onfocus="App.showSearchDropdown()"
+      />
+      <span class="search-icon">⌕</span>
+      <button class="search-clear" id="searchClear" onclick="App.clearSearch()">✕</button>
+      <div id="searchDropdown" class="search-dropdown hidden"></div>
+    </div>
+
+    <div class="header-right">
+      <button class="basket-btn" onclick="App.toggleBasket()" title="Basket">
+        🛒 <span class="basket-count" id="basketCount">0</span>
+      </button>
+      <button class="btn-icon settings-btn" onclick="App.openSettings()" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- ── BREADCRUMB ── -->
+  <div class="breadcrumb-bar" id="breadcrumbBar">
+    <span class="breadcrumb-item active" onclick="App.goHome()">Home</span>
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main id="mainContent" class="main-content">
+    <!-- Dynamically rendered by JS -->
+  </main>
+
+  <!-- ── BASKET PANEL ── -->
+  <div id="basketOverlay" class="overlay hidden" onclick="App.toggleBasket()"></div>
+  <aside id="basketPanel" class="basket-panel">
+    <div class="basket-header">
+      <h2>🛒 Your Basket</h2>
+      <button onclick="App.toggleBasket()" class="btn-icon">✕</button>
+    </div>
+    <div id="basketItems" class="basket-items">
+      <div class="basket-empty">Your basket is empty</div>
+    </div>
+    <div class="basket-footer" id="basketFooter" style="display:none">
+      <div class="basket-total">
+        <span>Total Items: <strong id="basketTotalQty">0</strong></span>
+        <span>Total MRP: <strong id="basketTotalMrp">₹0</strong></span>
+      </div>
+      <button class="btn-primary btn-full" onclick="App.openCheckout()">Proceed to Checkout →</button>
+      <button class="btn-outline btn-full" onclick="App.clearBasket()">Clear Basket</button>
+    </div>
+  </aside>
+
+  <!-- ── CHECKOUT MODAL ── -->
+  <div id="checkoutOverlay" class="overlay hidden" onclick="App.closeCheckout()"></div>
+  <div id="checkoutModal" class="modal hidden">
+    <div class="modal-header">
+      <h2>Confirm & Place Order</h2>
+      <button onclick="App.closeCheckout()" class="btn-icon">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-summary">
+        <div class="summary-row"><span>Firm Name:</span><strong id="co_firm"></strong></div>
+        <div class="summary-row"><span>Contact:</span><strong id="co_contact"></strong></div>
+        <div class="summary-row"><span>Items:</span><strong id="co_items"></strong></div>
+      </div>
+      <div class="order-list" id="co_list"></div>
+    </div>
+    <div class="modal-footer">
+      <div id="checkoutMsg" class="checkout-msg hidden"></div>
+      <button id="placeOrderBtn" class="btn-primary btn-full" onclick="App.placeOrder()">
+        ✓ Place Order &amp; Send
+      </button>
+      <button class="btn-outline btn-full" onclick="App.closeCheckout()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ── SETTINGS MODAL ── -->
+  <div id="settingsOverlay" class="overlay hidden" onclick="App.closeSettings()"></div>
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-header">
+      <h2>⚙ Portal Settings</h2>
+      <button onclick="App.closeSettings()" class="btn-icon">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Order Recipient Email</label>
+        <input id="cfg_email" type="email" placeholder="harshrupani@rupaniautomobiles.com" />
+      </div>
+      <div class="settings-section-title">SMTP Configuration (for auto-email)</div>
+      <div class="form-group">
+        <label>SMTP Host</label>
+        <input id="cfg_smtp_host" type="text" placeholder="smtp.gmail.com" />
+      </div>
+      <div class="form-row">
+        <div class="form-group flex-1">
+          <label>SMTP Port</label>
+          <input id="cfg_smtp_port" type="number" placeholder="587" />
+        </div>
+        <div class="form-group flex-1">
+          <label>SMTP Username</label>
+          <input id="cfg_smtp_user" type="text" placeholder="your@gmail.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>SMTP Password / App Password</label>
+        <input id="cfg_smtp_pass" type="password" placeholder="App password (not Gmail password)" />
+      </div>
+      <div class="settings-note">
+        💡 For Gmail: Enable 2FA and use an App Password (not your regular password).
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div id="settingsMsg" class="checkout-msg hidden"></div>
+      <button class="btn-primary" onclick="App.saveSettings()">Save Settings</button>
+      <button class="btn-outline" onclick="App.closeSettings()">Cancel</button>
+    </div>
+  </div>
+
+</div><!-- /appScreen -->
+
+<!-- Loading overlay -->
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="loader-box">
+    <div class="spinner"></div>
+    <div class="loader-text" id="loaderText">Loading…</div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
