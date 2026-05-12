@@ -855,8 +855,11 @@ const App = (() => {
     .then(data => {
       const msg = document.getElementById('checkoutMsg');
       if (data.success) {
-        msg.textContent = data.message || 'Order placed successfully!';
-        msg.className   = 'checkout-msg success';
+        const emailLine = data.email_sent
+          ? `📧 Email sent to harshrupani@rupaniautomobiles.com`
+          : `⚠️ Email not sent: ${data.message}`;
+        msg.innerHTML = `✅ Order placed!<br><small>${emailLine}</small>`;
+        msg.className   = data.email_sent ? 'checkout-msg success' : 'checkout-msg error';
         msg.classList.remove('hidden');
         btn.textContent = '✓ Order Placed!';
 
@@ -867,7 +870,7 @@ const App = (() => {
           a.click();
         }
         clearBasket();
-        setTimeout(closeCheckout, 3000);
+        setTimeout(closeCheckout, 5000);
       } else {
         msg.textContent = data.error || 'Something went wrong.';
         msg.className   = 'checkout-msg error';

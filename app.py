@@ -274,9 +274,18 @@ def _build_excel(firm_name, contact_number, items):
 
 
 def _send_email(config, firm_name, contact_number, items, filepath, fname):
+    order_email = config['order_email']
+    smtp_user   = config['smtp_user']
+
+    # Always CC the sender account so there's a copy in Gmail Sent/Inbox
+    recipients = [order_email]
+    if smtp_user and smtp_user != order_email:
+        recipients.append(smtp_user)
+
     msg = MIMEMultipart()
-    msg['From'] = config['smtp_user']
-    msg['To'] = config['order_email']
+    msg['From']    = smtp_user
+    msg['To']      = order_email
+    msg['Cc']      = smtp_user
     msg['Subject'] = f"New Order – {firm_name} | {datetime.now().strftime('%d %b %Y %H:%M')}"
 
     body = (
@@ -298,8 +307,8 @@ def _send_email(config, firm_name, contact_number, items, filepath, fname):
 
     with smtplib.SMTP(config['smtp_host'], int(config['smtp_port'])) as s:
         s.starttls()
-        s.login(config['smtp_user'], config['smtp_pass'])
-        s.sendmail(config['smtp_user'], config['order_email'], msg.as_string())
+        s.login(smtp_user, config['smtp_pass'])
+        s.sendmail(smtp_user, recipients, msg.as_string())
 
 
 if __name__ == '__main__':
