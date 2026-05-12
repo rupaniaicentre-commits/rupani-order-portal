@@ -76,14 +76,23 @@ def load_config():
     cfg = os.path.join(BASE_DIR, 'portal_config.json')
     if os.path.exists(cfg):
         with open(cfg) as f:
-            return json.load(f)
-    return {
-        'order_email': 'harshrupani@rupaniautomobiles.com',
-        'smtp_host': 'smtp.gmail.com',
-        'smtp_port': 587,
-        'smtp_user': '',
-        'smtp_pass': ''
-    }
+            data = json.load(f)
+    else:
+        data = {
+            'order_email': 'harshrupani@rupaniautomobiles.com',
+            'smtp_host': 'smtp.gmail.com',
+            'smtp_port': 587,
+            'smtp_user': '',
+            'smtp_pass': ''
+        }
+    # env vars override file (used in cloud deployments)
+    if os.environ.get('SMTP_USER'):
+        data['smtp_user'] = os.environ['SMTP_USER']
+    if os.environ.get('SMTP_PASS'):
+        data['smtp_pass'] = os.environ['SMTP_PASS']
+    if os.environ.get('ORDER_EMAIL'):
+        data['order_email'] = os.environ['ORDER_EMAIL']
+    return data
 
 
 def save_config(data):
