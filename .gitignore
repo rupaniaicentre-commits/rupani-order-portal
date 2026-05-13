@@ -8,4 +8,3 @@ Order_*.xlsx
 venv/
 .DS_Store
 google_credentials.json
-product_catalog.xlsx
