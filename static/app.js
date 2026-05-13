@@ -238,6 +238,31 @@ const App = (() => {
     if (view === 'allProducts') return renderAllProducts(params);
   }
 
+  // ── INLINE FILTER ─────────────────────────────────────
+  function filterInlineList(val, selector) {
+    const q = val.toLowerCase().trim();
+    document.querySelectorAll(selector).forEach(el => {
+      const text = el.textContent.toLowerCase();
+      el.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+    const countEl = document.getElementById('inlineFilterCount');
+    if (countEl) {
+      const visible = document.querySelectorAll(selector + ':not([style*="none"])').length;
+      countEl.textContent = q ? `${visible} result(s)` : '';
+    }
+  }
+
+  function inlineSearchBar(placeholder) {
+    return `
+      <div class="inline-search-wrap">
+        <span class="inline-search-icon">🔍</span>
+        <input class="inline-search-input" type="text" placeholder="${placeholder}"
+          oninput="App.filterInlineList(this.value,'${placeholder.includes('vehicle') ? '.vehicle-item' : placeholder.includes('brand') ? '.brand-card' : '.part-card,.parts-table tbody tr'}')"
+          autocomplete="off" />
+        <span id="inlineFilterCount" class="inline-filter-count"></span>
+      </div>`;
+  }
+
   // ── BRANDS ────────────────────────────────────────────
   function renderBrands({ category }) {
     const products = allProducts.filter(p => p.category === category);
@@ -245,7 +270,7 @@ const App = (() => {
 
     const html = `
       <div class="page-title">${esc(category)}</div>
-      <div class="page-sub">Select a brand to view vehicles</div>
+      ${inlineSearchBar('Search brand...')}
       <div class="brand-grid">
         ${brands.map(b => {
           const cls = BRAND_COLORS[b] || 'brand-other';
@@ -269,7 +294,7 @@ const App = (() => {
 
     const html = `
       <div class="page-title">${BRAND_DISPLAY[brand] || esc(brand)} — ${esc(category)}</div>
-      <div class="page-sub">Select a vehicle model</div>
+      ${inlineSearchBar('Search vehicle model...')}
       <div class="vehicle-list">
         ${vehicles.map(v => {
           const cnt = products.filter(p => p.vehicle === v).length;
@@ -311,6 +336,14 @@ const App = (() => {
           <div class="parts-filter-note">${subtitle}</div>
         </div>
         <span class="parts-count-badge">${products.length}</span>
+      </div>
+
+      <div class="inline-search-wrap">
+        <span class="inline-search-icon">🔍</span>
+        <input class="inline-search-input" type="text" placeholder="Filter parts by name, part no, colour…"
+          oninput="App.filterInlineList(this.value,'.part-card,.parts-table tbody tr')"
+          autocomplete="off" />
+        <span id="inlineFilterCount" class="inline-filter-count"></span>
       </div>
 
       <!-- MOBILE CARDS -->
@@ -1006,5 +1039,6 @@ const App = (() => {
     openSettings, closeSettings, saveSettings,
     onSearch, onSearchKey, showSearchDropdown, clearSearch,
     searchItemClick, setSearchFocus,
+    filterInlineList,
   };
 })();
