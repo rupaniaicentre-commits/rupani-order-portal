@@ -73,6 +73,8 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: v
 .login-form { display: flex; flex-direction: column; gap: 16px; }
 .login-error { color: var(--danger); font-size: 13px; padding: 10px 14px; background: #fef2f2; border-radius: var(--radius-xs); border: 1px solid #fecaca; }
 .login-note { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 24px; }
+.remember-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); cursor: pointer; margin-top: -4px; }
+.remember-label input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--navy); cursor: pointer; }
 
 /* ─── FORM ELEMENTS ───────────────────────── */
 .form-group { display: flex; flex-direction: column; gap: 6px; }

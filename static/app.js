@@ -43,13 +43,35 @@ const App = (() => {
   // ── INIT ─────────────────────────────────────────────
   function init() {
     loadBasketFromStorage();
-    // Restore session
+    // Auto-login if remembered
+    const remembered = localStorage.getItem('ra_remember');
+    if (remembered) {
+      try {
+        session = JSON.parse(remembered);
+        if (session.firm) { showApp(); return; }
+      } catch(_) {}
+    }
+    // Restore session storage (same tab)
     const saved = sessionStorage.getItem('ra_session');
     if (saved) {
       try { session = JSON.parse(saved); } catch(_) {}
     }
     if (session.firm) {
       showApp();
+      return;
+    }
+    // Pre-fill remembered credentials if checkbox was set before
+    const prefill = localStorage.getItem('ra_prefill');
+    if (prefill) {
+      try {
+        const p = JSON.parse(prefill);
+        const fi = document.getElementById('firmNameInput');
+        const mi = document.getElementById('mobileInput');
+        const cb = document.getElementById('rememberMe');
+        if (fi) fi.value = p.firm || '';
+        if (mi) mi.value = p.contact || '';
+        if (cb) cb.checked = true;
+      } catch(_) {}
     }
   }
 
@@ -77,6 +99,15 @@ const App = (() => {
     errEl.classList.add('hidden');
     session = { firm, contact };
     sessionStorage.setItem('ra_session', JSON.stringify(session));
+
+    const remember = document.getElementById('rememberMe');
+    if (remember && remember.checked) {
+      localStorage.setItem('ra_remember', JSON.stringify(session));
+      localStorage.setItem('ra_prefill', JSON.stringify(session));
+    } else {
+      localStorage.removeItem('ra_remember');
+      localStorage.setItem('ra_prefill', JSON.stringify(session));
+    }
     showApp();
   }
 
