@@ -23,14 +23,60 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = BASE_DIR  # data files now live alongside app.py
 
 _products_cache = None
+_catalog_mtime  = None  # tracks product_catalog.xlsx modification time
+
+def _load_from_excel(xlsx_path):
+    wb = openpyxl.load_workbook(xlsx_path, read_only=True, data_only=True)
+    ws = wb['All Products']
+    products, seen = [], set()
+    headers = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+    col = {h: i for i, h in enumerate(headers) if h}
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        pn = str(row[col['AS Part No']] or '').strip()
+        if not pn or pn in seen:
+            continue
+        seen.add(pn)
+        mrp_raw = row[col.get('MRP (₹)', -1)] if 'MRP (₹)' in col else None
+        try:
+            mrp = float(mrp_raw) if mrp_raw not in (None, '', '-') else None
+        except (ValueError, TypeError):
+            mrp = None
+        products.append({
+            'id':             pn,
+            'as_part_number': pn,
+            'sai_part_number': str(row[col.get('SAI Part No', -1)] or '').strip(),
+            'description':    str(row[col.get('Description', -1)] or '').strip(),
+            'category':       str(row[col.get('Category', -1)] or '').strip(),
+            'brand':          str(row[col.get('Brand', -1)] or '').strip(),
+            'vehicle':        str(row[col.get('Vehicle', -1)] or '').strip(),
+            'colour':         str(row[col.get('Colour', -1)] or 'N/A').strip(),
+            'mrp':            mrp,
+        })
+    wb.close()
+    return products
 
 def load_products():
-    global _products_cache
-    if _products_cache is not None:
-        return _products_cache
+    global _products_cache, _catalog_mtime
 
+    catalog_file = os.path.join(BASE_DIR, 'product_catalog.xlsx')
     mapping_file = os.path.join(PARENT_DIR, 'product_mapping.json')
     aerostar_file = os.path.join(PARENT_DIR, 'aerostar_products.json')
+
+    # If catalog Excel exists, use it and reload when file changes
+    if os.path.exists(catalog_file):
+        mtime = os.path.getmtime(catalog_file)
+        if _products_cache is not None and mtime == _catalog_mtime:
+            return _products_cache
+        try:
+            products = _load_from_excel(catalog_file)
+            _products_cache = products
+            _catalog_mtime  = mtime
+            return products
+        except Exception as e:
+            print(f'[catalog] Failed to load Excel: {e}')
+
+    if _products_cache is not None:
+        return _products_cache
 
     products = []
 
@@ -133,6 +179,15 @@ def update_config():
     c.update(data)
     save_config(c)
     return jsonify({'success': True})
+
+
+@app.route('/api/reload-catalog', methods=['POST'])
+def reload_catalog():
+    global _products_cache, _catalog_mtime
+    _products_cache = None
+    _catalog_mtime  = None
+    load_products()
+    return jsonify({'success': True, 'total': len(_products_cache or [])})
 
 
 @app.route('/api/checkout', methods=['POST'])
