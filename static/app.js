@@ -864,7 +864,7 @@ const App = (() => {
     const items = Object.values(basket);
     if (!items.length) return;
 
-    document.getElementById('co_firm').textContent    = session.firm;
+    document.getElementById('co_firm').value          = session.firm;
     document.getElementById('co_contact').textContent = session.contact;
     document.getElementById('co_items').textContent   = `${items.length} items · ${basketTotalQty()} pcs`;
 
@@ -915,7 +915,7 @@ const App = (() => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        firm_name:      session.firm,
+        firm_name:      (document.getElementById('co_firm').value.trim() || session.firm),
         contact_number: session.contact,
         items,
       })
