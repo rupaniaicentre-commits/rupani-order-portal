@@ -18,6 +18,14 @@ try:
 except ImportError:
     _GSPREAD_AVAILABLE = False
 
+import urllib.request
+
+# ── Green API (WhatsApp) config ───────────────────────────────────
+WA_INSTANCE  = os.environ.get('WA_INSTANCE', '7107619441')
+WA_TOKEN     = os.environ.get('WA_TOKEN', 'ff2ce0fab0154d8a94fd5153423feb4ab9a76b0a5b5047cf8f')
+WA_GROUP_ID  = os.environ.get('WA_GROUP_ID', '120363425235648966@g.us')  # Fiber order grp
+WA_BASE      = f'https://api.green-api.com/waInstance{WA_INSTANCE}'
+
 app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = BASE_DIR  # data files now live alongside app.py
@@ -266,15 +274,25 @@ def checkout():
             msg = f'Order saved. Email failed: {str(e)}'
     else:
         print(f"[EMAIL SKIP] smtp_user={repr(smtp_user)} smtp_pass_len={len(smtp_pass)}", flush=True)
-        msg = 'Order saved. Configure SMTP to enable auto-email.'
+        msg = 'Order saved.'
 
-    # Log to Google Sheet (non-blocking, errors are swallowed)
+    # ── WhatsApp notification ────────────────────────────────────
+    wa_sent = False
     try:
-        _log_to_gsheet(config, firm_name, contact_number, items, email_sent)
+        _send_whatsapp(firm_name, contact_number, items, save_path, fname)
+        wa_sent = True
+        msg = 'Order placed! WhatsApp sent to Fiber order grp ✅'
+    except Exception as e:
+        print(f"[WhatsApp ERROR] {e}", flush=True)
+        msg += f' WhatsApp failed: {str(e)}'
+
+    # Log to Google Sheet (non-blocking)
+    try:
+        _log_to_gsheet(config, firm_name, contact_number, items, email_sent or wa_sent)
     except Exception as e:
         print(f"[GSheet] Logging failed: {e}")
 
-    return jsonify({'success': True, 'email_sent': email_sent, 'message': msg, 'download': fname})
+    return jsonify({'success': True, 'email_sent': email_sent, 'wa_sent': wa_sent, 'message': msg, 'download': fname})
 
 
 @app.route('/download/<path:filename>')
@@ -421,6 +439,55 @@ def _send_email(config, firm_name, contact_number, items, filepath, fname):
         s.starttls()
         s.login(smtp_user, config['smtp_pass'])
         s.sendmail(smtp_user, recipients, msg.as_string())
+
+
+def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
+    """Send order summary text + Excel file to the WhatsApp group via Green API."""
+    import base64
+
+    now = datetime.now().strftime('%d %b %Y, %I:%M %p')
+    total_qty = sum(i.get('qty', 0) for i in items)
+    total_mrp = sum((i.get('mrp') or 0) * i.get('qty', 0) for i in items)
+
+    # ── 1. Text summary ──────────────────────────────────────────
+    lines = [
+        f"🛒 *New Order — {firm_name}*",
+        f"📱 {contact_number}",
+        f"📦 {len(items)} item(s) | Qty: {total_qty} | ₹{total_mrp:,.0f}",
+        f"🕐 {now}",
+        "",
+    ]
+    for it in items:
+        lines.append(f"• {it.get('as_part_number','')} — {it.get('description','')[:45]}  x{it.get('qty',0)}")
+    text_body = json.dumps({"chatId": WA_GROUP_ID, "message": "\n".join(lines)})
+    text_url  = f"{WA_BASE}/sendMessage/{WA_TOKEN}"
+    req = urllib.request.Request(
+        text_url,
+        data=text_body.encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+    urllib.request.urlopen(req, timeout=15)
+
+    # ── 2. Excel file ────────────────────────────────────────────
+    with open(filepath, 'rb') as fh:
+        b64 = base64.b64encode(fh.read()).decode()
+
+    file_body = json.dumps({
+        "chatId":   WA_GROUP_ID,
+        "fileName": fname,
+        "caption":  f"Order: {firm_name} — {now}",
+        "file":     f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}"
+    })
+    file_url = f"{WA_BASE}/sendFileByUpload/{WA_TOKEN}"
+    req2 = urllib.request.Request(
+        file_url,
+        data=file_body.encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+    urllib.request.urlopen(req2, timeout=30)
+    print(f"[WhatsApp] Sent order to group for {firm_name}", flush=True)
 
 
 def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
