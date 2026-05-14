@@ -276,15 +276,15 @@ def checkout():
         print(f"[EMAIL SKIP] smtp_user={repr(smtp_user)} smtp_pass_len={len(smtp_pass)}", flush=True)
         msg = 'Order saved.'
 
-    # ── WhatsApp notification ────────────────────────────────────
+    # ── WhatsApp notification (non-blocking) ─────────────────────
     wa_sent = False
     try:
         _send_whatsapp(firm_name, contact_number, items, save_path, fname)
         wa_sent = True
-        msg = 'Order placed! WhatsApp sent to Fiber order grp ✅'
+        msg = '✅ Order placed! Sent to Fiber order grp on WhatsApp.'
     except Exception as e:
-        print(f"[WhatsApp ERROR] {e}", flush=True)
-        msg += f' WhatsApp failed: {str(e)}'
+        print(f"[WhatsApp ERROR] {type(e).__name__}: {e}", flush=True)
+        msg = '✅ Order placed! (WhatsApp notification failed — check logs)'
 
     # Log to Google Sheet (non-blocking)
     try:
@@ -442,10 +442,9 @@ def _send_email(config, firm_name, contact_number, items, filepath, fname):
 
 
 def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
-    """Send order summary text + Excel file to the WhatsApp group via Green API."""
-    import base64
+    """Send order summary text + Excel file link to WhatsApp group via Green API."""
 
-    now = datetime.now().strftime('%d %b %Y, %I:%M %p')
+    now       = datetime.now().strftime('%d %b %Y, %I:%M %p')
     total_qty = sum(i.get('qty', 0) for i in items)
     total_mrp = sum((i.get('mrp') or 0) * i.get('qty', 0) for i in items)
 
@@ -453,41 +452,39 @@ def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
     lines = [
         f"🛒 *New Order — {firm_name}*",
         f"📱 {contact_number}",
-        f"📦 {len(items)} item(s) | Qty: {total_qty} | ₹{total_mrp:,.0f}",
+        f"📦 {len(items)} item(s)  |  Qty: {total_qty}  |  ₹{total_mrp:,.0f}",
         f"🕐 {now}",
         "",
     ]
     for it in items:
-        lines.append(f"• {it.get('as_part_number','')} — {it.get('description','')[:45]}  x{it.get('qty',0)}")
-    text_body = json.dumps({"chatId": WA_GROUP_ID, "message": "\n".join(lines)})
-    text_url  = f"{WA_BASE}/sendMessage/{WA_TOKEN}"
-    req = urllib.request.Request(
-        text_url,
-        data=text_body.encode(),
-        headers={"Content-Type": "application/json"},
-        method="POST"
-    )
-    urllib.request.urlopen(req, timeout=15)
+        desc = (it.get('description') or '')[:50]
+        lines.append(f"• {it.get('as_part_number','')}  {desc}  ×{it.get('qty',0)}")
 
-    # ── 2. Excel file ────────────────────────────────────────────
-    with open(filepath, 'rb') as fh:
-        b64 = base64.b64encode(fh.read()).decode()
+    def _post(url, body):
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(body).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
+        resp = urllib.request.urlopen(req, timeout=15)
+        return json.loads(resp.read())
 
-    file_body = json.dumps({
+    _post(f"{WA_BASE}/sendMessage/{WA_TOKEN}",
+          {"chatId": WA_GROUP_ID, "message": "\n".join(lines)})
+
+    # ── 2. Send file via URL (Railway serves the file publicly) ──
+    app_url = os.environ.get('APP_URL', 'https://www.raplportal.in')
+    file_url = f"{app_url}/download/{fname}"
+
+    _post(f"{WA_BASE}/sendFileByUrl/{WA_TOKEN}", {
         "chatId":   WA_GROUP_ID,
+        "urlFile":  file_url,
         "fileName": fname,
-        "caption":  f"Order: {firm_name} — {now}",
-        "file":     f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}"
+        "caption":  f"📄 Order sheet — {firm_name}"
     })
-    file_url = f"{WA_BASE}/sendFileByUpload/{WA_TOKEN}"
-    req2 = urllib.request.Request(
-        file_url,
-        data=file_body.encode(),
-        headers={"Content-Type": "application/json"},
-        method="POST"
-    )
-    urllib.request.urlopen(req2, timeout=30)
-    print(f"[WhatsApp] Sent order to group for {firm_name}", flush=True)
+
+    print(f"[WhatsApp] Sent to Fiber order grp for {firm_name}", flush=True)
 
 
 def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
