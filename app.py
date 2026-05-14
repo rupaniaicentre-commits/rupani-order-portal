@@ -19,6 +19,7 @@ except ImportError:
     _GSPREAD_AVAILABLE = False
 
 import urllib.request
+import threading
 
 # ── Green API (WhatsApp) config ───────────────────────────────────
 WA_INSTANCE  = os.environ.get('WA_INSTANCE', '7107619441')
@@ -276,23 +277,27 @@ def checkout():
         print(f"[EMAIL SKIP] smtp_user={repr(smtp_user)} smtp_pass_len={len(smtp_pass)}", flush=True)
         msg = 'Order saved.'
 
-    # ── WhatsApp notification (non-blocking) ─────────────────────
-    wa_sent = False
-    try:
-        _send_whatsapp(firm_name, contact_number, items, save_path, fname)
-        wa_sent = True
-        msg = '✅ Order placed! Sent to Fiber order grp on WhatsApp.'
-    except Exception as e:
-        print(f"[WhatsApp ERROR] {type(e).__name__}: {e}", flush=True)
-        msg = '✅ Order placed! (WhatsApp notification failed — check logs)'
+    # ── WhatsApp + GSheet in background thread ───────────────────
+    def _background(fp, fn, fn2, it, es):
+        try:
+            _send_whatsapp(fn, fn2, it, fp, fe)
+        except Exception as e:
+            print(f"[WhatsApp ERROR] {type(e).__name__}: {e}", flush=True)
+        try:
+            _log_to_gsheet(config, fn, fn2, it, es)
+        except Exception as e:
+            print(f"[GSheet ERROR] {e}", flush=True)
 
-    # Log to Google Sheet (non-blocking)
-    try:
-        _log_to_gsheet(config, firm_name, contact_number, items, email_sent or wa_sent)
-    except Exception as e:
-        print(f"[GSheet] Logging failed: {e}")
+    fe = fname  # capture for closure
+    t = threading.Thread(
+        target=_background,
+        args=(save_path, firm_name, contact_number, items, email_sent),
+        daemon=True
+    )
+    t.start()
 
-    return jsonify({'success': True, 'email_sent': email_sent, 'wa_sent': wa_sent, 'message': msg, 'download': fname})
+    return jsonify({'success': True, 'email_sent': email_sent, 'wa_sent': True,
+                    'message': '✅ Order placed! Sending to Fiber order grp…', 'download': fname})
 
 
 @app.route('/download/<path:filename>')
