@@ -865,7 +865,7 @@ const App = (() => {
     if (!items.length) return;
 
     document.getElementById('co_firm').value          = session.firm;
-    document.getElementById('co_contact').textContent = session.contact;
+    document.getElementById('co_contact').value = session.contact;
     document.getElementById('co_items').textContent   = `${items.length} items · ${basketTotalQty()} pcs`;
 
     document.getElementById('co_list').innerHTML = items.map(i => `
@@ -916,7 +916,7 @@ const App = (() => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         firm_name:      (document.getElementById('co_firm').value.trim() || session.firm),
-        contact_number: session.contact,
+        contact_number: (document.getElementById('co_contact').value.trim() || session.contact),
         items,
       })
     })
