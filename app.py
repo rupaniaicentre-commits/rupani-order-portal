@@ -264,40 +264,25 @@ def checkout():
     smtp_pass = config.get('smtp_pass', '')
     order_email = config.get('order_email', 'harshrupani@rupaniautomobiles.com')
 
-    email_sent = False
-    if smtp_user and smtp_pass:
+    # ── Fire WhatsApp + GSheet in background, return immediately ─
+    def _notify(sp, fn, ct, it):
         try:
-            _send_email(config, firm_name, contact_number, items, save_path, fname)
-            email_sent = True
-            msg = f'Order sent successfully to {order_email}'
+            _send_whatsapp(fn, ct, it, sp, fname)
         except Exception as e:
-            print(f"[EMAIL ERROR] {e}", flush=True)
-            msg = f'Order saved. Email failed: {str(e)}'
-    else:
-        print(f"[EMAIL SKIP] smtp_user={repr(smtp_user)} smtp_pass_len={len(smtp_pass)}", flush=True)
-        msg = 'Order saved.'
+            print(f"[WA ERROR] {type(e).__name__}: {e}", flush=True)
+        try:
+            _log_to_gsheet(config, fn, ct, it, False)
+        except Exception as e:
+            print(f"[GSHEET ERROR] {type(e).__name__}: {e}", flush=True)
 
-    # ── WhatsApp + GSheet in background thread ───────────────────
-    def _background(fp, fn, fn2, it, es):
-        try:
-            _send_whatsapp(fn, fn2, it, fp, fe)
-        except Exception as e:
-            print(f"[WhatsApp ERROR] {type(e).__name__}: {e}", flush=True)
-        try:
-            _log_to_gsheet(config, fn, fn2, it, es)
-        except Exception as e:
-            print(f"[GSheet ERROR] {e}", flush=True)
-
-    fe = fname  # capture for closure
-    t = threading.Thread(
-        target=_background,
-        args=(save_path, firm_name, contact_number, items, email_sent),
+    threading.Thread(
+        target=_notify,
+        args=(save_path, firm_name, contact_number, items),
         daemon=True
-    )
-    t.start()
+    ).start()
 
-    return jsonify({'success': True, 'email_sent': email_sent, 'wa_sent': True,
-                    'message': '✅ Order placed! Sending to Fiber order grp…', 'download': fname})
+    return jsonify({'success': True, 'email_sent': False, 'wa_sent': True,
+                    'message': '✅ Order placed! Notifying Fiber order grp…', 'download': fname})
 
 
 @app.route('/download/<path:filename>')
@@ -446,67 +431,87 @@ def _send_email(config, firm_name, contact_number, items, filepath, fname):
         s.sendmail(smtp_user, recipients, msg.as_string())
 
 
-def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
-    """Send order summary text + Excel file link to WhatsApp group via Green API."""
+def _wa_post(endpoint, body):
+    url = f"{WA_BASE}/{endpoint}/{WA_TOKEN}"
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+    resp = urllib.request.urlopen(req, timeout=20)
+    result = json.loads(resp.read())
+    print(f"[WA] {endpoint}: {result}", flush=True)
+    return result
 
+
+def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
+    """Send order summary + Excel to WhatsApp group via Green API."""
     now       = datetime.now().strftime('%d %b %Y, %I:%M %p')
     total_qty = sum(i.get('qty', 0) for i in items)
     total_mrp = sum((i.get('mrp') or 0) * i.get('qty', 0) for i in items)
 
-    # ── 1. Text summary ──────────────────────────────────────────
     lines = [
         f"🛒 *New Order — {firm_name}*",
         f"📱 {contact_number}",
         f"📦 {len(items)} item(s)  |  Qty: {total_qty}  |  ₹{total_mrp:,.0f}",
-        f"🕐 {now}",
-        "",
+        f"🕐 {now}", "",
     ]
     for it in items:
         desc = (it.get('description') or '')[:50]
         lines.append(f"• {it.get('as_part_number','')}  {desc}  ×{it.get('qty',0)}")
 
-    def _post(url, body):
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(body).encode(),
-            headers={"Content-Type": "application/json"},
-            method="POST"
-        )
-        resp = urllib.request.urlopen(req, timeout=15)
-        return json.loads(resp.read())
+    # 1. Send text summary
+    _wa_post("sendMessage", {"chatId": WA_GROUP_ID, "message": "\n".join(lines)})
 
-    _post(f"{WA_BASE}/sendMessage/{WA_TOKEN}",
-          {"chatId": WA_GROUP_ID, "message": "\n".join(lines)})
+    # 2. Send Excel file as base64 upload
+    import base64
+    with open(filepath, 'rb') as fh:
+        b64 = base64.b64encode(fh.read()).decode()
 
-    # ── 2. Send file via URL (Railway serves the file publicly) ──
-    app_url = os.environ.get('APP_URL', 'https://www.raplportal.in')
-    file_url = f"{app_url}/download/{fname}"
-
-    _post(f"{WA_BASE}/sendFileByUrl/{WA_TOKEN}", {
+    _wa_post("sendFileByUpload", {
         "chatId":   WA_GROUP_ID,
-        "urlFile":  file_url,
         "fileName": fname,
-        "caption":  f"📄 Order sheet — {firm_name}"
+        "caption":  f"📄 {firm_name} — {now}",
+        "file":     f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}"
     })
-
-    print(f"[WhatsApp] Sent to Fiber order grp for {firm_name}", flush=True)
+    print(f"[WA] Order sent for {firm_name}", flush=True)
 
 
 def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
     if not _GSPREAD_AVAILABLE:
+        print("[GSHEET] gspread not available", flush=True)
         return
-    creds_file = os.path.join(BASE_DIR, 'google_credentials.json')
-    sheet_id   = config.get('gsheet_id', '').strip()
-    if not os.path.exists(creds_file) or not sheet_id:
+    sheet_id = config.get('gsheet_id', '').strip()
+    if not sheet_id:
+        print("[GSHEET] No sheet ID configured", flush=True)
         return
 
-    try:
-        scopes = [
-            'https://www.googleapis.com/auth/spreadsheets',
-            'https://www.googleapis.com/auth/drive',
-        ]
+    scopes = [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive',
+    ]
+
+    # Load credentials: env var takes priority over file
+    creds = None
+    creds_b64 = os.environ.get('GOOGLE_CREDENTIALS_B64', '')
+    if creds_b64:
+        import base64, io
+        creds_json = base64.b64decode(creds_b64).decode()
+        import google.oauth2.service_account as sa
+        creds = sa.Credentials.from_service_account_info(
+            json.loads(creds_json), scopes=scopes)
+        print("[GSHEET] Using credentials from env var", flush=True)
+    else:
+        creds_file = os.path.join(BASE_DIR, 'google_credentials.json')
+        if not os.path.exists(creds_file):
+            print("[GSHEET] No credentials file and no GOOGLE_CREDENTIALS_B64 env var", flush=True)
+            return
         creds = SACredentials.from_service_account_file(creds_file, scopes=scopes)
-        gc    = gspread.authorize(creds)
+        print("[GSHEET] Using credentials from file", flush=True)
+
+    try:
+        gc          = gspread.authorize(creds)
         spreadsheet = gc.open_by_key(sheet_id)
 
         # ── master Orders sheet ──────────────────────────
