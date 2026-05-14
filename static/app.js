@@ -379,6 +379,7 @@ const App = (() => {
     const cardCls  = inBasket ? ' in-basket' : '';
     return `
       <div class="part-card${cardCls}" id="card-${esc(p.as_part_number)}">
+        ${p.sai_part_number ? `<div class="part-img-wrap"><img class="part-img" src="/static/images/${esc(p.sai_part_number)}.jpeg" onerror="if(this.src.endsWith('.jpeg')){this.src='/static/images/${esc(p.sai_part_number)}.png';}else{this.parentElement.style.display='none';}" loading="lazy" /></div>` : ''}
         <div class="part-card-top">
           <div class="part-card-pns">
             <span class="pn-as">${esc(p.as_part_number)}</span>
