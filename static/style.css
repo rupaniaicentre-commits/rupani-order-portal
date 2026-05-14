@@ -342,6 +342,7 @@ mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
 .part-card-desc { font-size: 13px; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
 .part-card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 .colour-badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; background: #FFF3CD; color: #92400E; }
+.std-pkg-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; background: #E0F2FE; color: #0369A1; }
 .vehicle-tag { font-size: 11px; color: var(--text-muted); }
 .part-card-actions { display: flex; align-items: center; gap: 8px; }
 .qty-input {

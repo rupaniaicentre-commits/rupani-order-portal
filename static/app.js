@@ -389,6 +389,7 @@ const App = (() => {
         <div class="part-card-desc">${esc(p.description)}</div>
         <div class="part-card-meta">
           <span class="colour-badge">${esc(p.colour || 'N/A')}</span>
+          ${p.std_packing ? `<span class="std-pkg-badge">📦 ${esc(p.std_packing)}</span>` : ''}
         </div>
         <div class="part-card-actions">
           <input class="qty-input" type="number" min="1" value="${qty}"
@@ -413,7 +414,10 @@ const App = (() => {
           ${p.sai_part_number ? `<div class="pn-sai" style="margin-top:3px">${esc(p.sai_part_number)}</div>` : ''}
         </td>
         <td class="td-desc">${esc(p.description)}</td>
-        <td class="td-colour"><span class="colour-badge">${esc(p.colour || 'N/A')}</span></td>
+        <td class="td-colour">
+          <span class="colour-badge">${esc(p.colour || 'N/A')}</span>
+          ${p.std_packing ? `<div class="std-pkg-badge" style="margin-top:3px">📦 ${esc(p.std_packing)}</div>` : ''}
+        </td>
         <td class="td-mrp">${p.mrp ? '₹' + Number(p.mrp).toLocaleString('en-IN') : '—'}</td>
         <td class="td-qty">
           <input class="qty-input" type="number" min="1" value="${qty}"

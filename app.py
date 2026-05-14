@@ -51,6 +51,7 @@ def _load_from_excel(xlsx_path):
             'vehicle':        str(row[col.get('Vehicle', -1)] or '').strip(),
             'colour':         str(row[col.get('Colour', -1)] or 'N/A').strip(),
             'mrp':            mrp,
+            'std_packing':    str(row[col.get('Std. Packing', -1)] or '').strip() if 'Std. Packing' in col else '',
         })
     wb.close()
     return products
