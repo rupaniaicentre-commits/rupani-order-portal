@@ -139,15 +139,19 @@ def load_config():
             'smtp_user': '',
             'smtp_pass': ''
         }
-    # env vars override file (used in cloud deployments)
+    # env vars always override file (used in cloud deployments like Railway)
     if os.environ.get('SMTP_USER'):
-        data['smtp_user'] = os.environ['SMTP_USER']
+        data['smtp_user'] = os.environ['SMTP_USER'].strip()
     if os.environ.get('SMTP_PASS'):
-        data['smtp_pass'] = os.environ['SMTP_PASS']
+        data['smtp_pass'] = os.environ['SMTP_PASS']  # keep spaces – Gmail App Password uses them
     if os.environ.get('ORDER_EMAIL'):
-        data['order_email'] = os.environ['ORDER_EMAIL']
+        data['order_email'] = os.environ['ORDER_EMAIL'].strip()
     if os.environ.get('GSHEET_ID'):
-        data['gsheet_id'] = os.environ['GSHEET_ID']
+        data['gsheet_id'] = os.environ['GSHEET_ID'].strip()
+    if os.environ.get('SMTP_HOST'):
+        data['smtp_host'] = os.environ['SMTP_HOST'].strip()
+    if os.environ.get('SMTP_PORT'):
+        data['smtp_port'] = int(os.environ['SMTP_PORT'].strip())
     return data
 
 
@@ -180,6 +184,43 @@ def update_config():
     c.update(data)
     save_config(c)
     return jsonify({'success': True})
+
+
+@app.route('/api/test-email')
+def test_email():
+    config = load_config()
+    smtp_user = config.get('smtp_user', '')
+    smtp_pass = config.get('smtp_pass', '')
+    order_email = config.get('order_email', '')
+    smtp_host = config.get('smtp_host', 'smtp.gmail.com')
+    smtp_port = int(config.get('smtp_port', 587))
+
+    print(f"[TEST-EMAIL] smtp_user={repr(smtp_user)}", flush=True)
+    print(f"[TEST-EMAIL] smtp_pass_len={len(smtp_pass)} smtp_pass_repr={repr(smtp_pass)}", flush=True)
+    print(f"[TEST-EMAIL] order_email={repr(order_email)}", flush=True)
+    print(f"[TEST-EMAIL] smtp_host={smtp_host} smtp_port={smtp_port}", flush=True)
+
+    if not smtp_user or not smtp_pass:
+        return jsonify({
+            'success': False,
+            'smtp_user': smtp_user,
+            'smtp_pass_len': len(smtp_pass),
+            'error': 'Missing SMTP credentials'
+        })
+
+    try:
+        msg = MIMEText('Test email from Rupani Order Portal (/api/test-email)')
+        msg['From'] = smtp_user
+        msg['To'] = order_email
+        msg['Subject'] = 'Rupani Portal – SMTP Test'
+        with smtplib.SMTP(smtp_host, smtp_port) as s:
+            s.starttls()
+            s.login(smtp_user, smtp_pass)
+            s.sendmail(smtp_user, [order_email], msg.as_string())
+        return jsonify({'success': True, 'smtp_user': smtp_user, 'smtp_pass_len': len(smtp_pass), 'error': None})
+    except Exception as e:
+        print(f"[TEST-EMAIL ERROR] {e}", flush=True)
+        return jsonify({'success': False, 'smtp_user': smtp_user, 'smtp_pass_len': len(smtp_pass), 'error': str(e)})
 
 
 @app.route('/api/reload-catalog', methods=['POST'])
@@ -221,8 +262,10 @@ def checkout():
             email_sent = True
             msg = f'Order sent successfully to {order_email}'
         except Exception as e:
+            print(f"[EMAIL ERROR] {e}", flush=True)
             msg = f'Order saved. Email failed: {str(e)}'
     else:
+        print(f"[EMAIL SKIP] smtp_user={repr(smtp_user)} smtp_pass_len={len(smtp_pass)}", flush=True)
         msg = 'Order saved. Configure SMTP to enable auto-email.'
 
     # Log to Google Sheet (non-blocking, errors are swallowed)
