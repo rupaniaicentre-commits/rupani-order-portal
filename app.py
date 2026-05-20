@@ -28,6 +28,7 @@ WA_GROUP_ID  = os.environ.get('WA_GROUP_ID', '120363425235648966@g.us')  # Fiber
 WA_BASE      = f'https://api.green-api.com/waInstance{WA_INSTANCE}'
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0   # disable static file caching
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = BASE_DIR  # data files now live alongside app.py
 
