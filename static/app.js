@@ -627,27 +627,18 @@ const App = (() => {
     const p = allProducts.find(x => x.as_part_number === partNo);
     if (!p) return;
 
-    // Navigate hierarchy to show this product in its parts view
+    // Show ONLY this part — never the full vehicle list
     clearSearch();
     navStack = [{ view: 'home', title: 'Home' }];
     if (p.category) navStack.push({ view: 'brands',   params: { category: p.category },                        title: p.category });
     if (p.brand)    navStack.push({ view: 'vehicles',  params: { category: p.category, brand: p.brand },        title: p.brand });
     if (p.vehicle)  navStack.push({ view: 'parts',     params: { category: p.category, brand: p.brand, vehicle: p.vehicle }, title: p.vehicle });
+    navStack.push({ view: 'parts', params: { searchResults: [p] }, title: partNo });
 
     renderBreadcrumb();
-    renderParts({ category: p.category, brand: p.brand, vehicle: p.vehicle });
-    document.getElementById('backBtn').style.visibility = navStack.length > 1 ? 'visible' : 'hidden';
-
-    // Scroll to and highlight that row after a tick
-    setTimeout(() => {
-      const row = document.getElementById(`row-${partNo}`);
-      if (row) {
-        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        row.style.transition = 'background .1s';
-        row.style.background = '#FEF08A';
-        setTimeout(() => { row.style.background = ''; }, 1800);
-      }
-    }, 80);
+    renderParts({ searchResults: [p] });
+    document.getElementById('backBtn').style.visibility = 'visible';
+    document.getElementById('mainContent').scrollTop = 0;
   }
 
   function showSearchResults(query) {
@@ -924,11 +915,8 @@ const App = (() => {
     .then(data => {
       const msg = document.getElementById('checkoutMsg');
       if (data.success) {
-        const emailLine = data.email_sent
-          ? `📧 Email sent to harshrupani@rupaniautomobiles.com`
-          : `⚠️ Email not sent: ${data.message}`;
-        msg.innerHTML = `✅ Order placed!<br><small>${emailLine}</small>`;
-        msg.className   = data.email_sent ? 'checkout-msg success' : 'checkout-msg error';
+        msg.innerHTML = `✅ Order placed!<br><small>📲 Notifying Fiber order grp on WhatsApp…</small>`;
+        msg.className   = 'checkout-msg success';
         msg.classList.remove('hidden');
         btn.textContent = '✓ Order Placed!';
 
