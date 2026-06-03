@@ -183,6 +183,11 @@ const App = (() => {
           <div class="quick-card-label">My Basket</div>
           <div class="quick-card-sub">${basketCount()} item(s) added</div>
         </div>
+        <div class="quick-card" onclick="App.openVehicleLookup()">
+          <div class="quick-card-icon">🔍</div>
+          <div class="quick-card-label">Find by Vehicle No.</div>
+          <div class="quick-card-sub">Enter RC number to find parts</div>
+        </div>
       </div>
 
       <div class="section-title">Browse by Category</div>
@@ -223,19 +228,21 @@ const App = (() => {
   }
 
   function getTitleForView(view, params) {
-    if (view === 'brands')      return params.category;
-    if (view === 'vehicles')    return params.brand;
-    if (view === 'parts')       return params.vehicle || params.brand;
-    if (view === 'allProducts') return 'All Products';
+    if (view === 'brands')         return params.category;
+    if (view === 'vehicles')       return params.brand;
+    if (view === 'parts')          return params.vehicle || params.brand;
+    if (view === 'allProducts')    return 'All Products';
+    if (view === 'vehicleLookup')  return 'Find by Vehicle No.';
     return view;
   }
 
   function renderView(view, params) {
-    if (view === 'home')        return renderHome();
-    if (view === 'brands')      return renderBrands(params);
-    if (view === 'vehicles')    return renderVehicles(params);
-    if (view === 'parts')       return renderParts(params);
-    if (view === 'allProducts') return renderAllProducts(params);
+    if (view === 'home')          return renderHome();
+    if (view === 'brands')        return renderBrands(params);
+    if (view === 'vehicles')      return renderVehicles(params);
+    if (view === 'parts')         return renderParts(params);
+    if (view === 'allProducts')   return renderAllProducts(params);
+    if (view === 'vehicleLookup') return renderVehicleLookupScreen();
   }
 
   // ── INLINE FILTER ─────────────────────────────────────
@@ -1023,6 +1030,115 @@ const App = (() => {
     document.getElementById('loadingOverlay').classList.add('hidden');
   }
 
+  // ── VEHICLE LOOKUP ────────────────────────────────────
+
+  function renderVehicleLookupScreen() {
+    document.getElementById('mainContent').innerHTML = `
+      <div class="vehicle-lookup-wrap">
+        <div class="lookup-hero">
+          <div class="lookup-icon">🏍️</div>
+          <h2>Find Parts by Vehicle</h2>
+          <p>Enter your vehicle registration number to instantly find all compatible parts</p>
+        </div>
+
+        <div class="lookup-form">
+          <div class="lookup-input-wrap">
+            <input id="regNumberInput" class="lookup-input" type="text"
+              placeholder="e.g. MH12AB1234"
+              maxlength="12"
+              oninput="this.value=this.value.toUpperCase()"
+              onkeydown="if(event.key==='Enter')App.doVehicleLookup()" />
+            <button class="btn-primary lookup-btn" onclick="App.doVehicleLookup()">
+              🔍 Find Parts
+            </button>
+          </div>
+          <div class="lookup-hint">Works with any Indian vehicle registration (RC) number</div>
+        </div>
+
+        <div id="lookupResult" class="lookup-result hidden"></div>
+      </div>`;
+    // Focus input
+    const inp = document.getElementById('regNumberInput');
+    if (inp) setTimeout(() => inp.focus(), 60);
+  }
+
+  function openVehicleLookup() {
+    navStack.push({ view: 'vehicleLookup', title: 'Find by Vehicle No.' });
+    renderBreadcrumb();
+    document.getElementById('backBtn').style.visibility = 'visible';
+    renderVehicleLookupScreen();
+  }
+
+  async function doVehicleLookup() {
+    const regEl = document.getElementById('regNumberInput');
+    if (!regEl) return;
+    const reg = regEl.value.trim();
+    if (!reg) return;
+
+    const resultEl = document.getElementById('lookupResult');
+    resultEl.innerHTML = '<div class="lookup-loading">🔄 Looking up vehicle…</div>';
+    resultEl.classList.remove('hidden');
+
+    try {
+      const res  = await fetch('/api/vehicle-lookup', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ reg_number: reg })
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        const v = data.vehicle;
+        resultEl.innerHTML = `
+          <div class="lookup-vehicle-card">
+            <div class="lv-header">
+              <span class="lv-reg">${esc(reg)}</span>
+              <span class="lv-badge ${BRAND_COLORS[data.brand] || 'brand-other'}">${esc(data.brand || '')}</span>
+            </div>
+            <div class="lv-model">${esc(v.model || data.model)}</div>
+            <div class="lv-meta">
+              ${v.year      ? `<span>📅 ${esc(v.year)}</span>`      : ''}
+              ${v.fuel_type ? `<span>⛽ ${esc(v.fuel_type)}</span>` : ''}
+            </div>
+            <div class="lv-parts-count">${data.parts_count} parts found</div>
+            <button class="btn-primary btn-full" style="margin-top:16px"
+              onclick="App.showPartsForVehicle('${esc(data.brand)}','${esc(data.model)}')">
+              View ${data.parts_count} Compatible Parts →
+            </button>
+          </div>`;
+      } else {
+        resultEl.innerHTML = `<div class="lookup-error">❌ ${esc(data.error)}</div>`;
+      }
+    } catch(e) {
+      resultEl.innerHTML = '<div class="lookup-error">❌ Network error. Please try again.</div>';
+    }
+  }
+
+  function showPartsForVehicle(brand, model) {
+    if (!brand && !model) return;
+
+    const brandLower = brand.toLowerCase();
+    const modelUpper = model.toUpperCase();
+
+    // Normalise model to keywords (strip noise words)
+    const noise = new Set(['BS6','BS4','BS-6','BS-4','FI','STD','DLX','DELUXE','DRUM','DISC']);
+    const modelWords = modelUpper.split(/\s+/).filter(w => w.length > 1 && !noise.has(w));
+
+    const matched = allProducts.filter(p => {
+      if (brand && (p.brand || '').toLowerCase() !== brandLower) return false;
+      if (!modelWords.length) return true;
+      const v = (p.vehicle || '').toUpperCase();
+      return modelWords.some(w => v.includes(w));
+    });
+
+    const title = `${brand} ${model}`.trim();
+    navStack.push({ view: 'parts', params: { searchResults: matched }, title });
+    renderBreadcrumb();
+    document.getElementById('backBtn').style.visibility = 'visible';
+    renderParts({ searchResults: matched });
+    document.getElementById('mainContent').scrollTop = 0;
+  }
+
   // ── PUBLIC API ────────────────────────────────────────
   return {
     login, navigateTo, goBack, goHome, jumpTo,
@@ -1033,5 +1149,6 @@ const App = (() => {
     onSearch, onSearchKey, showSearchDropdown, clearSearch,
     searchItemClick, setSearchFocus,
     filterInlineList,
+    openVehicleLookup, doVehicleLookup, showPartsForVehicle,
   };
 })();

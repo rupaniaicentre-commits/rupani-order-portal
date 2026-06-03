@@ -10,6 +10,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 import tempfile
 from datetime import datetime
+import difflib
 
 try:
     import gspread
@@ -19,7 +20,15 @@ except ImportError:
     _GSPREAD_AVAILABLE = False
 
 import urllib.request
+import urllib.parse
 import threading
+
+# ── Vahan / Vehicle lookup config ─────────────────────────────────
+VAHAN_API_KEY = os.environ.get('VAHAN_API_KEY', '')
+VAHAN_API_URL = os.environ.get(
+    'VAHAN_API_URL',
+    'https://vahan.parivahan.gov.in/vahanapiservice/vahan/api/getVehicleRegistrationDetails'
+)
 
 # ── Green API (WhatsApp) config ───────────────────────────────────
 WA_INSTANCE  = os.environ.get('WA_INSTANCE', '7107619441')
@@ -584,5 +593,230 @@ def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
         print(f"[GSheet] Error: {e}")
 
 
+# ── Vehicle lookup helpers ────────────────────────────────────────
+
+# Maps raw API maker strings → catalog brand names
+_BRAND_MAP = {
+    'HERO':          'Hero',
+    'HERO MOTOCORP': 'Hero',
+    'HONDA':         'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER': 'Honda',
+    'HONDA MOTORCYCLE': 'Honda',
+    'HONDA SCOOTER': 'Honda',
+    'BAJAJ':         'Bajaj',
+    'BAJAJ AUTO':    'Bajaj',
+    'TVS':           'Tvs',
+    'TVS MOTOR':     'Tvs',
+    'TVS MOTOR COMPANY': 'Tvs',
+    'SUZUKI':        'Suzuki',
+    'SUZUKI MOTORCYCLE': 'Suzuki',
+    'YAMAHA':        'Yamaha',
+    'INDIA YAMAHA MOTOR': 'Yamaha',
+    'ROYAL ENFIELD': 'Royal Enfield',
+    'KTM':           'Ktm',
+    'KTM AG':        'Ktm',
+}
+
+
+def _normalise_brand(make):
+    """Map raw API maker string to catalog brand."""
+    if not make:
+        return ''
+    upper = make.upper().strip()
+    # Exact match first
+    if upper in _BRAND_MAP:
+        return _BRAND_MAP[upper]
+    # Partial match
+    for key, val in _BRAND_MAP.items():
+        if key in upper:
+            return val
+    # Title-case fallback
+    return make.title()
+
+
+def _fetch_vehicle_info(reg_number):
+    """
+    Fetch vehicle details from VAHAN API (or configured endpoint).
+    Returns dict {make, model, year, fuel_type, registration_date} or None.
+
+    When VAHAN_API_KEY is not set the endpoint still requires auth, so we
+    return a structured 'not configured' sentinel that the route converts
+    to a user-friendly error.
+    """
+    if not VAHAN_API_KEY:
+        return None   # caller will surface "API not configured" message
+
+    try:
+        params = urllib.parse.urlencode({
+            'regNumber': reg_number,
+            'key':       VAHAN_API_KEY,
+        })
+        url = f"{VAHAN_API_URL}?{params}"
+        req = urllib.request.Request(
+            url,
+            headers={
+                'Accept': 'application/json',
+                'User-Agent': 'RupaniOrderPortal/1.0',
+            }
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            raw = json.loads(resp.read().decode())
+
+        # VAHAN API response shape varies; try common field names
+        # Official VAHAN fields: RC_REGN_NO, RC_MAKER_DESC, RC_MODEL, etc.
+        if not raw:
+            return None
+
+        # Handle list-wrapped response
+        record = raw[0] if isinstance(raw, list) else raw
+
+        make  = (record.get('RC_MAKER_DESC') or record.get('make') or '').strip()
+        model = (record.get('RC_MODEL') or record.get('model') or '').strip()
+        year  = str(record.get('RC_MFG_MONTH_YR') or record.get('year') or '').strip()
+        fuel  = (record.get('RC_FUEL_DESC') or record.get('fuel_type') or '').strip()
+        reg_date = (record.get('RC_REGN_DT') or record.get('registration_date') or '').strip()
+        owner = (record.get('RC_OWNER_NAME') or '').strip()
+
+        return {
+            'make':              make,
+            'model':             model,
+            'year':              year,
+            'fuel_type':         fuel,
+            'registration_date': reg_date,
+            'owner_name':        owner,
+        }
+    except Exception as e:
+        print(f"[VAHAN] Error fetching {reg_number}: {e}", flush=True)
+        return None
+
+
+def _match_parts_to_vehicle(make, model):
+    """
+    Return list of product IDs from the catalog that match the brand + model.
+    Uses fuzzy matching (difflib) for model name comparison.
+    """
+    brand = _normalise_brand(make)
+    if not brand and not model:
+        return []
+
+    products = load_products()
+
+    # Prepare model keywords (strip common noise words)
+    noise = {'BS6', 'BS4', 'BS-6', 'BS-4', 'FI', 'STD', 'DLX', 'DELUXE', 'DRUM', 'DISC'}
+    model_upper = model.upper()
+    model_words = [w for w in model_upper.split() if w not in noise and len(w) > 1]
+
+    matched = []
+    for p in products:
+        # Brand must match (when we have brand info)
+        if brand and p.get('brand', '').strip().lower() != brand.lower():
+            continue
+
+        vehicle_str = (p.get('vehicle') or '').upper()
+
+        if not model_words:
+            matched.append(p['id'])
+            continue
+
+        # Check if any model keyword appears in the vehicle string
+        keyword_hits = sum(1 for w in model_words if w in vehicle_str)
+        if keyword_hits == 0:
+            continue
+
+        # Fuzzy ratio check to avoid false positives on short keywords
+        ratio = difflib.SequenceMatcher(None, model_upper, vehicle_str).ratio()
+        if keyword_hits >= 1 and ratio >= 0.3:
+            matched.append(p['id'])
+        elif keyword_hits >= 2:
+            matched.append(p['id'])
+
+    return matched
+
+
+@app.route('/api/vehicle-lookup', methods=['POST'])
+def vehicle_lookup():
+    data       = request.json or {}
+    reg_number = (data.get('reg_number') or '').strip().upper()
+    reg_number = reg_number.replace(' ', '').replace('-', '')
+
+    if not reg_number or len(reg_number) < 6:
+        return jsonify({'success': False, 'error': 'Enter a valid registration number'})
+
+    # Check if API is configured
+    if not VAHAN_API_KEY:
+        return jsonify({
+            'success': False,
+            'error':   (
+                'Vehicle lookup API is not configured yet. '
+                'Set the VAHAN_API_KEY environment variable to enable this feature.'
+            )
+        })
+
+    vehicle_info = _fetch_vehicle_info(reg_number)
+
+    if not vehicle_info:
+        return jsonify({
+            'success': False,
+            'error':   'Could not fetch vehicle details. Check the number and try again.'
+        })
+
+    make  = vehicle_info.get('make', '').strip()
+    model = vehicle_info.get('model', '').strip()
+
+    matched_parts = _match_parts_to_vehicle(make, model)
+    brand         = _normalise_brand(make)
+
+    return jsonify({
+        'success':     True,
+        'vehicle':     vehicle_info,
+        'parts_count': len(matched_parts),
+        'brand':       brand,
+        'model':       model,
+    })
+
+
+# ── Simple self-test (run with: python app.py --test) ────────────
+def _run_tests():
+    import sys
+    errors = []
+
+    # Test 1: _normalise_brand
+    result = _normalise_brand("HERO MOTOCORP LTD")
+    expected = "Hero"
+    if result != expected:
+        errors.append(f"FAIL _normalise_brand('HERO MOTOCORP LTD'): got {result!r}, expected {expected!r}")
+    else:
+        print(f"PASS _normalise_brand('HERO MOTOCORP LTD') -> {result!r}")
+
+    # Test 2: _normalise_brand Honda
+    result2 = _normalise_brand("HONDA MOTORCYCLE AND SCOOTER")
+    if result2 != "Honda":
+        errors.append(f"FAIL _normalise_brand Honda: got {result2!r}")
+    else:
+        print(f"PASS _normalise_brand('HONDA MOTORCYCLE AND SCOOTER') -> {result2!r}")
+
+    # Test 3: _match_parts_to_vehicle – only meaningful if catalog is loaded
+    try:
+        matched = _match_parts_to_vehicle("HONDA MOTORCYCLE AND SCOOTER", "ACTIVA 6G")
+        if len(matched) > 0:
+            print(f"PASS _match_parts_to_vehicle('HONDA...', 'ACTIVA 6G') -> {len(matched)} parts")
+        else:
+            print(f"INFO _match_parts_to_vehicle('HONDA...', 'ACTIVA 6G') -> 0 parts (catalog may not contain Activa)")
+    except Exception as e:
+        errors.append(f"FAIL _match_parts_to_vehicle raised: {e}")
+
+    if errors:
+        print("\nFAILURES:")
+        for e in errors:
+            print(" ", e)
+        sys.exit(1)
+    else:
+        print("\nAll tests passed.")
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5001, host='0.0.0.0')
+    import sys
+    if '--test' in sys.argv:
+        _run_tests()
+    else:
+        app.run(debug=True, port=5001, host='0.0.0.0')
