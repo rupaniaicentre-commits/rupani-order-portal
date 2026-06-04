@@ -30,7 +30,7 @@ import threading
 SUREPASS_TOKEN   = os.environ.get('SUREPASS_TOKEN', '')
 SUREPASS_RC_URL  = os.environ.get(
     'SUREPASS_RC_URL',
-    'https://sandbox.surepass.app/api/v1/rc/rc-full'
+    'https://sandbox.surepass.app/api/v1/rc/rc-v2'   # correct endpoint
 )
 
 # ── Green API (WhatsApp) config ───────────────────────────────────
