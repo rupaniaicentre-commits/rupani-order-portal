@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request, send_file
 import json
 import os
+import re
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -607,14 +608,17 @@ _BRAND_MAP = {
     'HERO HONDA':                    'Hero',
     'HERO HONDA MOTORS':             'Hero',
     'HERO HONDA MOTORS LTD':         'Hero',
-    # Honda variants (Surepass returns "HONDA MOTORCYCLE AND SCOOTER INDIA PVT LTD")
-    'HONDA':                         'Honda',
-    'HONDA MOTORCYCLE':              'Honda',
-    'HONDA SCOOTER':                 'Honda',
-    'HONDA MOTORCYCLE AND SCOOTER':  'Honda',
-    'HONDA MOTORCYCLE AND SCOOTER INDIA': 'Honda',
-    'HONDA MOTORCYCLE AND SCOOTER INDIA PVT LTD': 'Honda',
+    # Honda variants — Surepass returns "HONDA MOTORCYCLE & SCOOTER INDIA PVT LTD"
+    'HONDA':                                         'Honda',
+    'HONDA MOTORCYCLE':                              'Honda',
+    'HONDA SCOOTER':                                 'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER':                  'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER INDIA':            'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER INDIA PVT LTD':   'Honda',
     'HONDA MOTORCYCLE AND SCOOTER INDIA PVT. LTD.': 'Honda',
+    'HONDA MOTORCYCLE & SCOOTER INDIA PVT LTD':     'Honda',
+    'HONDA MOTORCYCLE & SCOOTER INDIA PVT. LTD.':   'Honda',
+    'HONDA MOTORCYCLE & SCOOTER':                    'Honda',
     # Bajaj
     'BAJAJ':                         'Bajaj',
     'BAJAJ AUTO':                    'Bajaj',
@@ -647,18 +651,24 @@ _BRAND_MAP = {
 
 
 def _normalise_brand(make):
-    """Map raw API maker string to catalog brand."""
+    """Map raw API maker string to catalog brand name."""
     if not make:
         return ''
-    upper = make.upper().strip()
-    # Exact match first
-    if upper in _BRAND_MAP:
-        return _BRAND_MAP[upper]
-    # Partial match
-    for key, val in _BRAND_MAP.items():
-        if key in upper:
+    # Normalise: uppercase, collapse whitespace, replace & with AND
+    upper = re.sub(r'\s+', ' ', make.upper().strip())
+    upper_and = upper.replace(' & ', ' AND ')   # "HONDA MOTORCYCLE & SCOOTER" → "HONDA MOTORCYCLE AND SCOOTER"
+
+    # 1. Exact match
+    for key_upper in (upper, upper_and):
+        if key_upper in _BRAND_MAP:
+            return _BRAND_MAP[key_upper]
+
+    # 2. Partial / contains match (longest key first to avoid Hero matching Hero Honda)
+    for key, val in sorted(_BRAND_MAP.items(), key=lambda x: -len(x[0])):
+        if key in upper or key in upper_and:
             return val
-    # Title-case fallback
+
+    # 3. Title-case fallback
     return make.title()
 
 
