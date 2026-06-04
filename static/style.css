@@ -594,3 +594,5 @@ mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
 .lv-model { font-size: 22px; font-weight: 700; color: var(--gold-dark); margin: 8px 0; }
 .lv-meta { display: flex; gap: 16px; color: var(--text-muted); font-size: 13px; margin-bottom: 12px; }
 .lv-parts-count { font-size: 14px; color: var(--success); font-weight: 600; }
+.lv-owner { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.lv-no-parts { font-size: 13px; color: var(--danger); margin-bottom: 6px; }

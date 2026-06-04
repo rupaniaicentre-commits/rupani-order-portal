@@ -23,11 +23,13 @@ import urllib.request
 import urllib.parse
 import threading
 
-# ── Vahan / Vehicle lookup config ─────────────────────────────────
-VAHAN_API_KEY = os.environ.get('VAHAN_API_KEY', '')
-VAHAN_API_URL = os.environ.get(
-    'VAHAN_API_URL',
-    'https://vahan.parivahan.gov.in/vahanapiservice/vahan/api/getVehicleRegistrationDetails'
+# ── Surepass RC V2 config ─────────────────────────────────────────
+# Sandbox:    https://sandbox.surepass.app/api/v1/rc/rc-full
+# Production: https://kyc-api.surepass.app/api/v1/rc/rc-full
+SUREPASS_TOKEN   = os.environ.get('SUREPASS_TOKEN', '')
+SUREPASS_RC_URL  = os.environ.get(
+    'SUREPASS_RC_URL',
+    'https://sandbox.surepass.app/api/v1/rc/rc-full'
 )
 
 # ── Green API (WhatsApp) config ───────────────────────────────────
@@ -596,25 +598,51 @@ def _log_to_gsheet(config, firm_name, contact_number, items, email_sent):
 # ── Vehicle lookup helpers ────────────────────────────────────────
 
 # Maps raw API maker strings → catalog brand names
+# Surepass returns full legal company names — map all known variants
 _BRAND_MAP = {
-    'HERO':          'Hero',
-    'HERO MOTOCORP': 'Hero',
-    'HONDA':         'Honda',
-    'HONDA MOTORCYCLE AND SCOOTER': 'Honda',
-    'HONDA MOTORCYCLE': 'Honda',
-    'HONDA SCOOTER': 'Honda',
-    'BAJAJ':         'Bajaj',
-    'BAJAJ AUTO':    'Bajaj',
-    'TVS':           'Tvs',
-    'TVS MOTOR':     'Tvs',
-    'TVS MOTOR COMPANY': 'Tvs',
-    'SUZUKI':        'Suzuki',
-    'SUZUKI MOTORCYCLE': 'Suzuki',
-    'YAMAHA':        'Yamaha',
-    'INDIA YAMAHA MOTOR': 'Yamaha',
-    'ROYAL ENFIELD': 'Royal Enfield',
-    'KTM':           'Ktm',
-    'KTM AG':        'Ktm',
+    # Hero variants (Surepass returns "HERO MOTOCORP LTD")
+    'HERO':                          'Hero',
+    'HERO MOTOCORP':                 'Hero',
+    'HERO MOTOCORP LTD':             'Hero',
+    'HERO HONDA':                    'Hero',
+    'HERO HONDA MOTORS':             'Hero',
+    'HERO HONDA MOTORS LTD':         'Hero',
+    # Honda variants (Surepass returns "HONDA MOTORCYCLE AND SCOOTER INDIA PVT LTD")
+    'HONDA':                         'Honda',
+    'HONDA MOTORCYCLE':              'Honda',
+    'HONDA SCOOTER':                 'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER':  'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER INDIA': 'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER INDIA PVT LTD': 'Honda',
+    'HONDA MOTORCYCLE AND SCOOTER INDIA PVT. LTD.': 'Honda',
+    # Bajaj
+    'BAJAJ':                         'Bajaj',
+    'BAJAJ AUTO':                    'Bajaj',
+    'BAJAJ AUTO LTD':                'Bajaj',
+    'BAJAJ AUTO LIMITED':            'Bajaj',
+    # TVS
+    'TVS':                           'Tvs',
+    'TVS MOTOR':                     'Tvs',
+    'TVS MOTOR COMPANY':             'Tvs',
+    'TVS MOTOR COMPANY LTD':         'Tvs',
+    'TVS MOTOR CO LTD':              'Tvs',
+    # Suzuki
+    'SUZUKI':                        'Suzuki',
+    'SUZUKI MOTORCYCLE':             'Suzuki',
+    'SUZUKI MOTORCYCLE INDIA':       'Suzuki',
+    'SUZUKI MOTORCYCLE INDIA PVT LTD': 'Suzuki',
+    # Yamaha
+    'YAMAHA':                        'Yamaha',
+    'INDIA YAMAHA MOTOR':            'Yamaha',
+    'INDIA YAMAHA MOTOR PVT LTD':    'Yamaha',
+    # Royal Enfield
+    'ROYAL ENFIELD':                 'Royal Enfield',
+    'ROYAL ENFIELD MOTORS':          'Royal Enfield',
+    # Others
+    'KTM':                           'Ktm',
+    'KTM AG':                        'Ktm',
+    'MAHINDRA':                      'Mahindra',
+    'MAHINDRA TWO WHEELERS':         'Mahindra',
 }
 
 
@@ -636,46 +664,61 @@ def _normalise_brand(make):
 
 def _fetch_vehicle_info(reg_number):
     """
-    Fetch vehicle details from VAHAN API (or configured endpoint).
-    Returns dict {make, model, year, fuel_type, registration_date} or None.
+    Fetch vehicle details via Surepass RC V2 API.
+    Returns dict {make, model, year, fuel_type, registration_date, owner_name, colour} or None.
 
-    When VAHAN_API_KEY is not set the endpoint still requires auth, so we
-    return a structured 'not configured' sentinel that the route converts
-    to a user-friendly error.
+    Surepass RC V2 docs: https://app.surepass.app/docs/kyc
+    Endpoint: POST https://sandbox.surepass.app/api/v1/rc/rc-full
+    Body:     {"id_number": "MH12AB1234"}
+    Auth:     Authorization: Bearer <SUREPASS_TOKEN>
+
+    Response data fields used:
+      maker_description  → manufacturer (e.g. "HERO MOTOCORP LTD")
+      maker_model        → model name   (e.g. "SPLENDOR PLUS")
+      manufacturing_date → mfg year
+      fuel_type          → PETROL / DIESEL / ELECTRIC
+      registration_date  → date of first registration
+      owner_name         → registered owner
+      color              → vehicle colour
+      vehicle_class_desc → Motor Cycle / Scooter etc.
     """
-    if not VAHAN_API_KEY:
-        return None   # caller will surface "API not configured" message
+    if not SUREPASS_TOKEN:
+        return None   # caller shows "API not configured" message
 
     try:
-        params = urllib.parse.urlencode({
-            'regNumber': reg_number,
-            'key':       VAHAN_API_KEY,
-        })
-        url = f"{VAHAN_API_URL}?{params}"
+        payload = json.dumps({'id_number': reg_number}).encode('utf-8')
         req = urllib.request.Request(
-            url,
+            SUREPASS_RC_URL,
+            data=payload,
             headers={
-                'Accept': 'application/json',
-                'User-Agent': 'RupaniOrderPortal/1.0',
-            }
+                'Authorization':  f'Bearer {SUREPASS_TOKEN}',
+                'Content-Type':   'application/json',
+                'Accept':         'application/json',
+                'User-Agent':     'RupaniOrderPortal/1.0',
+            },
+            method='POST',
         )
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        with urllib.request.urlopen(req, timeout=12) as resp:
             raw = json.loads(resp.read().decode())
 
-        # VAHAN API response shape varies; try common field names
-        # Official VAHAN fields: RC_REGN_NO, RC_MAKER_DESC, RC_MODEL, etc.
-        if not raw:
+        print(f"[Surepass] RC lookup {reg_number}: status={raw.get('status_code')} "
+              f"success={raw.get('success')}", flush=True)
+
+        if not raw.get('success'):
+            msg = raw.get('message', 'Unknown error')
+            print(f"[Surepass] Error: {msg}", flush=True)
             return None
 
-        # Handle list-wrapped response
-        record = raw[0] if isinstance(raw, list) else raw
+        d = raw.get('data') or {}
 
-        make  = (record.get('RC_MAKER_DESC') or record.get('make') or '').strip()
-        model = (record.get('RC_MODEL') or record.get('model') or '').strip()
-        year  = str(record.get('RC_MFG_MONTH_YR') or record.get('year') or '').strip()
-        fuel  = (record.get('RC_FUEL_DESC') or record.get('fuel_type') or '').strip()
-        reg_date = (record.get('RC_REGN_DT') or record.get('registration_date') or '').strip()
-        owner = (record.get('RC_OWNER_NAME') or '').strip()
+        make  = (d.get('maker_description') or '').strip()
+        model = (d.get('maker_model')       or '').strip()
+        year  = str(d.get('manufacturing_date') or d.get('registration_date') or '')[:4].strip()
+        fuel  = (d.get('fuel_type')          or '').strip().title()
+        reg_date = (d.get('registration_date') or '').strip()
+        owner = (d.get('owner_name')         or '').strip().title()
+        colour = (d.get('color')             or '').strip().title()
+        veh_class = (d.get('vehicle_class_desc') or '').strip()
 
         return {
             'make':              make,
@@ -684,9 +727,16 @@ def _fetch_vehicle_info(reg_number):
             'fuel_type':         fuel,
             'registration_date': reg_date,
             'owner_name':        owner,
+            'colour':            colour,
+            'vehicle_class':     veh_class,
+            'rc_number':         reg_number,
         }
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8', errors='replace')
+        print(f"[Surepass] HTTP {e.code} for {reg_number}: {body[:200]}", flush=True)
+        return None
     except Exception as e:
-        print(f"[VAHAN] Error fetching {reg_number}: {e}", flush=True)
+        print(f"[Surepass] Error fetching {reg_number}: {e}", flush=True)
         return None
 
 
@@ -743,12 +793,12 @@ def vehicle_lookup():
         return jsonify({'success': False, 'error': 'Enter a valid registration number'})
 
     # Check if API is configured
-    if not VAHAN_API_KEY:
+    if not SUREPASS_TOKEN:
         return jsonify({
             'success': False,
             'error':   (
-                'Vehicle lookup API is not configured yet. '
-                'Set the VAHAN_API_KEY environment variable to enable this feature.'
+                'Vehicle lookup is not configured. '
+                'Set the SUREPASS_TOKEN environment variable in Railway.'
             )
         })
 
@@ -757,7 +807,10 @@ def vehicle_lookup():
     if not vehicle_info:
         return jsonify({
             'success': False,
-            'error':   'Could not fetch vehicle details. Check the number and try again.'
+            'error':   (
+                'Could not find details for this registration number. '
+                'Please check the number and try again.'
+            )
         })
 
     make  = vehicle_info.get('make', '').strip()

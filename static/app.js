@@ -1089,21 +1089,28 @@ const App = (() => {
 
       if (data.success) {
         const v = data.vehicle;
+        const modelDisplay = (v.model || data.model || '').replace(/_/g,' ');
+        const noPartsMsg   = data.parts_count === 0
+          ? `<div class="lv-no-parts">⚠️ No parts found in catalogue for this model yet</div>` : '';
         resultEl.innerHTML = `
           <div class="lookup-vehicle-card">
             <div class="lv-header">
-              <span class="lv-reg">${esc(reg)}</span>
+              <span class="lv-reg">${esc(v.rc_number || reg)}</span>
               <span class="lv-badge ${BRAND_COLORS[data.brand] || 'brand-other'}">${esc(data.brand || '')}</span>
             </div>
-            <div class="lv-model">${esc(v.model || data.model)}</div>
+            <div class="lv-model">${esc(modelDisplay)}</div>
             <div class="lv-meta">
-              ${v.year      ? `<span>📅 ${esc(v.year)}</span>`      : ''}
-              ${v.fuel_type ? `<span>⛽ ${esc(v.fuel_type)}</span>` : ''}
+              ${v.year         ? `<span>📅 ${esc(v.year)}</span>`          : ''}
+              ${v.fuel_type    ? `<span>⛽ ${esc(v.fuel_type)}</span>`     : ''}
+              ${v.colour       ? `<span>🎨 ${esc(v.colour)}</span>`        : ''}
+              ${v.vehicle_class? `<span>🏍️ ${esc(v.vehicle_class)}</span>`: ''}
             </div>
-            <div class="lv-parts-count">${data.parts_count} parts found</div>
-            <button class="btn-primary btn-full" style="margin-top:16px"
+            ${v.owner_name ? `<div class="lv-owner">👤 ${esc(v.owner_name)}</div>` : ''}
+            ${noPartsMsg}
+            <div class="lv-parts-count">${data.parts_count} compatible parts found</div>
+            <button class="btn-primary btn-full" style="margin-top:16px" ${data.parts_count===0?'disabled':''}
               onclick="App.showPartsForVehicle('${esc(data.brand)}','${esc(data.model)}')">
-              View ${data.parts_count} Compatible Parts →
+              ${data.parts_count > 0 ? `View ${data.parts_count} Compatible Parts →` : 'No Parts Available'}
             </button>
           </div>`;
       } else {
