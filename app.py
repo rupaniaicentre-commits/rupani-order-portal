@@ -686,7 +686,7 @@ def _fetch_vehicle_info(reg_number):
         return None   # caller shows "API not configured" message
 
     try:
-        payload = json.dumps({'id_number': reg_number}).encode('utf-8')
+        payload = json.dumps({'id_number': reg_number, 'enrich': False}).encode('utf-8')
         req = urllib.request.Request(
             SUREPASS_RC_URL,
             data=payload,
