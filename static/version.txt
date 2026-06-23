@@ -1,1 +1,1 @@
-v=20260623-img cache-bust + 5096 AS images
+v=20260623-img2 +ARF/AMP/APM images, mixed-page AS fixes
