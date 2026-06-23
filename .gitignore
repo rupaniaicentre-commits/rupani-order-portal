@@ -9,3 +9,11 @@ venv/
 .DS_Store
 google_credentials.json
 vectordb/
+
+# large source asset (not needed at runtime) + work artifacts
+Aerostar ABS Product Catalogue 2026.pdf
+~$*.xlsx
+tmp_as.json
+tmp_sai.json
+test_long.json
+test_verify.json

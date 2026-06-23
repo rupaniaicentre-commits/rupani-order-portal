@@ -380,13 +380,47 @@ const App = (() => {
     document.getElementById('mainContent').innerHTML = html;
   }
 
+  // ── PRODUCT IMAGE ─────────────────────────────────────
+  // Prefer the image extracted directly from the Aerostar catalogue (keyed by
+  // AS part number — guaranteed correct), then fall back to the SAI image, then
+  // hide the frame if nothing is found.
+  function partImgChain(p) {
+    const srcs = [];
+    if (p.as_part_number)
+      srcs.push('/static/images_as/' + encodeURIComponent(p.as_part_number) + '.jpg');
+    if (p.sai_part_number) {
+      srcs.push('/static/images/' + encodeURIComponent(p.sai_part_number) + '.jpeg');
+      srcs.push('/static/images/' + encodeURIComponent(p.sai_part_number) + '.png');
+    }
+    return srcs;
+  }
+
+  function partImg(p) {
+    const srcs = partImgChain(p);
+    if (!srcs.length) return '';
+    return `<div class="part-img-wrap"><img class="part-img" src="${srcs[0]}" `
+         + `data-srcs="${srcs.join('|')}" data-idx="0" `
+         + `onerror="App.imgFallback(this)" loading="lazy" /></div>`;
+  }
+
+  function imgFallback(img) {
+    const srcs = (img.dataset.srcs || '').split('|').filter(Boolean);
+    let i = parseInt(img.dataset.idx || '0', 10) + 1;
+    if (i < srcs.length) {
+      img.dataset.idx = String(i);
+      img.src = srcs[i];
+    } else if (img.parentElement) {
+      img.parentElement.style.display = 'none';
+    }
+  }
+
   function buildPartCard(p) {
     const inBasket = basket[p.as_part_number];
     const qty      = inBasket ? inBasket.qty : 1;
     const cardCls  = inBasket ? ' in-basket' : '';
     return `
       <div class="part-card${cardCls}" id="card-${esc(p.as_part_number)}">
-        ${p.sai_part_number ? `<div class="part-img-wrap"><img class="part-img" src="/static/images/${esc(p.sai_part_number)}.jpeg" onerror="if(this.src.endsWith('.jpeg')){this.src='/static/images/${esc(p.sai_part_number)}.png';}else{this.parentElement.style.display='none';}" loading="lazy" /></div>` : ''}
+        ${partImg(p)}
         <div class="part-card-top">
           <div class="part-card-pns">
             <span class="pn-as">${esc(p.as_part_number)}</span>
@@ -1157,5 +1191,6 @@ const App = (() => {
     searchItemClick, setSearchFocus,
     filterInlineList,
     openVehicleLookup, doVehicleLookup, showPartsForVehicle,
+    imgFallback,
   };
 })();
