@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rupani Automobiles — Choose Portal</title>
+  <title>Rupani Automobiles — Order Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
       --navy:#1B2A4A; --navy-dark:#111D35; --gold:#F4A820; --gold-dark:#D9901A;
-      --surface:#fff; --text:#1A1D23; --muted:#9CA3AF;
+      --surface:#fff; --text:#1A1D23; --muted:#9CA3AF; --danger:#EF4444;
     }
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;color:#fff;
@@ -18,12 +18,29 @@
       padding:24px;overflow-x:hidden;position:relative}
     body::before{content:'';position:absolute;inset:0;
       background:radial-gradient(ellipse at 70% 20%,rgba(244,168,32,.14) 0%,transparent 60%);pointer-events:none}
+    .hidden{display:none!important}
     .brand{display:flex;align-items:center;gap:14px;margin-bottom:8px;z-index:1}
     .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));
       display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:var(--navy);
       box-shadow:0 8px 24px rgba(244,168,32,.35)}
     .brand h1{font-size:26px;font-weight:800;letter-spacing:-.02em}
-    .tag{color:var(--muted);font-size:14px;margin-bottom:44px;z-index:1;text-align:center}
+    .tag{color:var(--muted);font-size:14px;margin-bottom:34px;z-index:1;text-align:center}
+
+    /* login card */
+    .lcard{background:#fff;border-radius:18px;padding:32px 28px;width:100%;max-width:400px;
+      box-shadow:0 20px 50px rgba(0,0,0,.35);color:var(--text);z-index:1}
+    .fg{margin-bottom:14px}
+    .fg label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#374151}
+    .fg input{width:100%;padding:11px 13px;border:1.5px solid #E2E6EB;border-radius:9px;font-size:15px;font-family:inherit}
+    .fg input:focus{outline:none;border-color:var(--gold)}
+    .rem{display:flex;align-items:center;gap:8px;font-size:13px;color:#4b5563;margin:4px 0 14px;cursor:pointer}
+    .lerr{color:var(--danger);font-size:13px;margin-bottom:10px}
+    .btn{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);padding:13px;
+      border-radius:9px;font-size:15px;font-weight:700;width:100%;border:none;cursor:pointer;font-family:inherit}
+
+    /* chooser */
+    .welcome{font-size:15px;color:#e5e7eb;margin-bottom:22px;z-index:1;text-align:center}
+    .welcome b{color:var(--gold)}
     .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:720px;width:100%;z-index:1}
     @media(max-width:640px){.cards{grid-template-columns:1fr}}
     .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;
@@ -38,7 +55,9 @@
     .card h2{font-size:21px;font-weight:700}
     .card p{color:var(--muted);font-size:13.5px;line-height:1.5}
     .go{margin-top:6px;font-size:13px;font-weight:600;color:var(--gold);letter-spacing:.02em}
-    .foot{margin-top:40px;color:rgba(255,255,255,.35);font-size:12px;z-index:1}
+    .switch{margin-top:26px;color:rgba(255,255,255,.55);font-size:13px;z-index:1;background:none;border:none;
+      cursor:pointer;text-decoration:underline;font-family:inherit}
+    .foot{margin-top:34px;color:rgba(255,255,255,.35);font-size:12px;z-index:1}
   </style>
 </head>
 <body>
@@ -46,24 +65,91 @@
     <div class="logo">RA</div>
     <h1>Rupani Automobiles</h1>
   </div>
-  <div class="tag">Select a catalogue to start your order</div>
 
-  <div class="cards">
-    <a class="card" href="/aerostar">
-      <div class="ic aero">🛞</div>
-      <h2>Aerostar</h2>
-      <p>Two-wheeler fibre &amp; plastic moulded body parts — fenders, visors, cowls &amp; kits.</p>
-      <div class="go">Enter Aerostar →</div>
-    </a>
+  <!-- STEP 1: LOGIN -->
+  <div id="loginStep">
+    <div class="tag">Sign in to start your order</div>
+    <div class="lcard">
+      <div class="fg"><label>Firm / Shop Name</label>
+        <input id="firm" placeholder="Enter your firm name" autocomplete="organization"></div>
+      <div class="fg"><label>Mobile Number</label>
+        <input id="mobile" type="tel" maxlength="10" placeholder="10-digit mobile" autocomplete="tel"></div>
+      <div id="lerr" class="lerr hidden"></div>
+      <label class="rem"><input type="checkbox" id="remember" checked> Remember me on this device</label>
+      <button class="btn" onclick="doLogin()">Continue →</button>
+    </div>
+  </div>
 
-    <a class="card" href="/honda">
-      <div class="ic honda">🏍️</div>
-      <h2>Honda</h2>
-      <p>Genuine Honda spare parts by vehicle — Activa, Shine, Unicorn, Dio &amp; more.</p>
-      <div class="go">Enter Honda →</div>
-    </a>
+  <!-- STEP 2: BRAND CHOICE -->
+  <div id="chooseStep" class="hidden" style="display:contents">
+    <div class="welcome" id="welcome"></div>
+    <div class="cards">
+      <a class="card" href="/aerostar">
+        <div class="ic aero">🛞</div>
+        <h2>Aerostar</h2>
+        <p>Two-wheeler fibre &amp; plastic moulded body parts — fenders, visors, cowls &amp; kits.</p>
+        <div class="go">Enter Aerostar →</div>
+      </a>
+      <a class="card" href="/honda">
+        <div class="ic honda">🏍️</div>
+        <h2>Honda</h2>
+        <p>Genuine Honda spare parts by vehicle — Activa, Shine, Unicorn, Dio &amp; more.</p>
+        <div class="go">Enter Honda →</div>
+      </a>
+    </div>
+    <button class="switch" onclick="switchUser()">Not you? Sign in as a different firm</button>
   </div>
 
   <div class="foot">Powered by Rupani Automobiles Pvt. Ltd.</div>
+
+<script>
+'use strict';
+function getSession(){
+  try{
+    const s = sessionStorage.getItem('ra_session') || localStorage.getItem('ra_remember');
+    if(s){ const p = JSON.parse(s); if(p && p.firm) return p; }
+  }catch(_){}
+  return null;
+}
+function showChooser(sess){
+  document.getElementById('loginStep').classList.add('hidden');
+  document.getElementById('chooseStep').classList.remove('hidden');
+  document.getElementById('welcome').innerHTML =
+    'Welcome back, <b>'+String(sess.firm).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</b> — choose a catalogue';
+}
+function doLogin(){
+  const firm = document.getElementById('firm').value.trim();
+  const mob  = document.getElementById('mobile').value.trim();
+  const err  = document.getElementById('lerr');
+  if(!firm){ err.textContent='Please enter your firm / shop name'; err.classList.remove('hidden'); return; }
+  if(!/^\d{10}$/.test(mob)){ err.textContent='Please enter a valid 10-digit mobile number'; err.classList.remove('hidden'); return; }
+  err.classList.add('hidden');
+  const sess = { firm, contact: mob };
+  // shared session both portals read (Aerostar auto-logs-in from ra_remember)
+  sessionStorage.setItem('ra_session', JSON.stringify(sess));
+  localStorage.setItem('ra_prefill', JSON.stringify(sess));
+  if(document.getElementById('remember').checked){
+    localStorage.setItem('ra_remember', JSON.stringify(sess));
+  } else {
+    localStorage.removeItem('ra_remember');
+  }
+  showChooser(sess);
+}
+function switchUser(){
+  sessionStorage.removeItem('ra_session');
+  localStorage.removeItem('ra_remember');
+  document.getElementById('chooseStep').classList.add('hidden');
+  document.getElementById('loginStep').classList.remove('hidden');
+}
+// auto-skip login if already signed in
+(function(){
+  const s = getSession();
+  if(s){ showChooser(s); }
+  else {
+    try{ const p = JSON.parse(localStorage.getItem('ra_prefill')||'null');
+      if(p){ document.getElementById('firm').value=p.firm||''; document.getElementById('mobile').value=p.contact||''; } }catch(_){}
+  }
+})();
+</script>
 </body>
 </html>

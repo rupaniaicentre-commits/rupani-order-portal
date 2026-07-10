@@ -105,6 +105,25 @@
     .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;
       padding:12px 20px;border-radius:10px;font-size:14px;z-index:90;box-shadow:var(--shadow);opacity:0;transition:.25s}
     .toast.show{opacity:1}
+    .chip.all{background:#e0f2fe;color:#075985}
+    .flagbtn{background:none;font-size:13px;opacity:.45;padding:0 2px}
+    .flagbtn:hover{opacity:1}
+    /* feedback modal */
+    .fb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:80;opacity:0;pointer-events:none;transition:.2s}
+    .fb-overlay.show{opacity:1;pointer-events:auto}
+    .fb-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.97);width:min(430px,calc(100% - 32px));
+      background:#fff;border-radius:16px;z-index:85;box-shadow:0 24px 60px rgba(0,0,0,.35);padding:22px;
+      opacity:0;pointer-events:none;transition:.2s}
+    .fb-modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+    .fb-modal h3{font-size:16px;color:var(--navy);margin-bottom:4px}
+    .fb-modal .fbn{font-size:13.5px;font-weight:600;margin:10px 0 2px}
+    .fb-modal .fbi{font-size:12px;color:var(--muted);margin-bottom:12px}
+    .fb-modal textarea{width:100%;min-height:96px;border:1.5px solid var(--border);border-radius:9px;
+      padding:10px 12px;font-size:14px;font-family:inherit;resize:vertical}
+    .fb-modal textarea:focus{outline:none;border-color:var(--red)}
+    .fb-actions{display:flex;gap:10px;margin-top:14px}
+    .fb-cancel{flex:1;background:#eef1f5;color:var(--navy);padding:11px;border-radius:9px;font-weight:600}
+    .fb-send{flex:2;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:11px;border-radius:9px;font-weight:700}
   </style>
 </head>
 <body>
@@ -119,6 +138,9 @@
     <div class="fg"><label>Firm / Shop Name</label><input id="firm" placeholder="Enter your firm name" autocomplete="organization"></div>
     <div class="fg"><label>Mobile Number</label><input id="mobile" type="tel" maxlength="10" placeholder="10-digit mobile"></div>
     <div id="lerr" class="lerr hidden"></div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#4b5563;margin-bottom:12px;cursor:pointer">
+      <input type="checkbox" id="remember" checked> Remember me on this device
+    </label>
     <button class="btn" onclick="H.login()">Continue to Honda Parts →</button>
     <a class="lback" href="/">← Back to portal selection</a>
   </div>
@@ -158,6 +180,20 @@
 </div>
 <div id="toast" class="toast"></div>
 
-<script src="/static/honda.js?v=20260623-1"></script>
+<!-- FITMENT FEEDBACK MODAL -->
+<div id="fbOverlay" class="fb-overlay" onclick="H.closeFeedback()"></div>
+<div id="fbModal" class="fb-modal">
+  <h3>🚩 Part fitment feedback</h3>
+  <div style="font-size:12.5px;color:var(--muted)">Tell us if this fitment is wrong, or if this part also fits other vehicles.</div>
+  <div class="fbn" id="fbName"></div>
+  <div class="fbi"><span class="pn" id="fbPN"></span> &nbsp;·&nbsp; Currently listed under: <b id="fbCur"></b></div>
+  <textarea id="fbText" placeholder="e.g. This part also fits Activa 5G… / This does not fit Shine BS6…"></textarea>
+  <div class="fb-actions">
+    <button class="fb-cancel" onclick="H.closeFeedback()">Cancel</button>
+    <button class="fb-send" onclick="H.sendFeedback()">Send Feedback</button>
+  </div>
+</div>
+
+<script src="/static/honda.js?v=20260623-2"></script>
 </body>
 </html>

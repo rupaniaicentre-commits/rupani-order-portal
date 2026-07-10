@@ -215,6 +215,45 @@ def get_honda_data():
     return jsonify(load_honda())
 
 
+@app.route('/api/honda/feedback', methods=['POST'])
+def honda_feedback():
+    """Customer fitment feedback: wrong fitment / fits more vehicles."""
+    data = request.json or {}
+    part_no = (data.get('part_no') or '').strip()
+    comment = (data.get('comment') or '').strip()
+    if not part_no or not comment:
+        return jsonify({'success': False, 'error': 'Part number and comment required'})
+
+    entry = {
+        'ts': datetime.now().isoformat(timespec='seconds'),
+        'part_no': part_no,
+        'part_name': (data.get('name') or '').strip(),
+        'current_fitment': data.get('vehicles') or [],
+        'comment': comment,
+        'firm': (data.get('firm') or '').strip(),
+        'contact': (data.get('contact') or '').strip(),
+    }
+    try:
+        with open(os.path.join(BASE_DIR, 'honda_feedback.jsonl'), 'a', encoding='utf-8') as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+    except Exception as e:
+        print(f"[FEEDBACK FILE ERROR] {e}", flush=True)
+
+    def _notify_feedback(e):
+        try:
+            msg = ("📝 *Honda fitment feedback*\n"
+                   f"🏪 {e['firm']}  📱 {e['contact']}\n"
+                   f"🔩 {e['part_no']} — {e['part_name']}\n"
+                   f"🚗 Currently under: {', '.join(e['current_fitment']) or '—'}\n"
+                   f"💬 {e['comment']}")
+            _wa_post("sendMessage", {"chatId": WA_GROUP_ID, "message": msg})
+        except Exception as ex:
+            print(f"[FEEDBACK WA ERROR] {ex}", flush=True)
+    threading.Thread(target=_notify_feedback, args=(entry,), daemon=True).start()
+
+    return jsonify({'success': True})
+
+
 @app.route('/api/products')
 def get_products():
     return jsonify(load_products())
