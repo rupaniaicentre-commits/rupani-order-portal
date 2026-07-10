@@ -184,8 +184,35 @@ def save_config(data):
 
 
 @app.route('/')
+def landing():
+    """Portal entry — choose Aerostar (fibre) or Honda."""
+    return render_template('choose.html')
+
+
+@app.route('/aerostar')
 def index():
     return render_template('index.html')
+
+
+@app.route('/honda')
+def honda():
+    return render_template('honda.html')
+
+
+# ── Honda parts data (Parent = HONDA 18%, sorted by vehicle) ──────────
+_honda_cache = None
+
+def load_honda():
+    global _honda_cache
+    if _honda_cache is None:
+        with open(os.path.join(BASE_DIR, 'honda_parts.json'), encoding='utf-8') as f:
+            _honda_cache = json.load(f)
+    return _honda_cache
+
+
+@app.route('/api/honda/data')
+def get_honda_data():
+    return jsonify(load_honda())
 
 
 @app.route('/api/products')
@@ -260,13 +287,14 @@ def checkout():
     firm_name = (data.get('firm_name') or '').strip()
     contact_number = (data.get('contact_number') or '').strip()
     items = data.get('items', [])
+    portal = (data.get('portal') or 'aerostar').strip().lower()
 
     if not items:
         return jsonify({'success': False, 'error': 'No items in order'})
     if not firm_name:
         return jsonify({'success': False, 'error': 'Firm name required'})
 
-    wb = _build_excel(firm_name, contact_number, items)
+    wb = _build_excel(firm_name, contact_number, items, portal)
 
     fname = f"Order_{firm_name.replace(' ','_')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
     save_path = os.path.join(BASE_DIR, fname)
@@ -280,7 +308,7 @@ def checkout():
     # ── Fire WhatsApp + GSheet in background, return immediately ─
     def _notify(sp, fn, ct, it):
         try:
-            _send_whatsapp(fn, ct, it, sp, fname)
+            _send_whatsapp(fn, ct, it, sp, fname, portal)
         except Exception as e:
             print(f"[WA ERROR] {type(e).__name__}: {e}", flush=True)
         try:
@@ -306,7 +334,8 @@ def download_order(filename):
     return 'File not found', 404
 
 
-def _build_excel(firm_name, contact_number, items):
+def _build_excel(firm_name, contact_number, items, portal='aerostar'):
+    is_honda = portal == 'honda'
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = 'Order'
@@ -369,7 +398,10 @@ def _build_excel(firm_name, contact_number, items):
     ws.append([])  # row 6
 
     # Row 7: column headers
-    hdrs = ['Part No. (AS)', 'Part No. (SAI)', 'Description', 'Vehicle', 'Colour', 'MRP (₹)', 'Qty']
+    if is_honda:
+        hdrs = ['Part No.', 'Code', 'Description', 'Vehicle', 'Unit', 'Price (₹)', 'Qty']
+    else:
+        hdrs = ['Part No. (AS)', 'Part No. (SAI)', 'Description', 'Vehicle', 'Colour', 'MRP (₹)', 'Qty']
     for col, h in enumerate(hdrs, 1):
         c = ws.cell(row=7, column=col, value=h)
         c.font = hdr_font
@@ -458,14 +490,15 @@ def _wa_post(endpoint, body):
     return result
 
 
-def _send_whatsapp(firm_name, contact_number, items, filepath, fname):
+def _send_whatsapp(firm_name, contact_number, items, filepath, fname, portal='aerostar'):
     """Send order summary + Excel to WhatsApp group via Green API."""
     now       = datetime.now().strftime('%d %b %Y, %I:%M %p')
     total_qty = sum(i.get('qty', 0) for i in items)
     total_mrp = sum((i.get('mrp') or 0) * i.get('qty', 0) for i in items)
+    tag = 'Honda Order' if portal == 'honda' else 'Order'
 
     lines = [
-        f"🛒 *New Order — {firm_name}*",
+        f"🛒 *New {tag} — {firm_name}*",
         f"📱 {contact_number}",
         f"📦 {len(items)} item(s)  |  Qty: {total_qty}  |  ₹{total_mrp:,.0f}",
         f"🕐 {now}", "",

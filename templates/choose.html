@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rupani Automobiles — Choose Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --navy:#1B2A4A; --navy-dark:#111D35; --gold:#F4A820; --gold-dark:#D9901A;
+      --surface:#fff; --text:#1A1D23; --muted:#9CA3AF;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;color:#fff;
+      background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 55%,#1e3a6e 100%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:24px;overflow-x:hidden;position:relative}
+    body::before{content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 70% 20%,rgba(244,168,32,.14) 0%,transparent 60%);pointer-events:none}
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:8px;z-index:1}
+    .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+      display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:var(--navy);
+      box-shadow:0 8px 24px rgba(244,168,32,.35)}
+    .brand h1{font-size:26px;font-weight:800;letter-spacing:-.02em}
+    .tag{color:var(--muted);font-size:14px;margin-bottom:44px;z-index:1;text-align:center}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:720px;width:100%;z-index:1}
+    @media(max-width:640px){.cards{grid-template-columns:1fr}}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;
+      padding:34px 28px;text-align:center;cursor:pointer;transition:.22s ease;text-decoration:none;color:#fff;
+      backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;gap:14px}
+    .card:hover{transform:translateY(-6px);border-color:var(--gold);
+      box-shadow:0 18px 44px rgba(0,0,0,.35);background:rgba(255,255,255,.07)}
+    .ic{width:88px;height:88px;border-radius:22px;display:flex;align-items:center;justify-content:center;
+      font-size:42px;box-shadow:0 10px 28px rgba(0,0,0,.3)}
+    .ic.aero{background:linear-gradient(135deg,#7CB342,#4a8a1e)}
+    .ic.honda{background:linear-gradient(135deg,#E30613,#a10410)}
+    .card h2{font-size:21px;font-weight:700}
+    .card p{color:var(--muted);font-size:13.5px;line-height:1.5}
+    .go{margin-top:6px;font-size:13px;font-weight:600;color:var(--gold);letter-spacing:.02em}
+    .foot{margin-top:40px;color:rgba(255,255,255,.35);font-size:12px;z-index:1}
+  </style>
+</head>
+<body>
+  <div class="brand">
+    <div class="logo">RA</div>
+    <h1>Rupani Automobiles</h1>
+  </div>
+  <div class="tag">Select a catalogue to start your order</div>
+
+  <div class="cards">
+    <a class="card" href="/aerostar">
+      <div class="ic aero">🛞</div>
+      <h2>Aerostar</h2>
+      <p>Two-wheeler fibre &amp; plastic moulded body parts — fenders, visors, cowls &amp; kits.</p>
+      <div class="go">Enter Aerostar →</div>
+    </a>
+
+    <a class="card" href="/honda">
+      <div class="ic honda">🏍️</div>
+      <h2>Honda</h2>
+      <p>Genuine Honda spare parts by vehicle — Activa, Shine, Unicorn, Dio &amp; more.</p>
+      <div class="go">Enter Honda →</div>
+    </a>
+  </div>
+
+  <div class="foot">Powered by Rupani Automobiles Pvt. Ltd.</div>
+</body>
+</html>
