@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rupani Automobiles — Order Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- fonts loaded async so they never block first paint (system font shows instantly) -->
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" /></noscript>
+  <link rel="preload" as="image" href="/static/img/aerostar_logo.png" />
+  <link rel="preload" as="image" href="/static/img/honda_logo.png" />
   <style>
     :root{
       --navy:#1B2A4A; --navy-dark:#111D35; --gold:#F4A820; --gold-dark:#D9901A;
@@ -43,9 +51,9 @@
     .welcome b{color:var(--gold)}
     .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:720px;width:100%;z-index:1}
     @media(max-width:640px){.cards{grid-template-columns:1fr}}
-    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;
-      padding:34px 28px;text-align:center;cursor:pointer;transition:.22s ease;text-decoration:none;color:#fff;
-      backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;gap:14px}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;
+      padding:34px 28px;text-align:center;cursor:pointer;transition:transform .18s ease,border-color .18s ease;
+      text-decoration:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:14px}
     .card:hover{transform:translateY(-6px);border-color:var(--gold);
       box-shadow:0 18px 44px rgba(0,0,0,.35);background:rgba(255,255,255,.07)}
     .ic{width:150px;height:96px;border-radius:16px;display:flex;align-items:center;justify-content:center;
@@ -86,13 +94,13 @@
     <div class="welcome" id="welcome"></div>
     <div class="cards">
       <a class="card" href="/aerostar">
-        <div class="ic aero"><img src="/static/img/aerostar_logo.png" alt="Aerostar Auto Components"></div>
+        <div class="ic aero"><img src="/static/img/aerostar_logo.png" alt="Aerostar Auto Components" width="130" height="85" fetchpriority="high"></div>
         <h2>Aerostar</h2>
         <p>Two-wheeler fibre &amp; plastic moulded body parts — fenders, visors, cowls &amp; kits.</p>
         <div class="go">Enter Aerostar →</div>
       </a>
       <a class="card" href="/honda">
-        <div class="ic honda"><img src="/static/img/honda_logo.png" alt="Honda Genuine Parts"></div>
+        <div class="ic honda"><img src="/static/img/honda_logo.png" alt="Honda Genuine Parts" width="120" height="120" fetchpriority="high"></div>
         <h2>Honda Genuine Parts</h2>
         <p>Genuine Honda spare parts by vehicle — Activa, Shine, Unicorn, Dio &amp; more.</p>
         <div class="go">Enter Honda →</div>

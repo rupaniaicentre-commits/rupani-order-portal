@@ -76,7 +76,16 @@ const H = (() => {
   function renderHome(){
     const groups=DATA.vehicle_groups||[];
     const nCommon=(DATA.meta&&DATA.meta.common_all_count)||0;
-    let html=`<div class="crumb"><b>Select your vehicle</b> — or search any part above</div>`;
+    // full product range first (top)
+    let html=`<div class="crumb"><b>Browse the full range</b> or pick a vehicle — search any part above</div>
+      <div class="vgrid" style="margin-bottom:22px">
+        <div class="vcard vcard-hero" onclick="H.openAll()">
+          <div class="vic">📋</div>
+          <b>Full product range</b><small>All ${parts.length} parts · A→Z</small>
+        </div>
+        ${nCommon?`<div class="vcard" onclick="H.openVehicle('ALL MODELS')">
+          <div class="vic">🔧</div><b>Common to all</b><small>${nCommon} universal part${nCommon!==1?'s':''}</small></div>`:''}
+      </div>`;
     for(const g of groups){
       const fam=g.family;
       const label = fam==='OTHER' ? 'Universal / Other' : fam;
@@ -88,14 +97,6 @@ const H = (() => {
             <small>${v.part_count} part${v.part_count!==1?'s':''}</small>
           </div>`).join('')+`</div>`;
     }
-    if(nCommon){
-      html+=`<div class="sectitle">🔧 Common to all models</div>
-        <div class="vgrid" style="margin-bottom:20px"><div class="vcard" onclick="H.openVehicle('ALL MODELS')">
-          <b>All-model parts</b><small>${nCommon} part${nCommon!==1?'s':''}</small></div></div>`;
-    }
-    html+=`<div class="sectitle">📋 Explore full catalogue</div>
-      <div class="vgrid"><div class="vcard" onclick="H.openAll()">
-        <b>All parts A→Z</b><small>${parts.length} parts by part number</small></div></div>`;
     $('main').innerHTML=html;
   }
 
