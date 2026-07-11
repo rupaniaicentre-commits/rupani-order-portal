@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 210">
+  <!-- Honda motorcycle wing: solid red silhouette + white feather separations -->
+  <g>
+    <path d="M50,124
+             C 60,80 84,55 120,48
+             C 150,44 176,52 210,58
+             L 150,86
+             L 196,92
+             L 120,112
+             L 168,120
+             L 78,132 Z"
+          fill="#E4002B"/>
+    <g stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" fill="none">
+      <path d="M70,118 C 110,96 150,80 205,60"/>
+      <path d="M70,122 C 108,108 150,96 196,90"/>
+      <path d="M74,127 C 108,118 150,110 168,118"/>
+    </g>
+  </g>
+  <rect x="14" y="152" width="202" height="44" rx="22" ry="22"
+        fill="none" stroke="#E4002B" stroke-width="6"/>
+  <text x="115" y="184" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-weight="bold"
+        font-size="34" letter-spacing="2" fill="#E4002B">HONDA</text>
+</svg>
