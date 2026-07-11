@@ -63,6 +63,7 @@ const H = (() => {
     if(view==='home') renderHome();
     else if(view==='vehicle') renderVehicle(arg);
     else if(view==='search') renderSearch(arg);
+    else if(view==='all') renderAll();
     window.scrollTo(0,0);
   }
   function home(){ stack=[]; if($('search')) $('search').value=''; go('home',null,true); }
@@ -89,10 +90,42 @@ const H = (() => {
     }
     if(nCommon){
       html+=`<div class="sectitle">🔧 Common to all models</div>
-        <div class="vgrid"><div class="vcard" onclick="H.openVehicle('ALL MODELS')">
+        <div class="vgrid" style="margin-bottom:20px"><div class="vcard" onclick="H.openVehicle('ALL MODELS')">
           <b>All-model parts</b><small>${nCommon} part${nCommon!==1?'s':''}</small></div></div>`;
     }
+    html+=`<div class="sectitle">📋 Explore full catalogue</div>
+      <div class="vgrid"><div class="vcard" onclick="H.openAll()">
+        <b>All parts A→Z</b><small>${parts.length} parts by part number</small></div></div>`;
     $('main').innerHTML=html;
+  }
+
+  // ── all-parts explorer (sorted by part number) ──────
+  let allAsc=true;
+  function renderAll(){
+    const list=parts.slice().sort((a,b)=>allAsc
+      ? a.part_no.localeCompare(b.part_no)
+      : b.part_no.localeCompare(a.part_no));
+    $('main').innerHTML=`
+      <div class="crumb"><span style="cursor:pointer" onclick="H.home()">Vehicles</span> › <b>All parts</b></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px">
+        <div class="sectitle" style="margin:0">All ${list.length} parts</div>
+        <button class="padd" style="background:#eef1f5;color:var(--navy)" onclick="H.toggleSort()">
+          Part No ${allAsc?'▲ ascending':'▼ descending'}</button>
+      </div>
+      <div class="searchbox" style="margin-bottom:14px">
+        <span class="si">🔍</span>
+        <input id="allSearch" placeholder="Filter all parts…" oninput="H.filterAll()">
+      </div>
+      <div class="plist" id="allList">${list.map(p=>rowHTML(p)).join('')}</div>`;
+  }
+  function toggleSort(){ allAsc=!allAsc; renderAll(); }
+  function filterAll(){
+    const q=($('allSearch').value||'').toLowerCase().trim();
+    let list=parts.slice().sort((a,b)=>allAsc
+      ? a.part_no.localeCompare(b.part_no)
+      : b.part_no.localeCompare(a.part_no));
+    if(q) list=list.filter(p=>matchQ(p,q));
+    $('allList').innerHTML=list.length?list.map(p=>rowHTML(p)).join(''):'<div class="empty">No matching parts</div>';
   }
 
   function partsForVehicle(v){
@@ -272,6 +305,7 @@ const H = (() => {
 
   return {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
+    openAll:()=>go('all',null,true), toggleSort, filterAll,
     onSearch, filterVehicle, add, inc, dec, setQty, remove,
     openCart, closeCart, placeOrder,
     openFeedback, closeFeedback, sendFeedback

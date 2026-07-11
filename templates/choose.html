@@ -48,10 +48,11 @@
       backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;gap:14px}
     .card:hover{transform:translateY(-6px);border-color:var(--gold);
       box-shadow:0 18px 44px rgba(0,0,0,.35);background:rgba(255,255,255,.07)}
-    .ic{width:88px;height:88px;border-radius:22px;display:flex;align-items:center;justify-content:center;
-      font-size:42px;box-shadow:0 10px 28px rgba(0,0,0,.3)}
-    .ic.aero{background:linear-gradient(135deg,#7CB342,#4a8a1e)}
-    .ic.honda{background:linear-gradient(135deg,#E30613,#a10410)}
+    .ic{width:150px;height:96px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 10px 28px rgba(0,0,0,.3);overflow:hidden}
+    .ic.aero{background:#2b2b2b;padding:10px}
+    .ic.honda{background:#fff;padding:12px}
+    .ic img{max-width:100%;max-height:100%;object-fit:contain}
     .card h2{font-size:21px;font-weight:700}
     .card p{color:var(--muted);font-size:13.5px;line-height:1.5}
     .go{margin-top:6px;font-size:13px;font-weight:600;color:var(--gold);letter-spacing:.02em}
@@ -85,14 +86,14 @@
     <div class="welcome" id="welcome"></div>
     <div class="cards">
       <a class="card" href="/aerostar">
-        <div class="ic aero">🛞</div>
+        <div class="ic aero"><img src="/static/img/aerostar_logo.png" alt="Aerostar Auto Components"></div>
         <h2>Aerostar</h2>
         <p>Two-wheeler fibre &amp; plastic moulded body parts — fenders, visors, cowls &amp; kits.</p>
         <div class="go">Enter Aerostar →</div>
       </a>
       <a class="card" href="/honda">
-        <div class="ic honda">🏍️</div>
-        <h2>Honda</h2>
+        <div class="ic honda"><img src="/static/img/honda_logo.png" alt="Honda Genuine Parts"></div>
+        <h2>Honda Genuine Parts</h2>
         <p>Genuine Honda spare parts by vehicle — Activa, Shine, Unicorn, Dio &amp; more.</p>
         <div class="go">Enter Honda →</div>
       </a>

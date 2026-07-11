@@ -5,11 +5,11 @@
   "stats": {
    "both": 1050,
    "name": 102,
-   "none": 15,
+   "universal": 15,
    "common_all": 3,
    "code": 21
   },
-  "common_all_count": 3
+  "common_all_count": 18
  },
  "vehicle_groups": [
   {
@@ -18,47 +18,47 @@
     {
      "name": "ACTIVA",
      "family": "ACTIVA",
-     "part_count": 39
+     "part_count": 54
     },
     {
      "name": "ACTIVA 110/DLX",
      "family": "ACTIVA",
-     "part_count": 102
+     "part_count": 117
     },
     {
      "name": "ACTIVA 125",
      "family": "ACTIVA",
-     "part_count": 34
+     "part_count": 49
     },
     {
      "name": "ACTIVA 125 BS6",
      "family": "ACTIVA",
-     "part_count": 59
+     "part_count": 74
     },
     {
      "name": "ACTIVA 3G/4G",
      "family": "ACTIVA",
-     "part_count": 70
+     "part_count": 85
     },
     {
      "name": "ACTIVA 5G",
      "family": "ACTIVA",
-     "part_count": 51
+     "part_count": 66
     },
     {
      "name": "ACTIVA 6G",
      "family": "ACTIVA",
-     "part_count": 149
+     "part_count": 164
     },
     {
      "name": "ACTIVA HET",
      "family": "ACTIVA",
-     "part_count": 81
+     "part_count": 96
     },
     {
      "name": "ACTIVA OLD",
      "family": "ACTIVA",
-     "part_count": 80
+     "part_count": 95
     }
    ]
   },
@@ -68,27 +68,27 @@
     {
      "name": "SHINE",
      "family": "SHINE",
-     "part_count": 168
+     "part_count": 183
     },
     {
      "name": "SHINE 100",
      "family": "SHINE",
-     "part_count": 9
+     "part_count": 24
     },
     {
      "name": "SHINE 125",
      "family": "SHINE",
-     "part_count": 4
+     "part_count": 19
     },
     {
      "name": "SHINE BS6",
      "family": "SHINE",
-     "part_count": 126
+     "part_count": 141
     },
     {
      "name": "SHINE SP",
      "family": "SHINE",
-     "part_count": 60
+     "part_count": 75
     }
    ]
   },
@@ -98,22 +98,22 @@
     {
      "name": "UNICORN",
      "family": "UNICORN",
-     "part_count": 33
+     "part_count": 48
     },
     {
      "name": "UNICORN 150",
      "family": "UNICORN",
-     "part_count": 111
+     "part_count": 126
     },
     {
      "name": "UNICORN 160",
      "family": "UNICORN",
-     "part_count": 46
+     "part_count": 61
     },
     {
      "name": "UNICORN BS6",
      "family": "UNICORN",
-     "part_count": 52
+     "part_count": 67
     }
    ]
   },
@@ -123,12 +123,12 @@
     {
      "name": "DIO",
      "family": "DIO",
-     "part_count": 27
+     "part_count": 42
     },
     {
      "name": "DIO BS6",
      "family": "DIO",
-     "part_count": 9
+     "part_count": 24
     }
    ]
   },
@@ -138,12 +138,12 @@
     {
      "name": "DREAM NEO",
      "family": "DREAM",
-     "part_count": 26
+     "part_count": 41
     },
     {
      "name": "DREAM YUGA",
      "family": "DREAM",
-     "part_count": 65
+     "part_count": 80
     }
    ]
   },
@@ -153,7 +153,7 @@
     {
      "name": "GRAZIA",
      "family": "GRAZIA",
-     "part_count": 8
+     "part_count": 23
     }
    ]
   },
@@ -163,7 +163,7 @@
     {
      "name": "AVIATOR",
      "family": "AVIATOR",
-     "part_count": 23
+     "part_count": 38
     }
    ]
   },
@@ -173,7 +173,7 @@
     {
      "name": "TWISTER",
      "family": "TWISTER",
-     "part_count": 25
+     "part_count": 40
     }
    ]
   },
@@ -183,7 +183,7 @@
     {
      "name": "NAVI",
      "family": "NAVI",
-     "part_count": 5
+     "part_count": 20
     }
    ]
   },
@@ -193,7 +193,7 @@
     {
      "name": "HORNET",
      "family": "HORNET",
-     "part_count": 15
+     "part_count": 30
     }
    ]
   },
@@ -203,7 +203,7 @@
     {
      "name": "STUNNER",
      "family": "STUNNER",
-     "part_count": 7
+     "part_count": 22
     }
    ]
   },
@@ -213,12 +213,12 @@
     {
      "name": "LIVO",
      "family": "LIVO",
-     "part_count": 18
+     "part_count": 33
     },
     {
      "name": "LIVO BS6",
      "family": "LIVO",
-     "part_count": 11
+     "part_count": 26
     }
    ]
   },
@@ -228,22 +228,12 @@
     {
      "name": "CD 110",
      "family": "CD 110",
-     "part_count": 12
+     "part_count": 27
     },
     {
      "name": "CD 110 BS6",
      "family": "CD 110",
-     "part_count": 11
-    }
-   ]
-  },
-  {
-   "family": "OTHER",
-   "vehicles": [
-    {
-     "name": "OTHER",
-     "family": "OTHER",
-     "part_count": 18
+     "part_count": 26
     }
    ]
   }
@@ -1805,13 +1795,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -1821,13 +1811,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -1837,13 +1827,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -5578,13 +5568,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -5915,13 +5905,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -6325,13 +6315,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -9825,13 +9815,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -10316,13 +10306,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -11011,13 +11001,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -14835,13 +14825,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -16700,13 +16690,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -16716,13 +16706,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -17104,13 +17094,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -19046,13 +19036,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
@@ -19192,13 +19182,13 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "OTHER"
+    "ALL MODELS"
    ],
    "families": [
-    "OTHER"
+    "ALL MODELS"
    ],
-   "common_all": false,
-   "source": "none",
+   "common_all": true,
+   "source": "universal",
    "category": "HONDA"
   },
   {
