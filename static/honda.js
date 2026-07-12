@@ -7,6 +7,8 @@
 const H = (() => {
   let DATA = null;           // {vehicle_groups, parts}
   let parts = [];
+  let searchIndex = [];      // parts + _search string (Aerostar-style)
+  let searchFocusIdx = -1;
   let session = { firm:'', contact:'' };
   let basket = {};           // part_no -> {part, qty}
   let stack = [];            // view history: {view, arg}
@@ -20,6 +22,10 @@ const H = (() => {
   const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const inr = n => n==null ? '—' : '₹'+Number(n).toLocaleString('en-IN');
   const cssid = s => String(s).replace(/[^A-Za-z0-9_-]/g,'_');
+  // normalise to letters+digits only so "bp"↔"B.P.", "3g"↔"3G", "n/m"↔"nm" all match
+  const flat = s => String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+  const normHay = p => flat(p.part_no+' '+(p.code||'')+' '+p.name+' '+(p.vehicles||[]).join(' '));
+  const qWords = q => String(q||'').toLowerCase().split(/\s+/).map(w=>w.replace(/[^a-z0-9]+/g,'')).filter(Boolean);
 
   // ── session (shared with landing page + Aerostar) ───
   function getShared(){
@@ -52,6 +58,7 @@ const H = (() => {
       try{
         const r=await fetch('/api/honda/data'); DATA=await r.json();
         parts=DATA.parts||[];
+        searchIndex=parts.map(p=>({p, s:normHay(p)}));
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
     }
     home();
@@ -64,6 +71,7 @@ const H = (() => {
     else if(view==='vehicle') renderVehicle(arg);
     else if(view==='search') renderSearch(arg);
     else if(view==='all') renderAll();
+    else if(view==='one') renderOne(arg);
     window.scrollTo(0,0);
   }
   function home(){ stack=[]; if($('search')) $('search').value=''; go('home',null,true); }
@@ -157,25 +165,70 @@ const H = (() => {
   }
 
   function matchQ(p,q){
-    const hay=((p.name||'')+' '+(p.part_no||'')+' '+(p.vehicles||[]).join(' ')).toLowerCase();
-    return q.split(/\s+/).filter(Boolean).every(tok=>hay.includes(tok));
+    const hay=normHay(p);
+    return qWords(q).every(w=>hay.includes(w));
   }
 
-  let searchTimer=null;
+  // ── search (Aerostar-style: live dropdown + Enter for full results) ──
+  function searchHits(q){
+    const words=qWords(q);
+    if(!words.length) return [];
+    return searchIndex.filter(x=>words.every(w=>x.s.includes(w))).map(x=>x.p);
+  }
   function onSearch(){
-    clearTimeout(searchTimer);
-    searchTimer=setTimeout(()=>{
-      const q=($('search').value||'').toLowerCase().trim();
-      if(!q){ if(stack[stack.length-1]?.view==='search'){ home(); } return; }
-      go('search', q, stack[stack.length-1]?.view!=='search');
-      if(stack[stack.length-1]?.view==='search') stack[stack.length-1].arg=q;
-    },140);
+    const q=($('search').value||'').trim();
+    const clr=$('searchClear'); if(clr) clr.classList.toggle('show', !!q);
+    if(!q){ hideDD(); return; }
+    renderDD(searchHits(q).slice(0,40), q);
+  }
+  function renderDD(results, q){
+    const dd=$('searchDD'); searchFocusIdx=-1;
+    if(!results.length){ dd.innerHTML=`<div class="search-none">No parts match “${esc(q)}”</div>`; dd.classList.remove('hidden'); return; }
+    dd.innerHTML=`<div class="search-ddh">${results.length}${results.length===40?'+':''} result${results.length!==1?'s':''} — press Enter to see all</div>`+
+      results.map((p,i)=>{
+        const veh=(p.common_all?['ALL MODELS']:(p.vehicles||[])).filter(v=>v!=='OTHER').join(' · ');
+        return `<div class="search-it" data-idx="${i}" onmousedown="H.pick('${esc(p.part_no)}')" onmouseover="H.focusDD(${i})">
+          <div class="si-b"><div class="si-n">${hl(p.name,q)}</div>
+            <div class="si-m"><span class="pn">${hl(p.part_no,q)}</span>${veh?`<span>${hl(veh,q)}</span>`:''}</div></div>
+          <div class="si-p">${inr(p.price)}</div></div>`;
+      }).join('');
+    dd.classList.remove('hidden');
+  }
+  function hl(text,q){
+    let s=esc(text);
+    q.toLowerCase().split(/\s+/).filter(Boolean).forEach(w=>{
+      const rx=new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+      s=s.replace(rx,'<mark>$1</mark>');
+    });
+    return s;
+  }
+  function hideDD(){ const dd=$('searchDD'); if(dd) dd.classList.add('hidden'); searchFocusIdx=-1; }
+  function focusDD(i){ searchFocusIdx=i; document.querySelectorAll('#searchDD .search-it').forEach((el,j)=>el.classList.toggle('foc',j===i)); }
+  function clearSearch(){ const s=$('search'); if(s) s.value=''; const c=$('searchClear'); if(c) c.classList.remove('show'); hideDD(); }
+  function onSearchKey(e){
+    const items=document.querySelectorAll('#searchDD .search-it');
+    if(e.key==='ArrowDown'){ e.preventDefault(); if(items.length){ searchFocusIdx=Math.min(searchFocusIdx+1,items.length-1); markFoc(items);} }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); if(items.length){ searchFocusIdx=Math.max(searchFocusIdx-1,0); markFoc(items);} }
+    else if(e.key==='Enter'){ e.preventDefault();
+      if(searchFocusIdx>=0 && items[searchFocusIdx]){ items[searchFocusIdx].dispatchEvent(new MouseEvent('mousedown')); }
+      else { showResults(($('search').value||'').trim()); } }
+    else if(e.key==='Escape'){ hideDD(); }
+  }
+  function markFoc(items){ items.forEach((el,i)=>{ el.classList.toggle('foc',i===searchFocusIdx); if(i===searchFocusIdx) el.scrollIntoView({block:'nearest'}); }); }
+  function pick(pn){ hideDD(); const p=findPart(pn); if(!p) return; clearSearch(); go('one', p, true); }
+  function showResults(q){ if(!q) return; hideDD(); go('search', q, true); }
+
+  function renderOne(p){
+    $('main').innerHTML=`
+      <div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> › <b>${esc(p.part_no)}</b></div>
+      <div class="sectitle">Part ${esc(p.part_no)}</div>
+      <div class="plist">${rowHTML(p)}</div>`;
   }
   function renderSearch(q){
-    const list=parts.filter(p=>matchQ(p,q)).slice(0,300);
+    const list=searchHits(q).slice(0,300);
     $('main').innerHTML=`
       <div class="crumb">Search results for <b>“${esc(q)}”</b></div>
-      <div class="sectitle">${list.length} part${list.length!==1?'s':''} found${list.length===300?' (showing first 300)':''}</div>
+      <div class="sectitle">${list.length} part${list.length!==1?'s':''} found${list.length===300?' (first 300)':''}</div>
       <div class="plist">${list.length?list.map(p=>rowHTML(p)).join(''):'<div class="empty">No parts match your search</div>'}</div>`;
   }
 
@@ -304,10 +357,14 @@ const H = (() => {
     }
   })();
 
+  // close dropdown on outside click
+  document.addEventListener('click', e=>{ if(!e.target.closest('.searchbox')) hideDD(); });
+
   return {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
     openAll:()=>go('all',null,true), toggleSort, filterAll,
-    onSearch, filterVehicle, add, inc, dec, setQty, remove,
+    onSearch, onSearchKey, focusDD, clearSearch, pick,
+    filterVehicle, add, inc, dec, setQty, remove,
     openCart, closeCart, placeOrder,
     openFeedback, closeFeedback, sendFeedback
   };
