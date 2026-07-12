@@ -3,11 +3,12 @@
   "source": "HONDAPARTS.xlsx (Parent=HONDA 18%)",
   "total_parts": 1191,
   "stats": {
-   "both": 1043,
+   "code": 1010,
+   "both": 60,
    "name": 100,
    "universal": 17,
    "common_all": 3,
-   "code": 28
+   "override": 1
   },
   "common_all_count": 20
  },
@@ -16,14 +17,39 @@
    "family": "ACTIVA",
    "vehicles": [
     {
-     "name": "ACTIVA",
+     "name": "ACTIVA 6G",
      "family": "ACTIVA",
-     "part_count": 56
+     "part_count": 129
     },
     {
      "name": "ACTIVA 110/DLX",
      "family": "ACTIVA",
-     "part_count": 119
+     "part_count": 106
+    },
+    {
+     "name": "ACTIVA OLD",
+     "family": "ACTIVA",
+     "part_count": 97
+    },
+    {
+     "name": "ACTIVA 125 BS6",
+     "family": "ACTIVA",
+     "part_count": 75
+    },
+    {
+     "name": "ACTIVA 3G/4G",
+     "family": "ACTIVA",
+     "part_count": 72
+    },
+    {
+     "name": "ACTIVA HET",
+     "family": "ACTIVA",
+     "part_count": 72
+    },
+    {
+     "name": "ACTIVA",
+     "family": "ACTIVA",
+     "part_count": 59
     },
     {
      "name": "ACTIVA 125",
@@ -31,34 +57,9 @@
      "part_count": 51
     },
     {
-     "name": "ACTIVA 125 BS6",
-     "family": "ACTIVA",
-     "part_count": 76
-    },
-    {
-     "name": "ACTIVA 3G/4G",
-     "family": "ACTIVA",
-     "part_count": 87
-    },
-    {
      "name": "ACTIVA 5G",
      "family": "ACTIVA",
-     "part_count": 68
-    },
-    {
-     "name": "ACTIVA 6G",
-     "family": "ACTIVA",
-     "part_count": 165
-    },
-    {
-     "name": "ACTIVA HET",
-     "family": "ACTIVA",
-     "part_count": 77
-    },
-    {
-     "name": "ACTIVA OLD",
-     "family": "ACTIVA",
-     "part_count": 97
+     "part_count": 46
     }
    ]
   },
@@ -71,24 +72,19 @@
      "part_count": 185
     },
     {
+     "name": "SHINE BS6",
+     "family": "SHINE",
+     "part_count": 95
+    },
+    {
+     "name": "SHINE SP BS6",
+     "family": "SHINE",
+     "part_count": 75
+    },
+    {
      "name": "SHINE 100",
      "family": "SHINE",
      "part_count": 26
-    },
-    {
-     "name": "SHINE 125",
-     "family": "SHINE",
-     "part_count": 21
-    },
-    {
-     "name": "SHINE BS6",
-     "family": "SHINE",
-     "part_count": 143
-    },
-    {
-     "name": "SHINE SP",
-     "family": "SHINE",
-     "part_count": 77
     }
    ]
   },
@@ -96,24 +92,24 @@
    "family": "UNICORN",
    "vehicles": [
     {
-     "name": "UNICORN",
-     "family": "UNICORN",
-     "part_count": 50
-    },
-    {
      "name": "UNICORN 150",
      "family": "UNICORN",
      "part_count": 128
     },
     {
-     "name": "UNICORN 160",
-     "family": "UNICORN",
-     "part_count": 63
-    },
-    {
      "name": "UNICORN BS6",
      "family": "UNICORN",
-     "part_count": 69
+     "part_count": 68
+    },
+    {
+     "name": "UNICORN 160",
+     "family": "UNICORN",
+     "part_count": 53
+    },
+    {
+     "name": "UNICORN",
+     "family": "UNICORN",
+     "part_count": 50
     }
    ]
   },
@@ -136,14 +132,14 @@
    "family": "DREAM",
    "vehicles": [
     {
-     "name": "DREAM NEO",
-     "family": "DREAM",
-     "part_count": 43
-    },
-    {
      "name": "DREAM YUGA",
      "family": "DREAM",
      "part_count": 82
+    },
+    {
+     "name": "DREAM NEO",
+     "family": "DREAM",
+     "part_count": 41
     }
    ]
   },
@@ -252,7 +248,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -268,7 +264,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -284,7 +280,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -331,14 +327,13 @@
    "unit": "Each",
    "code": "KWPH",
    "vehicles": [
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G"
+    "ACTIVA 5G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -348,14 +343,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -365,14 +359,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -382,14 +375,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -399,14 +391,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -422,7 +413,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -432,14 +423,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -455,7 +445,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -473,7 +463,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -491,7 +481,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -507,7 +497,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -523,7 +513,7 @@
     "GRAZIA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -539,7 +529,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -549,15 +539,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6",
-    "SHINE 125"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -567,14 +555,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -584,14 +571,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -601,14 +587,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -618,14 +603,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -635,14 +619,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -658,7 +641,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -674,7 +657,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -702,14 +685,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -719,14 +701,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -760,7 +741,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -770,14 +751,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -793,7 +773,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -809,7 +789,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -825,7 +805,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -841,7 +821,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -851,14 +831,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -868,14 +847,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -910,7 +888,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -926,7 +904,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -942,7 +920,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -958,7 +936,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -974,7 +952,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -990,7 +968,7 @@
     "GRAZIA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1006,7 +984,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1022,7 +1000,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1038,7 +1016,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1054,7 +1032,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1070,7 +1048,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1086,7 +1064,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1102,7 +1080,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1112,14 +1090,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1135,7 +1112,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1151,7 +1128,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1167,7 +1144,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1183,7 +1160,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1199,7 +1176,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1215,7 +1192,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1225,14 +1202,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1248,7 +1224,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1264,7 +1240,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1280,7 +1256,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1296,7 +1272,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1312,7 +1288,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1322,14 +1298,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1345,7 +1320,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1361,7 +1336,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1371,14 +1346,13 @@
    "unit": "Each",
    "code": "KWPF",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 110/DLX"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1394,7 +1368,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1404,7 +1378,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "ACTIVA 6G"
+    "ACTIVA"
    ],
    "families": [
     "ACTIVA"
@@ -1426,7 +1400,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1442,7 +1416,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1458,7 +1432,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1468,14 +1442,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 3G/4G"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1491,7 +1464,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1525,7 +1498,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1541,7 +1514,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1557,7 +1530,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1573,7 +1546,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1589,7 +1562,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1605,7 +1578,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1621,7 +1594,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1637,7 +1610,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1671,7 +1644,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1687,7 +1660,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1703,7 +1676,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1737,7 +1710,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1753,7 +1726,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1769,7 +1742,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1785,7 +1758,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1843,14 +1816,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1866,7 +1838,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1882,7 +1854,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "BLOCK KIT"
   },
   {
@@ -1898,7 +1870,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1914,7 +1886,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1930,7 +1902,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1946,7 +1918,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1972,14 +1944,13 @@
    "unit": "Each",
    "code": "K14",
    "vehicles": [
-    "DREAM YUGA",
-    "DREAM NEO"
+    "DREAM YUGA"
    ],
    "families": [
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -1995,7 +1966,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2011,7 +1982,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2027,7 +1998,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2043,7 +2014,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2053,14 +2024,13 @@
    "unit": "Each",
    "code": "K38",
    "vehicles": [
-    "UNICORN 160",
-    "UNICORN BS6"
+    "UNICORN 160"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2076,7 +2046,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2092,7 +2062,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2110,7 +2080,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2126,7 +2096,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2160,7 +2130,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2176,7 +2146,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2192,7 +2162,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2208,7 +2178,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2224,7 +2194,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2240,7 +2210,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2256,7 +2226,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2320,7 +2290,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2336,7 +2306,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2352,7 +2322,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2384,7 +2354,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2400,7 +2370,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "override",
    "category": "BRAKE SHOE"
   },
   {
@@ -2410,14 +2380,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2433,7 +2402,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2449,7 +2418,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2459,14 +2428,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2482,7 +2450,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2514,7 +2482,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2524,14 +2492,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2549,7 +2516,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2565,7 +2532,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2581,7 +2548,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2597,7 +2564,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2613,7 +2580,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2629,7 +2596,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2645,7 +2612,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2697,7 +2664,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2713,7 +2680,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2729,7 +2696,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2763,7 +2730,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2813,7 +2780,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2823,14 +2790,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2840,14 +2806,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2863,7 +2828,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2879,7 +2844,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2895,7 +2860,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2911,7 +2876,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2927,7 +2892,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2943,7 +2908,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2959,7 +2924,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2975,7 +2940,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3009,7 +2974,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3025,7 +2990,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3041,7 +3006,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3057,7 +3022,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "carburetor"
   },
   {
@@ -3075,7 +3040,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3091,7 +3056,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3107,7 +3072,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3123,7 +3088,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3139,7 +3104,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3155,7 +3120,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3171,7 +3136,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3203,7 +3168,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3219,7 +3184,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3235,7 +3200,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3251,7 +3216,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3261,14 +3226,13 @@
    "unit": "Each",
    "code": "KSP",
    "vehicles": [
-    "UNICORN 150",
-    "UNICORN 160"
+    "UNICORN 150"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3302,7 +3266,7 @@
     "GRAZIA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3318,7 +3282,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3334,7 +3298,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3350,7 +3314,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3366,7 +3330,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3382,7 +3346,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3398,7 +3362,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3414,7 +3378,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3430,7 +3394,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3446,7 +3410,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3462,7 +3426,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3472,14 +3436,13 @@
    "unit": "Each",
    "code": "KWPF",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 5G"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3489,14 +3452,13 @@
    "unit": "Each",
    "code": "KWPH",
    "vehicles": [
-    "ACTIVA 5G",
-    "ACTIVA 6G"
+    "ACTIVA 5G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3512,7 +3474,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3528,7 +3490,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3544,7 +3506,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3560,7 +3522,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3576,7 +3538,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3592,7 +3554,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3608,7 +3570,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3624,7 +3586,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3658,7 +3620,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3674,7 +3636,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3690,7 +3652,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3706,7 +3668,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3722,7 +3684,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3732,14 +3694,13 @@
    "unit": "Kit",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3755,7 +3716,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3771,7 +3732,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3787,7 +3748,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3803,7 +3764,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3819,7 +3780,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3835,7 +3796,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3869,7 +3830,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3885,7 +3846,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3895,14 +3856,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3918,7 +3878,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3934,7 +3894,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3950,7 +3910,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3966,7 +3926,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3982,7 +3942,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -3998,7 +3958,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4030,7 +3990,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4046,7 +4006,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4078,7 +4038,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4094,7 +4054,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4110,7 +4070,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4126,7 +4086,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4142,7 +4102,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4158,7 +4118,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4174,7 +4134,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4190,7 +4150,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4206,7 +4166,7 @@
     "STUNNER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4222,7 +4182,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4238,7 +4198,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4254,7 +4214,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4270,7 +4230,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4286,7 +4246,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4302,7 +4262,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4318,7 +4278,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4350,7 +4310,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4366,7 +4326,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4382,7 +4342,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4398,7 +4358,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4414,7 +4374,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4430,7 +4390,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4446,7 +4406,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4462,7 +4422,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4478,7 +4438,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4494,7 +4454,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4526,7 +4486,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4542,7 +4502,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4574,7 +4534,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4590,7 +4550,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4606,7 +4566,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4622,7 +4582,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4638,7 +4598,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4670,7 +4630,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4738,7 +4698,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4754,7 +4714,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4788,7 +4748,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4804,7 +4764,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4820,7 +4780,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4836,7 +4796,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4852,7 +4812,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4868,7 +4828,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4884,7 +4844,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4900,7 +4860,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4935,7 +4895,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4951,7 +4911,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4967,7 +4927,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -4983,7 +4943,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5015,7 +4975,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5031,7 +4991,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5047,7 +5007,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5063,7 +5023,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5079,7 +5039,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5095,7 +5055,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5161,7 +5121,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5177,7 +5137,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5211,7 +5171,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5227,7 +5187,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5237,14 +5197,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5260,7 +5219,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5308,7 +5267,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5324,7 +5283,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5356,7 +5315,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5366,15 +5325,15 @@
    "unit": "Each",
    "code": "K55",
    "vehicles": [
+    "LIVO BS6",
     "SHINE BS6",
     "DREAM YUGA",
-    "DREAM NEO",
-    "LIVO BS6"
+    "DREAM NEO"
    ],
    "families": [
+    "LIVO",
     "SHINE",
-    "DREAM",
-    "LIVO"
+    "DREAM"
    ],
    "common_all": false,
    "source": "both",
@@ -5393,7 +5352,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5444,7 +5403,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5460,7 +5419,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5470,14 +5429,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5487,14 +5445,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5547,7 +5504,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5579,7 +5536,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5611,7 +5568,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5643,7 +5600,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5675,7 +5632,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5707,7 +5664,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5717,14 +5674,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5740,7 +5696,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5756,7 +5712,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5772,7 +5728,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5804,7 +5760,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5836,7 +5792,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5852,7 +5808,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5916,7 +5872,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5932,7 +5888,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5948,7 +5904,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5964,7 +5920,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5980,7 +5936,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -5996,7 +5952,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6012,7 +5968,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6028,7 +5984,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6046,7 +6002,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6064,7 +6020,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6080,7 +6036,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6096,7 +6052,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6112,7 +6068,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6128,7 +6084,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6144,7 +6100,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6160,7 +6116,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6176,7 +6132,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6186,14 +6142,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6203,14 +6158,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6220,7 +6174,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "ACTIVA 6G"
+    "ACTIVA"
    ],
    "families": [
     "ACTIVA"
@@ -6278,7 +6232,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6294,7 +6248,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6326,7 +6280,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6342,7 +6296,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6358,7 +6312,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6368,14 +6322,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6385,14 +6338,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6408,7 +6360,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6424,7 +6376,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6440,7 +6392,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6450,14 +6402,13 @@
    "unit": "Each",
    "code": "K14",
    "vehicles": [
-    "DREAM YUGA",
-    "DREAM NEO"
+    "DREAM YUGA"
    ],
    "families": [
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6473,7 +6424,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6489,7 +6440,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6499,14 +6450,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6538,7 +6488,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6554,7 +6504,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6570,7 +6520,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6586,7 +6536,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6620,7 +6570,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6652,7 +6602,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6668,7 +6618,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6684,7 +6634,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6700,7 +6650,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6716,7 +6666,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6748,7 +6698,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6764,7 +6714,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6796,7 +6746,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6844,7 +6794,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6862,7 +6812,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6878,7 +6828,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6894,7 +6844,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6920,14 +6870,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6937,14 +6886,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -6972,14 +6920,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7011,7 +6958,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7027,7 +6974,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7043,7 +6990,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7059,7 +7006,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7075,7 +7022,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7091,7 +7038,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7107,7 +7054,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7117,14 +7064,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7134,14 +7080,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7151,14 +7096,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7174,7 +7118,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7190,7 +7134,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7206,7 +7150,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7222,7 +7166,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7238,7 +7182,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7254,7 +7198,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7270,7 +7214,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7286,7 +7230,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7302,7 +7246,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7318,7 +7262,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7334,7 +7278,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7350,7 +7294,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7366,7 +7310,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7382,7 +7326,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7392,14 +7336,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7415,7 +7358,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7431,7 +7374,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7447,7 +7390,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7463,7 +7406,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7479,7 +7422,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7495,7 +7438,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7511,7 +7454,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7527,7 +7470,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7543,7 +7486,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7553,15 +7496,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7571,15 +7512,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G",
-    "ACTIVA HET"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7595,7 +7534,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7611,7 +7550,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7627,7 +7566,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7643,7 +7582,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7659,7 +7598,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7675,7 +7614,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7691,7 +7630,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7707,7 +7646,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7723,7 +7662,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7739,7 +7678,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7755,7 +7694,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7771,7 +7710,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7787,7 +7726,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7803,7 +7742,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7835,7 +7774,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7851,7 +7790,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7867,7 +7806,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7883,7 +7822,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7893,14 +7832,13 @@
    "unit": "Each",
    "code": "KWPG",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 110/DLX"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7910,14 +7848,13 @@
    "unit": "Each",
    "code": "KWPG",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 5G"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7933,7 +7870,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7949,7 +7886,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7965,7 +7902,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7975,14 +7912,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -7992,14 +7928,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8015,7 +7950,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8031,7 +7966,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8065,7 +8000,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8075,14 +8010,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8098,7 +8032,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8130,7 +8064,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8146,7 +8080,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8162,7 +8096,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8178,7 +8112,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8188,14 +8122,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8211,7 +8144,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8227,7 +8160,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8243,7 +8176,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8259,7 +8192,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8275,7 +8208,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8291,7 +8224,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8301,14 +8234,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8356,7 +8288,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8372,7 +8304,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8388,7 +8320,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8404,7 +8336,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8420,7 +8352,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8436,7 +8368,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8452,7 +8384,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8484,7 +8416,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8516,7 +8448,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8532,7 +8464,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8548,7 +8480,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8564,7 +8496,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8580,7 +8512,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8596,7 +8528,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8612,7 +8544,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8628,7 +8560,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8638,15 +8570,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G",
-    "ACTIVA HET"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8662,7 +8592,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8678,7 +8608,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8688,15 +8618,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G",
-    "ACTIVA HET"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8712,7 +8640,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8728,7 +8656,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8744,7 +8672,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8754,14 +8682,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8777,7 +8704,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8787,14 +8714,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8804,14 +8730,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8829,7 +8754,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8845,7 +8770,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8861,7 +8786,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8877,7 +8802,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8895,7 +8820,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8911,7 +8836,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8921,14 +8846,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8962,7 +8886,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8972,14 +8896,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -8995,7 +8918,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9011,7 +8934,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9059,7 +8982,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9075,7 +8998,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9091,7 +9014,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9107,7 +9030,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9117,15 +9040,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9135,15 +9056,13 @@
    "unit": "Each",
    "code": "KWPF",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 5G",
-    "ACTIVA HET"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9153,15 +9072,13 @@
    "unit": "Each",
    "code": "KWPH",
    "vehicles": [
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G",
-    "ACTIVA HET"
+    "ACTIVA 5G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9177,7 +9094,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9209,7 +9126,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9241,7 +9158,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9257,7 +9174,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9273,7 +9190,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9289,7 +9206,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9305,7 +9222,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9321,7 +9238,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9337,7 +9254,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9353,7 +9270,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9369,7 +9286,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9385,7 +9302,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9395,14 +9312,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9412,14 +9328,13 @@
    "unit": "Kit",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 3G/4G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9435,7 +9350,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9451,7 +9366,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9467,7 +9382,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9531,7 +9446,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9547,7 +9462,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9563,7 +9478,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9579,7 +9494,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9589,14 +9504,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9606,14 +9520,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9629,7 +9542,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9645,7 +9558,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9655,14 +9568,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9680,7 +9592,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9696,7 +9608,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9712,7 +9624,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9728,7 +9640,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9744,7 +9656,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9760,7 +9672,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9776,7 +9688,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9792,7 +9704,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9824,7 +9736,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9840,7 +9752,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9856,7 +9768,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9872,7 +9784,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9888,7 +9800,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9904,7 +9816,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9920,7 +9832,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9936,7 +9848,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9952,7 +9864,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9962,14 +9874,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -9979,14 +9890,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10025,7 +9935,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10041,7 +9951,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10057,7 +9967,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10089,7 +9999,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10105,7 +10015,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10115,14 +10025,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10138,7 +10047,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10154,7 +10063,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10170,7 +10079,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10186,7 +10095,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10218,7 +10127,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10228,14 +10137,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10251,7 +10159,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10283,7 +10191,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10315,7 +10223,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10331,7 +10239,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10347,7 +10255,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10357,14 +10265,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10374,14 +10281,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10397,7 +10303,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10413,7 +10319,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10429,7 +10335,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10445,7 +10351,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10461,7 +10367,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10477,7 +10383,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10493,7 +10399,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10543,7 +10449,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10559,7 +10465,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10575,7 +10481,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10591,7 +10497,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10607,7 +10513,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10623,7 +10529,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10639,7 +10545,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10689,7 +10595,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10705,7 +10611,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10721,7 +10627,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10737,7 +10643,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10753,7 +10659,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10769,7 +10675,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10785,7 +10691,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10801,7 +10707,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10817,7 +10723,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10833,7 +10739,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10849,7 +10755,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10865,7 +10771,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10881,7 +10787,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10897,7 +10803,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10913,7 +10819,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10929,7 +10835,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10945,7 +10851,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10961,7 +10867,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -10971,14 +10877,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11010,7 +10915,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11020,14 +10925,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11037,14 +10941,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11076,7 +10979,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11092,7 +10995,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11108,7 +11011,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11124,7 +11027,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11140,7 +11043,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11158,7 +11061,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11168,14 +11071,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11191,7 +11093,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11207,7 +11109,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11217,14 +11119,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 6G"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11240,7 +11141,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11256,7 +11157,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11272,7 +11173,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11288,7 +11189,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11304,7 +11205,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11320,7 +11221,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11336,7 +11237,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11352,7 +11253,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11362,14 +11263,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11379,14 +11279,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11402,7 +11301,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11436,7 +11335,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11452,7 +11351,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11468,7 +11367,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11478,14 +11377,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11501,7 +11399,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11517,7 +11415,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11527,14 +11425,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 125 BS6"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11550,7 +11447,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11560,14 +11457,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11583,7 +11479,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11599,7 +11495,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11615,7 +11511,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11631,7 +11527,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11647,7 +11543,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11663,7 +11559,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11679,7 +11575,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11695,7 +11591,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11711,7 +11607,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11743,7 +11639,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11759,7 +11655,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11775,7 +11671,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11791,7 +11687,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11807,7 +11703,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11823,7 +11719,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11839,7 +11735,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11855,7 +11751,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11871,7 +11767,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11887,7 +11783,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11919,7 +11815,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11935,7 +11831,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11951,7 +11847,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11967,7 +11863,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -11999,7 +11895,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12031,7 +11927,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12047,7 +11943,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12063,7 +11959,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12097,7 +11993,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12145,7 +12041,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12161,7 +12057,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12205,14 +12101,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 3G/4G"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12256,14 +12151,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12313,7 +12207,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12329,7 +12223,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12345,7 +12239,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12361,7 +12255,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12377,7 +12271,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12387,14 +12281,13 @@
    "unit": "Each",
    "code": "KSP",
    "vehicles": [
-    "UNICORN 150",
-    "UNICORN 160"
+    "UNICORN 150"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12410,7 +12303,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12426,7 +12319,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12442,7 +12335,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12458,7 +12351,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12508,7 +12401,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12542,7 +12435,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12558,7 +12451,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12574,7 +12467,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12590,7 +12483,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12606,7 +12499,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12622,7 +12515,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12638,7 +12531,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12686,7 +12579,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12720,7 +12613,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12736,7 +12629,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12752,7 +12645,7 @@
     "NAVI"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12768,7 +12661,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12778,14 +12671,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12801,7 +12693,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12811,14 +12703,13 @@
    "unit": "Each",
    "code": "K0N",
    "vehicles": [
-    "SHINE BS6",
-    "SHINE SP"
+    "SHINE BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12828,14 +12719,13 @@
    "unit": "Each",
    "code": "K0N",
    "vehicles": [
-    "SHINE BS6",
-    "SHINE SP"
+    "SHINE BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12851,7 +12741,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12867,7 +12757,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12883,7 +12773,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12899,7 +12789,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12915,7 +12805,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12931,7 +12821,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12947,7 +12837,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12979,7 +12869,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -12995,7 +12885,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13011,7 +12901,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13027,7 +12917,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13043,7 +12933,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13077,7 +12967,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13093,7 +12983,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13109,7 +12999,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13119,14 +13009,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13142,7 +13031,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13158,7 +13047,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13174,7 +13063,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13190,7 +13079,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13206,7 +13095,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13222,7 +13111,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13238,7 +13127,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13254,7 +13143,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13270,7 +13159,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13286,7 +13175,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13302,7 +13191,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13318,7 +13207,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13328,14 +13217,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13351,7 +13239,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13367,7 +13255,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13383,7 +13271,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13399,7 +13287,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13417,7 +13305,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13481,7 +13369,7 @@
     "HORNET"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13547,7 +13435,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13563,7 +13451,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13579,7 +13467,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13595,7 +13483,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13611,7 +13499,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13621,14 +13509,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13644,7 +13531,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13714,7 +13601,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13730,7 +13617,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13746,7 +13633,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13778,7 +13665,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13788,14 +13675,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 3G/4G"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13805,14 +13691,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13828,7 +13713,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13844,7 +13729,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13860,7 +13745,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13888,7 +13773,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -13926,7 +13811,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13942,7 +13827,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13958,7 +13843,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13968,14 +13853,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -13991,7 +13875,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14007,7 +13891,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14017,7 +13901,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -14033,7 +13917,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -14055,7 +13939,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14071,7 +13955,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14087,7 +13971,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14139,7 +14023,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14155,7 +14039,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14171,7 +14055,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14187,7 +14071,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14203,7 +14087,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14219,7 +14103,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14271,7 +14155,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14287,7 +14171,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14303,7 +14187,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14337,7 +14221,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14353,7 +14237,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14369,7 +14253,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14385,7 +14269,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14395,14 +14279,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14418,7 +14301,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14434,7 +14317,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14450,7 +14333,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14466,7 +14349,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14482,7 +14365,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14498,7 +14381,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14514,7 +14397,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14530,7 +14413,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14546,7 +14429,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14556,14 +14439,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14579,7 +14461,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14595,7 +14477,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14611,7 +14493,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14627,7 +14509,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14643,7 +14525,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14659,7 +14541,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14675,7 +14557,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14691,7 +14573,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14707,7 +14589,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14723,7 +14605,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14739,7 +14621,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14771,7 +14653,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14781,14 +14663,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14836,7 +14717,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14852,7 +14733,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14868,7 +14749,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14884,7 +14765,7 @@
     "TWISTER"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14900,7 +14781,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14910,7 +14791,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "ACTIVA 6G"
+    "ACTIVA"
    ],
    "families": [
     "ACTIVA"
@@ -14932,7 +14813,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14976,14 +14857,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -14993,14 +14873,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15016,7 +14895,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15032,7 +14911,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15048,7 +14927,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15064,7 +14943,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15080,7 +14959,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15096,7 +14975,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15124,14 +15003,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15147,7 +15025,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15163,7 +15041,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15173,14 +15051,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15196,7 +15073,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15212,7 +15089,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15228,7 +15105,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15244,7 +15121,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15278,7 +15155,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15294,7 +15171,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15310,7 +15187,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15326,7 +15203,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15342,7 +15219,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15358,7 +15235,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15368,14 +15245,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15391,7 +15267,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15407,7 +15283,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15423,7 +15299,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15433,14 +15309,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15456,7 +15331,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15506,7 +15381,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15556,7 +15431,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15588,7 +15463,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15604,7 +15479,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15620,7 +15495,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15630,14 +15505,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15647,14 +15521,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15670,7 +15543,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15686,7 +15559,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15696,14 +15569,13 @@
    "unit": "Each",
    "code": "KWPG",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 5G"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15713,14 +15585,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15736,7 +15607,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15752,7 +15623,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15768,7 +15639,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15784,7 +15655,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15800,7 +15671,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15848,7 +15719,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15864,7 +15735,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15880,7 +15751,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15890,14 +15761,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15913,7 +15783,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15947,7 +15817,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15963,7 +15833,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -15979,7 +15849,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16043,7 +15913,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16075,7 +15945,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16141,7 +16011,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16157,7 +16027,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16173,7 +16043,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16189,7 +16059,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16205,7 +16075,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16221,7 +16091,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16237,7 +16107,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16269,7 +16139,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16285,7 +16155,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16335,7 +16205,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16351,7 +16221,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16386,7 +16256,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16420,7 +16290,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16436,7 +16306,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16452,7 +16322,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16468,7 +16338,7 @@
     "CD 110"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16484,7 +16354,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16500,7 +16370,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16510,15 +16380,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16534,7 +16402,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16544,14 +16412,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16567,7 +16434,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16583,7 +16450,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16599,7 +16466,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16615,7 +16482,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16631,7 +16498,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16711,7 +16578,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16721,14 +16588,13 @@
    "unit": "Each",
    "code": "KWPH",
    "vehicles": [
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G"
+    "ACTIVA 5G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16744,7 +16610,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16760,7 +16626,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16776,7 +16642,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16786,14 +16652,13 @@
    "unit": "Each",
    "code": "K0P",
    "vehicles": [
-    "ACTIVA 6G",
-    "ACTIVA 5G"
+    "ACTIVA 6G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16803,14 +16668,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16826,7 +16690,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16842,7 +16706,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16858,7 +16722,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16890,7 +16754,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16900,14 +16764,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16923,7 +16786,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16939,7 +16802,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16955,7 +16818,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16971,7 +16834,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -16987,7 +16850,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17003,7 +16866,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17019,7 +16882,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17035,7 +16898,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17051,7 +16914,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17083,7 +16946,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17093,14 +16956,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17132,7 +16994,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17148,7 +17010,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17158,14 +17020,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17181,7 +17042,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17197,7 +17058,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17213,7 +17074,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17229,7 +17090,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17245,7 +17106,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17261,7 +17122,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17277,7 +17138,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17287,14 +17148,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17304,14 +17164,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17327,7 +17186,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17343,7 +17202,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17353,7 +17212,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -17375,7 +17234,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17391,7 +17250,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17407,7 +17266,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17423,7 +17282,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17457,7 +17316,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17473,7 +17332,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17489,7 +17348,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17505,7 +17364,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17521,7 +17380,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17537,7 +17396,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17547,14 +17406,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17570,7 +17428,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17580,14 +17438,13 @@
    "unit": "Each",
    "code": "KWPF",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 110/DLX"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17619,7 +17476,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17635,7 +17492,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17667,7 +17524,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17683,7 +17540,7 @@
     "DIO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17731,7 +17588,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17747,7 +17604,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17757,14 +17614,13 @@
    "unit": "Each",
    "code": "KWPH",
    "vehicles": [
-    "ACTIVA 5G",
-    "ACTIVA 3G/4G"
+    "ACTIVA 5G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17780,7 +17636,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17796,7 +17652,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17828,7 +17684,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17844,7 +17700,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17860,7 +17716,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17876,7 +17732,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17892,7 +17748,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17908,7 +17764,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17918,7 +17774,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -17940,7 +17796,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17956,7 +17812,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17972,7 +17828,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -17988,7 +17844,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18004,7 +17860,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18014,14 +17870,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18053,7 +17908,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18069,7 +17924,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18085,7 +17940,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18111,14 +17966,13 @@
    "unit": "Each",
    "code": "KWP",
    "vehicles": [
-    "ACTIVA 110/DLX",
-    "ACTIVA 6G"
+    "ACTIVA 110/DLX"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18150,7 +18004,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18166,7 +18020,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18182,7 +18036,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18198,7 +18052,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18214,7 +18068,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18230,7 +18084,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18264,7 +18118,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18280,7 +18134,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18296,7 +18150,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18312,7 +18166,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18344,7 +18198,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18360,7 +18214,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18376,7 +18230,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18392,7 +18246,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18408,7 +18262,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18424,7 +18278,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18440,7 +18294,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18450,14 +18304,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18473,7 +18326,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18489,7 +18342,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18521,7 +18374,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18537,7 +18390,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18585,7 +18438,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18601,7 +18454,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18617,7 +18470,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18633,7 +18486,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18649,7 +18502,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18665,7 +18518,7 @@
     "AVIATOR"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18681,7 +18534,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18697,7 +18550,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18713,7 +18566,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18729,7 +18582,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18745,7 +18598,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18761,7 +18614,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18793,7 +18646,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18809,7 +18662,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18825,7 +18678,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18841,7 +18694,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18857,7 +18710,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18873,7 +18726,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18883,14 +18736,13 @@
    "unit": "Each",
    "code": "KWPD",
    "vehicles": [
-    "ACTIVA HET",
-    "ACTIVA 110/DLX"
+    "ACTIVA HET"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18900,14 +18752,13 @@
    "unit": "Each",
    "code": "KWPF",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 110/DLX"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18923,7 +18774,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18939,7 +18790,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18949,14 +18800,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18972,7 +18822,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18982,14 +18832,13 @@
    "unit": "Each",
    "code": "K1K",
    "vehicles": [
-    "UNICORN BS6",
-    "UNICORN 160"
+    "UNICORN BS6"
    ],
    "families": [
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19069,7 +18918,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19079,14 +18928,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19096,14 +18944,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19119,7 +18966,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19135,7 +18982,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19167,7 +19014,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19183,7 +19030,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19199,7 +19046,7 @@
     "UNICORN"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19247,7 +19094,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19263,7 +19110,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19279,7 +19126,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19295,7 +19142,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19327,7 +19174,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19337,14 +19184,13 @@
    "unit": "Each",
    "code": "KWPG",
    "vehicles": [
-    "ACTIVA 3G/4G",
-    "ACTIVA 110/DLX"
+    "ACTIVA 3G/4G"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19360,7 +19206,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19376,7 +19222,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19392,7 +19238,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19408,7 +19254,7 @@
     "LIVO"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19424,7 +19270,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19440,7 +19286,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19456,7 +19302,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19466,14 +19312,13 @@
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
-    "SHINE SP",
-    "SHINE BS6"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19489,7 +19334,7 @@
     "SHINE"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19499,7 +19344,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"
@@ -19521,7 +19366,7 @@
     "DREAM"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19537,7 +19382,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19553,7 +19398,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19563,14 +19408,13 @@
    "unit": "Each",
    "code": "K24",
    "vehicles": [
-    "ACTIVA 125",
-    "ACTIVA 5G"
+    "ACTIVA 125"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19580,14 +19424,13 @@
    "unit": "Each",
    "code": "K0L",
    "vehicles": [
-    "ACTIVA 125 BS6",
-    "ACTIVA 6G"
+    "ACTIVA 125 BS6"
    ],
    "families": [
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19603,7 +19446,7 @@
     "ACTIVA"
    ],
    "common_all": false,
-   "source": "both",
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -19613,7 +19456,7 @@
    "unit": "Each",
    "code": null,
    "vehicles": [
-    "SHINE SP"
+    "SHINE SP BS6"
    ],
    "families": [
     "SHINE"

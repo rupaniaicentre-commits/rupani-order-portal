@@ -1,1 +1,1 @@
-v=20260623-honda7 aerostar-style search, punctuation-proof, HET fix
+v=20260623-honda8 code-authoritative vehicle mapping (K0L fix)

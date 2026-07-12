@@ -56,7 +56,7 @@ const H = (() => {
   async function boot(){
     if(!DATA){
       try{
-        const r=await fetch('/api/honda/data'); DATA=await r.json();
+        const r=await fetch('/api/honda/data?v=20260623-8'); DATA=await r.json();
         parts=DATA.parts||[];
         searchIndex=parts.map(p=>({p, s:normHay(p)}));
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
