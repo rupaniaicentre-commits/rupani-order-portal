@@ -75,6 +75,7 @@
     </div>
 
     <div class="header-right">
+      <button class="btn-icon" onclick="App.openOrders()" title="Previous orders" style="font-size:17px">🧾</button>
       <button class="basket-btn" onclick="App.toggleBasket()" title="Basket">
         🛒 <span class="basket-count" id="basketCount">0</span>
       </button>
@@ -144,6 +145,16 @@
   </div>
 
   <!-- ── SETTINGS MODAL ── -->
+  <!-- ── PREVIOUS ORDERS MODAL ── -->
+  <div id="ordersOverlay" class="overlay hidden" onclick="App.closeOrders()"></div>
+  <div id="ordersModal" class="modal hidden">
+    <div class="modal-header">
+      <h2>🧾 Previous Orders</h2>
+      <button onclick="App.closeOrders()" class="btn-icon">✕</button>
+    </div>
+    <div class="modal-body" id="ordersBody"></div>
+  </div>
+
   <div id="settingsOverlay" class="overlay hidden" onclick="App.closeSettings()"></div>
   <div id="settingsModal" class="modal hidden">
     <div class="modal-header">
@@ -195,6 +206,6 @@
   </div>
 </div>
 
-<script src="/static/app.js?v=20260623-img"></script>
+<script src="/static/app.js?v=20260623-orders"></script>
 </body>
 </html>

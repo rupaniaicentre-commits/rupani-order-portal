@@ -596,3 +596,15 @@ mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
 .lv-parts-count { font-size: 14px; color: var(--success); font-weight: 600; }
 .lv-owner { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
 .lv-no-parts { font-size: 13px; color: var(--danger); margin-bottom: 6px; }
+
+/* ── Previous Orders ── */
+.ord-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.ord-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.ord-date{font-size:13px;font-weight:700;color:var(--navy)}
+.ord-tag{font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px}
+.ord-tag.aero{background:#e8f5e9;color:#2e7d32}
+.ord-tag.honda{background:#fee2e2;color:#b71c1c}
+.ord-meta{font-size:12px;color:var(--text-muted);margin-bottom:8px}
+.ord-lines{font-size:12.5px;color:#374151;line-height:1.6;border-top:1px dashed var(--border);padding-top:7px}
+.ord-reorder{margin-top:9px;background:var(--navy);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:12.5px;border:none;cursor:pointer}
+.ord-empty{text-align:center;color:var(--text-muted);padding:40px 20px;font-size:14px}

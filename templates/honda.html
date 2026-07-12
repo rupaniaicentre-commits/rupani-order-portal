@@ -43,7 +43,8 @@
     .hlogo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--red),var(--red-dark));
       display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
     .htitle{font-weight:700;font-size:15px}.hsub{font-size:11px;color:#9fb0d0;margin-top:-2px}
-    .cart-btn{margin-left:auto;position:relative;background:var(--red);color:#fff;padding:8px 14px;border-radius:9px;font-weight:600;font-size:14px}
+    .ord-btn{margin-left:auto;font-size:17px}
+    .cart-btn{position:relative;background:var(--red);color:#fff;padding:8px 14px;border-radius:9px;font-weight:600;font-size:14px}
     .cart-badge{position:absolute;top:-7px;right:-7px;background:#fff;color:var(--red);font-size:11px;font-weight:700;
       min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 
@@ -143,6 +144,38 @@
     .fb-actions{display:flex;gap:10px;margin-top:14px}
     .fb-cancel{flex:1;background:#eef1f5;color:var(--navy);padding:11px;border-radius:9px;font-weight:600}
     .fb-send{flex:2;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:11px;border-radius:9px;font-weight:700}
+    /* confirm-order + orders modals */
+    .cm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:80;opacity:0;pointer-events:none;transition:.2s}
+    .cm-overlay.show{opacity:1;pointer-events:auto}
+    .cm-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.97);width:min(460px,calc(100% - 28px));
+      max-height:88vh;display:flex;flex-direction:column;background:var(--bg);border-radius:16px;z-index:85;
+      box-shadow:0 24px 60px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.2s;overflow:hidden}
+    .cm-modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+    .cm-head{background:var(--navy);color:#fff;padding:15px 18px;display:flex;align-items:center;justify-content:space-between}
+    .cm-head b{font-size:16px}
+    .cm-body{padding:16px 18px;overflow-y:auto}
+    .cm-sum{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+    .cm-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;font-size:14px}
+    .cm-row span{color:var(--muted)}
+    .cm-row input{flex:1;max-width:230px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;text-align:right}
+    .cm-row input:focus{outline:none;border-color:var(--red)}
+    .cm-hint{font-size:11.5px;color:var(--muted);margin:2px 0 4px}
+    .cm-list{display:flex;flex-direction:column;gap:7px}
+    .cm-li{background:#fff;border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;gap:10px;font-size:13px}
+    .cm-li .pn{flex-shrink:0}.cm-li .cl-d{flex:1;min-width:0}.cm-li .cl-q{font-weight:700;color:var(--navy)}
+    .cm-foot{border-top:1px solid var(--border);padding:14px 18px;background:#fff}
+    .cm-cancel{width:100%;background:#eef1f5;color:var(--navy);padding:11px;border-radius:10px;font-weight:600;margin-top:8px}
+    .cm-msg{padding:10px 12px;border-radius:9px;font-size:13.5px;margin-bottom:10px;line-height:1.4}
+    .cm-msg.ok{background:#e8f5e9;color:#1b5e20}.cm-msg.err{background:#fdecea;color:#b71c1c}
+    /* orders */
+    .ord-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+    .ord-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+    .ord-date{font-size:13px;font-weight:700;color:var(--navy)}
+    .ord-tag{font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;background:#fee2e2;color:var(--red-dark)}
+    .ord-tag.aero{background:#e8f5e9;color:#2e7d32}
+    .ord-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+    .ord-lines{font-size:12.5px;color:#374151;line-height:1.6;border-top:1px dashed var(--border);padding-top:7px}
+    .ord-reorder{margin-top:9px;background:var(--navy);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:12.5px}
   </style>
 </head>
 <body>
@@ -173,6 +206,7 @@
       <div class="hlogo">H</div>
       <div><div class="htitle">Honda Parts</div><div class="hsub">Rupani Automobiles</div></div>
     </div>
+    <button class="hbtn ord-btn" onclick="H.openOrders()" title="Previous orders">🧾</button>
     <button class="cart-btn" onclick="H.openCart()">🛒 Cart<span id="badge" class="cart-badge hidden">0</span></button>
   </header>
 
@@ -197,10 +231,37 @@
     <div class="drow"><span>Items</span><span id="cItems">0</span></div>
     <div class="drow"><span>Total Qty</span><span id="cQty">0</span></div>
     <div class="drow tot"><span>Total</span><span id="cTot">₹0</span></div>
-    <button class="dcta" onclick="H.placeOrder()">Place Order →</button>
+    <button class="dcta" onclick="H.openCheckout()">Place Order →</button>
   </div>
 </div>
 <div id="toast" class="toast"></div>
+
+<!-- CONFIRM & PLACE ORDER MODAL (Aerostar-style) -->
+<div id="coOverlay" class="cm-overlay" onclick="H.closeCheckout()"></div>
+<div id="coModal" class="cm-modal">
+  <div class="cm-head"><b>Confirm &amp; Place Order</b><button class="dclose" onclick="H.closeCheckout()">✕</button></div>
+  <div class="cm-body">
+    <div class="cm-sum">
+      <div class="cm-row"><span>Firm Name</span><input id="coFirm" type="text" placeholder="Firm name"></div>
+      <div class="cm-hint">✏️ Ordering for a customer? Edit the name above.</div>
+      <div class="cm-row"><span>Contact</span><input id="coContact" type="tel" maxlength="10" placeholder="Mobile number"></div>
+      <div class="cm-row"><span>Items</span><strong id="coItems"></strong></div>
+    </div>
+    <div class="cm-list" id="coList"></div>
+  </div>
+  <div class="cm-foot">
+    <div id="coMsg" class="cm-msg hidden"></div>
+    <button id="coBtn" class="dcta" onclick="H.placeOrder()">✓ Place Order &amp; Send</button>
+    <button class="cm-cancel" onclick="H.closeCheckout()">Cancel</button>
+  </div>
+</div>
+
+<!-- PREVIOUS ORDERS MODAL -->
+<div id="ordOverlay" class="cm-overlay" onclick="H.closeOrders()"></div>
+<div id="ordModal" class="cm-modal">
+  <div class="cm-head"><b>🧾 Previous Orders</b><button class="dclose" onclick="H.closeOrders()">✕</button></div>
+  <div class="cm-body" id="ordBody"></div>
+</div>
 
 <!-- FITMENT FEEDBACK MODAL -->
 <div id="fbOverlay" class="fb-overlay" onclick="H.closeFeedback()"></div>
@@ -216,6 +277,6 @@
   </div>
 </div>
 
-<script src="/static/honda.js?v=20260623-8"></script>
+<script src="/static/honda.js?v=20260623-9"></script>
 </body>
 </html>

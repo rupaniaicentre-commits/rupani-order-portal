@@ -53,6 +53,22 @@ const H = (() => {
     boot();
   }
 
+  // ── per-user persistence (survives logout / long gaps, same device) ──
+  const userKey = () => (session.firm+'|'+session.contact).toLowerCase().replace(/[^a-z0-9|]/g,'');
+  const basketKey = () => 'honda_basket_'+userKey();
+  const ordersKey = () => 'ra_orders_'+userKey();     // shared with Aerostar
+  function saveBasket(){ try{
+    const slim={}; for(const k in basket){ const b=basket[k]; slim[k]={part_no:b.part.part_no, qty:b.qty}; }
+    localStorage.setItem(basketKey(), JSON.stringify(slim));
+  }catch(e){} }
+  function loadBasket(){ try{
+    const raw=JSON.parse(localStorage.getItem(basketKey())||'null'); basket={};
+    if(raw && parts.length){ for(const k in raw){ const p=findPart(k); if(p) basket[k]={part:p,qty:raw[k].qty}; } }
+    updateBadge();
+  }catch(e){ basket={}; } }
+  function getOrders(){ try{ return JSON.parse(localStorage.getItem(ordersKey())||'[]'); }catch(e){ return []; } }
+  function saveOrder(rec){ try{ const o=getOrders(); o.unshift(rec); localStorage.setItem(ordersKey(), JSON.stringify(o.slice(0,50))); }catch(e){} }
+
   async function boot(){
     if(!DATA){
       try{
@@ -61,6 +77,7 @@ const H = (() => {
         searchIndex=parts.map(p=>({p, s:normHay(p)}));
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
     }
+    loadBasket();     // restore this user's saved basket (parts are loaded now)
     home();
   }
 
@@ -285,10 +302,10 @@ const H = (() => {
 
   // ── basket ──────────────────────────────────────────
   function findPart(pn){ return parts.find(p=>p.part_no===pn); }
-  function add(pn){ const p=findPart(pn); if(!p) return; basket[pn]={part:p,qty:1}; refreshRow(pn); updateBadge(); toast('Added to order'); }
-  function inc(pn){ if(basket[pn]){ basket[pn].qty++; refreshRow(pn); updateBadge(); } }
-  function dec(pn){ if(basket[pn]){ basket[pn].qty--; if(basket[pn].qty<=0) delete basket[pn]; refreshRow(pn); updateBadge(); } }
-  function setQty(pn,v){ v=parseInt(v)||0; if(v<=0){ delete basket[pn]; } else if(basket[pn]){ basket[pn].qty=v; } refreshRow(pn); updateBadge(); }
+  function add(pn){ const p=findPart(pn); if(!p) return; basket[pn]={part:p,qty:1}; refreshRow(pn); updateBadge(); saveBasket(); toast('Added to order'); }
+  function inc(pn){ if(basket[pn]){ basket[pn].qty++; refreshRow(pn); updateBadge(); saveBasket(); } }
+  function dec(pn){ if(basket[pn]){ basket[pn].qty--; if(basket[pn].qty<=0) delete basket[pn]; refreshRow(pn); updateBadge(); saveBasket(); } }
+  function setQty(pn,v){ v=parseInt(v)||0; if(v<=0){ delete basket[pn]; } else if(basket[pn]){ basket[pn].qty=v; } refreshRow(pn); updateBadge(); saveBasket(); }
   function refreshRow(pn){
     const row=$('row-'+cssid(pn)), ctrl=$('ctrl-'+cssid(pn)); const p=findPart(pn);
     if(ctrl&&p) ctrl.innerHTML = basket[pn] ? qstepHTML(p) : `<button class="padd" onclick="H.add('${esc(pn)}')">+ Add</button>`;
@@ -321,26 +338,79 @@ const H = (() => {
     const tot=items.reduce((s,i)=>s+(i.part.price||0)*i.qty,0);
     $('cItems').textContent=nItems; $('cQty').textContent=qty; $('cTot').textContent=inr(tot);
   }
-  function remove(pn){ delete basket[pn]; refreshRow(pn); updateBadge(); renderCart(); }
+  function remove(pn){ delete basket[pn]; refreshRow(pn); updateBadge(); saveBasket(); renderCart(); }
+
+  // ── confirm & place order (Aerostar-style modal) ────
+  function openCheckout(){
+    const items=Object.values(basket);
+    if(!items.length){ toast('Your order is empty'); return; }
+    closeCart();
+    $('coFirm').value=session.firm; $('coContact').value=session.contact;
+    const qty=items.reduce((s,i)=>s+i.qty,0);
+    $('coItems').textContent=`${items.length} item${items.length!==1?'s':''} · ${qty} pcs`;
+    $('coList').innerHTML=items.map(({part:p,qty})=>`
+      <div class="cm-li"><span class="pn">${esc(p.part_no)}</span>
+        <span class="cl-d">${esc(p.name)}</span><span class="cl-q">×${qty}</span></div>`).join('');
+    const m=$('coMsg'); m.className='cm-msg hidden';
+    const b=$('coBtn'); b.disabled=false; b.textContent='✓ Place Order & Send';
+    $('coOverlay').classList.add('show'); $('coModal').classList.add('show');
+  }
+  function closeCheckout(){ $('coOverlay').classList.remove('show'); $('coModal').classList.remove('show'); }
 
   async function placeOrder(){
     const items=Object.values(basket);
-    if(!items.length){ toast('Your order is empty'); return; }
-    const payload={
-      firm_name:session.firm, contact_number:session.contact, portal:'honda',
-      items:items.map(({part:p,qty})=>({
-        as_part_number:p.part_no, sai_part_number:p.code||'', description:p.name,
-        vehicle:(p.common_all?['ALL MODELS']:(p.vehicles||[])).filter(v=>v!=='OTHER').join(', '),
-        colour:p.unit||'', mrp:p.price, qty
-      }))
-    };
-    toast('Placing order…');
+    if(!items.length){ return; }
+    const b=$('coBtn'), m=$('coMsg');
+    b.disabled=true; b.textContent='Placing order…';
+    const firm=($('coFirm').value.trim()||session.firm);
+    const contact=($('coContact').value.trim()||session.contact);
+    const lines=items.map(({part:p,qty})=>({
+      as_part_number:p.part_no, sai_part_number:p.code||'', description:p.name,
+      vehicle:(p.common_all?['ALL MODELS']:(p.vehicles||[])).filter(v=>v!=='OTHER').join(', '),
+      colour:p.unit||'', mrp:p.price, qty}));
     try{
-      const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({firm_name:firm, contact_number:contact, portal:'honda', items:lines})});
       const res=await r.json();
-      if(res.success){ basket={}; updateBadge(); renderCart(); closeCart(); toast('✅ Order placed! Sent to Rupani Automobiles'); }
-      else toast('⚠ '+(res.error||'Order failed'));
-    }catch(e){ toast('⚠ Network error, please retry'); }
+      if(res.success){
+        saveOrder({ts:Date.now(), portal:'honda',
+          totalQty:items.reduce((s,i)=>s+i.qty,0),
+          totalAmt:items.reduce((s,i)=>s+(i.part.price||0)*i.qty,0),
+          items:items.map(({part:p,qty})=>({part_no:p.part_no, name:p.name, price:p.price, qty}))});
+        m.className='cm-msg ok'; m.innerHTML='✅ Order placed!<br><small>📲 Notifying Rupani Automobiles on WhatsApp…</small>';
+        if(res.download){ const a=document.createElement('a'); a.href='/download/'+res.download; a.download=res.download; a.click(); }
+        b.textContent='✓ Order Placed!';
+        basket={}; updateBadge(); saveBasket(); renderCart();
+        setTimeout(closeCheckout,4500);
+      } else {
+        m.className='cm-msg err'; m.textContent=res.error||'Something went wrong.';
+        b.disabled=false; b.textContent='✓ Place Order & Send';
+      }
+    }catch(e){ m.className='cm-msg err'; m.textContent='Network error, please retry.';
+      b.disabled=false; b.textContent='✓ Place Order & Send'; }
+  }
+
+  // ── previous orders ─────────────────────────────────
+  function openOrders(){
+    const orders=getOrders();
+    $('ordBody').innerHTML = orders.length ? orders.map((o,idx)=>{
+      const d=new Date(o.ts);
+      const when=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+      const tag=o.portal==='honda'?'<span class="ord-tag">Honda</span>':'<span class="ord-tag aero">Aerostar</span>';
+      const lines=o.items.map(it=>`${esc(it.name)} <b>×${it.qty}</b>`).join('<br>');
+      const reorder=o.portal==='honda'?`<button class="ord-reorder" onclick="H.reorder(${idx})">↺ Add these to cart</button>`:'';
+      return `<div class="ord-card"><div class="ord-top"><span class="ord-date">${when}</span>${tag}</div>
+        <div class="ord-meta">${o.items.length} item(s) · ${o.totalQty} pcs · ₹${Number(o.totalAmt||0).toLocaleString('en-IN')}</div>
+        <div class="ord-lines">${lines}</div>${reorder}</div>`;
+    }).join('') : '<div class="empty">No previous orders yet. Your placed orders will appear here.</div>';
+    $('ordOverlay').classList.add('show'); $('ordModal').classList.add('show');
+  }
+  function closeOrders(){ $('ordOverlay').classList.remove('show'); $('ordModal').classList.remove('show'); }
+  function reorder(idx){
+    const o=getOrders()[idx]; if(!o) return;
+    let added=0;
+    o.items.forEach(it=>{ const p=findPart(it.part_no); if(p){ basket[it.part_no]={part:p,qty:(basket[it.part_no]?.qty||0)+it.qty}; added++; } });
+    updateBadge(); saveBasket(); closeOrders(); toast(added?`Added ${added} item(s) to cart`:'Those parts are no longer available');
   }
 
   let toastTimer=null;
@@ -365,7 +435,8 @@ const H = (() => {
     openAll:()=>go('all',null,true), toggleSort, filterAll,
     onSearch, onSearchKey, focusDD, clearSearch, pick,
     filterVehicle, add, inc, dec, setQty, remove,
-    openCart, closeCart, placeOrder,
+    openCart, closeCart, openCheckout, closeCheckout, placeOrder,
+    openOrders, closeOrders, reorder,
     openFeedback, closeFeedback, sendFeedback
   };
 })();

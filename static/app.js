@@ -80,6 +80,7 @@ const App = (() => {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('appScreen').classList.remove('hidden');
     document.getElementById('appScreen').classList.add('active');
+    loadBasketFromStorage();   // restore this user's saved basket
     loadProducts();
     loadSettings();
   }
@@ -879,16 +880,32 @@ const App = (() => {
     overlay.classList.remove('hidden');
   }
 
+  // per-user persistence (survives logout / long gaps on the same device)
+  function userKey() { return ((session.firm||'')+'|'+(session.contact||'')).toLowerCase().replace(/[^a-z0-9|]/g,''); }
+  function basketStoreKey() { return 'ra_basket_' + userKey(); }
+  function ordersStoreKey() { return 'ra_orders_' + userKey(); }   // shared with Honda
+
   function saveBasketToStorage() {
-    try { localStorage.setItem('ra_basket', JSON.stringify(basket)); } catch(_) {}
+    try { localStorage.setItem(basketStoreKey(), JSON.stringify(basket)); } catch(_) {}
   }
 
   function loadBasketFromStorage() {
     try {
-      const saved = localStorage.getItem('ra_basket');
-      if (saved) basket = JSON.parse(saved);
+      let saved = localStorage.getItem(basketStoreKey());
+      if (!saved && session.firm) {            // one-time migration from the old global key
+        const legacy = localStorage.getItem('ra_basket');
+        if (legacy) { saved = legacy; localStorage.removeItem('ra_basket'); }
+      }
+      basket = saved ? JSON.parse(saved) : {};
     } catch(_) { basket = {}; }
     updateBasketUI();
+  }
+
+  function getOrderHistory() {
+    try { return JSON.parse(localStorage.getItem(ordersStoreKey()) || '[]'); } catch(_) { return []; }
+  }
+  function saveOrderToHistory(rec) {
+    try { const o = getOrderHistory(); o.unshift(rec); localStorage.setItem(ordersStoreKey(), JSON.stringify(o.slice(0,50))); } catch(_) {}
   }
 
   // ── CHECKOUT ──────────────────────────────────────────
@@ -926,6 +943,44 @@ const App = (() => {
     document.getElementById('checkoutModal').classList.add('hidden');
   }
 
+  // ── PREVIOUS ORDERS ───────────────────────────────────
+  function openOrders() {
+    const orders = getOrderHistory();
+    const body = document.getElementById('ordersBody');
+    body.innerHTML = orders.length ? orders.map((o, idx) => {
+      const d = new Date(o.ts);
+      const when = d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) + ' · ' +
+                   d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+      const tag = o.portal === 'honda'
+        ? '<span class="ord-tag honda">Honda</span>' : '<span class="ord-tag aero">Aerostar</span>';
+      const lines = o.items.map(it => `${esc(it.name)} <b>×${it.qty}</b>`).join('<br>');
+      const canReorder = o.portal !== 'honda';
+      const reorder = canReorder ? `<button class="ord-reorder" onclick="App.reorder(${idx})">↺ Add these to basket</button>` : '';
+      return `<div class="ord-card">
+        <div class="ord-top"><span class="ord-date">${when}</span>${tag}</div>
+        <div class="ord-meta">${o.items.length} item(s) · ${o.totalQty} pcs${o.totalAmt?` · ₹${Number(o.totalAmt).toLocaleString('en-IN')}`:''}</div>
+        <div class="ord-lines">${lines}</div>${reorder}</div>`;
+    }).join('') : '<div class="ord-empty">No previous orders yet. Orders you place will appear here.</div>';
+    document.getElementById('ordersOverlay').classList.remove('hidden');
+    document.getElementById('ordersModal').classList.remove('hidden');
+  }
+  function closeOrders() {
+    document.getElementById('ordersOverlay').classList.add('hidden');
+    document.getElementById('ordersModal').classList.add('hidden');
+  }
+  function reorder(idx) {
+    const o = getOrderHistory()[idx];
+    if (!o) return;
+    let added = 0;
+    o.items.forEach(it => {
+      const p = allProducts.find(x => x.as_part_number === it.part_no);
+      if (p) { basket[it.part_no] = { ...p, qty: (basket[it.part_no]?.qty || 0) + it.qty }; added++; }
+    });
+    saveBasketToStorage();
+    updateBasketUI();
+    closeOrders();
+  }
+
   function placeOrder() {
     const items = Object.values(basket).map(i => ({
       as_part_number:  i.as_part_number,
@@ -956,6 +1011,12 @@ const App = (() => {
     .then(data => {
       const msg = document.getElementById('checkoutMsg');
       if (data.success) {
+        saveOrderToHistory({
+          ts: Date.now(), portal: 'aerostar',
+          totalQty: items.reduce((s,i)=>s+(i.qty||0),0),
+          totalAmt: items.reduce((s,i)=>s+((Number(i.mrp)||0)*(i.qty||0)),0),
+          items: items.map(i => ({ part_no: i.as_part_number, name: i.description, price: (Number(i.mrp)||null), qty: i.qty }))
+        });
         msg.innerHTML = `✅ Order placed!<br><small>📲 Notifying Fiber order grp on WhatsApp…</small>`;
         msg.className   = 'checkout-msg success';
         msg.classList.remove('hidden');
@@ -1186,6 +1247,7 @@ const App = (() => {
     addToBasket, addToBasketDt, removeFromBasket, updateBasketQty, clearBasket,
     toggleBasket, openBasketQuick,
     openCheckout, closeCheckout, placeOrder,
+    openOrders, closeOrders, reorder,
     openSettings, closeSettings, saveSettings,
     onSearch, onSearchKey, showSearchDropdown, clearSearch,
     searchItemClick, setSearchFocus,
