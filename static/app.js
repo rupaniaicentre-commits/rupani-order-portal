@@ -943,9 +943,30 @@ const App = (() => {
     document.getElementById('checkoutModal').classList.add('hidden');
   }
 
-  // ── PREVIOUS ORDERS ───────────────────────────────────
-  function openOrders() {
-    const orders = getOrderHistory();
+  // ── PREVIOUS ORDERS (server-backed, cross-device by mobile) ──────────
+  function mergeOrders(local, server) {
+    const map = {};
+    (server || []).concat(local || []).forEach(o => {
+      const k = o.oid || ('L' + o.ts);
+      if (!map[k]) map[k] = o;
+    });
+    return Object.values(map).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+  }
+  async function openOrders() {
+    const body = document.getElementById('ordersBody');
+    body.innerHTML = '<div class="ord-empty">Loading your orders…</div>';
+    document.getElementById('ordersOverlay').classList.remove('hidden');
+    document.getElementById('ordersModal').classList.remove('hidden');
+    let orders = getOrderHistory();
+    try {
+      const r = await fetch('/api/orders?contact=' + encodeURIComponent(session.contact || ''));
+      if (r.ok) orders = mergeOrders(orders, await r.json());
+    } catch (_) {}
+    renderOrders(orders);
+  }
+  let _ordersView = [];
+  function renderOrders(orders) {
+    _ordersView = orders;
     const body = document.getElementById('ordersBody');
     body.innerHTML = orders.length ? orders.map((o, idx) => {
       const d = new Date(o.ts);
@@ -969,7 +990,7 @@ const App = (() => {
     document.getElementById('ordersModal').classList.add('hidden');
   }
   function reorder(idx) {
-    const o = getOrderHistory()[idx];
+    const o = _ordersView[idx];
     if (!o) return;
     let added = 0;
     o.items.forEach(it => {
@@ -994,6 +1015,7 @@ const App = (() => {
 
     if (!items.length) return;
 
+    const oid = Date.now() + '-' + Math.random().toString(36).slice(2, 8);
     const btn = document.getElementById('placeOrderBtn');
     btn.disabled    = true;
     btn.textContent = 'Placing order…';
@@ -1004,6 +1026,7 @@ const App = (() => {
       body: JSON.stringify({
         firm_name:      (document.getElementById('co_firm').value.trim() || session.firm),
         contact_number: (document.getElementById('co_contact').value.trim() || session.contact),
+        portal: 'aerostar', oid,
         items,
       })
     })
@@ -1012,7 +1035,7 @@ const App = (() => {
       const msg = document.getElementById('checkoutMsg');
       if (data.success) {
         saveOrderToHistory({
-          ts: Date.now(), portal: 'aerostar',
+          oid, ts: Date.now(), portal: 'aerostar',
           totalQty: items.reduce((s,i)=>s+(i.qty||0),0),
           totalAmt: items.reduce((s,i)=>s+((Number(i.mrp)||0)*(i.qty||0)),0),
           items: items.map(i => ({ part_no: i.as_part_number, name: i.description, price: (Number(i.mrp)||null), qty: i.qty }))

@@ -1,1 +1,1 @@
-v=20260623-orders confirm modal, per-user basket memory, order history
+v=20260623-orders2 server-side cross-device order history

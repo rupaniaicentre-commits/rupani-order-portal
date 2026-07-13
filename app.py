@@ -10,6 +10,8 @@ from email import encoders
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 import tempfile
+import time
+import sqlite3
 from datetime import datetime
 import difflib
 
@@ -254,6 +256,67 @@ def honda_feedback():
     return jsonify({'success': True})
 
 
+# ── server-side order history (cross-device, keyed by mobile) ─────────
+# Uses SQLite. Set ORDERS_DB to a path on a Railway *volume* (e.g.
+# /data/orders.db) so history survives redeploys; otherwise it falls back
+# to a file in the app dir (works, but resets on each deploy).
+ORDERS_DB = os.environ.get('ORDERS_DB') or (
+    '/data/orders.db' if os.path.isdir('/data') else os.path.join(BASE_DIR, 'orders.db'))
+
+def _orders_conn():
+    conn = sqlite3.connect(ORDERS_DB, timeout=5)
+    conn.execute('''CREATE TABLE IF NOT EXISTS orders(
+        oid TEXT PRIMARY KEY, ts INTEGER, portal TEXT, firm TEXT,
+        contact TEXT, total_qty INTEGER, total_amt REAL, items TEXT)''')
+    conn.execute('CREATE INDEX IF NOT EXISTS idx_contact ON orders(contact)')
+    return conn
+
+def _num(v):
+    s = str(v).strip()
+    if s in ('', 'None'):
+        return None
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+def save_order_db(oid, portal, firm, contact, items):
+    contact_d = re.sub(r'\D', '', contact or '')
+    if not contact_d or not items:
+        return
+    norm = [{'part_no': i.get('as_part_number', ''), 'name': i.get('description', ''),
+             'price': _num(i.get('mrp')), 'qty': int(i.get('qty', 0) or 0)} for i in items]
+    tq = sum(n['qty'] for n in norm)
+    ta = sum((n['price'] or 0) * n['qty'] for n in norm)
+    if not oid:
+        oid = f"{int(time.time()*1000)}-{contact_d[-4:]}"
+    try:
+        conn = _orders_conn()
+        conn.execute('INSERT OR IGNORE INTO orders VALUES(?,?,?,?,?,?,?,?)',
+                     (oid, int(time.time()*1000), portal, firm, contact_d, tq, ta,
+                      json.dumps(norm, ensure_ascii=False)))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[ORDER DB WRITE ERROR] {e}", flush=True)
+
+@app.route('/api/orders')
+def get_orders():
+    contact_d = re.sub(r'\D', '', request.args.get('contact', '') or '')
+    if not contact_d:
+        return jsonify([])
+    try:
+        conn = _orders_conn()
+        rows = conn.execute(
+            'SELECT oid,ts,portal,total_qty,total_amt,items FROM orders '
+            'WHERE contact=? ORDER BY ts DESC LIMIT 50', (contact_d,)).fetchall()
+        conn.close()
+        return jsonify([{'oid': r[0], 'ts': r[1], 'portal': r[2], 'totalQty': r[3],
+                         'totalAmt': r[4], 'items': json.loads(r[5])} for r in rows])
+    except Exception as e:
+        print(f"[ORDER DB READ ERROR] {e}", flush=True)
+        return jsonify([])
+
+
 @app.route('/api/products')
 def get_products():
     return jsonify(load_products())
@@ -327,11 +390,15 @@ def checkout():
     contact_number = (data.get('contact_number') or '').strip()
     items = data.get('items', [])
     portal = (data.get('portal') or 'aerostar').strip().lower()
+    oid = (data.get('oid') or '').strip()
 
     if not items:
         return jsonify({'success': False, 'error': 'No items in order'})
     if not firm_name:
         return jsonify({'success': False, 'error': 'Firm name required'})
+
+    # persist to cross-device order history (keyed by mobile)
+    save_order_db(oid, portal, firm_name, contact_number, items)
 
     wb = _build_excel(firm_name, contact_number, items, portal)
 

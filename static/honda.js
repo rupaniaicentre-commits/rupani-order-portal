@@ -364,16 +364,17 @@ const H = (() => {
     b.disabled=true; b.textContent='Placing order…';
     const firm=($('coFirm').value.trim()||session.firm);
     const contact=($('coContact').value.trim()||session.contact);
+    const oid=Date.now()+'-'+Math.random().toString(36).slice(2,8);
     const lines=items.map(({part:p,qty})=>({
       as_part_number:p.part_no, sai_part_number:p.code||'', description:p.name,
       vehicle:(p.common_all?['ALL MODELS']:(p.vehicles||[])).filter(v=>v!=='OTHER').join(', '),
       colour:p.unit||'', mrp:p.price, qty}));
     try{
       const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({firm_name:firm, contact_number:contact, portal:'honda', items:lines})});
+        body:JSON.stringify({firm_name:firm, contact_number:contact, portal:'honda', oid, items:lines})});
       const res=await r.json();
       if(res.success){
-        saveOrder({ts:Date.now(), portal:'honda',
+        saveOrder({oid, ts:Date.now(), portal:'honda',
           totalQty:items.reduce((s,i)=>s+i.qty,0),
           totalAmt:items.reduce((s,i)=>s+(i.part.price||0)*i.qty,0),
           items:items.map(({part:p,qty})=>({part_no:p.part_no, name:p.name, price:p.price, qty}))});
@@ -390,15 +391,29 @@ const H = (() => {
       b.disabled=false; b.textContent='✓ Place Order & Send'; }
   }
 
-  // ── previous orders ─────────────────────────────────
-  function openOrders(){
-    const orders=getOrders();
+  // ── previous orders (server-backed, cross-device by mobile) ─────────
+  let _ordersView=[];
+  function mergeOrders(local,server){
+    const map={};
+    (server||[]).concat(local||[]).forEach(o=>{ const k=o.oid||('L'+o.ts); if(!map[k]) map[k]=o; });
+    return Object.values(map).sort((a,b)=>(b.ts||0)-(a.ts||0));
+  }
+  async function openOrders(){
+    $('ordBody').innerHTML='<div class="empty">Loading your orders…</div>';
+    $('ordOverlay').classList.add('show'); $('ordModal').classList.add('show');
+    let orders=getOrders();
+    try{ const r=await fetch('/api/orders?contact='+encodeURIComponent(session.contact||''));
+      if(r.ok) orders=mergeOrders(orders, await r.json()); }catch(e){}
+    renderOrders(orders);
+  }
+  function renderOrders(orders){
+    _ordersView=orders;
     $('ordBody').innerHTML = orders.length ? orders.map((o,idx)=>{
       const d=new Date(o.ts);
       const when=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
       const tag=o.portal==='honda'?'<span class="ord-tag">Honda</span>':'<span class="ord-tag aero">Aerostar</span>';
       const lines=o.items.map(it=>`${esc(it.name)} <b>×${it.qty}</b>`).join('<br>');
-      const reorder=o.portal==='honda'?`<button class="ord-reorder" onclick="H.reorder(${idx})">↺ Add these to cart</button>`:'';
+      const reorder=(o.portal==='honda')?`<button class="ord-reorder" onclick="H.reorder(${idx})">↺ Add these to cart</button>`:'';
       return `<div class="ord-card"><div class="ord-top"><span class="ord-date">${when}</span>${tag}</div>
         <div class="ord-meta">${o.items.length} item(s) · ${o.totalQty} pcs · ₹${Number(o.totalAmt||0).toLocaleString('en-IN')}</div>
         <div class="ord-lines">${lines}</div>${reorder}</div>`;
@@ -407,7 +422,7 @@ const H = (() => {
   }
   function closeOrders(){ $('ordOverlay').classList.remove('show'); $('ordModal').classList.remove('show'); }
   function reorder(idx){
-    const o=getOrders()[idx]; if(!o) return;
+    const o=_ordersView[idx]; if(!o) return;
     let added=0;
     o.items.forEach(it=>{ const p=findPart(it.part_no); if(p){ basket[it.part_no]={part:p,qty:(basket[it.part_no]?.qty||0)+it.qty}; added++; } });
     updateBadge(); saveBasket(); closeOrders(); toast(added?`Added ${added} item(s) to cart`:'Those parts are no longer available');
