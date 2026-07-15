@@ -269,7 +269,19 @@ def _orders_conn():
         oid TEXT PRIMARY KEY, ts INTEGER, portal TEXT, firm TEXT,
         contact TEXT, total_qty INTEGER, total_amt REAL, items TEXT)''')
     conn.execute('CREATE INDEX IF NOT EXISTS idx_contact ON orders(contact)')
+    cols = [r[1] for r in conn.execute('PRAGMA table_info(orders)').fetchall()]
+    if 'status' not in cols:
+        conn.execute("ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'pending'")
+    if 'updated' not in cols:
+        conn.execute("ALTER TABLE orders ADD COLUMN updated INTEGER DEFAULT 0")
     return conn
+
+def _order_status(items):
+    total = sum(int(i.get('qty', 0) or 0) for i in items)
+    done  = sum(min(int(i.get('disp', 0) or 0), int(i.get('qty', 0) or 0)) for i in items)
+    if total and done >= total:
+        return 'dispatched'
+    return 'partial' if done > 0 else 'pending'
 
 def _num(v):
     s = str(v).strip()
@@ -285,16 +297,17 @@ def save_order_db(oid, portal, firm, contact, items):
     if not contact_d or not items:
         return
     norm = [{'part_no': i.get('as_part_number', ''), 'name': i.get('description', ''),
-             'price': _num(i.get('mrp')), 'qty': int(i.get('qty', 0) or 0)} for i in items]
+             'price': _num(i.get('mrp')), 'qty': int(i.get('qty', 0) or 0), 'disp': 0} for i in items]
     tq = sum(n['qty'] for n in norm)
     ta = sum((n['price'] or 0) * n['qty'] for n in norm)
     if not oid:
         oid = f"{int(time.time()*1000)}-{contact_d[-4:]}"
     try:
         conn = _orders_conn()
-        conn.execute('INSERT OR IGNORE INTO orders VALUES(?,?,?,?,?,?,?,?)',
+        conn.execute('INSERT OR IGNORE INTO orders(oid,ts,portal,firm,contact,total_qty,total_amt,items,status,updated) '
+                     'VALUES(?,?,?,?,?,?,?,?,?,?)',
                      (oid, int(time.time()*1000), portal, firm, contact_d, tq, ta,
-                      json.dumps(norm, ensure_ascii=False)))
+                      json.dumps(norm, ensure_ascii=False), 'pending', 0))
         conn.commit(); conn.close()
     except Exception as e:
         print(f"[ORDER DB WRITE ERROR] {e}", flush=True)
@@ -307,14 +320,148 @@ def get_orders():
     try:
         conn = _orders_conn()
         rows = conn.execute(
-            'SELECT oid,ts,portal,total_qty,total_amt,items FROM orders '
+            'SELECT oid,ts,portal,total_qty,total_amt,items,status FROM orders '
             'WHERE contact=? ORDER BY ts DESC LIMIT 50', (contact_d,)).fetchall()
         conn.close()
         return jsonify([{'oid': r[0], 'ts': r[1], 'portal': r[2], 'totalQty': r[3],
-                         'totalAmt': r[4], 'items': json.loads(r[5])} for r in rows])
+                         'totalAmt': r[4], 'items': json.loads(r[5]), 'status': r[6] or 'pending'}
+                        for r in rows])
     except Exception as e:
         print(f"[ORDER DB READ ERROR] {e}", flush=True)
         return jsonify([])
+
+
+# ── internal dashboard: auth + fulfillment + analytics ────────────────
+ADMIN_USERS = {
+    'HARSH': {'password': os.environ.get('ADMIN_PW_HARSH', 'RUPANI10'),     'role': 'admin',   'scope': 'all'},
+    'ABHAY': {'password': os.environ.get('ADMIN_PW_ABHAY', 'RUPANIABHAY123'), 'role': 'manager', 'scope': 'honda'},
+    'DEVA':  {'password': os.environ.get('ADMIN_PW_DEVA',  'RUPANIDEVA123'),  'role': 'manager', 'scope': 'aerostar'},
+}
+_admin_tokens = {}   # token -> {user, role, scope, exp}
+
+def _admin_auth(token):
+    t = _admin_tokens.get(token or '')
+    if t and t['exp'] > time.time():
+        return t
+    return None
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    d = request.json or {}
+    u = (d.get('username') or '').strip().upper()
+    p = (d.get('password') or '')
+    rec = ADMIN_USERS.get(u)
+    if not rec or rec['password'] != p:
+        return jsonify({'success': False, 'error': 'Invalid username or password'})
+    import secrets
+    token = secrets.token_urlsafe(24)
+    _admin_tokens[token] = {'user': u, 'role': rec['role'], 'scope': rec['scope'],
+                            'exp': time.time() + 86400 * 7}
+    return jsonify({'success': True, 'token': token, 'user': u.title(),
+                    'role': rec['role'], 'scope': rec['scope']})
+
+
+@app.route('/api/admin/orders')
+def admin_orders():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    portal = request.args.get('portal', '')
+    scope = auth['scope']
+    where, args = [], []
+    if scope in ('honda', 'aerostar'):
+        where.append('portal=?'); args.append(scope)
+    elif portal in ('honda', 'aerostar'):
+        where.append('portal=?'); args.append(portal)
+    q = 'SELECT oid,ts,portal,firm,contact,total_qty,total_amt,items,status FROM orders'
+    if where:
+        q += ' WHERE ' + ' AND '.join(where)
+    q += ' ORDER BY ts DESC LIMIT 2000'
+    conn = _orders_conn()
+    rows = conn.execute(q, args).fetchall()
+    conn.close()
+    orders = [{'oid': r[0], 'ts': r[1], 'portal': r[2], 'firm': r[3], 'contact': r[4],
+               'totalQty': r[5], 'totalAmt': r[6], 'items': json.loads(r[7]),
+               'status': r[8] or 'pending'} for r in rows]
+    return jsonify({'success': True, 'role': auth['role'], 'scope': scope, 'orders': orders})
+
+
+@app.route('/api/admin/dispatch', methods=['POST'])
+def admin_dispatch():
+    d = request.json or {}
+    auth = _admin_auth(d.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    oid = d.get('oid')
+    updates = {u.get('part_no'): int(u.get('disp', 0) or 0) for u in (d.get('items') or [])}
+    mark_all = d.get('mark_all')
+    conn = _orders_conn()
+    row = conn.execute('SELECT portal,items FROM orders WHERE oid=?', (oid,)).fetchone()
+    if not row:
+        conn.close(); return jsonify({'success': False, 'error': 'not found'})
+    portal, items = row[0], json.loads(row[1])
+    if auth['scope'] in ('honda', 'aerostar') and auth['scope'] != portal:
+        conn.close(); return jsonify({'success': False, 'error': 'forbidden'}), 403
+    for it in items:
+        if mark_all:
+            it['disp'] = it['qty']
+        elif it['part_no'] in updates:
+            it['disp'] = max(0, min(updates[it['part_no']], it['qty']))
+    status = _order_status(items)
+    conn.execute('UPDATE orders SET items=?, status=?, updated=? WHERE oid=?',
+                 (json.dumps(items, ensure_ascii=False), status, int(time.time()*1000), oid))
+    conn.commit(); conn.close()
+    return jsonify({'success': True, 'status': status, 'items': items})
+
+
+@app.route('/api/admin/analytics')
+def admin_analytics():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    scope = auth['scope']
+    portal = scope if scope in ('honda', 'aerostar') else (request.args.get('portal') or None)
+    where, args = [], []
+    if portal in ('honda', 'aerostar'):
+        where.append('portal=?'); args.append(portal)
+    q = 'SELECT total_amt,items,status FROM orders'
+    if where:
+        q += ' WHERE ' + ' AND '.join(where)
+    conn = _orders_conn()
+    rows = conn.execute(q, args).fetchall()
+    conn.close()
+
+    ordered_val = disp_val = pend_val = ordered_qty = disp_qty = 0
+    status_ct = {'pending': 0, 'partial': 0, 'dispatched': 0}
+    part_agg = {}
+    for amt, items_j, status in rows:
+        status_ct[status] = status_ct.get(status, 0) + 1
+        for it in json.loads(items_j):
+            q_ = int(it.get('qty', 0) or 0)
+            dp = min(int(it.get('disp', 0) or 0), q_)
+            pr = it.get('price') or 0
+            ordered_qty += q_; disp_qty += dp
+            ordered_val += pr * q_; disp_val += pr * dp; pend_val += pr * (q_ - dp)
+            a = part_agg.setdefault(it['part_no'], {'part_no': it['part_no'], 'name': it['name'],
+                                                    'ordered': 0, 'disp': 0, 'val': 0})
+            a['ordered'] += q_; a['disp'] += dp; a['val'] += pr * q_
+    for a in part_agg.values():
+        a['pending'] = a['ordered'] - a['disp']
+        a['pending_val'] = 0  # filled below
+    top_pending = sorted([a for a in part_agg.values() if a['pending'] > 0],
+                         key=lambda x: -x['pending'])[:25]
+    top_demand = sorted(part_agg.values(), key=lambda x: -x['ordered'])[:25]
+    fill = round(100 * disp_qty / ordered_qty) if ordered_qty else 0
+    return jsonify({'success': True, 'portal': portal or 'all', 'n_orders': len(rows),
+                    'ordered_val': ordered_val, 'disp_val': disp_val, 'pend_val': pend_val,
+                    'ordered_qty': ordered_qty, 'disp_qty': disp_qty, 'fill_ratio': fill,
+                    'status_counts': status_ct, 'top_pending': top_pending, 'top_demand': top_demand})
 
 
 @app.route('/api/products')

@@ -974,11 +974,20 @@ const App = (() => {
                    d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
       const tag = o.portal === 'honda'
         ? '<span class="ord-tag honda">Honda</span>' : '<span class="ord-tag aero">Aerostar</span>';
-      const lines = o.items.map(it => `${esc(it.name)} <b>×${it.qty}</b>`).join('<br>');
+      const st = o.status || 'pending';
+      const stLbl = {pending:'⏳ Pending', partial:'🚚 Partly sent', dispatched:'✅ Dispatched'}[st] || '⏳ Pending';
+      const statusBadge = `<span class="ord-st ${st}">${stLbl}</span>`;
+      const lines = o.items.map(it => {
+        const disp = Math.min(it.disp||0, it.qty);
+        const s = disp>=it.qty ? '<span class="oi-ok">✓ sent</span>'
+                : disp>0 ? `<span class="oi-part">${disp}/${it.qty} sent · ${it.qty-disp} pending</span>`
+                : '<span class="oi-pend">pending</span>';
+        return `${esc(it.name)} <b>×${it.qty}</b> — ${s}`;
+      }).join('<br>');
       const canReorder = o.portal !== 'honda';
       const reorder = canReorder ? `<button class="ord-reorder" onclick="App.reorder(${idx})">↺ Add these to basket</button>` : '';
       return `<div class="ord-card">
-        <div class="ord-top"><span class="ord-date">${when}</span>${tag}</div>
+        <div class="ord-top"><span class="ord-date">${when}</span><span style="display:flex;gap:6px;align-items:center">${statusBadge}${tag}</span></div>
         <div class="ord-meta">${o.items.length} item(s) · ${o.totalQty} pcs${o.totalAmt?` · ₹${Number(o.totalAmt).toLocaleString('en-IN')}`:''}</div>
         <div class="ord-lines">${lines}</div>${reorder}</div>`;
     }).join('') : '<div class="ord-empty">No previous orders yet. Orders you place will appear here.</div>';

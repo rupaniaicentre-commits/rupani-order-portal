@@ -412,9 +412,18 @@ const H = (() => {
       const d=new Date(o.ts);
       const when=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
       const tag=o.portal==='honda'?'<span class="ord-tag">Honda</span>':'<span class="ord-tag aero">Aerostar</span>';
-      const lines=o.items.map(it=>`${esc(it.name)} <b>×${it.qty}</b>`).join('<br>');
+      const st=o.status||'pending';
+      const stLbl={pending:'⏳ Pending',partial:'🚚 Partly sent',dispatched:'✅ Dispatched'}[st]||'⏳ Pending';
+      const lines=o.items.map(it=>{
+        const disp=Math.min(it.disp||0,it.qty);
+        const s=disp>=it.qty?'<span class="oi-ok">✓ sent</span>'
+              :disp>0?`<span class="oi-part">${disp}/${it.qty} sent · ${it.qty-disp} pending</span>`
+              :'<span class="oi-pend">pending</span>';
+        return `${esc(it.name)} <b>×${it.qty}</b> — ${s}`;
+      }).join('<br>');
       const reorder=(o.portal==='honda')?`<button class="ord-reorder" onclick="H.reorder(${idx})">↺ Add these to cart</button>`:'';
-      return `<div class="ord-card"><div class="ord-top"><span class="ord-date">${when}</span>${tag}</div>
+      return `<div class="ord-card"><div class="ord-top"><span class="ord-date">${when}</span>
+        <span style="display:flex;gap:6px;align-items:center"><span class="ord-st ${st}">${stLbl}</span>${tag}</span></div>
         <div class="ord-meta">${o.items.length} item(s) · ${o.totalQty} pcs · ₹${Number(o.totalAmt||0).toLocaleString('en-IN')}</div>
         <div class="ord-lines">${lines}</div>${reorder}</div>`;
     }).join('') : '<div class="empty">No previous orders yet. Your placed orders will appear here.</div>';

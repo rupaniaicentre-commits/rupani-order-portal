@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rupani Automobiles — Order Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <style>
+    :root{--navy:#1B2A4A;--navy-dark:#111D35;--gold:#F4A820;--bg:#EEF1F5;--surface:#fff;
+      --border:#E2E6EB;--text:#1A1D23;--muted:#6B7280;--green:#10B981;--amber:#F59E0B;--red:#EF4444;
+      --radius:12px;--shadow:0 4px 14px rgba(0,0,0,.08);--shadow-sm:0 1px 3px rgba(0,0,0,.07);--hh:56px;}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+    .hidden{display:none!important}button{font-family:inherit;cursor:pointer;border:none}input,select{font-family:inherit}
+    /* login */
+    #login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;
+      background:linear-gradient(135deg,var(--navy-dark),var(--navy) 60%,#1e3a6e)}
+    .lcard{background:#fff;border-radius:18px;padding:34px 30px;width:100%;max-width:390px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+    .lhead{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+    .llogo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#D9901A);
+      color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800}
+    .lhead b{font-size:17px;color:var(--navy)}
+    .lsub{font-size:12px;color:var(--muted);margin-bottom:22px}
+    .fg{margin-bottom:14px}.fg label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#374151}
+    .fg input{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:15px}
+    .fg input:focus{outline:none;border-color:var(--navy)}
+    .btn{background:var(--navy);color:#fff;padding:12px;border-radius:9px;font-size:15px;font-weight:700;width:100%}
+    .lerr{color:var(--red);font-size:13px;margin-bottom:10px}
+    /* app */
+    header{position:sticky;top:0;height:var(--hh);background:var(--navy);color:#fff;display:flex;align-items:center;
+      gap:12px;padding:0 16px;z-index:40;box-shadow:var(--shadow)}
+    header .ht{font-weight:800;font-size:16px}
+    header .who{margin-left:auto;font-size:13px;color:#cdd7ea}
+    header .lo{background:rgba(255,255,255,.14);color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600}
+    .tabs{display:flex;gap:6px;padding:12px 16px 0;max-width:1200px;margin:0 auto}
+    .tab{padding:9px 18px;border-radius:10px 10px 0 0;font-weight:600;font-size:14px;background:transparent;color:var(--muted)}
+    .tab.on{background:var(--surface);color:var(--navy);box-shadow:0 -2px 8px rgba(0,0,0,.05)}
+    main{max-width:1200px;margin:0 auto;padding:16px}
+    .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+    .seg{display:inline-flex;background:#e4e8ee;border-radius:9px;padding:3px}
+    .seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:var(--muted);background:transparent}
+    .seg button.on{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
+    .spacer{flex:1}
+    .search{padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;min-width:200px}
+    /* KPI */
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
+    .kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 16px;box-shadow:var(--shadow-sm)}
+    .kpi .k-l{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+    .kpi .k-v{font-size:24px;font-weight:800;color:var(--navy);margin-top:5px}
+    .kpi .k-s{font-size:12px;color:var(--muted);margin-top:2px}
+    .kpi.good .k-v{color:var(--green)}.kpi.warn .k-v{color:var(--amber)}.kpi.bad .k-v{color:var(--red)}
+    /* table/cards */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:16px;overflow:hidden}
+    .card-h{padding:12px 16px;font-weight:700;color:var(--navy);border-bottom:1px solid var(--border);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{text-align:left;padding:9px 14px;border-bottom:1px solid #f0f2f5}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);background:#fafbfc;position:sticky;top:0}
+    td.num,th.num{text-align:right}
+    tr:hover td{background:#fafbfc}
+    .tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;white-space:nowrap}
+    .tag.honda{background:#fee2e2;color:#b71c1c}.tag.aerostar{background:#e8f5e9;color:#2e7d32}
+    .st{font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap}
+    .st.pending{background:#fef3c7;color:#92400e}.st.partial{background:#dbeafe;color:#1e40af}.st.dispatched{background:#d1fae5;color:#065f46}
+    /* order row expand */
+    .ord{border-bottom:1px solid var(--border)}
+    .ord-sum{display:grid;grid-template-columns:130px 1fr 90px 90px 110px 110px;gap:10px;align-items:center;padding:11px 16px;cursor:pointer;font-size:13px}
+    .ord-sum:hover{background:#fafbfc}
+    .ord-firm{font-weight:700;color:var(--navy)}.ord-sub{font-size:11.5px;color:var(--muted)}
+    .ord-det{padding:6px 16px 16px;background:#fafbfc;border-top:1px dashed var(--border)}
+    .ord-det table{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .qi{width:56px;padding:5px 6px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;text-align:center}
+    .save{background:var(--navy);color:#fff;padding:7px 14px;border-radius:8px;font-weight:600;font-size:12.5px}
+    .markall{background:var(--green);color:#fff;padding:7px 14px;border-radius:8px;font-weight:600;font-size:12.5px}
+    .pill{font-size:11px;color:var(--muted)}
+    .empty{text-align:center;color:var(--muted);padding:44px 20px}
+    .fillbar{height:8px;background:#e4e8ee;border-radius:5px;overflow:hidden;margin-top:8px}
+    .fillbar>div{height:100%;background:var(--green)}
+    @media(max-width:720px){.ord-sum{grid-template-columns:1fr 70px 90px;grid-row-gap:4px}.ord-sum .hide-s{display:none}}
+  </style>
+</head>
+<body>
+<!-- LOGIN -->
+<div id="login">
+  <div class="lcard">
+    <div class="lhead"><div class="llogo">RA</div><div><b>Order Management</b></div></div>
+    <div class="lsub">Rupani Automobiles — internal dashboard</div>
+    <div class="fg"><label>Username</label><input id="u" autocomplete="username" placeholder="Username"></div>
+    <div class="fg"><label>Password</label><input id="p" type="password" autocomplete="current-password" placeholder="Password" onkeydown="if(event.key==='Enter')D.login()"></div>
+    <div id="lerr" class="lerr hidden"></div>
+    <button class="btn" onclick="D.login()">Sign In</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <header>
+    <span class="ht">📋 Order Management</span>
+    <span class="who" id="who"></span>
+    <button class="lo" onclick="D.logout()">Logout</button>
+  </header>
+  <div class="tabs">
+    <button class="tab on" id="tabOrders" onclick="D.tab('orders')">Orders</button>
+    <button class="tab" id="tabAnalytics" onclick="D.tab('analytics')">Analytics</button>
+  </div>
+  <main id="main"></main>
+</div>
+<script src="/static/dashboard.js?v=20260623-1"></script>
+</body>
+</html>
