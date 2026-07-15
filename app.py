@@ -450,6 +450,89 @@ def admin_diag():
     return jsonify(info)
 
 
+@app.route('/api/admin/pending-export')
+def admin_pending_export():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    scope = auth['scope']
+    portal = scope if scope in ('honda', 'aerostar') else (request.args.get('portal') or None)
+    conn = _orders_conn()
+    rows = conn.execute(
+        'SELECT ts,portal,firm,contact,items FROM orders'
+        + (' WHERE portal=?' if portal in ('honda', 'aerostar') else '')
+        + ' ORDER BY ts',
+        ([portal] if portal in ('honda', 'aerostar') else [])).fetchall()
+    conn.close()
+
+    agg, lines = {}, []
+    for ts, p, firm, contact, items_j in rows:
+        for it in json.loads(items_j):
+            qn = int(it.get('qty', 0) or 0)
+            dp = min(int(it.get('disp', 0) or 0), qn)
+            pend = qn - dp
+            if pend <= 0:
+                continue
+            pr = it.get('price') or 0
+            a = agg.setdefault(it['part_no'], {'name': it['name'], 'pending': 0, 'val': 0,
+                                               'ordered': 0, 'sent': 0, 'portal': p})
+            a['pending'] += pend; a['val'] += pr * pend; a['ordered'] += qn; a['sent'] += dp
+            lines.append((datetime.fromtimestamp(ts / 1000).strftime('%d-%m-%Y'), p, firm, contact,
+                          it['part_no'], it['name'], qn, dp, pend, pr, pr * pend))
+
+    navy = PatternFill('solid', fgColor='1B2A4A')
+    hf = Font(color='FFFFFF', bold=True, size=11)
+    bold = Font(bold=True)
+    thin = Side(style='thin', color='CCCCCC')
+    bd = Border(left=thin, right=thin, top=thin, bottom=thin)
+    ctr = Alignment(horizontal='center', vertical='center', wrap_text=True)
+
+    wb = openpyxl.Workbook()
+    label = (portal or 'All').title()
+
+    # ── Sheet 1: procurement summary (what to send the supplier) ──
+    ws = wb.active; ws.title = 'Pending Summary'
+    ws.merge_cells('A1:F1')
+    ws['A1'] = f'RUPANI AUTOMOBILES — PENDING PROCUREMENT ({label})  |  {datetime.now().strftime("%d-%m-%Y %H:%M")}'
+    ws['A1'].font = Font(bold=True, size=13, color='1B2A4A')
+    ws['A1'].alignment = ctr
+    ws.row_dimensions[1].height = 26
+    hdr = ['Part No', 'Description', 'Total Ordered', 'Already Sent', 'Pending Qty', 'Pending Value (₹)']
+    for c, h in enumerate(hdr, 1):
+        cell = ws.cell(3, c, h); cell.fill = navy; cell.font = hf; cell.border = bd; cell.alignment = ctr
+    r = 4
+    for pn, a in sorted(agg.items(), key=lambda kv: -kv[1]['pending']):
+        for c, v in enumerate([pn, a['name'], a['ordered'], a['sent'], a['pending'], round(a['val'])], 1):
+            cell = ws.cell(r, c, v); cell.border = bd
+            if c in (3, 4, 5, 6):
+                cell.alignment = Alignment(horizontal='center')
+        r += 1
+    ws.cell(r, 4, 'TOTAL').font = bold
+    ws.cell(r, 5, sum(a['pending'] for a in agg.values())).font = bold
+    ws.cell(r, 6, round(sum(a['val'] for a in agg.values()))).font = bold
+    for col, w in zip('ABCDEF', [16, 46, 14, 13, 12, 16]):
+        ws.column_dimensions[col].width = w
+    ws.freeze_panes = 'A4'
+
+    # ── Sheet 2: detailed pending order lines (internal reference) ──
+    ws2 = wb.create_sheet('Pending Order Lines')
+    hdr2 = ['Order Date', 'Catalogue', 'Firm', 'Mobile', 'Part No', 'Description',
+            'Ordered', 'Sent', 'Pending', 'Rate', 'Pending Value']
+    for c, h in enumerate(hdr2, 1):
+        cell = ws2.cell(1, c, h); cell.fill = navy; cell.font = hf; cell.border = bd; cell.alignment = ctr
+    for i, row in enumerate(lines, 2):
+        for c, v in enumerate(row, 1):
+            cell = ws2.cell(i, c, (round(v) if isinstance(v, float) else v)); cell.border = bd
+    for col, w in zip('ABCDEFGHIJK', [12, 11, 22, 13, 15, 40, 9, 8, 9, 9, 13]):
+        ws2.column_dimensions[col].width = w
+    ws2.freeze_panes = 'A2'
+
+    fname = f"Pending_{label}_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx"
+    path = os.path.join(tempfile.gettempdir(), fname)
+    wb.save(path)
+    return send_file(path, as_attachment=True, download_name=fname)
+
+
 @app.route('/api/admin/analytics')
 def admin_analytics():
     auth = _admin_auth(request.args.get('token', ''))

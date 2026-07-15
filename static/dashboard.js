@@ -57,6 +57,11 @@ const D = (() => {
     const b=(p,l)=>`<button class="${portal===p?'on':''}" onclick="D.setPortal('${p}')">${l}</button>`;
     return `<div class="seg">${b('all','All')}${b('honda','Honda')}${b('aerostar','Aerostar')}</div>`;
   }
+  function dlPending(){
+    const url='/api/admin/pending-export?token='+encodeURIComponent(auth.token)+(portal!=='all'?'&portal='+portal:'');
+    const a=document.createElement('a'); a.href=url; a.download=''; document.body.appendChild(a); a.click(); a.remove();
+  }
+  const dlBtn = () => `<button class="dl" onclick="D.dlPending()">⬇ Download pending (Excel)</button>`;
 
   // ── ORDERS TAB ──────────────────────────────────────
   let statusFilter='all', q='';
@@ -71,6 +76,7 @@ const D = (() => {
       <div class="bar">${portalSeg()}
         <div class="seg">${sb('all','All')}${sb('pending','Pending')}${sb('partial','Partial')}${sb('dispatched','Dispatched')}</div>
         <div class="spacer"></div>
+        ${dlBtn()}
         <input class="search" placeholder="Search firm / part / mobile…" value="${esc(q)}" oninput="D.setQ(this.value)">
       </div>
       <div class="card">
@@ -140,7 +146,7 @@ const D = (() => {
     const a=await r.json();
     const sc=a.status_counts||{};
     $('main').innerHTML=`
-      <div class="bar">${portalSeg()}<div class="spacer"></div><span class="pill">${a.portal==='all'?'All catalogues':a.portal} · ${a.n_orders} orders</span></div>
+      <div class="bar">${portalSeg()}<div class="spacer"></div>${dlBtn()}<span class="pill">${a.portal==='all'?'All catalogues':a.portal} · ${a.n_orders} orders</span></div>
       <div class="kpis">
         <div class="kpi"><div class="k-l">Total Order Value</div><div class="k-v">${inr(a.ordered_val)}</div><div class="k-s">${a.ordered_qty} pcs ordered</div></div>
         <div class="kpi good"><div class="k-l">Dispatched</div><div class="k-v">${inr(a.disp_val)}</div><div class="k-s">${a.disp_qty} pcs sent</div></div>
@@ -169,5 +175,5 @@ const D = (() => {
   // ── restore session ─────────────────────────────────
   (function(){ try{ const s=JSON.parse(localStorage.getItem('rupani_admin')||'null'); if(s&&s.token){ auth=s; enter(); } }catch(e){} })();
 
-  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll };
+  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending };
 })();

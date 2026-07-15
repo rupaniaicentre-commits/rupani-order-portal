@@ -1,1 +1,1 @@
-v=20260623-vol volume autodetect + diag
+v=20260623-pendingxl download pending orders excel for supplier
