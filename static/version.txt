@@ -1,1 +1,1 @@
-v=20260623-pendingxl download pending orders excel for supplier
+v=20260623-session db-backed admin sessions (fix 401 across workers)

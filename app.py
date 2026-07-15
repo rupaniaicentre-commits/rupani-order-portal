@@ -285,6 +285,9 @@ def _orders_conn():
         conn.execute("ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'pending'")
     if 'updated' not in cols:
         conn.execute("ALTER TABLE orders ADD COLUMN updated INTEGER DEFAULT 0")
+    # admin sessions live in the DB so tokens work across all gunicorn workers
+    conn.execute('''CREATE TABLE IF NOT EXISTS sessions(
+        token TEXT PRIMARY KEY, "user" TEXT, role TEXT, scope TEXT, exp REAL)''')
     return conn
 
 def _order_status(items):
@@ -348,12 +351,18 @@ ADMIN_USERS = {
     'ABHAY': {'password': os.environ.get('ADMIN_PW_ABHAY', 'RUPANIABHAY123'), 'role': 'manager', 'scope': 'honda'},
     'DEVA':  {'password': os.environ.get('ADMIN_PW_DEVA',  'RUPANIDEVA123'),  'role': 'manager', 'scope': 'aerostar'},
 }
-_admin_tokens = {}   # token -> {user, role, scope, exp}
-
 def _admin_auth(token):
-    t = _admin_tokens.get(token or '')
-    if t and t['exp'] > time.time():
-        return t
+    if not token:
+        return None
+    try:
+        conn = _orders_conn()
+        row = conn.execute('SELECT "user",role,scope,exp FROM sessions WHERE token=?', (token,)).fetchone()
+        conn.close()
+    except Exception as e:
+        print(f"[SESSION READ ERROR] {e}", flush=True)
+        return None
+    if row and row[3] > time.time():
+        return {'user': row[0], 'role': row[1], 'scope': row[2]}
     return None
 
 
@@ -372,8 +381,15 @@ def admin_login():
         return jsonify({'success': False, 'error': 'Invalid username or password'})
     import secrets
     token = secrets.token_urlsafe(24)
-    _admin_tokens[token] = {'user': u, 'role': rec['role'], 'scope': rec['scope'],
-                            'exp': time.time() + 86400 * 7}
+    try:
+        conn = _orders_conn()
+        conn.execute('DELETE FROM sessions WHERE exp < ?', (time.time(),))   # prune expired
+        conn.execute('INSERT INTO sessions(token,"user",role,scope,exp) VALUES(?,?,?,?,?)',
+                     (token, u, rec['role'], rec['scope'], time.time() + 86400 * 30))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[SESSION WRITE ERROR] {e}", flush=True)
+        return jsonify({'success': False, 'error': 'session store error'})
     return jsonify({'success': True, 'token': token, 'user': u.title(),
                     'role': rec['role'], 'scope': rec['scope']})
 
