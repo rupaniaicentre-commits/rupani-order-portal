@@ -1,1 +1,1 @@
-v=20260623-dashboard order management + analytics + tracking
+v=20260623-vol volume autodetect + diag

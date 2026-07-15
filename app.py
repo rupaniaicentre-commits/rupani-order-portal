@@ -260,8 +260,19 @@ def honda_feedback():
 # Uses SQLite. Set ORDERS_DB to a path on a Railway *volume* (e.g.
 # /data/orders.db) so history survives redeploys; otherwise it falls back
 # to a file in the app dir (works, but resets on each deploy).
-ORDERS_DB = os.environ.get('ORDERS_DB') or (
-    '/data/orders.db' if os.path.isdir('/data') else os.path.join(BASE_DIR, 'orders.db'))
+def _orders_db_path():
+    if os.environ.get('ORDERS_DB'):
+        return os.environ['ORDERS_DB']
+    # Railway exposes the attached volume's mount path here (any mount point)
+    vol = os.environ.get('RAILWAY_VOLUME_MOUNT_PATH')
+    if vol and os.path.isdir(vol):
+        return os.path.join(vol, 'orders.db')
+    if os.path.isdir('/data'):
+        return os.path.join('/data', 'orders.db')
+    return os.path.join(BASE_DIR, 'orders.db')
+
+ORDERS_DB = _orders_db_path()
+_ON_VOLUME = bool(os.environ.get('ORDERS_DB') or os.environ.get('RAILWAY_VOLUME_MOUNT_PATH') or os.path.isdir('/data'))
 
 def _orders_conn():
     conn = sqlite3.connect(ORDERS_DB, timeout=5)
@@ -418,6 +429,25 @@ def admin_dispatch():
                  (json.dumps(items, ensure_ascii=False), status, int(time.time()*1000), oid))
     conn.commit(); conn.close()
     return jsonify({'success': True, 'status': status, 'items': items})
+
+
+@app.route('/api/admin/diag')
+def admin_diag():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    info = {'success': True, 'db_path': ORDERS_DB, 'on_volume': _ON_VOLUME,
+            'volume_env': os.environ.get('RAILWAY_VOLUME_MOUNT_PATH') or '',
+            'data_dir_exists': os.path.isdir('/data')}
+    try:
+        conn = _orders_conn()
+        info['order_count'] = conn.execute('SELECT count(*) FROM orders').fetchone()[0]
+        conn.close()
+        info['writable'] = os.access(os.path.dirname(ORDERS_DB) or '.', os.W_OK)
+    except Exception as e:
+        info['writable'] = False
+        info['error'] = str(e)
+    return jsonify(info)
 
 
 @app.route('/api/admin/analytics')
