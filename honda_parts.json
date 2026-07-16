@@ -1,16 +1,17 @@
 {
  "meta": {
   "source": "HONDAPARTS.xlsx (Parent=HONDA 18%)",
-  "total_parts": 1191,
+  "total_parts": 1214,
   "stats": {
-   "code": 1010,
-   "both": 60,
+   "code": 1032,
+   "both": 61,
    "name": 100,
    "universal": 17,
    "common_all": 3,
    "override": 1
   },
-  "common_all_count": 20
+  "common_all_count": 20,
+  "built": "2026-07-16 13:41"
  },
  "vehicle_groups": [
   {
@@ -19,7 +20,7 @@
     {
      "name": "ACTIVA 6G",
      "family": "ACTIVA",
-     "part_count": 129
+     "part_count": 130
     },
     {
      "name": "ACTIVA 110/DLX",
@@ -69,17 +70,17 @@
     {
      "name": "SHINE",
      "family": "SHINE",
-     "part_count": 185
+     "part_count": 191
     },
     {
      "name": "SHINE BS6",
      "family": "SHINE",
-     "part_count": 95
+     "part_count": 99
     },
     {
      "name": "SHINE SP BS6",
      "family": "SHINE",
-     "part_count": 75
+     "part_count": 77
     },
     {
      "name": "SHINE 100",
@@ -94,22 +95,22 @@
     {
      "name": "UNICORN 150",
      "family": "UNICORN",
-     "part_count": 128
+     "part_count": 126
     },
     {
      "name": "UNICORN BS6",
      "family": "UNICORN",
-     "part_count": 68
+     "part_count": 69
     },
     {
      "name": "UNICORN 160",
      "family": "UNICORN",
-     "part_count": 53
+     "part_count": 54
     },
     {
      "name": "UNICORN",
      "family": "UNICORN",
-     "part_count": 50
+     "part_count": 52
     }
    ]
   },
@@ -134,12 +135,12 @@
     {
      "name": "DREAM YUGA",
      "family": "DREAM",
-     "part_count": 82
+     "part_count": 84
     },
     {
      "name": "DREAM NEO",
      "family": "DREAM",
-     "part_count": 41
+     "part_count": 43
     }
    ]
   },
@@ -159,7 +160,7 @@
     {
      "name": "AVIATOR",
      "family": "AVIATOR",
-     "part_count": 40
+     "part_count": 42
     }
    ]
   },
@@ -169,7 +170,7 @@
     {
      "name": "TWISTER",
      "family": "TWISTER",
-     "part_count": 42
+     "part_count": 43
     }
    ]
   },
@@ -189,7 +190,7 @@
     {
      "name": "HORNET",
      "family": "HORNET",
-     "part_count": 32
+     "part_count": 33
     }
    ]
   },
@@ -209,7 +210,7 @@
     {
      "name": "LIVO",
      "family": "LIVO",
-     "part_count": 35
+     "part_count": 36
     },
     {
      "name": "LIVO BS6",
@@ -517,6 +518,24 @@
    "category": "HONDA"
   },
   {
+   "part_no": "17910K43901",
+   "name": "Honda ACC CABLE HORNET / UNICORN 160",
+   "price": 168.0,
+   "unit": "Each",
+   "code": "K43",
+   "vehicles": [
+    "HORNET",
+    "UNICORN 160"
+   ],
+   "families": [
+    "HORNET",
+    "UNICORN"
+   ],
+   "common_all": false,
+   "source": "both",
+   "category": "HONDA"
+  },
+  {
    "part_no": "17910KTE911",
    "name": "Honda ACC CABLE SHINE",
    "price": 134.0,
@@ -658,24 +677,6 @@
    ],
    "common_all": false,
    "source": "code",
-   "category": "HONDA"
-  },
-  {
-   "part_no": "17910K43901",
-   "name": "Honda ACC CABLE UNICORN 150",
-   "price": 168.0,
-   "unit": "Each",
-   "code": "K43",
-   "vehicles": [
-    "HORNET",
-    "UNICORN 150"
-   ],
-   "families": [
-    "HORNET",
-    "UNICORN"
-   ],
-   "common_all": false,
-   "source": "both",
    "category": "HONDA"
   },
   {
@@ -1714,6 +1715,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "33600K0ND01",
+   "name": "Honda BLK SHINE BS6 RR",
+   "price": 259.0,
+   "unit": "Each",
+   "code": "K0N",
+   "vehicles": [
+    "SHINE BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "33600KTE601",
    "name": "Honda BLK SHINE NEW REAR RH",
    "price": 240.0,
@@ -2390,6 +2407,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "43451KTE670",
+   "name": "HONDA B ROD SHINE",
+   "price": 88.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "43451K3CD10",
    "name": "Honda BROD SHINE 100",
    "price": 79.0,
@@ -2467,6 +2500,22 @@
    ],
    "common_all": false,
    "source": "name",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "45150KVT962",
+   "name": "Honda CALIPER ASSY AVIATOR",
+   "price": 2399.0,
+   "unit": "Each",
+   "code": "KVT",
+   "vehicles": [
+    "AVIATOR"
+   ],
+   "families": [
+    "AVIATOR"
+   ],
+   "common_all": false,
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -2634,6 +2683,24 @@
    "category": "HONDA"
   },
   {
+   "part_no": "14401K43901",
+   "name": "Honda CAM CHAIN HORNET / UNICORN",
+   "price": 419.0,
+   "unit": "Each",
+   "code": "K43",
+   "vehicles": [
+    "HORNET",
+    "UNICORN"
+   ],
+   "families": [
+    "HORNET",
+    "UNICORN"
+   ],
+   "common_all": false,
+   "source": "both",
+   "category": "HONDA"
+  },
+  {
    "part_no": "01467KWS900",
    "name": "Honda CAM CHAIN KIT-DREAM YUGA (W/O CHAIN)",
    "price": 189.0,
@@ -2731,24 +2798,6 @@
    ],
    "common_all": false,
    "source": "code",
-   "category": "HONDA"
-  },
-  {
-   "part_no": "14401K43901",
-   "name": "Honda CAM CHAIN UNICORN 150",
-   "price": 419.0,
-   "unit": "Each",
-   "code": "K43",
-   "vehicles": [
-    "HORNET",
-    "UNICORN 150"
-   ],
-   "families": [
-    "HORNET",
-    "UNICORN"
-   ],
-   "common_all": false,
-   "source": "both",
    "category": "HONDA"
   },
   {
@@ -3108,6 +3157,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "16100K23904",
+   "name": "Honda CARBURETOR DREAM NEO",
+   "price": 2101.0,
+   "unit": "Each",
+   "code": "K23",
+   "vehicles": [
+    "DREAM NEO"
+   ],
+   "families": [
+    "DREAM"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "16229KPL840",
    "name": "Honda Carburetor Insulator Activa",
    "price": 7.0,
@@ -3360,6 +3425,22 @@
    ],
    "families": [
     "DREAM"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "30410KTE651",
+   "name": "Honda CDI SHINE KTE651",
+   "price": 1784.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
    ],
    "common_all": false,
    "source": "code",
@@ -5844,6 +5925,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "35330KWS901",
+   "name": "Honda CLUTCH SWITCH TWISTER",
+   "price": 33.0,
+   "unit": "Each",
+   "code": "KWS",
+   "vehicles": [
+    "TWISTER"
+   ],
+   "families": [
+    "TWISTER"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "94001122000S",
    "name": "Honda CLUTCH VARIATOR NUT",
    "price": 13.0,
@@ -7506,6 +7603,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "50621K0PD00ZA",
+   "name": "Honda Footrest Bracket Act 6g",
+   "price": 281.0,
+   "unit": "Each",
+   "code": "K0P",
+   "vehicles": [
+    "ACTIVA 6G"
+   ],
+   "families": [
+    "ACTIVA"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "50621KWP901",
    "name": "Honda Footrest Bracket Act DLX/3g/het",
    "price": 268.0,
@@ -8148,6 +8261,24 @@
    "category": "HONDA"
   },
   {
+   "part_no": "50610K14900",
+   "name": "Honda FR FOOTREST ROD UNICORN K14900",
+   "price": 267.0,
+   "unit": "Each",
+   "code": "K14",
+   "vehicles": [
+    "DREAM YUGA",
+    "UNICORN"
+   ],
+   "families": [
+    "DREAM",
+    "UNICORN"
+   ],
+   "common_all": false,
+   "source": "both",
+   "category": "HONDA"
+  },
+  {
    "part_no": "51110KWPH00",
    "name": "Honda Fr Fork Activa 5G",
    "price": 2847.0,
@@ -8663,6 +8794,22 @@
    "part_no": "09106KTEA00",
    "name": "Honda FR WHEEL BEARING KIT SHINE",
    "price": 189.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "09106KTEA01",
+   "name": "Honda FR WHEEL BEARING KIT SHINE KTEA01",
+   "price": 179.0,
    "unit": "Each",
    "code": "KTE",
    "vehicles": [
@@ -9596,6 +9743,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "53219K55910",
+   "name": "Honda HANDLE TEE LIVO",
+   "price": 1430.0,
+   "unit": "Each",
+   "code": "K55",
+   "vehicles": [
+    "LIVO"
+   ],
+   "families": [
+    "LIVO"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "53219KTE610",
    "name": "Honda HANDLE TEE SHINE 610",
    "price": 1155.0,
@@ -9756,6 +9919,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "53100K1KD40ZA",
+   "name": "Honda HANDLE UNICORN BS-6 K1KD40ZA",
+   "price": 340.0,
+   "unit": "Each",
+   "code": "K1K",
+   "vehicles": [
+    "UNICORN BS6"
+   ],
+   "families": [
+    "UNICORN"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "53100KSPD00",
    "name": "Honda HANDLE UNICORN KSPD00",
    "price": 360.0,
@@ -9817,6 +9996,22 @@
    ],
    "common_all": false,
    "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "35200K67931",
+   "name": "Honda HBS LH SHINE SP",
+   "price": 579.0,
+   "unit": "Each",
+   "code": null,
+   "vehicles": [
+    "SHINE SP BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "name",
    "category": "HONDA"
   },
   {
@@ -10488,6 +10683,22 @@
    "part_no": "33120KTED01",
    "name": "Honda HEAD LIGHT ASSY SHINE BS4",
    "price": 729.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "33120KTE651",
+   "name": "Honda HEAD LIGHT ASSY SHINE KTE651",
+   "price": 759.0,
    "unit": "Each",
    "code": "KTE",
    "vehicles": [
@@ -11484,7 +11695,7 @@
   },
   {
    "part_no": "17560K0ND00",
-   "name": "Honda Injector Cap Shine Sp125",
+   "name": "Honda Injector Cap Shine SP BS6",
    "price": 198.0,
    "unit": "Each",
    "code": "K0N",
@@ -11707,6 +11918,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "52200K0ND00",
+   "name": "Honda JHULA SHINE BS6",
+   "price": 1656.0,
+   "unit": "Each",
+   "code": "K0N",
+   "vehicles": [
+    "SHINE BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "52200KTE650",
    "name": "Honda JHULA SHINE KTE650",
    "price": 1548.0,
@@ -11813,6 +12040,22 @@
    ],
    "families": [
     "ACTIVA"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "28300K14900",
+   "name": "Honda KICK LEVER DREAM YUGA",
+   "price": 370.0,
+   "unit": "Each",
+   "code": "K14",
+   "vehicles": [
+    "DREAM YUGA"
+   ],
+   "families": [
+    "DREAM"
    ],
    "common_all": false,
    "source": "code",
@@ -13749,6 +13992,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "37211KVT901",
+   "name": "Honda METER GLASS AVIATOR",
+   "price": 71.0,
+   "unit": "Each",
+   "code": "KVT",
+   "vehicles": [
+    "AVIATOR"
+   ],
+   "families": [
+    "AVIATOR"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "37211KRP901",
    "name": "Honda METER GLASS DIO",
    "price": 74.0,
@@ -13850,6 +14109,22 @@
    "part_no": "61311K0VA00",
    "name": "Honda METER HADDI SHINEBS-6",
    "price": 181.0,
+   "unit": "Each",
+   "code": "K0V",
+   "vehicles": [
+    "SHINE SP BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "61311K0VAQ0",
+   "name": "Honda METER HADDI SHINEBS-6 DIGITAL K0VAQ0",
+   "price": 144.0,
    "unit": "Each",
    "code": "K0V",
    "vehicles": [
@@ -14076,7 +14351,7 @@
   },
   {
    "part_no": "88220K0PD00ZA",
-   "name": "Honda MIRROR ACTIVA 6G LH",
+   "name": "Honda MIRROR ACTIVA 6G LH (2)",
    "price": 103.0,
    "unit": "Each",
    "code": "K0P",
@@ -15255,6 +15530,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "30700KTED02",
+   "name": "Honda PLUG CAP SHINE KTED02",
+   "price": 124.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "30700KSPB01",
    "name": "Honda PLUG CAP UNICORN",
    "price": 96.0,
@@ -16358,6 +16649,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "80100K23900",
+   "name": "Honda RR FENDER DREAM NEO K23900",
+   "price": 516.0,
+   "unit": "Each",
+   "code": "K23",
+   "vehicles": [
+    "DREAM NEO"
+   ],
+   "families": [
+    "DREAM"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "80100K14900",
    "name": "Honda RR FENDER DYUGA",
    "price": 541.0,
@@ -16966,22 +17273,6 @@
    "category": "HONDA"
   },
   {
-   "part_no": "35200K67931",
-   "name": "Honda Shine Lh Switch",
-   "price": 579.0,
-   "unit": "Each",
-   "code": null,
-   "vehicles": [
-    "SHINE"
-   ],
-   "families": [
-    "SHINE"
-   ],
-   "common_all": false,
-   "source": "name",
-   "category": "HONDA"
-  },
-  {
    "part_no": "52400K0PDA2",
    "name": "Honda SHOCKUP ACTIVA 6G",
    "price": 880.0,
@@ -17104,6 +17395,22 @@
    ],
    "families": [
     "DREAM"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "52400K43901",
+   "name": "Honda SHOCKUP HORNET",
+   "price": 3462.0,
+   "unit": "Each",
+   "code": "K43",
+   "vehicles": [
+    "HORNET"
+   ],
+   "families": [
+    "HORNET"
    ],
    "common_all": false,
    "source": "code",
@@ -17301,6 +17608,38 @@
    ],
    "common_all": false,
    "source": "both",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "50285K0ND00",
+   "name": "Honda SHROUD L INNER SHINE BS6",
+   "price": 127.0,
+   "unit": "Each",
+   "code": "K0N",
+   "vehicles": [
+    "SHINE BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "50280K0ND00",
+   "name": "Honda SHROUD R INNER SHINE BS6",
+   "price": 136.0,
+   "unit": "Each",
+   "code": "K0N",
+   "vehicles": [
+    "SHINE BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
    "category": "HONDA"
   },
   {
@@ -18778,6 +19117,22 @@
    "category": "HONDA"
   },
   {
+   "part_no": "37080KTE930",
+   "name": "Honda TANK UNIT SHINE",
+   "price": 188.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
    "part_no": "37800KTE651",
    "name": "HONDA TANK UNIT SHINE 651",
    "price": 218.0,
@@ -18801,6 +19156,22 @@
    "code": "K0V",
    "vehicles": [
     "SHINE SP BS6"
+   ],
+   "families": [
+    "SHINE"
+   ],
+   "common_all": false,
+   "source": "code",
+   "category": "HONDA"
+  },
+  {
+   "part_no": "37800KTED01",
+   "name": "HONDA TANK UNIT SHINE KTED01",
+   "price": 315.0,
+   "unit": "Each",
+   "code": "KTE",
+   "vehicles": [
+    "SHINE"
    ],
    "families": [
     "SHINE"
