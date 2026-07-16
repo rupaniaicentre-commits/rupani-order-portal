@@ -66,12 +66,15 @@ const App = (() => {
       return /tpfc|t\.?\s*p\.?\s*f\.?\s*c/i.test(p.description||'') ? 'TPFC' : 'Back Plate';
     return CAT_MAP[c] || 'Others';
   }
-  // pinned representative thumbnails (null = no product photo, use icon)
+  // pinned representative thumbnails (AS product photo)
   const CAT_REP = {
     'Rear Cowl': 'AS-105',
-    'Head Light Visor': 'AS-1146',
-    'Half Chain Cover': null,
-    'Speedometer Plate': null
+    'Head Light Visor': 'AS-1146'
+  };
+  // official category images from saigroupglobal.com/abs/ (direct file)
+  const CAT_IMG = {
+    'Half Chain Cover': '/static/img/cat/half-chain-cover.jpg',
+    'Speedometer Plate': '/static/img/cat/speedometer-plate.jpg'
   };
 
   // ── INIT ─────────────────────────────────────────────
@@ -231,14 +234,15 @@ const App = (() => {
       <div class="section-title">Browse by Category</div>
       <div class="category-grid">
         ${cats.map(cat => {
-          let repPn;
-          if (Object.prototype.hasOwnProperty.call(CAT_REP, cat)) {
-            repPn = CAT_REP[cat];                 // pinned (may be null -> icon only)
+          let img;
+          if (CAT_IMG[cat]) {
+            img = CAT_IMG[cat];                   // official site category photo
           } else {
-            const rep = allProducts.find(p => p.ocat === cat && p.as_part_number);
-            repPn = rep ? rep.as_part_number : null;
+            let repPn;
+            if (Object.prototype.hasOwnProperty.call(CAT_REP, cat)) repPn = CAT_REP[cat];
+            else { const rep = allProducts.find(p => p.ocat === cat && p.as_part_number); repPn = rep ? rep.as_part_number : null; }
+            img = repPn ? `/static/images_as/${esc(repPn)}.jpg` : '';
           }
-          const img = repPn ? `/static/images_as/${esc(repPn)}.jpg` : '';
           const thumb = img
             ? `<div class="cat-thumb"><img class="cat-img" src="${img}" loading="lazy"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
