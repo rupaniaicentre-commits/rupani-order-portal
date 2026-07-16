@@ -982,7 +982,8 @@ const App = (() => {
         const s = disp>=it.qty ? '<span class="oi-ok">✓ sent</span>'
                 : disp>0 ? `<span class="oi-part">${disp}/${it.qty} sent · ${it.qty-disp} pending</span>`
                 : '<span class="oi-pend">pending</span>';
-        return `${esc(it.name)} <b>×${it.qty}</b> — ${s}`;
+        const alt = it.alt ? ` <span class="oi-alt">↔ sent as ${esc(it.alt)}</span>` : '';
+        return `${esc(it.name)} <b>×${it.qty}</b> — ${s}${alt}`;
       }).join('<br>');
       const canReorder = o.portal !== 'honda';
       const reorder = canReorder ? `<button class="ord-reorder" onclick="App.reorder(${idx})">↺ Add these to basket</button>` : '';

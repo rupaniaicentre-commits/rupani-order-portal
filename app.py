@@ -451,7 +451,7 @@ def admin_dispatch():
     if not auth:
         return jsonify({'success': False, 'error': 'unauthorized'}), 401
     oid = d.get('oid')
-    updates = {u.get('part_no'): int(u.get('disp', 0) or 0) for u in (d.get('items') or [])}
+    updates = {u.get('part_no'): u for u in (d.get('items') or [])}
     mark_all = d.get('mark_all')
     conn = _orders_conn()
     row = conn.execute('SELECT portal,items FROM orders WHERE oid=?', (oid,)).fetchone()
@@ -464,7 +464,10 @@ def admin_dispatch():
         if mark_all:
             it['disp'] = it['qty']
         elif it['part_no'] in updates:
-            it['disp'] = max(0, min(updates[it['part_no']], it['qty']))
+            u = updates[it['part_no']]
+            it['disp'] = max(0, min(int(u.get('disp', 0) or 0), it['qty']))
+            if 'alt' in u:                       # alternate part number actually sent
+                it['alt'] = (u.get('alt') or '').strip()
     status = _order_status(items)
     conn.execute('UPDATE orders SET items=?, status=?, updated=? WHERE oid=?',
                  (json.dumps(items, ensure_ascii=False), status, int(time.time()*1000), oid))

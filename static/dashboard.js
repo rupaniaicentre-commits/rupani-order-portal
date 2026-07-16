@@ -119,14 +119,14 @@ const D = (() => {
     const o=orders.find(x=>x.oid===oid); if(!o) return;
     openOid=oid;
     det.innerHTML=`
-      <table><thead><tr><th>Part No</th><th>Description</th><th class="num">Ordered</th><th class="num">Dispatched</th><th class="num">Pending</th><th class="num">Value</th></tr></thead>
+      <table><thead><tr><th>Ordered Part</th><th>Description</th><th>Alternate part sent</th><th class="num">Ordered</th><th class="num">Dispatched</th><th class="num">Pending</th></tr></thead>
       <tbody>${o.items.map((it,i)=>{
         const disp=Math.min(it.disp||0,it.qty), pend=it.qty-disp;
         return `<tr><td>${esc(it.part_no)}</td><td>${esc(it.name)}</td>
+          <td><input class="alti" id="a-${esc(oid)}-${i}" type="text" placeholder="same as ordered" value="${esc(it.alt||'')}"></td>
           <td class="num">${it.qty}</td>
           <td class="num"><input class="qi" id="q-${esc(oid)}-${i}" type="number" min="0" max="${it.qty}" value="${disp}"></td>
-          <td class="num" style="color:${pend?'#b45309':'#065f46'};font-weight:600">${pend}</td>
-          <td class="num">${inr((it.price||0)*it.qty)}</td></tr>`;
+          <td class="num" style="color:${pend?'#b45309':'#065f46'};font-weight:600">${pend}</td></tr>`;
       }).join('')}</tbody></table>
       <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
         <button class="markall" onclick="D.markAll('${esc(oid)}')">✓ Mark all dispatched</button>
@@ -136,7 +136,7 @@ const D = (() => {
   }
   async function saveDispatch(oid){
     const o=orders.find(x=>x.oid===oid); if(!o) return;
-    const items=o.items.map((it,i)=>({part_no:it.part_no, disp:parseInt($(`q-${oid}-${i}`).value)||0}));
+    const items=o.items.map((it,i)=>({part_no:it.part_no, disp:parseInt($(`q-${oid}-${i}`).value)||0, alt:($(`a-${oid}-${i}`)?.value||'').trim()}));
     await postDispatch({oid, items});
   }
   async function markAll(oid){ await postDispatch({oid, mark_all:true}); }
