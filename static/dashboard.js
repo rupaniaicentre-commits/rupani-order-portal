@@ -33,7 +33,15 @@ const D = (() => {
     portal = auth.scope==='all' ? 'all' : auth.scope;
     const scopeLabel = auth.scope==='all'?'All catalogues':(auth.scope==='honda'?'Honda':'Aerostar');
     $('who').textContent = `${auth.user} · ${auth.role==='admin'?'Admin':'Sales Manager'} · ${scopeLabel}`;
+    // New Items tab is Honda-only
+    if(auth.scope==='all'||auth.scope==='honda'){ $('tabNew').classList.remove('hidden'); loadNewBadge(); }
     tab('orders');
+  }
+  async function loadNewBadge(){
+    try{ const r=await fetch('/api/admin/honda-new?token='+encodeURIComponent(auth.token));
+      const d=await r.json(); const b=$('newBadge');
+      if(d.total>0){ b.textContent=d.total; b.classList.remove('hidden'); } else b.classList.add('hidden');
+    }catch(e){}
   }
 
   // ── data ────────────────────────────────────────────
@@ -48,7 +56,8 @@ const D = (() => {
     curTab=t;
     $('tabOrders').classList.toggle('on',t==='orders');
     $('tabAnalytics').classList.toggle('on',t==='analytics');
-    if(t==='orders') renderOrders(); else renderAnalytics();
+    $('tabNew').classList.toggle('on',t==='new');
+    if(t==='orders') renderOrders(); else if(t==='analytics') renderAnalytics(); else renderNew();
   }
   function setPortal(p){ portal=p; if(curTab==='orders') renderOrders(); else renderAnalytics(); }
 
@@ -170,6 +179,29 @@ const D = (() => {
         <table><thead><tr><th>Part No</th><th>Description</th><th class="num">Total Ordered</th><th class="num">Order Value</th></tr></thead>
         <tbody>${(a.top_demand||[]).map(p=>`<tr><td>${esc(p.part_no)}</td><td>${esc(p.name)}</td><td class="num" style="font-weight:700">${p.ordered}</td><td class="num">${inr(p.val)}</td></tr>`).join('')||'<tr><td colspan=4 class="empty">No data</td></tr>'}</tbody></table>
       </div>`;
+  }
+
+  // ── NEW ITEMS TAB (Honda) ───────────────────────────
+  async function renderNew(){
+    $('main').innerHTML='<div class="empty">Loading new items…</div>';
+    const r=await fetch('/api/admin/honda-new?token='+encodeURIComponent(auth.token));
+    if(r.status===401){ logout(); return; }
+    const d=await r.json();
+    if(!d.total){
+      $('main').innerHTML=`<div class="card"><div class="empty">No new parts yet.<br>
+        <span class="pill">When the Honda parts list is updated, newly added part numbers appear here grouped by the date they were received.</span></div></div>`;
+      return;
+    }
+    const fb=b=>b==='baseline'?b:new Date(b+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+    $('main').innerHTML=`
+      <div class="bar"><span class="pill">${d.total} new part(s) added across ${d.batches.length} update(s)</span></div>
+      ${d.batches.map(bt=>`
+        <div class="batch-h"><span class="bd">📦 Received ${fb(bt.batch)}</span><span class="bc">${bt.count} new</span></div>
+        <div class="card"><table>
+          <thead><tr><th>Part No</th><th>Description</th><th>Vehicle(s)</th><th class="num">Price</th></tr></thead>
+          <tbody>${bt.items.map(it=>`<tr><td>${esc(it.part_no)}</td><td>${esc(it.name)}</td>
+            <td>${esc(it.vehicles||'—')}</td><td class="num">${it.price?inr(it.price):'—'}</td></tr>`).join('')}</tbody>
+        </table></div>`).join('')}`;
   }
 
   // ── restore session ─────────────────────────────────

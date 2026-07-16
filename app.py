@@ -288,6 +288,10 @@ def _orders_conn():
     # admin sessions live in the DB so tokens work across all gunicorn workers
     conn.execute('''CREATE TABLE IF NOT EXISTS sessions(
         token TEXT PRIMARY KEY, "user" TEXT, role TEXT, scope TEXT, exp REAL)''')
+    # registry of Honda parts + when each first appeared (to detect new stock)
+    conn.execute('''CREATE TABLE IF NOT EXISTS honda_registry(
+        part_no TEXT PRIMARY KEY, name TEXT, price REAL, vehicles TEXT,
+        first_seen REAL, batch TEXT)''')
     return conn
 
 def _order_status(items):
@@ -445,6 +449,62 @@ def admin_dispatch():
                  (json.dumps(items, ensure_ascii=False), status, int(time.time()*1000), oid))
     conn.commit(); conn.close()
     return jsonify({'success': True, 'status': status, 'items': items})
+
+
+_registry_synced = False
+
+def sync_honda_registry():
+    """Record any Honda parts not seen before. First run = 'baseline' (not new);
+    later runs tag newly-appeared parts with the sync date so the dashboard can
+    show 'new items received'."""
+    global _registry_synced
+    if _registry_synced:
+        return
+    try:
+        parts = load_honda().get('parts', [])
+        conn = _orders_conn()
+        existing = set(r[0] for r in conn.execute('SELECT part_no FROM honda_registry').fetchall())
+        batch = 'baseline' if not existing else datetime.now().strftime('%Y-%m-%d')
+        now = time.time()
+        added = 0
+        for p in parts:
+            pn = p.get('part_no')
+            if not pn or pn in existing:
+                continue
+            conn.execute('INSERT OR IGNORE INTO honda_registry VALUES(?,?,?,?,?,?)',
+                         (pn, p.get('name', ''), p.get('price'),
+                          ' / '.join([v for v in (p.get('vehicles') or []) if v != 'OTHER']),
+                          now, batch))
+            added += 1
+        conn.commit(); conn.close()
+        if added:
+            print(f"[HONDA REGISTRY] +{added} parts (batch={batch})", flush=True)
+        _registry_synced = True
+    except Exception as e:
+        print(f"[HONDA REGISTRY ERROR] {e}", flush=True)
+
+
+@app.route('/api/admin/honda-new')
+def admin_honda_new():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth:
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    if auth['scope'] == 'aerostar':
+        return jsonify({'success': True, 'batches': [], 'total': 0})
+    sync_honda_registry()
+    conn = _orders_conn()
+    rows = conn.execute("SELECT part_no,name,price,vehicles,first_seen,batch FROM honda_registry "
+                        "WHERE batch != 'baseline' ORDER BY first_seen DESC, part_no").fetchall()
+    conn.close()
+    batches = {}
+    order = []
+    for pn, name, price, veh, fs, batch in rows:
+        if batch not in batches:
+            batches[batch] = []
+            order.append(batch)
+        batches[batch].append({'part_no': pn, 'name': name, 'price': price, 'vehicles': veh})
+    out = [{'batch': b, 'count': len(batches[b]), 'items': batches[b]} for b in order]
+    return jsonify({'success': True, 'batches': out, 'total': len(rows)})
 
 
 @app.route('/api/admin/diag')
@@ -1290,6 +1350,13 @@ def _run_tests():
         sys.exit(1)
     else:
         print("\nAll tests passed.")
+
+
+# establish the Honda parts baseline on startup (safe/idempotent across workers)
+try:
+    sync_honda_registry()
+except Exception as _e:
+    print(f"[HONDA REGISTRY STARTUP] {_e}", flush=True)
 
 
 if __name__ == '__main__':
