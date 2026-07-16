@@ -40,6 +40,33 @@ const App = (() => {
     'Front Center Plate': '🔺', 'Grab Rail': '✋',
   };
 
+  // ── official category taxonomy (matches saigroupglobal.com/abs/) ──────
+  const OCAT_ICONS = {
+    'Front Fender':'🏍','Head Light Visor':'💡','Side Cowl':'🔷','Rear Cowl':'🔶',
+    'Nose':'👃','Rear Fender':'🔰','Foot Trim':'👣','Back Plate':'◼','Meter Cover':'🕐',
+    'Rear Cowl Center Plate':'🔵','Silencer Protector Muffler':'🔧','Half Chain Cover':'⛓',
+    'Head Light Visor Glass Only':'🔍','Speedometer Plate':'🎛','Lower':'⬇',
+    'Front Inner Cover':'🔲','TPFC':'🧩','Others':'🔩'
+  };
+  const OCAT_ORDER = ['Back Plate','Foot Trim','Front Fender','Front Inner Cover','Lower',
+    'Meter Cover','Nose','Rear Cowl','Head Light Visor','Rear Fender','Side Cowl',
+    'Half Chain Cover','Speedometer Plate','TPFC','Silencer Protector Muffler',
+    'Rear Cowl Center Plate','Head Light Visor Glass Only'];
+  const CAT_MAP = {
+    'Front Fender':'Front Fender','Head Light Visor':'Head Light Visor','Side Cowl Set':'Side Cowl',
+    'Rear Cowl Set':'Rear Cowl','Nose':'Nose','Rear Fender':'Rear Fender','Foot Trim Set':'Foot Trim',
+    'Meter Cowling':'Meter Cover','Rear Cowl Center Plate':'Rear Cowl Center Plate',
+    'Silencer Protector Muffler':'Silencer Protector Muffler','Chain Cover':'Half Chain Cover',
+    'Head Light Visor Glass':'Head Light Visor Glass Only','Speedo Meter Glass':'Speedometer Plate',
+    'Lower Body Cover':'Lower','Inner Cover':'Front Inner Cover','Inner Frame':'Front Inner Cover'
+  };
+  function officialCat(p){
+    const c = (p && p.category) || '';
+    if (c === 'Rear Cowl Back Plate')
+      return /tpfc|t\.?\s*p\.?\s*f\.?\s*c/i.test(p.description||'') ? 'TPFC' : 'Back Plate';
+    return CAT_MAP[c] || 'Others';
+  }
+
   // ── INIT ─────────────────────────────────────────────
   function init() {
     loadBasketFromStorage();
@@ -134,6 +161,7 @@ const App = (() => {
       .then(r => r.json())
       .then(data => {
         allProducts = data;
+        allProducts.forEach(p => { p.ocat = officialCat(p); });
         buildSearchIndex();
         hideLoader();
         renderHome();
@@ -160,7 +188,9 @@ const App = (() => {
     renderBreadcrumb();
     document.getElementById('backBtn').style.visibility = 'hidden';
 
-    const cats   = uniqueValues(allProducts, 'category').filter(Boolean).sort();
+    const catCounts = {};
+    allProducts.forEach(p => { catCounts[p.ocat] = (catCounts[p.ocat] || 0) + 1; });
+    const cats = [...OCAT_ORDER.filter(c => catCounts[c]), ...(catCounts['Others'] ? ['Others'] : [])];
     const total  = allProducts.length;
 
     const html = `
@@ -193,13 +223,21 @@ const App = (() => {
 
       <div class="section-title">Browse by Category</div>
       <div class="category-grid">
-        ${cats.map(cat => `
+        ${cats.map(cat => {
+          const rep = allProducts.find(p => p.ocat === cat && p.as_part_number);
+          const img = rep ? `/static/images_as/${esc(rep.as_part_number)}.jpg` : '';
+          const thumb = img
+            ? `<div class="cat-thumb"><img class="cat-img" src="${img}" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+                 <div class="cat-icon" style="display:none">${OCAT_ICONS[cat] || '🔩'}</div></div>`
+            : `<div class="cat-icon">${OCAT_ICONS[cat] || '🔩'}</div>`;
+          return `
           <div class="category-card" onclick="App.navigateTo('brands',{category:'${esc(cat)}'})">
-            <div class="cat-icon">${CAT_ICONS[cat] || '🔩'}</div>
+            ${thumb}
             <div class="cat-label">${esc(cat)}</div>
-            <div class="cat-count">${allProducts.filter(p=>p.category===cat).length} parts</div>
-          </div>
-        `).join('')}
+            <div class="cat-count">${catCounts[cat]} parts</div>
+          </div>`;
+        }).join('')}
       </div>`;
 
     document.getElementById('mainContent').innerHTML = html;
@@ -273,7 +311,7 @@ const App = (() => {
 
   // ── BRANDS ────────────────────────────────────────────
   function renderBrands({ category }) {
-    const products = allProducts.filter(p => p.category === category);
+    const products = allProducts.filter(p => p.ocat === category);
     const brands   = uniqueValues(products, 'brand').filter(Boolean).sort();
 
     const html = `
@@ -297,7 +335,7 @@ const App = (() => {
 
   // ── VEHICLES ──────────────────────────────────────────
   function renderVehicles({ category, brand }) {
-    const products  = allProducts.filter(p => p.category === category && p.brand === brand);
+    const products  = allProducts.filter(p => p.ocat === category && p.brand === brand);
     const vehicles  = uniqueValues(products, 'vehicle').filter(Boolean).sort();
 
     const html = `
@@ -330,7 +368,7 @@ const App = (() => {
       subtitle = `${products.length} result(s) found`;
     } else {
       products = allProducts.filter(p =>
-        (!category || p.category === category) &&
+        (!category || p.ocat === category) &&
         (!brand    || p.brand    === brand   ) &&
         (!vehicle  || p.vehicle  === vehicle )
       );
@@ -672,9 +710,10 @@ const App = (() => {
     // Show ONLY this part — never the full vehicle list
     clearSearch();
     navStack = [{ view: 'home', title: 'Home' }];
-    if (p.category) navStack.push({ view: 'brands',   params: { category: p.category },                        title: p.category });
-    if (p.brand)    navStack.push({ view: 'vehicles',  params: { category: p.category, brand: p.brand },        title: p.brand });
-    if (p.vehicle)  navStack.push({ view: 'parts',     params: { category: p.category, brand: p.brand, vehicle: p.vehicle }, title: p.vehicle });
+    const oc = p.ocat || officialCat(p);
+    if (oc)        navStack.push({ view: 'brands',   params: { category: oc },                        title: oc });
+    if (p.brand)   navStack.push({ view: 'vehicles',  params: { category: oc, brand: p.brand },        title: p.brand });
+    if (p.vehicle) navStack.push({ view: 'parts',     params: { category: oc, brand: p.brand, vehicle: p.vehicle }, title: p.vehicle });
     navStack.push({ view: 'parts', params: { searchResults: [p] }, title: partNo });
 
     renderBreadcrumb();

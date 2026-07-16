@@ -618,3 +618,7 @@ mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
 .oi-part{color:#1e40af;font-weight:600}
 .oi-pend{color:#b45309}
 .oi-alt{color:#6d28d9;font-weight:600;background:#f5f3ff;padding:0 6px;border-radius:5px}
+
+/* category thumbnail images (Browse by Category) */
+.cat-thumb{width:100%;height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.cat-thumb .cat-img{max-height:64px;max-width:100%;object-fit:contain}
