@@ -66,6 +66,13 @@ const App = (() => {
       return /tpfc|t\.?\s*p\.?\s*f\.?\s*c/i.test(p.description||'') ? 'TPFC' : 'Back Plate';
     return CAT_MAP[c] || 'Others';
   }
+  // pinned representative thumbnails (null = no product photo, use icon)
+  const CAT_REP = {
+    'Rear Cowl': 'AS-105',
+    'Head Light Visor': 'AS-1146',
+    'Half Chain Cover': null,
+    'Speedometer Plate': null
+  };
 
   // ── INIT ─────────────────────────────────────────────
   function init() {
@@ -224,8 +231,14 @@ const App = (() => {
       <div class="section-title">Browse by Category</div>
       <div class="category-grid">
         ${cats.map(cat => {
-          const rep = allProducts.find(p => p.ocat === cat && p.as_part_number);
-          const img = rep ? `/static/images_as/${esc(rep.as_part_number)}.jpg` : '';
+          let repPn;
+          if (Object.prototype.hasOwnProperty.call(CAT_REP, cat)) {
+            repPn = CAT_REP[cat];                 // pinned (may be null -> icon only)
+          } else {
+            const rep = allProducts.find(p => p.ocat === cat && p.as_part_number);
+            repPn = rep ? rep.as_part_number : null;
+          }
+          const img = repPn ? `/static/images_as/${esc(repPn)}.jpg` : '';
           const thumb = img
             ? `<div class="cat-thumb"><img class="cat-img" src="${img}" loading="lazy"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
