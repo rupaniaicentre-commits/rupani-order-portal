@@ -217,6 +217,27 @@ def get_honda_data():
     return jsonify(load_honda())
 
 
+@app.route('/api/honda/new')
+def honda_new_public():
+    """Newly received Honda parts (for the customer 'New Arrivals' section)."""
+    sync_honda_registry()
+    try:
+        conn = _orders_conn()
+        rows = conn.execute("SELECT part_no,batch,first_seen FROM honda_registry "
+                            "WHERE batch != 'baseline' ORDER BY first_seen DESC, part_no").fetchall()
+        conn.close()
+    except Exception as e:
+        print(f"[HONDA NEW PUBLIC ERROR] {e}", flush=True)
+        return jsonify({'total': 0, 'batches': []})
+    batches, order = {}, []
+    for pn, batch, fs in rows:
+        if batch not in batches:
+            batches[batch] = []; order.append(batch)
+        batches[batch].append(pn)
+    return jsonify({'total': len(rows),
+                    'batches': [{'batch': b, 'part_nos': batches[b]} for b in order]})
+
+
 @app.route('/api/honda/feedback', methods=['POST'])
 def honda_feedback():
     """Customer fitment feedback: wrong fitment / fits more vehicles."""

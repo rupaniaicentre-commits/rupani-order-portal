@@ -7,6 +7,8 @@
 const H = (() => {
   let DATA = null;           // {vehicle_groups, parts}
   let parts = [];
+  let newBatches = [];       // [{batch, part_nos}] newly received parts
+  let newSet = new Set();    // part_no -> is new
   let searchIndex = [];      // parts + _search string (Aerostar-style)
   let searchFocusIdx = -1;
   let session = { firm:'', contact:'' };
@@ -78,6 +80,10 @@ const H = (() => {
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
     }
     loadBasket();     // restore this user's saved basket (parts are loaded now)
+    try{
+      const nr=await fetch('/api/honda/new'); const nd=await nr.json();
+      newBatches=nd.batches||[]; newSet=new Set(newBatches.flatMap(b=>b.part_nos));
+    }catch(e){ newBatches=[]; newSet=new Set(); }
     home();
   }
 
@@ -89,6 +95,7 @@ const H = (() => {
     else if(view==='search') renderSearch(arg);
     else if(view==='all') renderAll();
     else if(view==='one') renderOne(arg);
+    else if(view==='new') renderNewArrivals();
     window.scrollTo(0,0);
   }
   function home(){ stack=[]; if($('search')) $('search').value=''; go('home',null,true); }
@@ -104,6 +111,8 @@ const H = (() => {
     // full product range first (top)
     let html=`<div class="crumb"><b>Browse the full range</b> or pick a vehicle — search any part above</div>
       <div class="vgrid" style="margin-bottom:22px">
+        ${newSet.size?`<div class="vcard vcard-new" onclick="H.openNew()">
+          <div class="vic">🆕</div><b>New Arrivals</b><small>${newSet.size} newly received part${newSet.size!==1?'s':''}</small></div>`:''}
         <div class="vcard vcard-hero" onclick="H.openAll()">
           <div class="vic">📋</div>
           <b>Full product range</b><small>All ${parts.length} parts · A→Z</small>
@@ -121,6 +130,21 @@ const H = (() => {
             <b>${esc(v.name==='OTHER'?'Universal parts':v.name)}</b>
             <small>${v.part_count} part${v.part_count!==1?'s':''}</small>
           </div>`).join('')+`</div>`;
+    }
+    $('main').innerHTML=html;
+  }
+
+  // ── new arrivals ────────────────────────────────────
+  function fbatch(b){ try{ return new Date(b+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}); }catch(e){ return b; } }
+  function renderNewArrivals(){
+    const byPn=Object.fromEntries(parts.map(p=>[p.part_no,p]));
+    let html=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> › <b>New Arrivals</b></div>
+      <div class="sectitle">🆕 Newly received parts — ${newSet.size}</div>`;
+    for(const bt of newBatches){
+      const list=bt.part_nos.map(pn=>byPn[pn]).filter(Boolean);
+      if(!list.length) continue;
+      html+=`<div class="batch-line">📦 Received ${esc(fbatch(bt.batch))} · ${list.length} part${list.length!==1?'s':''}</div>
+        <div class="plist" style="margin-bottom:18px">${list.map(p=>rowHTML(p)).join('')}</div>`;
     }
     $('main').innerHTML=html;
   }
@@ -253,7 +277,8 @@ const H = (() => {
   function rowHTML(p, ctx){
     const inCart=basket[p.part_no];
     const vehicles = p.common_all ? ['ALL MODELS'] : (p.vehicles||[]);
-    const chips=vehicles.filter(v=>v!=='OTHER')
+    const newChip = newSet.has(p.part_no) ? '<span class="chip newc">🆕 NEW</span>' : '';
+    const chips=newChip+vehicles.filter(v=>v!=='OTHER')
       .map(v=>`<span class="chip${v==='ALL MODELS'?' all':''}">${esc(v)}</span>`).join('');
     const ctrl = inCart ? qstepHTML(p) : `<button class="padd" onclick="H.add('${esc(p.part_no)}')">+ Add</button>`;
     return `<div class="prow ${inCart?'in':''}" id="row-${cssid(p.part_no)}">
@@ -456,7 +481,7 @@ const H = (() => {
 
   return {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
-    openAll:()=>go('all',null,true), toggleSort, filterAll,
+    openAll:()=>go('all',null,true), openNew:()=>go('new',null,true), toggleSort, filterAll,
     onSearch, onSearchKey, focusDD, clearSearch, pick,
     filterVehicle, add, inc, dec, setQty, remove,
     openCart, closeCart, openCheckout, closeCheckout, placeOrder,
