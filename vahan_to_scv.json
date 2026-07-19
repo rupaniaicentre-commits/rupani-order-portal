@@ -1,0 +1,1920 @@
+{
+ "Activa": [
+  {
+   "year": null,
+   "code": "SCV110N",
+   "gen": "",
+   "norms": "",
+   "model_id": "2642"
+  },
+  {
+   "year": 2002,
+   "code": "SCV100CM2",
+   "gen": "",
+   "norms": "",
+   "model_id": "4"
+  },
+  {
+   "year": 2005,
+   "code": "SCV100CM5",
+   "gen": "",
+   "norms": "",
+   "model_id": "5"
+  },
+  {
+   "year": 2009,
+   "code": "SCV1109",
+   "gen": "",
+   "norms": "",
+   "model_id": "6"
+  },
+  {
+   "year": 2010,
+   "code": "SCV110B",
+   "gen": "",
+   "norms": "",
+   "model_id": "7"
+  },
+  {
+   "year": 2012,
+   "code": "SCV110D",
+   "gen": "",
+   "norms": "",
+   "model_id": "8"
+  },
+  {
+   "year": 2013,
+   "code": "SCV110E",
+   "gen": "",
+   "norms": "",
+   "model_id": "9"
+  },
+  {
+   "year": 2014,
+   "code": "SCV110F",
+   "gen": "3G",
+   "norms": "",
+   "model_id": "51"
+  },
+  {
+   "year": 2015,
+   "code": "SCV110G",
+   "gen": "",
+   "norms": "",
+   "model_id": "827"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110H",
+   "gen": "4G",
+   "norms": "",
+   "model_id": "1147"
+  },
+  {
+   "year": 2017,
+   "code": "SCV110J",
+   "gen": "",
+   "norms": "",
+   "model_id": "1521"
+  },
+  {
+   "year": 2019,
+   "code": "SCV110L",
+   "gen": "5G",
+   "norms": "",
+   "model_id": "2116"
+  },
+  {
+   "year": 2020,
+   "code": "SCV110LI",
+   "gen": "",
+   "norms": "",
+   "model_id": "2236"
+  },
+  {
+   "year": 2020,
+   "code": "SCV110M",
+   "gen": "",
+   "norms": "",
+   "model_id": "2482"
+  },
+  {
+   "year": 2023,
+   "code": "SCV110P/SR",
+   "gen": "",
+   "norms": "",
+   "model_id": "2902"
+  },
+  {
+   "year": 2025,
+   "code": "SCV110S",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3394"
+  },
+  {
+   "year": 2025,
+   "code": "SCV110T",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3535"
+  }
+ ],
+ "Dream Yuga": [
+  {
+   "year": 2012,
+   "code": "CB110D",
+   "gen": "",
+   "norms": "",
+   "model_id": "11"
+  },
+  {
+   "year": 2012,
+   "code": "CB110E",
+   "gen": "",
+   "norms": "",
+   "model_id": "12"
+  },
+  {
+   "year": 2012,
+   "code": "CB110MD",
+   "gen": "",
+   "norms": "",
+   "model_id": "13"
+  },
+  {
+   "year": 2012,
+   "code": "CB110ME",
+   "gen": "",
+   "norms": "",
+   "model_id": "14"
+  },
+  {
+   "year": 2014,
+   "code": "CB110AMF",
+   "gen": "",
+   "norms": "",
+   "model_id": "15"
+  },
+  {
+   "year": 2016,
+   "code": "CB110AMH",
+   "gen": "",
+   "norms": "",
+   "model_id": "961"
+  },
+  {
+   "year": 2018,
+   "code": "CB110J",
+   "gen": "",
+   "norms": "",
+   "model_id": "1461"
+  },
+  {
+   "year": 2018,
+   "code": "CB110BK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1956"
+  }
+ ],
+ "Dream Neo": [
+  {
+   "year": 2012,
+   "code": "CB110CE",
+   "gen": "",
+   "norms": "",
+   "model_id": "62"
+  },
+  {
+   "year": 2012,
+   "code": "CB110CME",
+   "gen": "",
+   "norms": "",
+   "model_id": "64"
+  },
+  {
+   "year": 2014,
+   "code": "CB110CF",
+   "gen": "",
+   "norms": "",
+   "model_id": "63"
+  },
+  {
+   "year": 2014,
+   "code": "CB110CMF",
+   "gen": "",
+   "norms": "",
+   "model_id": "65"
+  },
+  {
+   "year": 2016,
+   "code": "CB110CG",
+   "gen": "",
+   "norms": "",
+   "model_id": "887"
+  },
+  {
+   "year": 2016,
+   "code": "CB110CMG",
+   "gen": "",
+   "norms": "",
+   "model_id": "888"
+  },
+  {
+   "year": 2016,
+   "code": "CB110CMH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1222"
+  }
+ ],
+ "Dio": [
+  {
+   "year": null,
+   "code": "SCV110FL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2256"
+  },
+  {
+   "year": null,
+   "code": "SCV110FBL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2257"
+  },
+  {
+   "year": 2003,
+   "code": "SCV100F3",
+   "gen": "",
+   "norms": "",
+   "model_id": "82"
+  },
+  {
+   "year": 2005,
+   "code": "SCV100F5",
+   "gen": "",
+   "norms": "",
+   "model_id": "83"
+  },
+  {
+   "year": 2008,
+   "code": "SCV100F9",
+   "gen": "",
+   "norms": "",
+   "model_id": "382"
+  },
+  {
+   "year": 2009,
+   "code": "SCV100FA",
+   "gen": "",
+   "norms": "",
+   "model_id": "383"
+  },
+  {
+   "year": 2009,
+   "code": "SCV110FC",
+   "gen": "",
+   "norms": "",
+   "model_id": "401"
+  },
+  {
+   "year": 2011,
+   "code": "SCV110FBC",
+   "gen": "",
+   "norms": "",
+   "model_id": "403"
+  },
+  {
+   "year": 2012,
+   "code": "SCV110FD",
+   "gen": "",
+   "norms": "",
+   "model_id": "402"
+  },
+  {
+   "year": 2014,
+   "code": "SCV110FF",
+   "gen": "",
+   "norms": "",
+   "model_id": "404"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110FH",
+   "gen": "",
+   "norms": "",
+   "model_id": "941"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110FBH",
+   "gen": "",
+   "norms": "",
+   "model_id": "942"
+  },
+  {
+   "year": 2018,
+   "code": "SCV110FK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1301"
+  },
+  {
+   "year": 2018,
+   "code": "SCV110FBK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1302"
+  },
+  {
+   "year": 2020,
+   "code": "SCV110FM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2405"
+  },
+  {
+   "year": 2022,
+   "code": "SCV110FP",
+   "gen": "",
+   "norms": "",
+   "model_id": "2862"
+  },
+  {
+   "year": 2023,
+   "code": "SCV110FR",
+   "gen": "",
+   "norms": "",
+   "model_id": "3062"
+  },
+  {
+   "year": 2023,
+   "code": "SCV110FBR",
+   "gen": "",
+   "norms": "",
+   "model_id": "3065"
+  },
+  {
+   "year": 2025,
+   "code": "SCV110FS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3334"
+  },
+  {
+   "year": 2025,
+   "code": "SCV110FBS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3335"
+  }
+ ],
+ "Aviator": [
+  {
+   "year": 2007,
+   "code": "SCV100G8",
+   "gen": "",
+   "norms": "",
+   "model_id": "84"
+  },
+  {
+   "year": 2009,
+   "code": "SCV110GA",
+   "gen": "",
+   "norms": "",
+   "model_id": "86"
+  },
+  {
+   "year": 2011,
+   "code": "SCV110GC",
+   "gen": "",
+   "norms": "",
+   "model_id": "87"
+  },
+  {
+   "year": 2012,
+   "code": "SCV110GD",
+   "gen": "",
+   "norms": "",
+   "model_id": "88"
+  },
+  {
+   "year": 2012,
+   "code": "SCV110GFD",
+   "gen": "",
+   "norms": "",
+   "model_id": "89"
+  },
+  {
+   "year": 2015,
+   "code": "SCV110GF",
+   "gen": "",
+   "norms": "",
+   "model_id": "90"
+  },
+  {
+   "year": 2015,
+   "code": "SCV110GFF",
+   "gen": "",
+   "norms": "",
+   "model_id": "91"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110GH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1141"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110GFH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1142"
+  },
+  {
+   "year": 2017,
+   "code": "SCV110GK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1807"
+  },
+  {
+   "year": 2017,
+   "code": "SCV110GFK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1808"
+  }
+ ],
+ "CBR150R": [
+  {
+   "year": 2011,
+   "code": "CBR150RC",
+   "gen": "",
+   "norms": "",
+   "model_id": "122"
+  },
+  {
+   "year": 2015,
+   "code": "CBR150RG",
+   "gen": "",
+   "norms": "",
+   "model_id": "782"
+  }
+ ],
+ "CBR250R": [
+  {
+   "year": 2010,
+   "code": "CBR250RB",
+   "gen": "",
+   "norms": "",
+   "model_id": "124"
+  },
+  {
+   "year": 2010,
+   "code": "CBR250RAB",
+   "gen": "",
+   "norms": "",
+   "model_id": "127"
+  },
+  {
+   "year": 2012,
+   "code": "CBR250RC",
+   "gen": "",
+   "norms": "",
+   "model_id": "125"
+  },
+  {
+   "year": 2012,
+   "code": "CBR250RAC",
+   "gen": "",
+   "norms": "",
+   "model_id": "128"
+  },
+  {
+   "year": 2013,
+   "code": "CBR250RD",
+   "gen": "",
+   "norms": "",
+   "model_id": "126"
+  },
+  {
+   "year": 2013,
+   "code": "CBR250RAD",
+   "gen": "",
+   "norms": "",
+   "model_id": "129"
+  },
+  {
+   "year": 2015,
+   "code": "CBR250RG",
+   "gen": "",
+   "norms": "",
+   "model_id": "821"
+  },
+  {
+   "year": 2015,
+   "code": "CBR250RAG",
+   "gen": "",
+   "norms": "",
+   "model_id": "822"
+  },
+  {
+   "year": 2017,
+   "code": "CBR250RH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1061"
+  },
+  {
+   "year": 2017,
+   "code": "CBR250RAH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1062"
+  },
+  {
+   "year": 2017,
+   "code": "CBR250RJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1561"
+  },
+  {
+   "year": 2017,
+   "code": "CBR250RAJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1564"
+  }
+ ],
+ "CB Unicorn": [
+  {
+   "year": 2004,
+   "code": "CBF1505",
+   "gen": "",
+   "norms": "",
+   "model_id": "182"
+  },
+  {
+   "year": 2004,
+   "code": "CBF150M5",
+   "gen": "",
+   "norms": "",
+   "model_id": "183"
+  },
+  {
+   "year": 2005,
+   "code": "CBF1506",
+   "gen": "",
+   "norms": "",
+   "model_id": "184"
+  },
+  {
+   "year": 2005,
+   "code": "CBF150M6",
+   "gen": "",
+   "norms": "",
+   "model_id": "185"
+  },
+  {
+   "year": 2006,
+   "code": "CBF1507",
+   "gen": "",
+   "norms": "",
+   "model_id": "186"
+  },
+  {
+   "year": 2006,
+   "code": "CBF150M7",
+   "gen": "",
+   "norms": "",
+   "model_id": "187"
+  },
+  {
+   "year": 2008,
+   "code": "CBF150M9",
+   "gen": "",
+   "norms": "",
+   "model_id": "188"
+  },
+  {
+   "year": 2010,
+   "code": "CBF150MA",
+   "gen": "",
+   "norms": "",
+   "model_id": "189"
+  },
+  {
+   "year": 2017,
+   "code": "CBF150MH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1167"
+  },
+  {
+   "year": 2018,
+   "code": "CBF150MK",
+   "gen": "",
+   "norms": "",
+   "model_id": "2016"
+  }
+ ],
+ "CB Unicorn Dazzler": [
+  {
+   "year": 2009,
+   "code": "CBF150MB",
+   "gen": "",
+   "norms": "",
+   "model_id": "190"
+  },
+  {
+   "year": 2011,
+   "code": "CBF150MC",
+   "gen": "",
+   "norms": "",
+   "model_id": "191"
+  }
+ ],
+ "CBR650F": [
+  {
+   "year": 2015,
+   "code": "CBR650FAG",
+   "gen": "",
+   "norms": "",
+   "model_id": "242"
+  },
+  {
+   "year": 2017,
+   "code": "CBR650FAJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1345"
+  }
+ ],
+ "CB Trigger": [
+  {
+   "year": 2012,
+   "code": "CBF150MD",
+   "gen": "",
+   "norms": "",
+   "model_id": "262"
+  }
+ ],
+ "CB Unicorn 160": [
+  {
+   "year": 2014,
+   "code": "CBF160F",
+   "gen": "",
+   "norms": "",
+   "model_id": "266"
+  },
+  {
+   "year": 2016,
+   "code": "CBF160G",
+   "gen": "",
+   "norms": "",
+   "model_id": "861"
+  },
+  {
+   "year": 2016,
+   "code": "CBF160H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1041"
+  },
+  {
+   "year": 2020,
+   "code": "CBF160AL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2283"
+  },
+  {
+   "year": 2023,
+   "code": "CBF160AR",
+   "gen": "",
+   "norms": "",
+   "model_id": "3082"
+  },
+  {
+   "year": 2025,
+   "code": "CBF160AS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3314"
+  }
+ ],
+ "CB Twister": [
+  {
+   "year": 2009,
+   "code": "CBF110A",
+   "gen": "",
+   "norms": "",
+   "model_id": "282"
+  },
+  {
+   "year": 2009,
+   "code": "CBF110E",
+   "gen": "",
+   "norms": "",
+   "model_id": "284"
+  },
+  {
+   "year": 2009,
+   "code": "CBF110MA",
+   "gen": "",
+   "norms": "",
+   "model_id": "285"
+  },
+  {
+   "year": 2011,
+   "code": "CBF110C",
+   "gen": "",
+   "norms": "",
+   "model_id": "283"
+  },
+  {
+   "year": 2011,
+   "code": "CBF110MC",
+   "gen": "",
+   "norms": "",
+   "model_id": "286"
+  },
+  {
+   "year": 2013,
+   "code": "CBF110ME",
+   "gen": "",
+   "norms": "",
+   "model_id": "287"
+  },
+  {
+   "year": 2013,
+   "code": "CBF110MSE",
+   "gen": "",
+   "norms": "",
+   "model_id": "288"
+  }
+ ],
+ "Activa125": [
+  {
+   "year": 2013,
+   "code": "SCV125E",
+   "gen": "",
+   "norms": "",
+   "model_id": "316"
+  },
+  {
+   "year": 2015,
+   "code": "SCV125G",
+   "gen": "",
+   "norms": "",
+   "model_id": "317"
+  },
+  {
+   "year": 2017,
+   "code": "SCV125H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1101"
+  },
+  {
+   "year": 2018,
+   "code": "SCV125K",
+   "gen": "",
+   "norms": "",
+   "model_id": "1764"
+  },
+  {
+   "year": 2019,
+   "code": "SCV125L",
+   "gen": "",
+   "norms": "",
+   "model_id": "2136"
+  },
+  {
+   "year": 2021,
+   "code": "SCV125N",
+   "gen": "",
+   "norms": "",
+   "model_id": "2662"
+  },
+  {
+   "year": 2023,
+   "code": "SCV125FP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3002"
+  },
+  {
+   "year": 2025,
+   "code": "SCV125S",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3274"
+  },
+  {
+   "year": 2025,
+   "code": "SCV125T",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3534"
+  }
+ ],
+ "Activa i": [
+  {
+   "year": 2013,
+   "code": "SCV110HE",
+   "gen": "",
+   "norms": "",
+   "model_id": "323"
+  },
+  {
+   "year": 2015,
+   "code": "SCV110HF",
+   "gen": "",
+   "norms": "",
+   "model_id": "324"
+  },
+  {
+   "year": 2016,
+   "code": "SCV110HH",
+   "gen": "",
+   "norms": "",
+   "model_id": "921"
+  },
+  {
+   "year": 2018,
+   "code": "SCV110HK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1816"
+  }
+ ],
+ "Livo": [
+  {
+   "year": 2015,
+   "code": "CBF110G",
+   "gen": "",
+   "norms": "",
+   "model_id": "342"
+  },
+  {
+   "year": 2015,
+   "code": "CBF110SG",
+   "gen": "",
+   "norms": "",
+   "model_id": "343"
+  },
+  {
+   "year": 2017,
+   "code": "CBF110H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1185"
+  },
+  {
+   "year": 2017,
+   "code": "CBF110SH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1186"
+  },
+  {
+   "year": 2017,
+   "code": "CBF110J",
+   "gen": "",
+   "norms": "",
+   "model_id": "1481"
+  },
+  {
+   "year": 2017,
+   "code": "CBF110SJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1484"
+  },
+  {
+   "year": 2019,
+   "code": "CBF110BK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1936"
+  },
+  {
+   "year": 2019,
+   "code": "CBF110SBK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1937"
+  },
+  {
+   "year": 2020,
+   "code": "CBF110BL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2336"
+  },
+  {
+   "year": 2020,
+   "code": "CBF110SBL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2337"
+  },
+  {
+   "year": 2021,
+   "code": "CBF110BN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2627"
+  },
+  {
+   "year": 2021,
+   "code": "CBF110SBN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2628"
+  },
+  {
+   "year": 2022,
+   "code": "CBF110BEN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2725"
+  },
+  {
+   "year": 2022,
+   "code": "CBF110SBEN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2726"
+  },
+  {
+   "year": 2023,
+   "code": "CBF110BER",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3148"
+  },
+  {
+   "year": 2023,
+   "code": "CBF110SBER",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3149"
+  },
+  {
+   "year": 2025,
+   "code": "CBF110BES",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3440"
+  },
+  {
+   "year": 2025,
+   "code": "CBF110SBES",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3441"
+  }
+ ],
+ "Eterno": [
+  {
+   "year": 2004,
+   "code": "SC1504",
+   "gen": "",
+   "norms": "",
+   "model_id": "349"
+  },
+  {
+   "year": 2005,
+   "code": "SC1505",
+   "gen": "",
+   "norms": "",
+   "model_id": "350"
+  }
+ ],
+ "CD 110 Dream": [
+  {
+   "year": null,
+   "code": "CB110C3MM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2296"
+  },
+  {
+   "year": 2014,
+   "code": "CB110C2F",
+   "gen": "",
+   "norms": "",
+   "model_id": "366"
+  },
+  {
+   "year": 2016,
+   "code": "CB110C2G",
+   "gen": "",
+   "norms": "",
+   "model_id": "881"
+  },
+  {
+   "year": 2016,
+   "code": "CB110C2MG",
+   "gen": "",
+   "norms": "",
+   "model_id": "882"
+  },
+  {
+   "year": 2016,
+   "code": "CB110C2H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1161"
+  },
+  {
+   "year": 2016,
+   "code": "CB110C2MH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1162"
+  },
+  {
+   "year": 2018,
+   "code": "CB110C2K",
+   "gen": "",
+   "norms": "",
+   "model_id": "1801"
+  },
+  {
+   "year": 2018,
+   "code": "CB110C2MK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1802"
+  },
+  {
+   "year": 2018,
+   "code": "CB110CMDK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1996"
+  },
+  {
+   "year": 2020,
+   "code": "CB110CMDM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2297"
+  },
+  {
+   "year": 2021,
+   "code": "CB110CMDN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2626"
+  },
+  {
+   "year": 2023,
+   "code": "CB110CMDR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3143"
+  }
+ ],
+ "CB Shine/ Shine 125": [
+  {
+   "year": 2005,
+   "code": "CBF1256",
+   "gen": "",
+   "norms": "",
+   "model_id": "462"
+  },
+  {
+   "year": 2007,
+   "code": "CBF125M7",
+   "gen": "",
+   "norms": "",
+   "model_id": "467"
+  },
+  {
+   "year": 2008,
+   "code": "CBF125MC9",
+   "gen": "",
+   "norms": "",
+   "model_id": "471"
+  },
+  {
+   "year": 2009,
+   "code": "CBF125C9",
+   "gen": "",
+   "norms": "",
+   "model_id": "465"
+  },
+  {
+   "year": 2009,
+   "code": "CBF125CA",
+   "gen": "",
+   "norms": "",
+   "model_id": "466"
+  },
+  {
+   "year": 2009,
+   "code": "CBF125MCA",
+   "gen": "",
+   "norms": "",
+   "model_id": "468"
+  },
+  {
+   "year": 2010,
+   "code": "CBF125A",
+   "gen": "",
+   "norms": "",
+   "model_id": "464"
+  },
+  {
+   "year": 2011,
+   "code": "CBF125C",
+   "gen": "",
+   "norms": "",
+   "model_id": "422"
+  },
+  {
+   "year": 2011,
+   "code": "CBF125CC",
+   "gen": "",
+   "norms": "",
+   "model_id": "423"
+  },
+  {
+   "year": 2011,
+   "code": "CBF125MCC",
+   "gen": "",
+   "norms": "",
+   "model_id": "424"
+  },
+  {
+   "year": 2014,
+   "code": "CBF125F",
+   "gen": "",
+   "norms": "",
+   "model_id": "501"
+  },
+  {
+   "year": 2016,
+   "code": "CBF125H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1081"
+  },
+  {
+   "year": 2017,
+   "code": "CBF125BH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1342"
+  },
+  {
+   "year": 2017,
+   "code": "CBF125J/K",
+   "gen": "",
+   "norms": "",
+   "model_id": "1421"
+  },
+  {
+   "year": 2019,
+   "code": "CBF125L",
+   "gen": "",
+   "norms": "",
+   "model_id": "2119"
+  },
+  {
+   "year": 2020,
+   "code": "CBF125L3",
+   "gen": "",
+   "norms": "",
+   "model_id": "2280"
+  },
+  {
+   "year": 2020,
+   "code": "CBF125CL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2422"
+  },
+  {
+   "year": 2021,
+   "code": "CBF125N",
+   "gen": "",
+   "norms": "",
+   "model_id": "2602"
+  },
+  {
+   "year": 2022,
+   "code": "CBF125P",
+   "gen": "",
+   "norms": "",
+   "model_id": "2882"
+  },
+  {
+   "year": 2025,
+   "code": "CBF125S",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3434"
+  },
+  {
+   "year": 2026,
+   "code": "CBF125T",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3581"
+  }
+ ],
+ "CBF Stunner": [
+  {
+   "year": 2008,
+   "code": "CBF1259",
+   "gen": "",
+   "norms": "",
+   "model_id": "463"
+  },
+  {
+   "year": 2008,
+   "code": "CBF125M9/MF",
+   "gen": "",
+   "norms": "",
+   "model_id": "469"
+  },
+  {
+   "year": 2009,
+   "code": "CBF125MA",
+   "gen": "",
+   "norms": "",
+   "model_id": "470"
+  },
+  {
+   "year": 2010,
+   "code": "CBF125MB",
+   "gen": "",
+   "norms": "",
+   "model_id": "472"
+  },
+  {
+   "year": 2011,
+   "code": "CBF125MC",
+   "gen": "",
+   "norms": "",
+   "model_id": "473"
+  }
+ ],
+ "CB Shine SP": [
+  {
+   "year": 2016,
+   "code": "CBF125MG",
+   "gen": "",
+   "norms": "",
+   "model_id": "542"
+  },
+  {
+   "year": 2016,
+   "code": "CBF125MH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1121"
+  },
+  {
+   "year": 2017,
+   "code": "CBF125MJ/MK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1441"
+  }
+ ],
+ "CB Hornet 160R": [
+  {
+   "year": 2015,
+   "code": "CBF160MG",
+   "gen": "",
+   "norms": "",
+   "model_id": "682"
+  },
+  {
+   "year": 2016,
+   "code": "CBF160MH",
+   "gen": "",
+   "norms": "",
+   "model_id": "981"
+  },
+  {
+   "year": 2017,
+   "code": "CBF160MJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1543"
+  },
+  {
+   "year": 2017,
+   "code": "CBF160MAJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1544"
+  },
+  {
+   "year": 2018,
+   "code": "CBF160MAK",
+   "gen": "",
+   "norms": "",
+   "model_id": "2076"
+  }
+ ],
+ "Navi": [
+  {
+   "year": 2016,
+   "code": "NVA110G",
+   "gen": "",
+   "norms": "",
+   "model_id": "902"
+  },
+  {
+   "year": 2017,
+   "code": "NVA110H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1201"
+  },
+  {
+   "year": 2018,
+   "code": "NVA110K",
+   "gen": "",
+   "norms": "",
+   "model_id": "1781"
+  },
+  {
+   "year": 2019,
+   "code": "NVA110BK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1976"
+  }
+ ],
+ "CLIQ": [
+  {
+   "year": 2017,
+   "code": "NVB110H",
+   "gen": "",
+   "norms": "",
+   "model_id": "1242"
+  }
+ ],
+ "Africa Twin": [
+  {
+   "year": null,
+   "code": "CRF1100AL2L",
+   "gen": "",
+   "norms": "",
+   "model_id": "2376"
+  },
+  {
+   "year": null,
+   "code": "CRF1100AL2N",
+   "gen": "",
+   "norms": "",
+   "model_id": "2802"
+  },
+  {
+   "year": 2017,
+   "code": "CRF1000DH",
+   "gen": "",
+   "norms": "",
+   "model_id": "1262"
+  },
+  {
+   "year": 2018,
+   "code": "CRF1000DJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1813"
+  },
+  {
+   "year": 2018,
+   "code": "CRF1000DK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1916"
+  },
+  {
+   "year": 2020,
+   "code": "CRF1100DL2L",
+   "gen": "",
+   "norms": "",
+   "model_id": "2377"
+  },
+  {
+   "year": 2021,
+   "code": "CRF1100AL2M",
+   "gen": "",
+   "norms": "",
+   "model_id": "2502"
+  },
+  {
+   "year": 2021,
+   "code": "CRF1100DL2M",
+   "gen": "",
+   "norms": "",
+   "model_id": "2503"
+  },
+  {
+   "year": 2022,
+   "code": "CRF1100DL2N",
+   "gen": "",
+   "norms": "",
+   "model_id": "2803"
+  }
+ ],
+ "GRAZIA": [
+  {
+   "year": 2017,
+   "code": "SCV125SJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1362"
+  },
+  {
+   "year": 2018,
+   "code": "SCV125SK",
+   "gen": "",
+   "norms": "",
+   "model_id": "2019"
+  },
+  {
+   "year": 2020,
+   "code": "SCV125SL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2356"
+  },
+  {
+   "year": 2021,
+   "code": "SCV125SM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2402"
+  },
+  {
+   "year": 2021,
+   "code": "SCV125SN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2682"
+  }
+ ],
+ "XBLADE": [
+  {
+   "year": null,
+   "code": "CBF160FSN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2745"
+  },
+  {
+   "year": 2017,
+   "code": "CBF160FSJ",
+   "gen": "",
+   "norms": "",
+   "model_id": "1502"
+  },
+  {
+   "year": 2018,
+   "code": "CBF160FSK",
+   "gen": "",
+   "norms": "",
+   "model_id": "1876"
+  },
+  {
+   "year": 2020,
+   "code": "CBF160FSM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2316"
+  }
+ ],
+ "CB300R": [
+  {
+   "year": 2018,
+   "code": "CBF300NAK",
+   "gen": "",
+   "norms": "",
+   "model_id": "2037"
+  },
+  {
+   "year": 2022,
+   "code": "CBF300NAN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2762"
+  },
+  {
+   "year": 2023,
+   "code": "CBF300NAR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3214"
+  }
+ ],
+ "CBR650R": [
+  {
+   "year": 2018,
+   "code": "CBR650RAL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2097"
+  },
+  {
+   "year": 2021,
+   "code": "CBR650RAM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2566"
+  },
+  {
+   "year": 2022,
+   "code": "CBR650RAN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2782"
+  }
+ ],
+ "SP125": [
+  {
+   "year": 2019,
+   "code": "CBF125ML",
+   "gen": "",
+   "norms": "",
+   "model_id": "2182"
+  },
+  {
+   "year": 2021,
+   "code": "CBF125MN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2582"
+  },
+  {
+   "year": 2022,
+   "code": "CBF125MEN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2742"
+  },
+  {
+   "year": 2023,
+   "code": "CBF125MP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "2984"
+  },
+  {
+   "year": 2023,
+   "code": "CBF125MEP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "2985"
+  },
+  {
+   "year": 2023,
+   "code": "CBF125MER",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3194"
+  },
+  {
+   "year": 2025,
+   "code": "CBF125MEFS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3294"
+  },
+  {
+   "year": 2025,
+   "code": "CBF125MFS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3295"
+  },
+  {
+   "year": 2025,
+   "code": "CBF125MEFT",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3538"
+  }
+ ],
+ "Hornet 2.0": [
+  {
+   "year": 2020,
+   "code": "CBF190MAL",
+   "gen": "",
+   "norms": "",
+   "model_id": "2383"
+  },
+  {
+   "year": 2020,
+   "code": "CBF190MAM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2462"
+  },
+  {
+   "year": 2022,
+   "code": "CBF190MAN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2702"
+  },
+  {
+   "year": 2023,
+   "code": "CBF190MAR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3154"
+  },
+  {
+   "year": 2025,
+   "code": "CBF190MAS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3400"
+  }
+ ],
+ "HNESS": [
+  {
+   "year": 2020,
+   "code": "CB350DM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2443"
+  },
+  {
+   "year": 2020,
+   "code": "CB350DSM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2444"
+  },
+  {
+   "year": 2021,
+   "code": "CB350RSM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2522"
+  },
+  {
+   "year": 2021,
+   "code": "CB350DSN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2722"
+  },
+  {
+   "year": 2023,
+   "code": "CB350DP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "2922"
+  },
+  {
+   "year": 2023,
+   "code": "CB350DSP/DSR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "2942"
+  },
+  {
+   "year": 2023,
+   "code": "CB350RSP/RSR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "2943"
+  },
+  {
+   "year": 2025,
+   "code": "CB350DS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3446"
+  },
+  {
+   "year": 2025,
+   "code": "CB350DSS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3447"
+  },
+  {
+   "year": 2025,
+   "code": "CB350RSS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3448"
+  }
+ ],
+ "500X": [
+  {
+   "year": 2021,
+   "code": "CB500XAM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2543"
+  }
+ ],
+ "CB650R": [
+  {
+   "year": 2021,
+   "code": "CB650RAM",
+   "gen": "",
+   "norms": "",
+   "model_id": "2563"
+  },
+  {
+   "year": 2022,
+   "code": "CB650RAN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2783"
+  }
+ ],
+ "CB200X": [
+  {
+   "year": 2021,
+   "code": "CB190XN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2623"
+  },
+  {
+   "year": 2023,
+   "code": "CB190XR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3197"
+  },
+  {
+   "year": 2025,
+   "code": "CB190XS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3414"
+  }
+ ],
+ "CB300F": [
+  {
+   "year": 2022,
+   "code": "MC300AN",
+   "gen": "",
+   "norms": "",
+   "model_id": "2846"
+  },
+  {
+   "year": 2023,
+   "code": "MC300AP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3175"
+  },
+  {
+   "year": 2024,
+   "code": "MC300AS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3254"
+  }
+ ],
+ "Shine 100": [
+  {
+   "year": 2023,
+   "code": "CD100RNP",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3023"
+  },
+  {
+   "year": 2025,
+   "code": "CD100RNS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3437"
+  }
+ ],
+ "Dio 125": [
+  {
+   "year": null,
+   "code": "SCV125SR",
+   "gen": "",
+   "norms": "",
+   "model_id": "3103"
+  },
+  {
+   "year": null,
+   "code": "SCV125SBR",
+   "gen": "",
+   "norms": "",
+   "model_id": "3104"
+  },
+  {
+   "year": null,
+   "code": "SCV125ST",
+   "gen": "",
+   "norms": "",
+   "model_id": "3494"
+  },
+  {
+   "year": null,
+   "code": "SCV125SBT",
+   "gen": "",
+   "norms": "",
+   "model_id": "3495"
+  }
+ ],
+ "SP160": [
+  {
+   "year": 2023,
+   "code": "CBF160FSR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3123"
+  },
+  {
+   "year": 2025,
+   "code": "CBF160FSS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3340"
+  }
+ ],
+ "CB350": [
+  {
+   "year": 2023,
+   "code": "CB350CR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3235"
+  },
+  {
+   "year": 2023,
+   "code": "CB350CSR",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3236"
+  },
+  {
+   "year": 2025,
+   "code": "CB350CS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3474"
+  },
+  {
+   "year": 2025,
+   "code": "CB350CSS",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3475"
+  },
+  {
+   "year": 2025,
+   "code": "CB350CT",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3561"
+  },
+  {
+   "year": 2025,
+   "code": "CB350CST",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3562"
+  }
+ ],
+ "Shine100 DX": [
+  {
+   "year": 2025,
+   "code": "CD100RNT",
+   "gen": "",
+   "norms": "BS-VI",
+   "model_id": "3515"
+  }
+ ],
+ "CB125 Hornet": [
+  {
+   "year": null,
+   "code": "CBF125ZT",
+   "gen": "",
+   "norms": "",
+   "model_id": "3519"
+  }
+ ]
+}

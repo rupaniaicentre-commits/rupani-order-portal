@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chassis → Parts — Admin Test (Rupani)</title>
+<style>
+  :root{--navy:#1f3864;--red:#c0392b;--green:#1e8449;--bg:#f4f6fb;--line:#e2e6ee;}
+  *{box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  body{margin:0;background:var(--bg);color:#1a1a1a}
+  header{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px}
+  header .logo{background:#fff;color:var(--navy);font-weight:800;border-radius:8px;padding:4px 9px}
+  header .tag{background:var(--red);font-size:11px;padding:2px 8px;border-radius:10px;letter-spacing:.5px}
+  .wrap{max-width:820px;margin:24px auto;padding:0 16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px}
+  label{font-size:12px;font-weight:600;color:#555;display:block;margin:10px 0 4px}
+  input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font-size:15px}
+  .row{display:flex;gap:10px}.row>div{flex:1}
+  button{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px 18px;font-size:15px;font-weight:600;cursor:pointer}
+  button.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  button:disabled{opacity:.5}
+  .hint{font-size:12px;color:#888;margin-top:6px}
+  .err{background:#fdecea;color:#a5281b;padding:12px;border-radius:8px;margin-top:12px}
+  .ok-badge{display:inline-block;background:var(--green);color:#fff;padding:6px 12px;border-radius:8px;font-weight:700;font-size:18px}
+  .kv{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px}
+  .kv span{background:#eef1f8;padding:4px 10px;border-radius:6px}
+  .q{background:#fff8e1;border:1px solid #f0d98c;border-radius:10px;padding:16px;margin-top:14px}
+  .q h3{margin:0 0 12px;font-size:16px}
+  .opt{display:block;width:100%;text-align:left;background:#fff;color:var(--navy);border:1.5px solid var(--navy);
+       border-radius:8px;padding:12px;margin-bottom:8px;font-size:15px;cursor:pointer}
+  .opt small{color:#888;font-weight:400}
+  .grp{border:1px solid var(--line);border-radius:8px;margin-top:10px;overflow:hidden}
+  .grp h4{margin:0;background:#f0f2f7;padding:8px 12px;font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  td{padding:6px 12px;border-top:1px solid var(--line)}
+  td.pn{font-family:monospace;color:var(--navy);white-space:nowrap}
+  .ns{color:var(--red);font-size:11px}
+  .note{background:#e8f5e9;color:#1e6b3a;padding:10px;border-radius:8px;margin-top:10px;font-size:13px}
+  #loginCard{max-width:360px;margin:60px auto}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">RA</span><strong>Chassis → Parts</strong>
+  <span class="tag">ADMIN TEST</span>
+  <span style="margin-left:auto;font-size:12px" id="who"></span>
+</header>
+
+<!-- LOGIN -->
+<div class="wrap" id="loginWrap">
+  <div class="card" id="loginCard">
+    <h2 style="margin-top:0">Admin Login</h2>
+    <label>Username</label><input id="u" placeholder="HARSH"/>
+    <label>Password</label><input id="p" type="password" onkeydown="if(event.key=='Enter')login()"/>
+    <div id="loginErr"></div>
+    <button style="width:100%;margin-top:16px" onclick="login()">Login</button>
+    <div class="hint">Testing area — only the Admin ID can open this.</div>
+  </div>
+</div>
+
+<!-- TESTER -->
+<div class="wrap" id="app" style="display:none">
+  <div class="card">
+    <h2 style="margin-top:0">Enter chassis number</h2>
+    <label>Chassis / Frame number *</label>
+    <input id="chassis" placeholder="ME4JF914JLW156040" autocomplete="off"/>
+    <div class="hint">VDS (letters 4–8) + year (letter 10) is read from this automatically.</div>
+    <div class="row">
+      <div><label>Model name from VAHAN (optional)</label><input id="mm" placeholder="ACTIVA 6G"/></div>
+      <div><label>Mfg year (optional)</label><input id="yr" placeholder="2020"/></div>
+      <div><label>Norms (optional)</label><input id="nm" placeholder="BS-VI"/></div>
+    </div>
+    <button style="margin-top:16px" onclick="resolve()">Find parts →</button>
+    <div id="out"></div>
+  </div>
+</div>
+
+<script>
+let TOKEN='';
+function h(s){return (s==null?'':(''+s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+async function api(path,body){
+  const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  return r.json();
+}
+async function login(){
+  const u=document.getElementById('u').value.trim(), p=document.getElementById('p').value;
+  const r=await api('/api/admin/login',{username:u,password:p});
+  const e=document.getElementById('loginErr');
+  if(!r.success){e.innerHTML='<div class="err">'+h(r.error)+'</div>';return;}
+  if(r.role!=='admin'){e.innerHTML='<div class="err">Only the Admin ID can use the testing page.</div>';return;}
+  TOKEN=r.token;
+  document.getElementById('loginWrap').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('who').textContent=r.user+' (admin)';
+}
+async function resolve(){
+  const body={token:TOKEN,chassis:document.getElementById('chassis').value.trim(),
+              maker_model:document.getElementById('mm').value.trim(),
+              mfg_year:document.getElementById('yr').value.trim(),
+              norms:document.getElementById('nm').value.trim()};
+  render(await api('/api/admin/resolve-vin',body));
+}
+async function pick(code){ render(await api('/api/admin/resolve-vin',{token:TOKEN,pick:code})); }
+
+function render(r){
+  const out=document.getElementById('out');
+  if(!r.success){out.innerHTML='<div class="err">'+h(r.error)+'</div>';return;}
+  if(r.resolved){
+    let html='<div style="margin-top:16px"><span class="ok-badge">'+h(r.model_code)+'</span></div>';
+    html+='<div class="kv">'
+        + (r.family?'<span>Model: '+h(r.family)+'</span>':'')
+        + (r.year?'<span>Year: '+h(r.year)+'</span>':'')
+        + '<span>Total parts: '+h(r.total_parts)+'</span>'
+        + (r.model_id?'<span>ID: '+h(r.model_id)+'</span>':'') + '</div>';
+    if(r.note) html+='<div class="note">ℹ️ '+h(r.note)+'</div>';
+    (r.groups||[]).forEach(g=>{
+      html+='<div class="grp"><h4>'+h(g.group)+'</h4><table>';
+      g.parts.forEach(p=>{html+='<tr><td class="pn">'+h(p.pn)+'</td><td>'+h(p.desc)
+          +(p.ns==='NS'?' <span class="ns">(NS)</span>':'')+'</td><td>'+h(p.qty)+'</td></tr>';});
+      html+='</table></div>';
+    });
+    out.innerHTML=html;
+    return;
+  }
+  if(r.needs_filter){
+    let html='<div class="q"><h3>'+h(r.question.ask)+'</h3>';
+    html+='<div class="hint" style="margin-bottom:10px">'+h(r.family)+' '+h(r.year)+' — is saal ke '+r.candidates.length+' variant hain, ek chuno:</div>';
+    r.question.options.forEach(o=>{
+      const code=o.codes[0];
+      html+='<button class="opt" onclick="pick(\''+h(code)+'\')">'+h(o.label)
+          +'  <small>('+h(o.codes.join(', '))+')</small></button>';
+    });
+    html+='</div>';
+    out.innerHTML=html;
+    return;
+  }
+  out.innerHTML='<div class="err">'+h(r.error||'Nahi mila')
+      +(r.vds4?' — VDS: '+h(r.vds4):'')+(r.year?', Year: '+h(r.year):'')+'</div>';
+}
+</script>
+</body>
+</html>
