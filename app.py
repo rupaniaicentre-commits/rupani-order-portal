@@ -419,65 +419,6 @@ def admin_login():
                     'role': rec['role'], 'scope': rec['scope']})
 
 
-# ─────────────── ADMIN-ONLY: Chassis → Model → Parts TEST page ───────────────
-@app.route('/vin-test')
-def vin_test_page():
-    return render_template('vin_test.html')
-
-
-def _epc_parts_for_model(model_id, limit=400):
-    """Fetch EPC parts for a resolved model_id, grouped by section/illustration."""
-    dbp = os.path.join(BASE_DIR, 'epc_parts.db')
-    if not os.path.exists(dbp):
-        return None, 0
-    conn = sqlite3.connect(dbp)
-    total = conn.execute('SELECT COUNT(*) FROM parts WHERE model_id=?', (str(model_id),)).fetchone()[0]
-    rows = conn.execute(
-        'SELECT section,illus,pn,descr,qty,ns FROM parts WHERE model_id=? ORDER BY section,illus LIMIT ?',
-        (str(model_id), limit)).fetchall()
-    conn.close()
-    groups = {}
-    for section, illus, pn, descr, qty, ns in rows:
-        key = f'{section} · {illus}'
-        groups.setdefault(key, []).append({'pn': pn, 'desc': descr, 'qty': qty, 'ns': ns})
-    return [{'group': k, 'parts': v} for k, v in groups.items()], total
-
-
-@app.route('/api/admin/resolve-vin', methods=['POST'])
-def admin_resolve_vin():
-    auth = _admin_auth((request.json or {}).get('token', ''))
-    if not auth or auth.get('role') != 'admin':          # admin-only (HARSH)
-        return jsonify({'success': False, 'error': 'unauthorized — admin only'}), 401
-    d = request.json or {}
-    try:
-        import vds_resolver as R
-    except Exception as e:
-        return jsonify({'success': False, 'error': f'resolver load failed: {e}'})
-
-    pick = (d.get('pick') or '').strip()               # a code chosen after a filter question
-    if pick:
-        model_id = R._mid(pick)
-        parts, total = _epc_parts_for_model(model_id)
-        return jsonify({'success': True, 'resolved': True, 'model_code': pick,
-                        'model_id': model_id, 'total_parts': total, 'groups': parts})
-
-    res = R.resolve(chassis=(d.get('chassis') or '').strip() or None,
-                    maker_model=(d.get('maker_model') or '').strip() or None,
-                    mfg_year=(int(d['mfg_year']) if str(d.get('mfg_year') or '').strip().isdigit() else None),
-                    norms=(d.get('norms') or '').strip() or None)
-    if not res.get('ok'):
-        return jsonify({'success': True, 'resolved': False, 'error': res.get('reason'),
-                        'vds4': res.get('vds4'), 'year': res.get('year')})
-    if res.get('needs_filter'):
-        return jsonify({'success': True, 'resolved': False, 'needs_filter': True,
-                        'family': res['family'], 'year': res['year'],
-                        'candidates': res['candidates'], 'question': res['question']})
-    parts, total = _epc_parts_for_model(res['model_id'])
-    return jsonify({'success': True, 'resolved': True, 'family': res['family'], 'year': res['year'],
-                    'model_code': res['model_code'], 'model_id': res['model_id'],
-                    'note': res.get('note'), 'total_parts': total, 'groups': parts})
-
-
 @app.route('/api/admin/orders')
 def admin_orders():
     auth = _admin_auth(request.args.get('token', ''))
