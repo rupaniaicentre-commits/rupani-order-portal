@@ -61,24 +61,16 @@
 <!-- TESTER -->
 <div class="wrap" id="app" style="display:none">
   <div class="card">
-    <h2 style="margin-top:0">Gaadi ka number daalo</h2>
-    <label>Vehicle Number (number plate)</label>
-    <input id="reg" placeholder="MH31AB1234" autocomplete="off" style="text-transform:uppercase;font-size:18px;letter-spacing:1px"
-           onkeydown="if(event.key=='Enter')resolve()"/>
-    <div class="hint">Number daalte hi gaadi aur uske parts aa jayenge.</div>
-    <button style="margin-top:16px" onclick="resolve()">Parts dhoondo →</button>
-
-    <div id="advToggle" class="hint" style="cursor:pointer;margin-top:14px" onclick="document.getElementById('adv').style.display=(document.getElementById('adv').style.display==='none'?'block':'none')">▸ Manual test (chassis se)</div>
-    <div id="adv" style="display:none;border-top:1px solid var(--line);margin-top:10px;padding-top:10px">
-      <label>Chassis / Frame number</label>
-      <input id="chassis" placeholder="ME4JF914JLW156040" autocomplete="off"/>
-      <div class="row">
-        <div><label>Model (VAHAN)</label><input id="mm" placeholder="ACTIVA 6G"/></div>
-        <div><label>Year</label><input id="yr" placeholder="2020"/></div>
-        <div><label>Norms</label><input id="nm" placeholder="BS-VI"/></div>
-      </div>
-      <button class="ghost" style="margin-top:12px" onclick="resolveManual()">Chassis se dhoondo</button>
+    <h2 style="margin-top:0">Enter chassis number</h2>
+    <label>Chassis / Frame number *</label>
+    <input id="chassis" placeholder="ME4JF914JLW156040" autocomplete="off"/>
+    <div class="hint">VDS (letters 4–8) + year (letter 10) is read from this automatically.</div>
+    <div class="row">
+      <div><label>Model name from VAHAN (optional)</label><input id="mm" placeholder="ACTIVA 6G"/></div>
+      <div><label>Mfg year (optional)</label><input id="yr" placeholder="2020"/></div>
+      <div><label>Norms (optional)</label><input id="nm" placeholder="BS-VI"/></div>
     </div>
+    <button style="margin-top:16px" onclick="resolve()">Find parts →</button>
     <div id="out"></div>
   </div>
 </div>
@@ -102,12 +94,6 @@ async function login(){
   document.getElementById('who').textContent=r.user+' (admin)';
 }
 async function resolve(){
-  const reg=document.getElementById('reg').value.trim();
-  if(!reg){document.getElementById('out').innerHTML='<div class="err">Vehicle number daalo</div>';return;}
-  document.getElementById('out').innerHTML='<div class="hint" style="margin-top:16px">⏳ VAHAN se detail aa rahi hai…</div>';
-  render(await api('/api/admin/resolve-vin',{token:TOKEN,reg_number:reg}));
-}
-async function resolveManual(){
   const body={token:TOKEN,chassis:document.getElementById('chassis').value.trim(),
               maker_model:document.getElementById('mm').value.trim(),
               mfg_year:document.getElementById('yr').value.trim(),
@@ -115,20 +101,17 @@ async function resolveManual(){
   render(await api('/api/admin/resolve-vin',body));
 }
 async function pick(code){ render(await api('/api/admin/resolve-vin',{token:TOKEN,pick:code})); }
-function vehicleCard(v){
-  if(!v) return '';
-  const bits=[['Gaadi',v.model],['Saal',v.year],['Rang',v.colour],['Malik',v.owner],['Type',v.vehicle_class]]
-     .filter(x=>x[1]).map(x=>'<span>'+h(x[0])+': '+h(x[1])+'</span>').join('');
-  return '<div class="kv" style="margin-top:14px"><span style="background:#1f3864;color:#fff">'+h(v.rc_number||'')+'</span>'+bits+'</div>';
-}
 
 function render(r){
   const out=document.getElementById('out');
   if(!r.success){out.innerHTML='<div class="err">'+h(r.error)+'</div>';return;}
   if(r.resolved){
-    let html=vehicleCard(r.vehicle);
-    html+='<div style="margin-top:14px"><span class="ok-badge">'+h(r.total_parts)+' parts mile</span>'
-        + ' <span class="kv"><span>Model code: '+h(r.model_code)+'</span></span></div>';
+    let html='<div style="margin-top:16px"><span class="ok-badge">'+h(r.model_code)+'</span></div>';
+    html+='<div class="kv">'
+        + (r.family?'<span>Model: '+h(r.family)+'</span>':'')
+        + (r.year?'<span>Year: '+h(r.year)+'</span>':'')
+        + '<span>Total parts: '+h(r.total_parts)+'</span>'
+        + (r.model_id?'<span>ID: '+h(r.model_id)+'</span>':'') + '</div>';
     if(r.note) html+='<div class="note">ℹ️ '+h(r.note)+'</div>';
     (r.groups||[]).forEach(g=>{
       html+='<div class="grp"><h4>'+h(g.group)+'</h4><table>';
@@ -140,7 +123,7 @@ function render(r){
     return;
   }
   if(r.needs_filter){
-    let html=vehicleCard(r.vehicle)+'<div class="q"><h3>'+h(r.question.ask)+'</h3>';
+    let html='<div class="q"><h3>'+h(r.question.ask)+'</h3>';
     html+='<div class="hint" style="margin-bottom:10px">'+h(r.family)+' '+h(r.year)+' — is saal ke '+r.candidates.length+' variant hain, ek chuno:</div>';
     r.question.options.forEach(o=>{
       const code=o.codes[0];
@@ -151,7 +134,8 @@ function render(r){
     out.innerHTML=html;
     return;
   }
-  out.innerHTML=vehicleCard(r.vehicle)+'<div class="err">'+h(r.error||'Nahi mila')+'</div>';
+  out.innerHTML='<div class="err">'+h(r.error||'Nahi mila')
+      +(r.vds4?' — VDS: '+h(r.vds4):'')+(r.year?', Year: '+h(r.year):'')+'</div>';
 }
 </script>
 </body>
