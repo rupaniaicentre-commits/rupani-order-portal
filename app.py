@@ -27,13 +27,14 @@ import urllib.parse
 import threading
 
 # ── Surepass RC config ────────────────────────────────────────────
-# NOTE: Surepass domain is .io (NOT .app). Match token type to domain:
-#   Sandbox:    https://sandbox.surepass.io/api/v1/rc/rc-full
-#   Production: https://kyc-api.surepass.io/api/v1/rc/rc-full
+# Use the endpoint your token is SCOPED for. Our sandbox token has scope for
+# rc-v2 (NOT rc-full). Verified working: sandbox.surepass.app/api/v1/rc/rc-v2
+#   Sandbox:    https://sandbox.surepass.app/api/v1/rc/rc-v2
+#   Production: https://kyc-api.surepass.app/api/v1/rc/rc-v2  (when prod token active)
 SUREPASS_TOKEN   = os.environ.get('SUREPASS_TOKEN', '')
 SUREPASS_RC_URL  = os.environ.get(
     'SUREPASS_RC_URL',
-    'https://kyc-api.surepass.io/api/v1/rc/rc-full'   # production (.io)
+    'https://sandbox.surepass.app/api/v1/rc/rc-v2'   # rc-v2 = the scoped endpoint
 )
 
 # ── Green API (WhatsApp) config ───────────────────────────────────

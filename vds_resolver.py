@@ -108,8 +108,13 @@ def resolve(chassis=None, maker_model=None, mfg_year=None, norms=None):
     if not family and p.get('vds4'): family=VDS2F.get(p['vds4'])
     year=mfg_year or (year_from_vin(p['year_letter']) if p.get('year_letter') else None)
     if not family:
-        return {'ok':False,'reason':'family unknown — VAHAN maker_model ya vds_to_family entry chahiye',
-                'vds4':p.get('vds4'),'year':year}
+        vds=p.get('vds4')
+        return {'ok':False,
+                'reason':(f'Is chassis ka model abhi pata nahi (VDS "{vds}" seeded nahi hai). '
+                          'Neeche "Model" box me gaadi ka naam daalo (jaise ACTIVA 6G, DIO, CB SHINE) '
+                          'aur "Chassis se dhoondo" dabao.') if vds
+                         else 'Model naam ya chassis number daalo.',
+                'vds4':vds,'year':year}
     cands=pick_variant(family, year, norms)
     if not cands:
         return {'ok':False,'reason':'is saal ka variant nahi mila','family':family,'year':year}
