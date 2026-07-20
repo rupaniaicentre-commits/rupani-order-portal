@@ -1361,7 +1361,9 @@ def _fetch_vehicle_info(reg_number):
 
         make  = (d.get('maker_description') or '').strip()
         model = (d.get('maker_model')       or '').strip()
-        year  = str(d.get('manufacturing_date') or d.get('registration_date') or '')[:4].strip()
+        _ydate = str(d.get('manufacturing_date') or d.get('registration_date') or '')
+        _ym = re.search(r'(19|20)\d{2}', _ydate)          # pull the 4-digit year from any format
+        year = _ym.group() if _ym else _ydate[:4].strip()
         fuel  = (d.get('fuel_type')          or '').strip().title()
         reg_date = (d.get('registration_date') or '').strip()
         owner = (d.get('owner_name')         or '').strip().title()
