@@ -26,13 +26,14 @@ import urllib.request
 import urllib.parse
 import threading
 
-# ── Surepass RC V2 config ─────────────────────────────────────────
-# Sandbox:    https://sandbox.surepass.app/api/v1/rc/rc-full
-# Production: https://kyc-api.surepass.app/api/v1/rc/rc-full
+# ── Surepass RC config ────────────────────────────────────────────
+# NOTE: Surepass domain is .io (NOT .app). Match token type to domain:
+#   Sandbox:    https://sandbox.surepass.io/api/v1/rc/rc-full
+#   Production: https://kyc-api.surepass.io/api/v1/rc/rc-full
 SUREPASS_TOKEN   = os.environ.get('SUREPASS_TOKEN', '')
 SUREPASS_RC_URL  = os.environ.get(
     'SUREPASS_RC_URL',
-    'https://sandbox.surepass.app/api/v1/rc/rc-v2'   # correct endpoint
+    'https://kyc-api.surepass.io/api/v1/rc/rc-full'   # production (.io)
 )
 
 # ── Green API (WhatsApp) config ───────────────────────────────────
