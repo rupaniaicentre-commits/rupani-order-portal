@@ -87,15 +87,31 @@ def _mid(code):
             if it['code']==code: return it['model_id']
     return None
 
+def _code_year(code):
+    """Model-year from the code's year LETTER — the same Honda model-year code
+    as VIN digit-10 (N=2022, P=2023...). Authoritative for matching. The OCR image
+    year is a display/launch year that runs ~1 year behind, so we do NOT use it.
+    Scans from the end so a trailing trim letter (e.g. SCV110L I) still resolves."""
+    b=code.split('/')[0].upper()
+    for ch in reversed(b):
+        i=_Y.find(ch)
+        if i>=0: return _Y0+i
+    return None
+
 def pick_variant(family, year, norms=None):
     cands=FAM.get(family, [])
     if not cands: return []
-    dated=[c for c in cands if c.get('year')]
-    le=[c for c in dated if c['year']<=year]
-    pool=le or dated
-    if not pool: return []
-    by=max(c['year'] for c in pool)
-    same=[c for c in pool if c['year']==by]
+    yrs=[(c,_code_year(c['code'])) for c in cands]
+    yrs=[(c,y) for c,y in yrs if y]
+    if not yrs: return cands[:1]
+    exact=[c for c,y in yrs if y==year]              # code letter == vehicle model-year
+    if exact:
+        same=exact
+    else:                                            # no exact -> latest variant on/before
+        le=[(c,y) for c,y in yrs if y<=year]
+        pool=le or yrs
+        by=max(y for c,y in pool)
+        same=[c for c,y in pool if y==by]
     if len(same)>1 and norms:
         n=_norm(norms)
         nn=[c for c in same if _norm(c.get('norms')) and _norm(c.get('norms'))[-2:] in n]
@@ -118,6 +134,18 @@ def resolve(chassis=None, maker_model=None, mfg_year=None, norms=None):
     cands=pick_variant(family, year, norms)
     if not cands:
         return {'ok':False,'reason':'is saal ka variant nahi mila','family':family,'year':year}
+    # Auto-narrow using hints VAHAN already puts in maker_model (DISK/DRUM/6G/ALLOY...)
+    if len(cands)>1 and maker_model:
+        mm=maker_model.upper()
+        want={}
+        if 'DISK' in mm or 'DISC' in mm: want['brake']='Disc'
+        elif 'DRUM' in mm:               want['brake']='Drum'
+        if any(g in mm for g in ('6G','BS6','BS-VI','BSVI','BS VI')): want['fuel']='FI'
+        elif any(g in mm for g in ('5G','4G','3G')):                  want['fuel']='Carb'
+        if 'ALLOY' in mm: want['wheel']='Alloy'
+        for feat,val in want.items():
+            f=[c for c in cands if FEAT.get(c['code'],{}).get(feat)==val]
+            if f and len(f)<len(cands): cands=f
     if len(cands)==1:
         c=cands[0]
         return {'ok':True,'family':family,'year':year,'model_code':c['code'],
