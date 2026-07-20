@@ -461,21 +461,49 @@ def admin_resolve_vin():
         return jsonify({'success': True, 'resolved': True, 'model_code': pick,
                         'model_id': model_id, 'total_parts': total, 'groups': parts})
 
-    res = R.resolve(chassis=(d.get('chassis') or '').strip() or None,
-                    maker_model=(d.get('maker_model') or '').strip() or None,
-                    mfg_year=(int(d['mfg_year']) if str(d.get('mfg_year') or '').strip().isdigit() else None),
-                    norms=(d.get('norms') or '').strip() or None)
+    # Primary input: vehicle (registration) number -> Surepass RC -> chassis + model
+    reg = (d.get('reg_number') or '').strip().upper().replace(' ', '')
+    vehicle = None
+    chassis = (d.get('chassis') or '').strip() or None
+    maker_model = (d.get('maker_model') or '').strip() or None
+    mfg_year = int(d['mfg_year']) if str(d.get('mfg_year') or '').strip().isdigit() else None
+    norms = (d.get('norms') or '').strip() or None
+    if reg:
+        info = _fetch_vehicle_info(reg)
+        if not info:
+            return jsonify({'success': True, 'resolved': False,
+                            'error': 'Vehicle number nahi mila (VAHAN se detail nahi aayi). '
+                                     'Number sahi hai? Ya API token check karo.'})
+        vehicle = {'rc_number': info.get('rc_number'), 'owner': info.get('owner_name'),
+                   'model': info.get('maker_model'), 'year': info.get('year'),
+                   'colour': info.get('colour'), 'fuel': info.get('fuel_type'),
+                   'vehicle_class': info.get('vehicle_class')}
+        chassis = info.get('chassis') or chassis
+        maker_model = info.get('maker_model') or maker_model
+        if not mfg_year and str(info.get('year') or '').isdigit():
+            mfg_year = int(info['year'])
+        norms = info.get('norms_type') or norms
+        if not maker_model and not chassis:
+            return jsonify({'success': True, 'resolved': False, 'vehicle': vehicle,
+                            'error': 'VAHAN se is gaadi ka model/chassis nahi mila. '
+                                     'Number sahi hai kya? (ya yeh Honda nahi hai)'})
+        make = (info.get('make') or '').upper()
+        if make and 'HONDA' not in make:
+            return jsonify({'success': True, 'resolved': False, 'vehicle': vehicle,
+                            'error': f'Yeh Honda gaadi nahi hai ({info.get("make")}). Abhi sirf Honda ke parts hain.'})
+
+    res = R.resolve(chassis=chassis, maker_model=maker_model, mfg_year=mfg_year, norms=norms)
     if not res.get('ok'):
         return jsonify({'success': True, 'resolved': False, 'error': res.get('reason'),
-                        'vds4': res.get('vds4'), 'year': res.get('year')})
+                        'vds4': res.get('vds4'), 'year': res.get('year'), 'vehicle': vehicle})
     if res.get('needs_filter'):
         return jsonify({'success': True, 'resolved': False, 'needs_filter': True,
                         'family': res['family'], 'year': res['year'],
-                        'candidates': res['candidates'], 'question': res['question']})
+                        'candidates': res['candidates'], 'question': res['question'], 'vehicle': vehicle})
     parts, total = _epc_parts_for_model(res['model_id'])
     return jsonify({'success': True, 'resolved': True, 'family': res['family'], 'year': res['year'],
                     'model_code': res['model_code'], 'model_id': res['model_id'],
-                    'note': res.get('note'), 'total_parts': total, 'groups': parts})
+                    'note': res.get('note'), 'total_parts': total, 'groups': parts, 'vehicle': vehicle})
 
 
 @app.route('/api/admin/orders')
@@ -1298,6 +1326,11 @@ def _fetch_vehicle_info(reg_number):
             'colour':            colour,
             'vehicle_class':     veh_class,
             'rc_number':         reg_number,
+            # extra fields used by the chassis->model resolver
+            'chassis':           (d.get('vehicle_chasi_number') or '').strip(),
+            'maker_model':       model,
+            'cubic_capacity':    (d.get('cubic_capacity') or '').strip(),
+            'norms_type':        (d.get('norms_type') or '').strip(),
         }
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8', errors='replace')
