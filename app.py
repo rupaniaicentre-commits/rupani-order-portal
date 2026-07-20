@@ -449,6 +449,10 @@ def _surepass_diag(reg_number):
     d = {'token_set': bool(SUREPASS_TOKEN),
          'url': SUREPASS_RC_URL,
          'url_type': 'PRODUCTION' if 'kyc-api' in SUREPASS_RC_URL else 'SANDBOX'}
+    tok = SUREPASS_TOKEN or ''
+    d['token_len'] = len(tok)
+    d['token_preview'] = (tok[:10] + '…' + tok[-6:]) if len(tok) > 20 else '(too short / empty)'
+    d['token_has_spaces'] = (tok != tok.strip()) or (' ' in tok) or ('"' in tok) or ("'" in tok)
     if not SUREPASS_TOKEN:
         d['reason'] = 'SUREPASS_TOKEN Railway env me set nahi hai'
         return d

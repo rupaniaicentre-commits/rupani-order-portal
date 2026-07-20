@@ -155,7 +155,9 @@ function render(r){
   if(r.diag){
     const d=r.diag; let rows='';
     const add=(k,v)=>{if(v!==undefined&&v!==null&&v!=='')rows+='<tr><td class="pn">'+h(k)+'</td><td>'+h(typeof v==='boolean'?(v?'Yes':'No'):v)+'</td></tr>';};
-    add('API token set', d.token_set); add('URL type', d.url_type);
+    add('API token set', d.token_set); add('URL type', d.url_type); add('URL', d.url);
+    add('Token length', d.token_len); add('Token preview', d.token_preview);
+    add('Token me spaces/quotes?', d.token_has_spaces);
     add('Reason', d.reason); add('HTTP status', d.status_code); add('API success', d.success);
     add('API message', d.message); add('HTTP error', d.http_error); add('Error', d.error);
     add('maker_model', d.maker_model); add('chassis mila', d.has_chassis); add('body', d.body);
