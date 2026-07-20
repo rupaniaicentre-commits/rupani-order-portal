@@ -36,9 +36,23 @@ def family_from_makermodel(mm):
     if not mm: return None
     if mm.upper() in MM2F: return MM2F[mm.upper()]
     t=_norm(mm)
-    for k,v in MM2F.items():
-        if _norm(k) and _norm(k) in t: return v
+    # match the LONGEST / most-specific name first, so "ACTIVA125..." beats "ACTIVA"
+    for k in sorted(MM2F, key=lambda k: -len(_norm(k))):
+        if _norm(k) and _norm(k) in t: return MM2F[k]
     return None
+
+# displacement-sibling families: (cc-token in name) -> correct family by engine cc
+_CC_SIBLINGS = [  # (small_family, big_family, cc_threshold)
+    ('Activa', 'Activa125', 120), ('Dio', 'Dio 125', 120),
+]
+def _correct_displacement(family, cc):
+    """VAHAN cubic_capacity is authoritative for 110-vs-125 style confusions."""
+    try: cc=float(str(cc).strip())
+    except (TypeError, ValueError): return family
+    for small, big, thr in _CC_SIBLINGS:
+        if cc>=thr and family==small and big in FAM: return big     # 125cc but got 110-family
+        if cc<thr  and family==big   and small in FAM: return small # 110cc but got 125-family
+    return family
 
 # ---------- HINGLISH distinguishing questions ----------
 # feature -> (Hinglish question, {value: Hinglish option label})
@@ -118,10 +132,11 @@ def pick_variant(family, year, norms=None):
         if nn: same=nn
     return same
 
-def resolve(chassis=None, maker_model=None, mfg_year=None, norms=None):
+def resolve(chassis=None, maker_model=None, mfg_year=None, norms=None, cubic_capacity=None):
     p=parse_chassis(chassis) if chassis else {}
     family=family_from_makermodel(maker_model) if maker_model else None
     if not family and p.get('vds4'): family=VDS2F.get(p['vds4'])
+    if family and cubic_capacity: family=_correct_displacement(family, cubic_capacity)
     year=mfg_year or (year_from_vin(p['year_letter']) if p.get('year_letter') else None)
     if not family:
         vds=p.get('vds4')

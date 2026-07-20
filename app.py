@@ -519,6 +519,7 @@ def admin_resolve_vin():
     maker_model = (d.get('maker_model') or '').strip() or None
     mfg_year = int(d['mfg_year']) if str(d.get('mfg_year') or '').strip().isdigit() else None
     norms = (d.get('norms') or '').strip() or None
+    cc = (d.get('cubic_capacity') or '').strip() or None
     if reg:
         info = _fetch_vehicle_info(reg)
         if not info:
@@ -535,6 +536,7 @@ def admin_resolve_vin():
         if not mfg_year and str(info.get('year') or '').isdigit():
             mfg_year = int(info['year'])
         norms = info.get('norms_type') or norms
+        cc = info.get('cubic_capacity') or cc
         if not maker_model and not chassis:
             return jsonify({'success': True, 'resolved': False, 'vehicle': vehicle,
                             'error': 'VAHAN se is gaadi ka model/chassis nahi mila. '
@@ -544,7 +546,7 @@ def admin_resolve_vin():
             return jsonify({'success': True, 'resolved': False, 'vehicle': vehicle,
                             'error': f'Yeh Honda gaadi nahi hai ({info.get("make")}). Abhi sirf Honda ke parts hain.'})
 
-    res = R.resolve(chassis=chassis, maker_model=maker_model, mfg_year=mfg_year, norms=norms)
+    res = R.resolve(chassis=chassis, maker_model=maker_model, mfg_year=mfg_year, norms=norms, cubic_capacity=cc)
     if not res.get('ok'):
         return jsonify({'success': True, 'resolved': False, 'error': res.get('reason'),
                         'vds4': res.get('vds4'), 'year': res.get('year'), 'vehicle': vehicle})
