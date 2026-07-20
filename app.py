@@ -453,6 +453,19 @@ def _surepass_diag(reg_number):
     d['token_len'] = len(tok)
     d['token_preview'] = (tok[:10] + '…' + tok[-6:]) if len(tok) > 20 else '(too short / empty)'
     d['token_has_spaces'] = (tok != tok.strip()) or (' ' in tok) or ('"' in tok) or ("'" in tok)
+    # decode the JWT payload (not the secret — just the claims) to reveal sandbox vs production
+    try:
+        import base64 as _b64
+        seg = tok.split('.')
+        if len(seg) >= 2:
+            pay = json.loads(_b64.urlsafe_b64decode(seg[1] + '=' * (-len(seg[1]) % 4)))
+            d['token_claims'] = {k: pay[k] for k in pay if k in
+                                 ('env', 'environment', 'mode', 'scope', 'type', 'token_type',
+                                  'sandbox', 'is_sandbox', 'client_id', 'user_id', 'aud', 'iss')}
+            blob = json.dumps(pay).lower()
+            d['looks_sandbox'] = 'sandbox' in blob
+    except Exception as _e:
+        d['token_decode_err'] = str(_e)[:80]
     if not SUREPASS_TOKEN:
         d['reason'] = 'SUREPASS_TOKEN Railway env me set nahi hai'
         return d

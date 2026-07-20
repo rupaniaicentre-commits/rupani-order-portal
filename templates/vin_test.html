@@ -158,6 +158,8 @@ function render(r){
     add('API token set', d.token_set); add('URL type', d.url_type); add('URL', d.url);
     add('Token length', d.token_len); add('Token preview', d.token_preview);
     add('Token me spaces/quotes?', d.token_has_spaces);
+    add('Looks like SANDBOX token?', d.looks_sandbox);
+    if(d.token_claims) add('Token claims', JSON.stringify(d.token_claims));
     add('Reason', d.reason); add('HTTP status', d.status_code); add('API success', d.success);
     add('API message', d.message); add('HTTP error', d.http_error); add('Error', d.error);
     add('maker_model', d.maker_model); add('chassis mila', d.has_chassis); add('body', d.body);
