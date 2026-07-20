@@ -443,6 +443,38 @@ def _epc_parts_for_model(model_id, limit=400):
     return [{'group': k, 'parts': v} for k, v in groups.items()], total
 
 
+def _surepass_diag(reg_number):
+    """Admin-only diagnostic: shows exactly why an RC (VAHAN) lookup failed."""
+    d = {'token_set': bool(SUREPASS_TOKEN),
+         'url': SUREPASS_RC_URL,
+         'url_type': 'PRODUCTION' if 'kyc-api' in SUREPASS_RC_URL else 'SANDBOX'}
+    if not SUREPASS_TOKEN:
+        d['reason'] = 'SUREPASS_TOKEN Railway env me set nahi hai'
+        return d
+    try:
+        payload = json.dumps({'id_number': reg_number}).encode('utf-8')
+        req = urllib.request.Request(
+            SUREPASS_RC_URL, data=payload, method='POST',
+            headers={'Authorization': f'Bearer {SUREPASS_TOKEN}',
+                     'Content-Type': 'application/json', 'Accept': 'application/json',
+                     'User-Agent': 'RupaniOrderPortal/1.0'})
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            raw = json.loads(resp.read().decode())
+        d['status_code'] = raw.get('status_code')
+        d['success'] = raw.get('success')
+        d['message'] = raw.get('message')
+        data = raw.get('data') or {}
+        d['maker_model'] = data.get('maker_model')
+        d['has_chassis'] = bool(data.get('vehicle_chasi_number'))
+    except urllib.error.HTTPError as e:
+        d['http_error'] = e.code
+        try: d['body'] = e.read().decode('utf-8', 'replace')[:300]
+        except Exception: pass
+    except Exception as e:
+        d['error'] = str(e)[:200]
+    return d
+
+
 @app.route('/api/admin/resolve-vin', methods=['POST'])
 def admin_resolve_vin():
     auth = _admin_auth((request.json or {}).get('token', ''))
@@ -473,7 +505,8 @@ def admin_resolve_vin():
         if not info:
             return jsonify({'success': True, 'resolved': False,
                             'error': 'Vehicle number nahi mila (VAHAN se detail nahi aayi). '
-                                     'Number sahi hai? Ya API token check karo.'})
+                                     'Number sahi hai? Ya API token check karo.',
+                            'diag': _surepass_diag(reg)})
         vehicle = {'rc_number': info.get('rc_number'), 'owner': info.get('owner_name'),
                    'model': info.get('maker_model'), 'year': info.get('year'),
                    'colour': info.get('colour'), 'fuel': info.get('fuel_type'),
