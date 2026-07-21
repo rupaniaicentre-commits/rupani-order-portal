@@ -119,7 +119,7 @@ async function resolveManual(){
 async function pick(code){ render(await api('/api/admin/resolve-vin',{token:TOKEN,pick:code})); }
 function vehicleCard(v){
   if(!v) return '';
-  const bits=[['Gaadi',v.model],['Saal',v.year],['Rang',v.colour],['Malik',v.owner],['Type',v.vehicle_class]]
+  const bits=[['Gaadi',v.model],['Saal',v.year],['Rang',v.colour],['Chassis',v.chassis],['Malik',v.owner],['Type',v.vehicle_class]]
      .filter(x=>x[1]).map(x=>'<span>'+h(x[0])+': '+h(x[1])+'</span>').join('');
   return '<div class="kv" style="margin-top:14px"><span style="background:#1f3864;color:#fff">'+h(v.rc_number||'')+'</span>'+bits+'</div>';
 }

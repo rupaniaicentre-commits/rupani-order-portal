@@ -530,7 +530,8 @@ def admin_resolve_vin():
         vehicle = {'rc_number': info.get('rc_number'), 'owner': info.get('owner_name'),
                    'model': info.get('maker_model'), 'year': info.get('year'),
                    'colour': info.get('colour'), 'fuel': info.get('fuel_type'),
-                   'vehicle_class': info.get('vehicle_class')}
+                   'vehicle_class': info.get('vehicle_class'),
+                   'chassis': info.get('chassis')}
         chassis = info.get('chassis') or chassis
         maker_model = info.get('maker_model') or maker_model
         if not mfg_year and str(info.get('year') or '').isdigit():
