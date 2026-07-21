@@ -84,13 +84,16 @@ QUESTIONS={
            {'Alloy':'Alloy wheel', 'Spoke':'Spoke / teeli waala'}),
  'cbs'  : ("CBS hai kya? (dono brake ek saath lagta hai)",
            {'Yes':'Haan, CBS hai', 'No':'Nahi'}),
+ 'abs'  : ("ABS hai kya?",
+           {'ABS':'Haan, ABS hai', 'No':'Nahi'}),
 }
 # ask features in this order (most obvious to a shop first)
-FEATURE_ORDER=['brake','wheel','fuel','start','cbs']
+FEATURE_ORDER=['brake','abs','wheel','fuel','start','cbs']
 
 def _feat(code):
     f=dict(FEAT.get(code,{}))
     f.setdefault('cbs','No')            # absence of CBS illustration => No
+    f.setdefault('abs','No')            # absence of ABS illustration => No
     return f
 
 def build_filter(codes):

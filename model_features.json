@@ -455,62 +455,84 @@
 },
 "CB500XAM": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CRF1000DH": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1000DJ": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1000DK": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100AL2L": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100AL2M": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100AL2N": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100DL2L": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100DL2M": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CRF1100DL2N": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc",
+"abs": "ABS",
 "wheel": "Spoke"
 },
 "CBF160MAJ": {
 "fuel": "Carb",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160MAK": {
 "fuel": "Carb",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160MG": {
 "fuel": "Carb",
@@ -655,7 +677,7 @@
 },
 "CBF150MD": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF110A": {
@@ -747,36 +769,40 @@
 "CBF150MK": {
 "fuel": "Carb",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160AL": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160AR": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160AS": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160F": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF160G": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF160H": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF150MB": {
@@ -792,77 +818,109 @@
 "CBF125ZT": {
 "fuel": "FI",
 "start": "Silent",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB190XN": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB190XR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB190XS": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc"
 },
 "MC300AN": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "MC300AP": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "MC300AS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF300NAK": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF300NAN": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF300NAR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CSR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CSS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CST": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350CT": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB650RAM": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB650RAN": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF1259": {
 "fuel": "FI",
@@ -891,26 +949,31 @@
 },
 "CBR150RC": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc"
 },
 "CBR150RG": {
 "fuel": "FI",
+"start": "Self",
 "brake": "Disc"
 },
 "CBR250RAB": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR250RAC": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR250RAD": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR250RAG": {
 "fuel": "FI",
@@ -920,12 +983,14 @@
 "CBR250RAH": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR250RAJ": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR250RB": {
 "fuel": "FI",
@@ -960,27 +1025,32 @@
 "CBR650FAG": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR650FAJ": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR650RAL": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR650RAM": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBR650RAN": {
 "fuel": "FI",
 "start": "Self",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB110C2F": {
 "fuel": "Carb",
@@ -989,7 +1059,7 @@
 },
 "CB110C2G": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110C2H": {
@@ -1004,17 +1074,17 @@
 },
 "CB110C2MG": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110C2MH": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110C2MK": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110C3MM": {
@@ -1024,7 +1094,7 @@
 },
 "CB110CMDK": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110CMDM": {
@@ -1056,43 +1126,43 @@
 },
 "CB110CG": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum",
 "wheel": "Spoke"
 },
 "CB110CME": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110CMF": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110CMG": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110CMH": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110AMF": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110AMH": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110BK": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110D": {
@@ -1109,79 +1179,106 @@
 },
 "CB110J": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum",
 "wheel": "Spoke"
 },
 "CB110MD": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB110ME": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CB350DM": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350DP": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350DS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Drum"
 },
 "CB350DSM": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350DSN": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350DSP/DSR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350DSS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Drum"
 },
 "CB350RSM": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350RSP/RSR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CB350RSS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Drum"
 },
 "CBF190MAL": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF190MAM": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF190MAN": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF190MAR": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF190MAS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF110BEN": {
 "fuel": "FI",
@@ -1200,7 +1297,7 @@
 },
 "CBF110BK": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CBF110BL": {
@@ -1215,17 +1312,17 @@
 },
 "CBF110G": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CBF110H": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CBF110J": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CBF110SBEN": {
@@ -1245,7 +1342,7 @@
 },
 "CBF110SBK": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF110SBL": {
@@ -1260,32 +1357,32 @@
 },
 "CBF110SG": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF110SH": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF110SJ": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CD100RNP": {
 "fuel": "FI",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CD100RNS": {
 "fuel": "FI",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CD100RNT": {
 "fuel": "FI",
-"start": "Kick",
+"start": "Self",
 "brake": "Drum"
 },
 "CBF125MEFS": {
@@ -1335,31 +1432,36 @@
 },
 "CBF160FSR": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160FSS": {
 "fuel": "FI",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160FSJ": {
 "fuel": "Carb",
-"start": "Kick",
+"start": "Self",
 "brake": "Disc"
 },
 "CBF160FSK": {
 "fuel": "Carb",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160FSM": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"start": "Self",
+"brake": "Disc",
+"abs": "ABS"
 },
 "CBF160FSN": {
 "fuel": "FI",
-"start": "Kick",
-"brake": "Disc"
+"brake": "Disc",
+"abs": "ABS"
 }
 }
