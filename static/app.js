@@ -224,11 +224,6 @@ const App = (() => {
           <div class="quick-card-label">My Basket</div>
           <div class="quick-card-sub">${basketCount()} item(s) added</div>
         </div>
-        <div class="quick-card" onclick="App.openVehicleLookup()">
-          <div class="quick-card-icon">🔍</div>
-          <div class="quick-card-label">Find by Vehicle No.</div>
-          <div class="quick-card-sub">Enter RC number to find parts</div>
-        </div>
       </div>
 
       <div class="section-title">Browse by Category</div>
