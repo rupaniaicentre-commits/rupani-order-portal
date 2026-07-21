@@ -18,6 +18,22 @@ MM2F  = json.load(open(f'{BASE}/makermodel_to_family.json'))
 FEAT  = json.load(open(f'{BASE}/model_features.json'))
 try:    VDS2F = json.load(open(f'{BASE}/vds_to_family.json'))
 except FileNotFoundError: VDS2F = {}
+# EXACT overrides: chassis VDS5+year-letter (e.g. "JK361T") -> exact code.
+# Seeded from Honda-portal cross-checks; highest priority, always trusted.
+try:    VDS_OVERRIDE = json.load(open(f'{BASE}/vds_overrides.json'))
+except FileNotFoundError: VDS_OVERRIDE = {}
+
+def _ovkey_from_chassis(ch):
+    ch=(ch or '').strip().upper()
+    return (ch[3:8] + ch[9]) if len(ch) > 9 else None   # VDS5 + year-letter
+
+def learn_vds_code(chassis, code):
+    """Record a Honda-confirmed exact mapping (chassis VDS+year -> code)."""
+    k=_ovkey_from_chassis(chassis)
+    if k and code and VDS_OVERRIDE.get(k)!=code:
+        VDS_OVERRIDE[k]=code
+        json.dump(VDS_OVERRIDE, open(f'{BASE}/vds_overrides.json','w'), indent=1)
+    return k
 
 # ---------- chassis parsing ----------
 _Y='123456789ABCDEFGHJKLMNPRSTVWXY'; _Y0=2001
@@ -134,6 +150,14 @@ def pick_variant(family, year, norms=None):
 
 def resolve(chassis=None, maker_model=None, mfg_year=None, norms=None, cubic_capacity=None):
     p=parse_chassis(chassis) if chassis else {}
+    # 1) EXACT override (Honda-confirmed) — highest priority
+    ovk=_ovkey_from_chassis(chassis)
+    if ovk and ovk in VDS_OVERRIDE:
+        code=VDS_OVERRIDE[ovk]
+        return {'ok':True,'model_code':code,'model_id':_mid(code),
+                'year':(year_from_vin(p['year_letter']) if p.get('year_letter') else mfg_year),
+                'family':family_from_makermodel(maker_model) if maker_model else None,
+                'needs_filter':False,'source':'exact'}
     family=family_from_makermodel(maker_model) if maker_model else None
     if not family and p.get('vds4'): family=VDS2F.get(p['vds4'])
     if family and cubic_capacity: family=_correct_displacement(family, cubic_capacity)
