@@ -48,6 +48,32 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0   # disable static file caching
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = BASE_DIR  # data files now live alongside app.py
 
+# ─────────────────────── SECURITY HARDENING ───────────────────────
+@app.after_request
+def _security_headers(resp):
+    resp.headers['X-Frame-Options'] = 'DENY'                 # no embedding our app
+    resp.headers['X-Content-Type-Options'] = 'nosniff'
+    resp.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    resp.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    resp.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
+    return resp
+
+def _client_ip():
+    xff = request.headers.get('X-Forwarded-For', '')
+    return (xff.split(',')[0].strip() if xff else request.remote_addr) or 'unknown'
+
+_RL = {}   # (bucket, key) -> [timestamps]   (per-worker; good enough to blunt abuse/scraping)
+def rate_limit(bucket, max_n, window_s):
+    """Return True if the caller is over the limit for this bucket."""
+    now = time.time()
+    k = (bucket, _client_ip())
+    hits = [t for t in _RL.get(k, []) if now - t < window_s]
+    hits.append(now)
+    _RL[k] = hits[-max_n * 2:]                # cap memory
+    if len(_RL) > 5000:                       # crude global cap
+        for kk in list(_RL)[:1000]: _RL.pop(kk, None)
+    return len(hits) > max_n
+
 _products_cache = None
 _catalog_mtime  = None  # tracks product_catalog.xlsx modification time
 
@@ -400,6 +426,8 @@ def dashboard():
 
 @app.route('/api/admin/login', methods=['POST'])
 def admin_login():
+    if rate_limit('admin_login', 8, 300):          # 8 tries / 5 min / IP
+        return jsonify({'success': False, 'error': 'Bahut zyada koshish. 5 min baad try karo.'}), 429
     d = request.json or {}
     u = (d.get('username') or '').strip().upper()
     p = (d.get('password') or '')
@@ -499,6 +527,8 @@ def admin_resolve_vin():
     auth = _admin_auth((request.json or {}).get('token', ''))
     if not auth or auth.get('role') != 'admin':          # admin-only (HARSH)
         return jsonify({'success': False, 'error': 'unauthorized — admin only'}), 401
+    if rate_limit('vahan', 60, 3600):                    # 60 VAHAN lookups / hr / IP (credit guard)
+        return jsonify({'success': False, 'error': 'VAHAN lookup limit (60/hour) reached. Thodi der baad.'}), 429
     d = request.json or {}
     try:
         import vds_resolver as R
@@ -887,6 +917,8 @@ def reload_catalog():
 
 @app.route('/api/checkout', methods=['POST'])
 def checkout():
+    if rate_limit('checkout', 15, 300):            # 15 orders / 5 min / IP (anti-spam)
+        return jsonify({'success': False, 'error': 'Bahut zyada orders. Thodi der baad try karo.'}), 429
     data = request.json or {}
     firm_name = (data.get('firm_name') or '').strip()
     contact_number = (data.get('contact_number') or '').strip()
