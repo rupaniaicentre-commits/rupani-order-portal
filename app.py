@@ -350,9 +350,38 @@ def _load_catalog():
         vv = json.load(open(os.path.join(BASE_DIR, 'vehicle_variants.json')))
     except Exception as e:
         print(f"[catalog] {e}", flush=True); _hc_catalog = {'scooters': [], 'motorcycles': []}; return _hc_catalog
+    # retailer-friendly display name + search aliases (so 'shine sp' finds SP125 etc.)
+    NAMES = {
+        'CB Shine/ Shine 125': ('Shine', 'cb shine shine125 shine 125'),
+        'CB Shine SP': ('Shine SP', 'shine sp'),
+        'SP125': ('SP 125 (Shine SP)', 'sp125 sp 125 shine sp'),
+        'SP160': ('SP 160', 'sp160 sp 160'),
+        'Shine 100': ('Shine 100', 'shine100'),
+        'Shine100 DX': ('Shine 100 DX', 'shine 100 dx'),
+        'Activa125': ('Activa 125', 'activa125 activa 125'),
+        'CB Unicorn': ('Unicorn', 'cb unicorn unicorn 150'),
+        'CB Unicorn 160': ('Unicorn 160', 'unicorn160'),
+        'CB Unicorn Dazzler': ('Unicorn Dazzler', 'dazzler'),
+        'CB Hornet 160R': ('Hornet 160R', 'hornet 160'),
+        'CB125 Hornet': ('Hornet 125', 'hornet 125'),
+        'Hornet 2.0': ('Hornet 2.0', 'hornet 2'),
+        'CBF Stunner': ('Stunner', 'cbf stunner'),
+        'CD 110 Dream': ('Dream 110', 'cd110 cd 110 dream'),
+        'HNESS': ("H'ness CB350", 'hness highness cb350'),
+        'CB350': ('CB350 / CB350RS', 'cb350'),
+        '500X': ('CB500X', 'cb500x 500x'),
+        'XBLADE': ('X-Blade', 'xblade x blade'),
+        'GRAZIA': ('Grazia', 'grazia'),
+        'CLIQ': ('Cliq', 'cliq'),
+        'Dio 125': ('Dio 125', 'dio125'),
+        'CB200X': ('CB200X', 'cb200x'), 'CB300F': ('CB300F', 'cb300f'),
+        'CB300R': ('CB300R', 'cb300r'), 'CB650R': ('CB650R', 'cb650r'),
+    }
     scoot, moto = [], []
     for fam, obj in vv.items():
-        entry = {'family': fam, 'name': obj.get('name', fam), 'groups': obj.get('groups', [])}
+        name, alias = NAMES.get(fam, (obj.get('name', fam), ''))
+        entry = {'family': fam, 'name': name, 'groups': obj.get('groups', []),
+                 'q': (name + ' ' + fam + ' ' + alias).lower()}
         (scoot if fam in _SCOOTER_FAMS else moto).append(entry)
     scoot.sort(key=lambda x: x['name']); moto.sort(key=lambda x: x['name'])
     _hc_catalog = {'scooters': scoot, 'motorcycles': moto}

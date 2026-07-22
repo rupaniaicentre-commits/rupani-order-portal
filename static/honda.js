@@ -135,18 +135,29 @@ const H = (() => {
         ${nCommon?`<div class="vcard" onclick="H.openVehicle('ALL MODELS')">
           <div class="vic">🔧</div><b>Common to all</b><small>${nCommon} universal part${nCommon!==1?'s':''}</small></div>`:''}
       </div>`;
-    // New catalogue browse: Scooters / Motorcycles → family
+    // New catalogue browse: model search + Scooters / Motorcycles → family
     if(CATALOG){
-      for(const [cat,label,icon] of [['scooters','Scooters','🛵'],['motorcycles','Motorcycles','🏍️']]){
-        const fams=CATALOG[cat]||[];
-        html+=`<div class="sectitle">${icon} ${label}</div><div class="vgrid" style="margin-bottom:20px">`+
-          fams.map(f=>`<div class="vcard" onclick="H.openFamily('${esc(f.family)}')">
-            <div class="vic">${icon}</div><b>${esc(f.name)}</b>
-            <small>${(f.groups||[]).length} model${(f.groups||[]).length!==1?'s':''}</small></div>`).join('')+`</div>`;
-      }
+      html+=`<div class="searchbox" style="margin:4px 0 18px"><span class="si">🔍</span>
+        <input id="modelSearch" placeholder="Gaadi dhoondo — Activa, Shine SP, SP125, Dio…" oninput="H.filterModels()"></div>
+        <div id="modelResults">${catalogFamiliesHTML('')}</div>`;
     }
     $('main').innerHTML=html;
   }
+  function catalogFamiliesHTML(q){
+    q=(q||'').toLowerCase().trim();
+    let html='';
+    for(const [cat,label,icon] of [['scooters','Scooters','🛵'],['motorcycles','Motorcycles','🏍️']]){
+      let fams=(CATALOG[cat]||[]);
+      if(q) fams=fams.filter(f=>(f.q||f.name.toLowerCase()).includes(q));
+      if(!fams.length) continue;
+      html+=`<div class="sectitle">${icon} ${label}</div><div class="vgrid" style="margin-bottom:20px">`+
+        fams.map(f=>`<div class="vcard" onclick="H.openFamily('${esc(f.family)}')">
+          <div class="vic">${icon}</div><b>${esc(f.name)}</b>
+          <small>${(f.groups||[]).length} model${(f.groups||[]).length!==1?'s':''}</small></div>`).join('')+`</div>`;
+    }
+    return html || '<div class="empty">Koi gaadi nahi mili — dusra naam try karo</div>';
+  }
+  function filterModels(){ const q=($('modelSearch').value||''); $('modelResults').innerHTML=catalogFamiliesHTML(q); }
 
   // family -> its generation groups (Activa 6G, 5G ...)
   function findFamily(fam){
@@ -163,50 +174,49 @@ const H = (() => {
     $('main').innerHTML=html;
   }
 
-  // generation group -> parts (procured first, then "search all")
+  // generation group -> ALL parts in ONE list (procured ✓ first, rest below, no tick)
+  let grpState=null;   // {key, list, shown}
   async function renderGroup(arg){
     const [fam,idx]=arg.split('|'); const f=findFamily(fam);
     const g=f&&(f.groups||[])[+idx]; if(!g){ home(); return; }
     const key=fam+'|'+idx;
-    $('main').innerHTML=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
-      <span style="cursor:pointer" onclick="H.openFamily('${esc(fam)}')">${esc(f.name)}</span> › <b>${esc(g.gen)}</b></div>
-      <div class="empty">Parts la rahe hain…</div>`;
+    const crumb=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
+      <span style="cursor:pointer" onclick="H.openFamily('${esc(fam)}')">${esc(f.name)}</span> › <b>${esc(g.gen)}</b></div>`;
+    $('main').innerHTML=crumb+'<div class="empty">Parts la rahe hain…</div>';
     if(!groupCache[key]){
       try{
         const d=await (await fetch('/api/honda/group-parts?ids='+encodeURIComponent((g.model_ids||[]).join(',')))).json();
-        const all=(d.parts||[]).map(adaptPart);
+        const all=(d.parts||[]).map(adaptPart);   // backend already sorts procured-first
         all.forEach(p=>{ if(!partIndex[p.part_no]) partIndex[p.part_no]=p; });
-        groupCache[key]={all, regular:all.filter(p=>p._regular), name:g.gen};
-      }catch(e){ $('main').innerHTML='<div class="empty">Parts load nahi hue. Refresh karo.</div>'; return; }
+        groupCache[key]={all, nreg:all.filter(p=>p._regular).length, name:g.gen};
+      }catch(e){ $('main').innerHTML=crumb+'<div class="empty">Parts load nahi hue. Refresh karo.</div>'; return; }
     }
     const gc=groupCache[key];
-    $('main').innerHTML=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
-      <span style="cursor:pointer" onclick="H.openFamily('${esc(fam)}')">${esc(f.name)}</span> › <b>${esc(g.gen)}</b></div>
-      <div class="sectitle">${esc(gc.name)} — hamare paas ${gc.regular.length} parts</div>
-      <div class="plist" id="grpRegular">${gc.regular.length?gc.regular.map(p=>rowHTML(p)).join(''):'<div class="empty">Is model ke liye regular part nahi — neeche saare Honda parts search karo</div>'}</div>
-      <div style="text-align:center;margin:18px 0">
-        <button class="padd" style="padding:11px 20px;font-size:14px" onclick="H.showAllGroup('${esc(key)}')">🔍 Saare Honda parts dekho (${gc.all.length})</button>
-      </div>
-      <div id="grpAll"></div>`;
-  }
-  const GRP_CAP=80;
-  function showAllGroup(key){
-    const gc=groupCache[key]; if(!gc) return;
-    const first=gc.all.slice(0,GRP_CAP);
-    $('grpAll').innerHTML=`<div class="sectitle">Saare parts (${gc.all.length}) — search karo</div>
+    $('main').innerHTML=crumb+`
+      <div class="sectitle">${esc(gc.name)} — ${gc.all.length} parts <span style="color:var(--success)">(${gc.nreg} humare paas ✓)</span></div>
       <div class="searchbox" style="margin-bottom:12px"><span class="si">🔍</span>
-      <input id="grpSearch" placeholder="Part number ya naam se dhoondo…" oninput="H.filterGroup('${esc(key)}')"></div>
-      <div class="plist" id="grpAllList">${first.map(p=>rowHTML(p)).join('')}</div>
-      ${gc.all.length>GRP_CAP?`<div class="empty" id="grpMore">Aur ${gc.all.length-GRP_CAP} parts — upar search karo</div>`:''}`;
-    $('grpAll').scrollIntoView({behavior:'smooth'});
+        <input id="grpSearch" placeholder="Part number ya naam se dhoondo…" oninput="H.filterGroup()"></div>
+      <div class="plist" id="grpList"></div>
+      <div id="grpSentinel" style="height:1px"></div>`;
+    grpState={key, list:gc.all, shown:0};
+    appendGroup(150);
   }
-  function filterGroup(key){
-    const gc=groupCache[key]; if(!gc) return;
+  function appendGroup(n){
+    if(!grpState || !$('grpList')) return;
+    const next=grpState.list.slice(grpState.shown, grpState.shown+(n||120));
+    if(!next.length) return;
+    $('grpList').insertAdjacentHTML('beforeend', next.map(p=>rowHTML(p)).join(''));
+    grpState.shown+=next.length;
+  }
+  function filterGroup(){
+    if(!grpState) return;
+    const gc=groupCache[grpState.key];
     const q=($('grpSearch').value||'').toLowerCase().trim();
-    const list=(q?gc.all.filter(p=>matchQ(p,q)):gc.all).slice(0,GRP_CAP);
-    const more=$('grpMore'); if(more) more.style.display=q?'none':'block';
-    $('grpAllList').innerHTML=list.length?list.map(p=>rowHTML(p)).join(''):'<div class="empty">Koi part nahi mila</div>';
+    grpState.list = q ? gc.all.filter(p=>matchQ(p,q)) : gc.all;
+    grpState.shown=0; $('grpList').innerHTML='';
+    appendGroup(150);
   }
+  // catalogue part {pn,desc,section,illus,regular,mrp} -> internal part shape
   // catalogue part {pn,desc,section,illus,regular,mrp} -> internal part shape
   function adaptPart(p){
     return {part_no:p.pn, name:p.desc, price:p.mrp, unit:'', vehicles:[],
@@ -561,11 +571,16 @@ const H = (() => {
 
   // close dropdown on outside click
   document.addEventListener('click', e=>{ if(!e.target.closest('.searchbox')) hideDD(); });
+  // infinite scroll for the generation parts list (no "show all" button)
+  window.addEventListener('scroll', ()=>{
+    if(grpState && grpState.shown<grpState.list.length &&
+       window.innerHeight+window.scrollY >= document.body.offsetHeight-700) appendGroup(120);
+  });
 
   return {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
     openFamily:(f)=>go('family',f,true), openGroup:(f,i)=>go('group',f+'|'+i,true),
-    showAllGroup, filterGroup,
+    filterGroup, filterModels,
     openAll:()=>go('all',null,true), openNew:()=>go('new',null,true), toggleSort, filterAll,
     onSearch, onSearchKey, focusDD, clearSearch, pick,
     filterVehicle, add, inc, dec, setQty, remove,
