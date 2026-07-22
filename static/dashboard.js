@@ -74,10 +74,18 @@ const D = (() => {
     const maxDay=Math.max(1,...(d.logins_by_day||[]).map(x=>x.count));
     wrap.innerHTML=`
       <div class="kpis">${kpi('Total logins',t.logins_total||0)}${kpi('Searches',t.searches_total||0)}${kpi('Vehicle-no. lookups',t.vin_total||0)}${kpi('Orders',t.orders_total||0)}</div>
-      <div class="card"><h3>Logins per day (14 days)</h3>
-        <table><thead><tr><th>Day</th><th>Logins</th><th></th></tr></thead><tbody>
-        ${(d.logins_by_day||[]).map(x=>`<tr><td>${esc(x.day)}</td><td class="num">${x.count}</td>
-          <td><div style="background:#1f3864;height:10px;border-radius:5px;width:${Math.round(x.count/maxDay*160)}px"></div></td></tr>`).join('')||'<tr><td colspan=3 class="empty">No logins yet</td></tr>'}</tbody></table></div>
+      <div class="card"><h3>Logins per day — unique users (14 days)</h3>
+        <table><thead><tr><th>Day</th><th class="num">Users</th><th></th></tr></thead><tbody>
+        ${(d.logins_by_day||[]).map((x,i)=>`
+          <tr class="lg-day" style="cursor:pointer" onclick="D.toggleDay(${i})">
+            <td><span id="lg-ar-${i}">▸</span> ${esc(x.day)}</td>
+            <td class="num">${x.count}</td>
+            <td><div style="background:#1f3864;height:10px;border-radius:5px;width:${Math.round(x.count/maxDay*160)}px"></div></td></tr>
+          <tr id="lg-u-${i}" class="hidden"><td colspan="3" style="padding:0 10px 10px">
+            <table style="width:100%;background:#f7f9fc;border-radius:8px;margin:0">
+              <thead><tr><th>Firm</th><th>Mobile</th><th class="num">Logins</th></tr></thead>
+              <tbody>${(x.users||[]).map(u=>`<tr><td>${esc(u.firm||'—')}</td><td>${esc(u.mobile||'—')}</td><td class="num">${u.logins}</td></tr>`).join('')||'<tr><td colspan="3" class="empty">—</td></tr>'}</tbody>
+            </table></td></tr>`).join('')||'<tr><td colspan=3 class="empty">No logins yet</td></tr>'}</tbody></table></div>
       <div class="card"><h3>Aerostar vs Honda</h3>
         <table><thead><tr><th>Portal</th><th class="num">Visits</th><th class="num">Users</th></tr></thead><tbody>
         ${(d.portals||[]).map(p=>`<tr><td>${esc(p.portal)}</td><td class="num">${p.views}</td><td class="num">${p.users}</td></tr>`).join('')||'<tr><td colspan=3 class="empty">No data</td></tr>'}</tbody></table></div>
@@ -239,5 +247,11 @@ const D = (() => {
   // ── restore session ─────────────────────────────────
   (function(){ try{ const s=JSON.parse(localStorage.getItem('rupani_admin')||'null'); if(s&&s.token){ auth=s; enter(); } }catch(e){} })();
 
-  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending };
+  function toggleDay(i){
+    const el=document.getElementById('lg-u-'+i), ar=document.getElementById('lg-ar-'+i);
+    if(!el) return;
+    const nowHidden=el.classList.toggle('hidden');
+    if(ar) ar.textContent=nowHidden?'▸':'▾';
+  }
+  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending, toggleDay };
 })();

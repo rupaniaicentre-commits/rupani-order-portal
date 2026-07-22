@@ -1172,10 +1172,20 @@ def admin_portal_analytics():
         return jsonify({'success': False, 'error': 'unauthorized — admin only'}), 401
     conn = _orders_conn()
     q = conn.execute
-    # logins per day (last 14 days)
-    logins = [{'day': d, 'count': c} for d, c in q(
-        "SELECT date(ts,'unixepoch','localtime') d, COUNT(*) c FROM analytics "
-        "WHERE event='login' AND ts > strftime('%s','now','-14 days') GROUP BY d ORDER BY d").fetchall()]
+    # logins per day (last 14 days) — count each retailer ONCE per day, plus the
+    # list of who signed in that day for the collapsible view
+    login_rows = q(
+        "SELECT date(ts,'unixepoch','localtime') d, "
+        "COALESCE(NULLIF(mobile,''), NULLIF(firm,''), 'unknown') uid, "
+        "MAX(firm) firm, MAX(mobile) mobile, COUNT(*) hits "
+        "FROM analytics WHERE event='login' AND ts > strftime('%s','now','-14 days') "
+        "GROUP BY d, uid ORDER BY d DESC, firm").fetchall()
+    by_day, day_order = {}, []
+    for d, uid, firm, mobile, hits in login_rows:
+        if d not in by_day:
+            by_day[d] = []; day_order.append(d)
+        by_day[d].append({'firm': firm or '—', 'mobile': mobile or '', 'logins': hits})
+    logins = [{'day': d, 'count': len(by_day[d]), 'users': by_day[d]} for d in day_order]
     # unique visitors (by mobile) per portal + total views
     portal_rows = q("SELECT portal, COUNT(*) views, COUNT(DISTINCT mobile) users FROM analytics "
                     "WHERE event IN ('view','login') GROUP BY portal").fetchall()
