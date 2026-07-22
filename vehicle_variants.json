@@ -1,0 +1,2332 @@
+{
+ "Activa": {
+  "name": "Activa",
+  "variants": [
+   {
+    "label": "Activa 2002",
+    "codes": [
+     "SCV100CM2"
+    ],
+    "model_ids": [
+     "4"
+    ]
+   },
+   {
+    "label": "Activa 2005",
+    "codes": [
+     "SCV100CM5"
+    ],
+    "model_ids": [
+     "5"
+    ]
+   },
+   {
+    "label": "Activa 2009",
+    "codes": [
+     "SCV1109"
+    ],
+    "model_ids": [
+     "6"
+    ]
+   },
+   {
+    "label": "Activa 2011",
+    "codes": [
+     "SCV110B"
+    ],
+    "model_ids": [
+     "7"
+    ]
+   },
+   {
+    "label": "Activa 2013",
+    "codes": [
+     "SCV110D"
+    ],
+    "model_ids": [
+     "8"
+    ]
+   },
+   {
+    "label": "Activa 2014",
+    "codes": [
+     "SCV110E"
+    ],
+    "model_ids": [
+     "9"
+    ]
+   },
+   {
+    "label": "Activa 2015",
+    "codes": [
+     "SCV110F"
+    ],
+    "model_ids": [
+     "51"
+    ]
+   },
+   {
+    "label": "Activa 2016",
+    "codes": [
+     "SCV110G"
+    ],
+    "model_ids": [
+     "827"
+    ]
+   },
+   {
+    "label": "Activa 2017",
+    "codes": [
+     "SCV110H"
+    ],
+    "model_ids": [
+     "1147"
+    ]
+   },
+   {
+    "label": "Activa 2018",
+    "codes": [
+     "SCV110J"
+    ],
+    "model_ids": [
+     "1521"
+    ]
+   },
+   {
+    "label": "Activa 2020 \u00b7 Carb",
+    "codes": [
+     "SCV110L"
+    ],
+    "model_ids": [
+     "2116"
+    ]
+   },
+   {
+    "label": "Activa 2020 \u00b7 FI",
+    "codes": [
+     "SCV110LI"
+    ],
+    "model_ids": [
+     "2236"
+    ]
+   },
+   {
+    "label": "Activa 2021",
+    "codes": [
+     "SCV110M"
+    ],
+    "model_ids": [
+     "2482"
+    ]
+   },
+   {
+    "label": "Activa 2022",
+    "codes": [
+     "SCV110N"
+    ],
+    "model_ids": [
+     "2642"
+    ]
+   },
+   {
+    "label": "Activa 2023",
+    "codes": [
+     "SCV110P/SR"
+    ],
+    "model_ids": [
+     "2902"
+    ]
+   },
+   {
+    "label": "Activa 2025",
+    "codes": [
+     "SCV110S"
+    ],
+    "model_ids": [
+     "3394"
+    ]
+   },
+   {
+    "label": "Activa 2026",
+    "codes": [
+     "SCV110T"
+    ],
+    "model_ids": [
+     "3535"
+    ]
+   }
+  ]
+ },
+ "Dream Yuga": {
+  "name": "Dream Yuga",
+  "variants": [
+   {
+    "label": "Dream Yuga 2013 \u00b7 Kick-only",
+    "codes": [
+     "CB110D"
+    ],
+    "model_ids": [
+     "11"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2013 \u00b7 Self-start",
+    "codes": [
+     "CB110MD"
+    ],
+    "model_ids": [
+     "13"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2014 \u00b7 Kick-only",
+    "codes": [
+     "CB110E"
+    ],
+    "model_ids": [
+     "12"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2014 \u00b7 Self-start",
+    "codes": [
+     "CB110ME"
+    ],
+    "model_ids": [
+     "14"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2015",
+    "codes": [
+     "CB110AMF"
+    ],
+    "model_ids": [
+     "15"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2017",
+    "codes": [
+     "CB110AMH"
+    ],
+    "model_ids": [
+     "961"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2018",
+    "codes": [
+     "CB110J"
+    ],
+    "model_ids": [
+     "1461"
+    ]
+   },
+   {
+    "label": "Dream Yuga 2019",
+    "codes": [
+     "CB110BK"
+    ],
+    "model_ids": [
+     "1956"
+    ]
+   }
+  ]
+ },
+ "Dream Neo": {
+  "name": "Dream Neo",
+  "variants": [
+   {
+    "label": "Dream Neo 2014 \u00b7 Kick-only",
+    "codes": [
+     "CB110CE"
+    ],
+    "model_ids": [
+     "62"
+    ]
+   },
+   {
+    "label": "Dream Neo 2014 \u00b7 Self-start",
+    "codes": [
+     "CB110CME"
+    ],
+    "model_ids": [
+     "64"
+    ]
+   },
+   {
+    "label": "Dream Neo 2015 \u00b7 Kick-only",
+    "codes": [
+     "CB110CF"
+    ],
+    "model_ids": [
+     "63"
+    ]
+   },
+   {
+    "label": "Dream Neo 2015 \u00b7 Self-start",
+    "codes": [
+     "CB110CMF"
+    ],
+    "model_ids": [
+     "65"
+    ]
+   },
+   {
+    "label": "Dream Neo 2016",
+    "codes": [
+     "CB110CG",
+     "CB110CMG"
+    ],
+    "model_ids": [
+     "887",
+     "888"
+    ]
+   },
+   {
+    "label": "Dream Neo 2017",
+    "codes": [
+     "CB110CMH"
+    ],
+    "model_ids": [
+     "1222"
+    ]
+   }
+  ]
+ },
+ "Dio": {
+  "name": "Dio",
+  "variants": [
+   {
+    "label": "Dio 2003",
+    "codes": [
+     "SCV100F3"
+    ],
+    "model_ids": [
+     "82"
+    ]
+   },
+   {
+    "label": "Dio 2005",
+    "codes": [
+     "SCV100F5"
+    ],
+    "model_ids": [
+     "83"
+    ]
+   },
+   {
+    "label": "Dio 2009",
+    "codes": [
+     "SCV100F9"
+    ],
+    "model_ids": [
+     "382"
+    ]
+   },
+   {
+    "label": "Dio 2010",
+    "codes": [
+     "SCV100FA"
+    ],
+    "model_ids": [
+     "383"
+    ]
+   },
+   {
+    "label": "Dio 2012",
+    "codes": [
+     "SCV110FC",
+     "SCV110FBC"
+    ],
+    "model_ids": [
+     "401",
+     "403"
+    ]
+   },
+   {
+    "label": "Dio 2013",
+    "codes": [
+     "SCV110FD"
+    ],
+    "model_ids": [
+     "402"
+    ]
+   },
+   {
+    "label": "Dio 2015",
+    "codes": [
+     "SCV110FF"
+    ],
+    "model_ids": [
+     "404"
+    ]
+   },
+   {
+    "label": "Dio 2017",
+    "codes": [
+     "SCV110FH",
+     "SCV110FBH"
+    ],
+    "model_ids": [
+     "941",
+     "942"
+    ]
+   },
+   {
+    "label": "Dio 2019",
+    "codes": [
+     "SCV110FK",
+     "SCV110FBK"
+    ],
+    "model_ids": [
+     "1301",
+     "1302"
+    ]
+   },
+   {
+    "label": "Dio 2020",
+    "codes": [
+     "SCV110FL",
+     "SCV110FBL"
+    ],
+    "model_ids": [
+     "2256",
+     "2257"
+    ]
+   },
+   {
+    "label": "Dio 2021",
+    "codes": [
+     "SCV110FM"
+    ],
+    "model_ids": [
+     "2405"
+    ]
+   },
+   {
+    "label": "Dio 2023",
+    "codes": [
+     "SCV110FP"
+    ],
+    "model_ids": [
+     "2862"
+    ]
+   },
+   {
+    "label": "Dio 2024",
+    "codes": [
+     "SCV110FR",
+     "SCV110FBR"
+    ],
+    "model_ids": [
+     "3062",
+     "3065"
+    ]
+   },
+   {
+    "label": "Dio 2025",
+    "codes": [
+     "SCV110FS",
+     "SCV110FBS"
+    ],
+    "model_ids": [
+     "3334",
+     "3335"
+    ]
+   }
+  ]
+ },
+ "Aviator": {
+  "name": "Aviator",
+  "variants": [
+   {
+    "label": "Aviator 2008",
+    "codes": [
+     "SCV100G8"
+    ],
+    "model_ids": [
+     "84"
+    ]
+   },
+   {
+    "label": "Aviator 2010",
+    "codes": [
+     "SCV110GA"
+    ],
+    "model_ids": [
+     "86"
+    ]
+   },
+   {
+    "label": "Aviator 2012",
+    "codes": [
+     "SCV110GC"
+    ],
+    "model_ids": [
+     "87"
+    ]
+   },
+   {
+    "label": "Aviator 2013 \u00b7 Drum brake",
+    "codes": [
+     "SCV110GD"
+    ],
+    "model_ids": [
+     "88"
+    ]
+   },
+   {
+    "label": "Aviator 2013 \u00b7 Disc brake",
+    "codes": [
+     "SCV110GFD"
+    ],
+    "model_ids": [
+     "89"
+    ]
+   },
+   {
+    "label": "Aviator 2015 \u00b7 Drum brake",
+    "codes": [
+     "SCV110GF"
+    ],
+    "model_ids": [
+     "90"
+    ]
+   },
+   {
+    "label": "Aviator 2015 \u00b7 Disc brake",
+    "codes": [
+     "SCV110GFF"
+    ],
+    "model_ids": [
+     "91"
+    ]
+   },
+   {
+    "label": "Aviator 2017 \u00b7 Drum brake",
+    "codes": [
+     "SCV110GH"
+    ],
+    "model_ids": [
+     "1141"
+    ]
+   },
+   {
+    "label": "Aviator 2017 \u00b7 Disc brake",
+    "codes": [
+     "SCV110GFH"
+    ],
+    "model_ids": [
+     "1142"
+    ]
+   },
+   {
+    "label": "Aviator 2019 \u00b7 Drum brake",
+    "codes": [
+     "SCV110GK"
+    ],
+    "model_ids": [
+     "1807"
+    ]
+   },
+   {
+    "label": "Aviator 2019 \u00b7 Disc brake",
+    "codes": [
+     "SCV110GFK"
+    ],
+    "model_ids": [
+     "1808"
+    ]
+   }
+  ]
+ },
+ "CBR150R": {
+  "name": "CBR150R",
+  "variants": [
+   {
+    "label": "CBR150R 2012",
+    "codes": [
+     "CBR150RC"
+    ],
+    "model_ids": [
+     "122"
+    ]
+   },
+   {
+    "label": "CBR150R 2016",
+    "codes": [
+     "CBR150RG"
+    ],
+    "model_ids": [
+     "782"
+    ]
+   }
+  ]
+ },
+ "CBR250R": {
+  "name": "CBR250R",
+  "variants": [
+   {
+    "label": "CBR250R 2011 \u00b7 Standard",
+    "codes": [
+     "CBR250RB"
+    ],
+    "model_ids": [
+     "124"
+    ]
+   },
+   {
+    "label": "CBR250R 2011 \u00b7 ABS",
+    "codes": [
+     "CBR250RAB"
+    ],
+    "model_ids": [
+     "127"
+    ]
+   },
+   {
+    "label": "CBR250R 2012 \u00b7 Standard",
+    "codes": [
+     "CBR250RC"
+    ],
+    "model_ids": [
+     "125"
+    ]
+   },
+   {
+    "label": "CBR250R 2012 \u00b7 ABS",
+    "codes": [
+     "CBR250RAC"
+    ],
+    "model_ids": [
+     "128"
+    ]
+   },
+   {
+    "label": "CBR250R 2013 \u00b7 Standard",
+    "codes": [
+     "CBR250RD"
+    ],
+    "model_ids": [
+     "126"
+    ]
+   },
+   {
+    "label": "CBR250R 2013 \u00b7 ABS",
+    "codes": [
+     "CBR250RAD"
+    ],
+    "model_ids": [
+     "129"
+    ]
+   },
+   {
+    "label": "CBR250R 2016",
+    "codes": [
+     "CBR250RG",
+     "CBR250RAG"
+    ],
+    "model_ids": [
+     "821",
+     "822"
+    ]
+   },
+   {
+    "label": "CBR250R 2017 \u00b7 Standard",
+    "codes": [
+     "CBR250RH"
+    ],
+    "model_ids": [
+     "1061"
+    ]
+   },
+   {
+    "label": "CBR250R 2017 \u00b7 ABS",
+    "codes": [
+     "CBR250RAH"
+    ],
+    "model_ids": [
+     "1062"
+    ]
+   },
+   {
+    "label": "CBR250R 2018 \u00b7 Standard",
+    "codes": [
+     "CBR250RJ"
+    ],
+    "model_ids": [
+     "1561"
+    ]
+   },
+   {
+    "label": "CBR250R 2018 \u00b7 ABS",
+    "codes": [
+     "CBR250RAJ"
+    ],
+    "model_ids": [
+     "1564"
+    ]
+   }
+  ]
+ },
+ "CB Unicorn": {
+  "name": "Unicorn",
+  "variants": [
+   {
+    "label": "Unicorn 2005",
+    "codes": [
+     "CBF1505",
+     "CBF150M5"
+    ],
+    "model_ids": [
+     "182",
+     "183"
+    ]
+   },
+   {
+    "label": "Unicorn 2006",
+    "codes": [
+     "CBF1506",
+     "CBF150M6"
+    ],
+    "model_ids": [
+     "184",
+     "185"
+    ]
+   },
+   {
+    "label": "Unicorn 2007",
+    "codes": [
+     "CBF1507",
+     "CBF150M7"
+    ],
+    "model_ids": [
+     "186",
+     "187"
+    ]
+   },
+   {
+    "label": "Unicorn 2009",
+    "codes": [
+     "CBF150M9"
+    ],
+    "model_ids": [
+     "188"
+    ]
+   },
+   {
+    "label": "Unicorn 2010",
+    "codes": [
+     "CBF150MA"
+    ],
+    "model_ids": [
+     "189"
+    ]
+   },
+   {
+    "label": "Unicorn 2017",
+    "codes": [
+     "CBF150MH"
+    ],
+    "model_ids": [
+     "1167"
+    ]
+   },
+   {
+    "label": "Unicorn 2019",
+    "codes": [
+     "CBF150MK"
+    ],
+    "model_ids": [
+     "2016"
+    ]
+   }
+  ]
+ },
+ "CB Unicorn Dazzler": {
+  "name": "Dazzler",
+  "variants": [
+   {
+    "label": "Dazzler 2011",
+    "codes": [
+     "CBF150MB"
+    ],
+    "model_ids": [
+     "190"
+    ]
+   },
+   {
+    "label": "Dazzler 2012",
+    "codes": [
+     "CBF150MC"
+    ],
+    "model_ids": [
+     "191"
+    ]
+   }
+  ]
+ },
+ "CBR650F": {
+  "name": "CBR650F",
+  "variants": [
+   {
+    "label": "CBR650F 2016",
+    "codes": [
+     "CBR650FAG"
+    ],
+    "model_ids": [
+     "242"
+    ]
+   },
+   {
+    "label": "CBR650F 2018",
+    "codes": [
+     "CBR650FAJ"
+    ],
+    "model_ids": [
+     "1345"
+    ]
+   }
+  ]
+ },
+ "CB Trigger": {
+  "name": "Trigger",
+  "variants": [
+   {
+    "label": "Trigger 2013",
+    "codes": [
+     "CBF150MD"
+    ],
+    "model_ids": [
+     "262"
+    ]
+   }
+  ]
+ },
+ "CB Unicorn 160": {
+  "name": "Unicorn 160",
+  "variants": [
+   {
+    "label": "Unicorn 160 2015",
+    "codes": [
+     "CBF160F"
+    ],
+    "model_ids": [
+     "266"
+    ]
+   },
+   {
+    "label": "Unicorn 160 2016",
+    "codes": [
+     "CBF160G"
+    ],
+    "model_ids": [
+     "861"
+    ]
+   },
+   {
+    "label": "Unicorn 160 2017",
+    "codes": [
+     "CBF160H"
+    ],
+    "model_ids": [
+     "1041"
+    ]
+   },
+   {
+    "label": "Unicorn 160 2020",
+    "codes": [
+     "CBF160AL"
+    ],
+    "model_ids": [
+     "2283"
+    ]
+   },
+   {
+    "label": "Unicorn 160 2024",
+    "codes": [
+     "CBF160AR"
+    ],
+    "model_ids": [
+     "3082"
+    ]
+   },
+   {
+    "label": "Unicorn 160 2025",
+    "codes": [
+     "CBF160AS"
+    ],
+    "model_ids": [
+     "3314"
+    ]
+   }
+  ]
+ },
+ "CB Twister": {
+  "name": "Twister",
+  "variants": [
+   {
+    "label": "Twister 2010 \u00b7 Drum brake",
+    "codes": [
+     "CBF110A"
+    ],
+    "model_ids": [
+     "282"
+    ]
+   },
+   {
+    "label": "Twister 2010 \u00b7 Disc brake",
+    "codes": [
+     "CBF110MA"
+    ],
+    "model_ids": [
+     "285"
+    ]
+   },
+   {
+    "label": "Twister 2012 \u00b7 Drum brake",
+    "codes": [
+     "CBF110C"
+    ],
+    "model_ids": [
+     "283"
+    ]
+   },
+   {
+    "label": "Twister 2012 \u00b7 Disc brake",
+    "codes": [
+     "CBF110MC"
+    ],
+    "model_ids": [
+     "286"
+    ]
+   },
+   {
+    "label": "Twister 2014 \u00b7 Drum brake",
+    "codes": [
+     "CBF110E"
+    ],
+    "model_ids": [
+     "284"
+    ]
+   },
+   {
+    "label": "Twister 2014 \u00b7 Disc brake",
+    "codes": [
+     "CBF110ME"
+    ],
+    "model_ids": [
+     "287"
+    ]
+   },
+   {
+    "label": "Twister 2014 \u00b7 Disc brake",
+    "codes": [
+     "CBF110MSE"
+    ],
+    "model_ids": [
+     "288"
+    ]
+   }
+  ]
+ },
+ "Activa125": {
+  "name": "Activa 125",
+  "variants": [
+   {
+    "label": "Activa 125 2014",
+    "codes": [
+     "SCV125E"
+    ],
+    "model_ids": [
+     "316"
+    ]
+   },
+   {
+    "label": "Activa 125 2016",
+    "codes": [
+     "SCV125G"
+    ],
+    "model_ids": [
+     "317"
+    ]
+   },
+   {
+    "label": "Activa 125 2017",
+    "codes": [
+     "SCV125H"
+    ],
+    "model_ids": [
+     "1101"
+    ]
+   },
+   {
+    "label": "Activa 125 2019",
+    "codes": [
+     "SCV125K"
+    ],
+    "model_ids": [
+     "1764"
+    ]
+   },
+   {
+    "label": "Activa 125 2020",
+    "codes": [
+     "SCV125L"
+    ],
+    "model_ids": [
+     "2136"
+    ]
+   },
+   {
+    "label": "Activa 125 2022",
+    "codes": [
+     "SCV125N"
+    ],
+    "model_ids": [
+     "2662"
+    ]
+   },
+   {
+    "label": "Activa 125 2023",
+    "codes": [
+     "SCV125FP"
+    ],
+    "model_ids": [
+     "3002"
+    ]
+   },
+   {
+    "label": "Activa 125 2025",
+    "codes": [
+     "SCV125S"
+    ],
+    "model_ids": [
+     "3274"
+    ]
+   },
+   {
+    "label": "Activa 125 2026",
+    "codes": [
+     "SCV125T"
+    ],
+    "model_ids": [
+     "3534"
+    ]
+   }
+  ]
+ },
+ "Activa i": {
+  "name": "Activa i",
+  "variants": [
+   {
+    "label": "Activa i 2014",
+    "codes": [
+     "SCV110HE"
+    ],
+    "model_ids": [
+     "323"
+    ]
+   },
+   {
+    "label": "Activa i 2015",
+    "codes": [
+     "SCV110HF"
+    ],
+    "model_ids": [
+     "324"
+    ]
+   },
+   {
+    "label": "Activa i 2017",
+    "codes": [
+     "SCV110HH"
+    ],
+    "model_ids": [
+     "921"
+    ]
+   },
+   {
+    "label": "Activa i 2019",
+    "codes": [
+     "SCV110HK"
+    ],
+    "model_ids": [
+     "1816"
+    ]
+   }
+  ]
+ },
+ "Livo": {
+  "name": "Livo",
+  "variants": [
+   {
+    "label": "Livo 2016 \u00b7 Drum brake",
+    "codes": [
+     "CBF110G"
+    ],
+    "model_ids": [
+     "342"
+    ]
+   },
+   {
+    "label": "Livo 2016 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SG"
+    ],
+    "model_ids": [
+     "343"
+    ]
+   },
+   {
+    "label": "Livo 2017 \u00b7 Drum brake",
+    "codes": [
+     "CBF110H"
+    ],
+    "model_ids": [
+     "1185"
+    ]
+   },
+   {
+    "label": "Livo 2017 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SH"
+    ],
+    "model_ids": [
+     "1186"
+    ]
+   },
+   {
+    "label": "Livo 2018 \u00b7 Drum brake",
+    "codes": [
+     "CBF110J"
+    ],
+    "model_ids": [
+     "1481"
+    ]
+   },
+   {
+    "label": "Livo 2018 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SJ"
+    ],
+    "model_ids": [
+     "1484"
+    ]
+   },
+   {
+    "label": "Livo 2019 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BK"
+    ],
+    "model_ids": [
+     "1936"
+    ]
+   },
+   {
+    "label": "Livo 2019 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBK"
+    ],
+    "model_ids": [
+     "1937"
+    ]
+   },
+   {
+    "label": "Livo 2020 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BL"
+    ],
+    "model_ids": [
+     "2336"
+    ]
+   },
+   {
+    "label": "Livo 2020 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBL"
+    ],
+    "model_ids": [
+     "2337"
+    ]
+   },
+   {
+    "label": "Livo 2022 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BN"
+    ],
+    "model_ids": [
+     "2627"
+    ]
+   },
+   {
+    "label": "Livo 2022 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBN"
+    ],
+    "model_ids": [
+     "2628"
+    ]
+   },
+   {
+    "label": "Livo 2022 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BEN"
+    ],
+    "model_ids": [
+     "2725"
+    ]
+   },
+   {
+    "label": "Livo 2022 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBEN"
+    ],
+    "model_ids": [
+     "2726"
+    ]
+   },
+   {
+    "label": "Livo 2024 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BER"
+    ],
+    "model_ids": [
+     "3148"
+    ]
+   },
+   {
+    "label": "Livo 2024 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBER"
+    ],
+    "model_ids": [
+     "3149"
+    ]
+   },
+   {
+    "label": "Livo 2025 \u00b7 Drum brake",
+    "codes": [
+     "CBF110BES"
+    ],
+    "model_ids": [
+     "3440"
+    ]
+   },
+   {
+    "label": "Livo 2025 \u00b7 Disc brake",
+    "codes": [
+     "CBF110SBES"
+    ],
+    "model_ids": [
+     "3441"
+    ]
+   }
+  ]
+ },
+ "Eterno": {
+  "name": "Eterno",
+  "variants": [
+   {
+    "label": "Eterno 2004",
+    "codes": [
+     "SC1504"
+    ],
+    "model_ids": [
+     "349"
+    ]
+   },
+   {
+    "label": "Eterno 2005",
+    "codes": [
+     "SC1505"
+    ],
+    "model_ids": [
+     "350"
+    ]
+   }
+  ]
+ },
+ "CD 110 Dream": {
+  "name": "Dream 110",
+  "variants": [
+   {
+    "label": "Dream 110 2015",
+    "codes": [
+     "CB110C2F"
+    ],
+    "model_ids": [
+     "366"
+    ]
+   },
+   {
+    "label": "Dream 110 2016",
+    "codes": [
+     "CB110C2G",
+     "CB110C2MG"
+    ],
+    "model_ids": [
+     "881",
+     "882"
+    ]
+   },
+   {
+    "label": "Dream 110 2017 \u00b7 Kick-only",
+    "codes": [
+     "CB110C2H"
+    ],
+    "model_ids": [
+     "1161"
+    ]
+   },
+   {
+    "label": "Dream 110 2017 \u00b7 Self-start",
+    "codes": [
+     "CB110C2MH"
+    ],
+    "model_ids": [
+     "1162"
+    ]
+   },
+   {
+    "label": "Dream 110 2019 \u00b7 Kick-only",
+    "codes": [
+     "CB110C2K"
+    ],
+    "model_ids": [
+     "1801"
+    ]
+   },
+   {
+    "label": "Dream 110 2019 \u00b7 Self-start",
+    "codes": [
+     "CB110C2MK"
+    ],
+    "model_ids": [
+     "1802"
+    ]
+   },
+   {
+    "label": "Dream 110 2019 \u00b7 Self-start",
+    "codes": [
+     "CB110CMDK"
+    ],
+    "model_ids": [
+     "1996"
+    ]
+   },
+   {
+    "label": "Dream 110 2021",
+    "codes": [
+     "CB110C3MM",
+     "CB110CMDM"
+    ],
+    "model_ids": [
+     "2296",
+     "2297"
+    ]
+   },
+   {
+    "label": "Dream 110 2022",
+    "codes": [
+     "CB110CMDN"
+    ],
+    "model_ids": [
+     "2626"
+    ]
+   },
+   {
+    "label": "Dream 110 2024",
+    "codes": [
+     "CB110CMDR"
+    ],
+    "model_ids": [
+     "3143"
+    ]
+   }
+  ]
+ },
+ "CB Shine/ Shine 125": {
+  "name": "Shine",
+  "variants": [
+   {
+    "label": "Shine 2003",
+    "codes": [
+     "CBF125L3"
+    ],
+    "model_ids": [
+     "2280"
+    ]
+   },
+   {
+    "label": "Shine 2006",
+    "codes": [
+     "CBF1256"
+    ],
+    "model_ids": [
+     "462"
+    ]
+   },
+   {
+    "label": "Shine 2007",
+    "codes": [
+     "CBF125M7"
+    ],
+    "model_ids": [
+     "467"
+    ]
+   },
+   {
+    "label": "Shine 2009 \u00b7 Carb",
+    "codes": [
+     "CBF125MC9"
+    ],
+    "model_ids": [
+     "471"
+    ]
+   },
+   {
+    "label": "Shine 2009 \u00b7 FI",
+    "codes": [
+     "CBF125C9"
+    ],
+    "model_ids": [
+     "465"
+    ]
+   },
+   {
+    "label": "Shine 2010",
+    "codes": [
+     "CBF125CA",
+     "CBF125MCA",
+     "CBF125A"
+    ],
+    "model_ids": [
+     "466",
+     "468",
+     "464"
+    ]
+   },
+   {
+    "label": "Shine 2012 \u00b7 Drum brake",
+    "codes": [
+     "CBF125C"
+    ],
+    "model_ids": [
+     "422"
+    ]
+   },
+   {
+    "label": "Shine 2012 \u00b7 Disc brake",
+    "codes": [
+     "CBF125CC"
+    ],
+    "model_ids": [
+     "423"
+    ]
+   },
+   {
+    "label": "Shine 2012 \u00b7 Disc brake",
+    "codes": [
+     "CBF125MCC"
+    ],
+    "model_ids": [
+     "424"
+    ]
+   },
+   {
+    "label": "Shine 2015",
+    "codes": [
+     "CBF125F"
+    ],
+    "model_ids": [
+     "501"
+    ]
+   },
+   {
+    "label": "Shine 2017",
+    "codes": [
+     "CBF125H",
+     "CBF125BH"
+    ],
+    "model_ids": [
+     "1081",
+     "1342"
+    ]
+   },
+   {
+    "label": "Shine 2018",
+    "codes": [
+     "CBF125J/K"
+    ],
+    "model_ids": [
+     "1421"
+    ]
+   },
+   {
+    "label": "Shine 2020",
+    "codes": [
+     "CBF125L",
+     "CBF125CL"
+    ],
+    "model_ids": [
+     "2119",
+     "2422"
+    ]
+   },
+   {
+    "label": "Shine 2022",
+    "codes": [
+     "CBF125N"
+    ],
+    "model_ids": [
+     "2602"
+    ]
+   },
+   {
+    "label": "Shine 2023",
+    "codes": [
+     "CBF125P"
+    ],
+    "model_ids": [
+     "2882"
+    ]
+   },
+   {
+    "label": "Shine 2025",
+    "codes": [
+     "CBF125S"
+    ],
+    "model_ids": [
+     "3434"
+    ]
+   },
+   {
+    "label": "Shine 2026",
+    "codes": [
+     "CBF125T"
+    ],
+    "model_ids": [
+     "3581"
+    ]
+   }
+  ]
+ },
+ "CBF Stunner": {
+  "name": "Stunner",
+  "variants": [
+   {
+    "label": "Stunner 2009",
+    "codes": [
+     "CBF1259",
+     "CBF125M9/MF"
+    ],
+    "model_ids": [
+     "463",
+     "469"
+    ]
+   },
+   {
+    "label": "Stunner 2010",
+    "codes": [
+     "CBF125MA"
+    ],
+    "model_ids": [
+     "470"
+    ]
+   },
+   {
+    "label": "Stunner 2011",
+    "codes": [
+     "CBF125MB"
+    ],
+    "model_ids": [
+     "472"
+    ]
+   },
+   {
+    "label": "Stunner 2012",
+    "codes": [
+     "CBF125MC"
+    ],
+    "model_ids": [
+     "473"
+    ]
+   }
+  ]
+ },
+ "CB Shine SP": {
+  "name": "Shine SP",
+  "variants": [
+   {
+    "label": "Shine SP 2016",
+    "codes": [
+     "CBF125MG"
+    ],
+    "model_ids": [
+     "542"
+    ]
+   },
+   {
+    "label": "Shine SP 2017",
+    "codes": [
+     "CBF125MH"
+    ],
+    "model_ids": [
+     "1121"
+    ]
+   },
+   {
+    "label": "Shine SP 2018",
+    "codes": [
+     "CBF125MJ/MK"
+    ],
+    "model_ids": [
+     "1441"
+    ]
+   }
+  ]
+ },
+ "CB Hornet 160R": {
+  "name": "Hornet 160R",
+  "variants": [
+   {
+    "label": "Hornet 160R 2016",
+    "codes": [
+     "CBF160MG"
+    ],
+    "model_ids": [
+     "682"
+    ]
+   },
+   {
+    "label": "Hornet 160R 2017",
+    "codes": [
+     "CBF160MH"
+    ],
+    "model_ids": [
+     "981"
+    ]
+   },
+   {
+    "label": "Hornet 160R 2018 \u00b7 Standard",
+    "codes": [
+     "CBF160MJ"
+    ],
+    "model_ids": [
+     "1543"
+    ]
+   },
+   {
+    "label": "Hornet 160R 2018 \u00b7 ABS",
+    "codes": [
+     "CBF160MAJ"
+    ],
+    "model_ids": [
+     "1544"
+    ]
+   },
+   {
+    "label": "Hornet 160R 2019",
+    "codes": [
+     "CBF160MAK"
+    ],
+    "model_ids": [
+     "2076"
+    ]
+   }
+  ]
+ },
+ "Navi": {
+  "name": "Navi",
+  "variants": [
+   {
+    "label": "Navi 2016",
+    "codes": [
+     "NVA110G"
+    ],
+    "model_ids": [
+     "902"
+    ]
+   },
+   {
+    "label": "Navi 2017",
+    "codes": [
+     "NVA110H"
+    ],
+    "model_ids": [
+     "1201"
+    ]
+   },
+   {
+    "label": "Navi 2019",
+    "codes": [
+     "NVA110K",
+     "NVA110BK"
+    ],
+    "model_ids": [
+     "1781",
+     "1976"
+    ]
+   }
+  ]
+ },
+ "CLIQ": {
+  "name": "CLIQ",
+  "variants": [
+   {
+    "label": "CLIQ 2017",
+    "codes": [
+     "NVB110H"
+    ],
+    "model_ids": [
+     "1242"
+    ]
+   }
+  ]
+ },
+ "Africa Twin": {
+  "name": "Africa Twin",
+  "variants": [
+   {
+    "label": "Africa Twin 2017",
+    "codes": [
+     "CRF1000DH"
+    ],
+    "model_ids": [
+     "1262"
+    ]
+   },
+   {
+    "label": "Africa Twin 2018",
+    "codes": [
+     "CRF1000DJ"
+    ],
+    "model_ids": [
+     "1813"
+    ]
+   },
+   {
+    "label": "Africa Twin 2019",
+    "codes": [
+     "CRF1000DK"
+    ],
+    "model_ids": [
+     "1916"
+    ]
+   },
+   {
+    "label": "Africa Twin 2020",
+    "codes": [
+     "CRF1100AL2L",
+     "CRF1100DL2L"
+    ],
+    "model_ids": [
+     "2376",
+     "2377"
+    ]
+   },
+   {
+    "label": "Africa Twin 2021",
+    "codes": [
+     "CRF1100AL2M",
+     "CRF1100DL2M"
+    ],
+    "model_ids": [
+     "2502",
+     "2503"
+    ]
+   },
+   {
+    "label": "Africa Twin 2022",
+    "codes": [
+     "CRF1100AL2N",
+     "CRF1100DL2N"
+    ],
+    "model_ids": [
+     "2802",
+     "2803"
+    ]
+   }
+  ]
+ },
+ "GRAZIA": {
+  "name": "GRAZIA",
+  "variants": [
+   {
+    "label": "GRAZIA 2018",
+    "codes": [
+     "SCV125SJ"
+    ],
+    "model_ids": [
+     "1362"
+    ]
+   },
+   {
+    "label": "GRAZIA 2019",
+    "codes": [
+     "SCV125SK"
+    ],
+    "model_ids": [
+     "2019"
+    ]
+   },
+   {
+    "label": "GRAZIA 2020",
+    "codes": [
+     "SCV125SL"
+    ],
+    "model_ids": [
+     "2356"
+    ]
+   },
+   {
+    "label": "GRAZIA 2021",
+    "codes": [
+     "SCV125SM"
+    ],
+    "model_ids": [
+     "2402"
+    ]
+   },
+   {
+    "label": "GRAZIA 2022",
+    "codes": [
+     "SCV125SN"
+    ],
+    "model_ids": [
+     "2682"
+    ]
+   }
+  ]
+ },
+ "XBLADE": {
+  "name": "XBLADE",
+  "variants": [
+   {
+    "label": "XBLADE 2018",
+    "codes": [
+     "CBF160FSJ"
+    ],
+    "model_ids": [
+     "1502"
+    ]
+   },
+   {
+    "label": "XBLADE 2019",
+    "codes": [
+     "CBF160FSK"
+    ],
+    "model_ids": [
+     "1876"
+    ]
+   },
+   {
+    "label": "XBLADE 2021",
+    "codes": [
+     "CBF160FSM"
+    ],
+    "model_ids": [
+     "2316"
+    ]
+   },
+   {
+    "label": "XBLADE 2022",
+    "codes": [
+     "CBF160FSN"
+    ],
+    "model_ids": [
+     "2745"
+    ]
+   }
+  ]
+ },
+ "CB300R": {
+  "name": "CB300R",
+  "variants": [
+   {
+    "label": "CB300R 2019",
+    "codes": [
+     "CBF300NAK"
+    ],
+    "model_ids": [
+     "2037"
+    ]
+   },
+   {
+    "label": "CB300R 2022",
+    "codes": [
+     "CBF300NAN"
+    ],
+    "model_ids": [
+     "2762"
+    ]
+   },
+   {
+    "label": "CB300R 2024",
+    "codes": [
+     "CBF300NAR"
+    ],
+    "model_ids": [
+     "3214"
+    ]
+   }
+  ]
+ },
+ "CBR650R": {
+  "name": "CBR650R",
+  "variants": [
+   {
+    "label": "CBR650R 2020",
+    "codes": [
+     "CBR650RAL"
+    ],
+    "model_ids": [
+     "2097"
+    ]
+   },
+   {
+    "label": "CBR650R 2021",
+    "codes": [
+     "CBR650RAM"
+    ],
+    "model_ids": [
+     "2566"
+    ]
+   },
+   {
+    "label": "CBR650R 2022",
+    "codes": [
+     "CBR650RAN"
+    ],
+    "model_ids": [
+     "2782"
+    ]
+   }
+  ]
+ },
+ "SP125": {
+  "name": "SP125",
+  "variants": [
+   {
+    "label": "SP125 2020",
+    "codes": [
+     "CBF125ML"
+    ],
+    "model_ids": [
+     "2182"
+    ]
+   },
+   {
+    "label": "SP125 2022",
+    "codes": [
+     "CBF125MN",
+     "CBF125MEN"
+    ],
+    "model_ids": [
+     "2582",
+     "2742"
+    ]
+   },
+   {
+    "label": "SP125 2023 \u00b7 Drum brake",
+    "codes": [
+     "CBF125MP"
+    ],
+    "model_ids": [
+     "2984"
+    ]
+   },
+   {
+    "label": "SP125 2023 \u00b7 Disc brake",
+    "codes": [
+     "CBF125MEP"
+    ],
+    "model_ids": [
+     "2985"
+    ]
+   },
+   {
+    "label": "SP125 2024",
+    "codes": [
+     "CBF125MER"
+    ],
+    "model_ids": [
+     "3194"
+    ]
+   },
+   {
+    "label": "SP125 2025 \u00b7 Disc brake",
+    "codes": [
+     "CBF125MEFS"
+    ],
+    "model_ids": [
+     "3294"
+    ]
+   },
+   {
+    "label": "SP125 2025 \u00b7 Drum brake",
+    "codes": [
+     "CBF125MFS"
+    ],
+    "model_ids": [
+     "3295"
+    ]
+   },
+   {
+    "label": "SP125 2026",
+    "codes": [
+     "CBF125MEFT"
+    ],
+    "model_ids": [
+     "3538"
+    ]
+   }
+  ]
+ },
+ "Hornet 2.0": {
+  "name": "Hornet 2.0",
+  "variants": [
+   {
+    "label": "Hornet 2.0 2020",
+    "codes": [
+     "CBF190MAL"
+    ],
+    "model_ids": [
+     "2383"
+    ]
+   },
+   {
+    "label": "Hornet 2.0 2021",
+    "codes": [
+     "CBF190MAM"
+    ],
+    "model_ids": [
+     "2462"
+    ]
+   },
+   {
+    "label": "Hornet 2.0 2022",
+    "codes": [
+     "CBF190MAN"
+    ],
+    "model_ids": [
+     "2702"
+    ]
+   },
+   {
+    "label": "Hornet 2.0 2024",
+    "codes": [
+     "CBF190MAR"
+    ],
+    "model_ids": [
+     "3154"
+    ]
+   },
+   {
+    "label": "Hornet 2.0 2025",
+    "codes": [
+     "CBF190MAS"
+    ],
+    "model_ids": [
+     "3400"
+    ]
+   }
+  ]
+ },
+ "HNESS": {
+  "name": "HNESS",
+  "variants": [
+   {
+    "label": "HNESS 2021",
+    "codes": [
+     "CB350DM",
+     "CB350DSM",
+     "CB350RSM"
+    ],
+    "model_ids": [
+     "2443",
+     "2444",
+     "2522"
+    ]
+   },
+   {
+    "label": "HNESS 2022",
+    "codes": [
+     "CB350DSN"
+    ],
+    "model_ids": [
+     "2722"
+    ]
+   },
+   {
+    "label": "HNESS 2023",
+    "codes": [
+     "CB350DP",
+     "CB350DSP/DSR",
+     "CB350RSP/RSR"
+    ],
+    "model_ids": [
+     "2922",
+     "2942",
+     "2943"
+    ]
+   },
+   {
+    "label": "HNESS 2025",
+    "codes": [
+     "CB350DS",
+     "CB350DSS",
+     "CB350RSS"
+    ],
+    "model_ids": [
+     "3446",
+     "3447",
+     "3448"
+    ]
+   }
+  ]
+ },
+ "500X": {
+  "name": "500X",
+  "variants": [
+   {
+    "label": "500X 2021",
+    "codes": [
+     "CB500XAM"
+    ],
+    "model_ids": [
+     "2543"
+    ]
+   }
+  ]
+ },
+ "CB650R": {
+  "name": "CB650R",
+  "variants": [
+   {
+    "label": "CB650R 2021",
+    "codes": [
+     "CB650RAM"
+    ],
+    "model_ids": [
+     "2563"
+    ]
+   },
+   {
+    "label": "CB650R 2022",
+    "codes": [
+     "CB650RAN"
+    ],
+    "model_ids": [
+     "2783"
+    ]
+   }
+  ]
+ },
+ "CB200X": {
+  "name": "CB200X",
+  "variants": [
+   {
+    "label": "CB200X 2022",
+    "codes": [
+     "CB190XN"
+    ],
+    "model_ids": [
+     "2623"
+    ]
+   },
+   {
+    "label": "CB200X 2024",
+    "codes": [
+     "CB190XR"
+    ],
+    "model_ids": [
+     "3197"
+    ]
+   },
+   {
+    "label": "CB200X 2025",
+    "codes": [
+     "CB190XS"
+    ],
+    "model_ids": [
+     "3414"
+    ]
+   }
+  ]
+ },
+ "CB300F": {
+  "name": "CB300F",
+  "variants": [
+   {
+    "label": "CB300F 2022",
+    "codes": [
+     "MC300AN"
+    ],
+    "model_ids": [
+     "2846"
+    ]
+   },
+   {
+    "label": "CB300F 2023",
+    "codes": [
+     "MC300AP"
+    ],
+    "model_ids": [
+     "3175"
+    ]
+   },
+   {
+    "label": "CB300F 2025",
+    "codes": [
+     "MC300AS"
+    ],
+    "model_ids": [
+     "3254"
+    ]
+   }
+  ]
+ },
+ "Shine 100": {
+  "name": "Shine 100",
+  "variants": [
+   {
+    "label": "Shine 100 2023",
+    "codes": [
+     "CD100RNP"
+    ],
+    "model_ids": [
+     "3023"
+    ]
+   },
+   {
+    "label": "Shine 100 2025",
+    "codes": [
+     "CD100RNS"
+    ],
+    "model_ids": [
+     "3437"
+    ]
+   }
+  ]
+ },
+ "Dio 125": {
+  "name": "Dio 125",
+  "variants": [
+   {
+    "label": "Dio 125 2024",
+    "codes": [
+     "SCV125SR",
+     "SCV125SBR"
+    ],
+    "model_ids": [
+     "3103",
+     "3104"
+    ]
+   },
+   {
+    "label": "Dio 125 2026",
+    "codes": [
+     "SCV125ST",
+     "SCV125SBT"
+    ],
+    "model_ids": [
+     "3494",
+     "3495"
+    ]
+   }
+  ]
+ },
+ "SP160": {
+  "name": "SP160",
+  "variants": [
+   {
+    "label": "SP160 2024",
+    "codes": [
+     "CBF160FSR"
+    ],
+    "model_ids": [
+     "3123"
+    ]
+   },
+   {
+    "label": "SP160 2025",
+    "codes": [
+     "CBF160FSS"
+    ],
+    "model_ids": [
+     "3340"
+    ]
+   }
+  ]
+ },
+ "CB350": {
+  "name": "CB350",
+  "variants": [
+   {
+    "label": "CB350 2024",
+    "codes": [
+     "CB350CR",
+     "CB350CSR"
+    ],
+    "model_ids": [
+     "3235",
+     "3236"
+    ]
+   },
+   {
+    "label": "CB350 2025",
+    "codes": [
+     "CB350CS",
+     "CB350CSS"
+    ],
+    "model_ids": [
+     "3474",
+     "3475"
+    ]
+   },
+   {
+    "label": "CB350 2026",
+    "codes": [
+     "CB350CT",
+     "CB350CST"
+    ],
+    "model_ids": [
+     "3561",
+     "3562"
+    ]
+   }
+  ]
+ },
+ "Shine100 DX": {
+  "name": "Shine100 DX",
+  "variants": [
+   {
+    "label": "Shine100 DX 2026",
+    "codes": [
+     "CD100RNT"
+    ],
+    "model_ids": [
+     "3515"
+    ]
+   }
+  ]
+ },
+ "CB125 Hornet": {
+  "name": "CB125 Hornet",
+  "variants": [
+   {
+    "label": "CB125 Hornet 2026",
+    "codes": [
+     "CBF125ZT"
+    ],
+    "model_ids": [
+     "3519"
+    ]
+   }
+  ]
+ }
+}
