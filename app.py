@@ -256,6 +256,25 @@ def _clear_cart(portal, mobile, firm):
     except Exception as e:
         print(f"[cart clear] {e}", flush=True)
 
+@app.route('/api/cart')
+def cart_get():
+    """Return a customer's server-saved basket (for cross-device / restored carts)."""
+    portal = (request.args.get('portal') or '').lower()
+    firm = (request.args.get('firm') or '').strip()
+    mobile = (request.args.get('contact') or request.args.get('mobile') or '').strip()
+    if not firm and not mobile:
+        return jsonify({'items': []})
+    try:
+        conn = _orders_conn()
+        row = conn.execute('SELECT items FROM carts WHERE ckey=?',
+                           (_cart_key(portal, mobile, firm),)).fetchone()
+        conn.close()
+        items = json.loads(row[0]) if row and row[0] else []
+    except Exception as e:
+        print(f"[cart get] {e}", flush=True)
+        items = []
+    return jsonify({'items': items})
+
 @app.route('/api/cart-sync', methods=['POST'])
 def cart_sync():
     """Persist a customer's current basket so admins can follow up on unplaced carts."""

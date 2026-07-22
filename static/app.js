@@ -120,6 +120,7 @@ const App = (() => {
     document.getElementById('appScreen').classList.add('active');
     if (!_loginLogged) { _loginLogged = true; track('login'); }   // count every entry (incl. remembered)
     loadBasketFromStorage();   // restore this user's saved basket
+    loadBasketFromServer();    // cross-device / cleared-storage fallback
     loadProducts();
     loadSettings();
   }
@@ -980,6 +981,20 @@ const App = (() => {
       basket = saved ? JSON.parse(saved) : {};
     } catch(_) { basket = {}; }
     updateBasketUI();
+  }
+  // pull server-saved cart if local is empty (new device / cleared storage)
+  async function loadBasketFromServer() {
+    if (!session || !session.firm) return;
+    if (Object.keys(basket).length) return;
+    try {
+      const d = await (await fetch('/api/cart?portal=aerostar&firm=' + encodeURIComponent(session.firm) +
+        '&contact=' + encodeURIComponent(session.contact || ''))).json();
+      (d.items || []).forEach(it => {
+        basket[it.part_no] = { as_part_number: it.part_no, description: it.name,
+          mrp: it.price, name: it.name, qty: it.qty || 1 };
+      });
+      if (d.items && d.items.length) { updateBasketUI(); }
+    } catch(e) {}
   }
 
   function getOrderHistory() {

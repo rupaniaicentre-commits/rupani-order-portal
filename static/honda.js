@@ -75,7 +75,9 @@ const H = (() => {
   const basketKey = () => 'honda_basket_'+userKey();
   const ordersKey = () => 'ra_orders_'+userKey();     // shared with Aerostar
   function saveBasket(){ try{
-    const slim={}; for(const k in basket){ const b=basket[k]; slim[k]={part_no:b.part.part_no, qty:b.qty}; }
+    // store the FULL part (not just part_no) so the cart survives a restart even
+    // for 30k-catalogue parts that aren't in the boot-time part index
+    const slim={}; for(const k in basket){ const b=basket[k]; slim[k]={part:b.part, qty:b.qty}; }
     localStorage.setItem(basketKey(), JSON.stringify(slim));
   }catch(e){} syncCart(); }
   let _cartTimer=null;
@@ -91,9 +93,31 @@ const H = (() => {
   }
   function loadBasket(){ try{
     const raw=JSON.parse(localStorage.getItem(basketKey())||'null'); basket={};
-    if(raw && parts.length){ for(const k in raw){ const p=findPart(k); if(p) basket[k]={part:p,qty:raw[k].qty}; } }
+    if(raw){ for(const k in raw){
+      const e=raw[k];
+      const part=(e&&e.part)?e.part:findPart(k);   // self-contained (new) or old {part_no,qty}
+      if(part){ basket[k]={part, qty:(e&&e.qty)||1}; partIndex[k]=part; }
+    } }
     updateBadge();
   }catch(e){ basket={}; } }
+  // pull the server-saved cart (cross-device / cleared-storage) if local is empty
+  async function loadBasketFromServer(){
+    if(!session||!session.firm) return;
+    if(Object.keys(basket).length) return;         // local cart already present
+    try{
+      const d=await (await fetch('/api/cart?portal=honda&firm='+encodeURIComponent(session.firm)+
+        '&contact='+encodeURIComponent(session.contact||''))).json();
+      (d.items||[]).forEach(it=>{
+        const p={part_no:it.part_no, name:it.name, price:it.price, unit:'', vehicles:[]};
+        basket[it.part_no]={part:p, qty:it.qty||1}; partIndex[it.part_no]=p;
+      });
+      if(d.items&&d.items.length){ updateBadge(); saveBasketLocalOnly(); }
+    }catch(e){}
+  }
+  function saveBasketLocalOnly(){ try{
+    const slim={}; for(const k in basket){ const b=basket[k]; slim[k]={part:b.part, qty:b.qty}; }
+    localStorage.setItem(basketKey(), JSON.stringify(slim));
+  }catch(e){} }
   function getOrders(){ try{ return JSON.parse(localStorage.getItem(ordersKey())||'[]'); }catch(e){ return []; } }
   function saveOrder(rec){ try{ const o=getOrders(); o.unshift(rec); localStorage.setItem(ordersKey(), JSON.stringify(o.slice(0,50))); }catch(e){} }
 
@@ -107,7 +131,8 @@ const H = (() => {
         try{ CATALOG=await (await fetch('/api/honda/catalog2')).json(); META=(CATALOG&&CATALOG.meta)||{}; }catch(_){ CATALOG=null; }
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
     }
-    loadBasket();     // restore this user's saved basket (parts are loaded now)
+    loadBasket();     // restore this user's saved basket (self-contained)
+    await loadBasketFromServer();   // cross-device / cleared-storage fallback
     try{
       const nr=await fetch('/api/honda/new'); const nd=await nr.json();
       newBatches=nd.batches||[]; newSet=new Set(newBatches.flatMap(b=>b.part_nos));
