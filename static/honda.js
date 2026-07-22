@@ -113,6 +113,7 @@ const H = (() => {
     else if(view==='search') renderSearch(arg);
     else if(view==='all') renderAll();
     else if(view==='common') renderCommon();
+    else if(view==='vin') renderVin();
     else if(view==='one') renderOne(arg);
     else if(view==='new') renderNewArrivals();
     window.scrollTo(0,0);
@@ -127,8 +128,17 @@ const H = (() => {
   function renderHome(){
     const total=META.total||parts.length;
     const nCommon=META.common||0;
-    // full product range first (top)
-    let html=`<div class="crumb"><b>Browse the full range</b> or pick a vehicle — search any part above</div>
+    // vehicle-number lookup — fastest path to the exact model's parts
+    let html=`<div class="vinbox">
+        <div class="vinh">🏍️ Gaadi ka number daalo — turant sahi parts</div>
+        <div class="vinrow">
+          <input id="vinInput" autocomplete="off" placeholder="MH31 AB 1234"
+            onkeydown="if(event.key==='Enter')H.lookupVin()">
+          <button id="vinBtn" class="vinbtn" onclick="H.lookupVin()">Parts dekho</button>
+        </div>
+        <div class="vinnote">Number plate se aapki Honda ka exact model apne aap mil jayega</div>
+      </div>
+      <div class="crumb"><b>Ya browse karo</b> — full range, vehicle, ya part search</div>
       <div class="vgrid" style="margin-bottom:22px">
         ${newSet.size?`<div class="vcard vcard-new" onclick="H.openNew()">
           <div class="vic">🆕</div><b>New Arrivals</b><small>${newSet.size} newly received part${newSet.size!==1?'s':''}</small></div>`:''}
@@ -209,9 +219,9 @@ const H = (() => {
     mountList(crumb, title, gc.all);
   }
 
-  // ── shared lazy list (used by variant / full range / common parts) ──
-  function mountList(crumb, titleHTML, list, ph){
-    $('main').innerHTML=crumb+`
+  // ── shared lazy list (used by variant / full range / common / vin) ──
+  function mountList(crumb, titleHTML, list, ph, headHTML){
+    $('main').innerHTML=crumb+(headHTML||'')+`
       <div class="sectitle">${titleHTML}</div>
       <div class="searchbox" style="margin-bottom:12px"><span class="si">🔍</span>
         <input id="grpSearch" placeholder="${ph||'Part number ya naam se dhoondo…'}" oninput="H.filterGroup()"></div>
@@ -323,6 +333,73 @@ const H = (() => {
   function matchQ(p,q){
     const hay=normHay(p);
     return qWords(q).every(w=>hay.includes(w));
+  }
+
+  // ── vehicle-number lookup (VAHAN -> exact model -> parts) ──
+  let vinResult=null;
+  function vehCardHTML(v, reg){
+    const rows=[['Gaadi', reg], ['Model', v&&v.model], ['Saal', v&&v.year],
+                ['Rang', v&&v.colour], ['Chassis', v&&v.chassis]].filter(x=>x[1]);
+    if(!rows.length) return '';
+    return `<div class="vehcard">`+rows.map(r=>
+      `<div class="vcr"><span>${r[0]}</span><b>${esc(String(r[1]))}</b></div>`).join('')+`</div>`;
+  }
+  async function lookupVin(){
+    const el=$('vinInput'); if(!el) return;
+    const reg=(el.value||'').trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(!reg){ toast('Gaadi ka number daalo'); return; }
+    const btn=$('vinBtn'); if(btn){ btn.disabled=true; btn.textContent='Dhoond rahe hain…'; }
+    try{
+      const r=await fetch('/api/honda/resolve-vehicle',{method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({reg_number:reg, firm:session.firm, contact:session.contact})});
+      vinResult=await r.json();
+    }catch(e){ vinResult={resolved:false, error:'Network problem. Dubara try karo.'}; }
+    vinResult._reg=reg;
+    if(btn){ btn.disabled=false; btn.textContent='Parts dekho'; }
+    go('vin',null,true);
+  }
+  async function fetchAndMount(crumb, titlePrefix, model_ids, head){
+    $('main').innerHTML=crumb+(head||'')+'<div class="empty">Parts la rahe hain…</div>';
+    const ids=(model_ids||[]).filter(Boolean);
+    let all=[];
+    try{
+      const d=await (await fetch('/api/honda/group-parts?ids='+encodeURIComponent(ids.join(',')))).json();
+      all=(d.parts||[]).map(adaptPart);
+      all.forEach(p=>{ if(!partIndex[p.part_no]) partIndex[p.part_no]=p; });
+    }catch(e){ $('main').innerHTML=crumb+(head||'')+'<div class="empty">Parts load nahi hue. Refresh karo.</div>'; return; }
+    const nreg=all.filter(p=>p._regular).length;
+    mountList(crumb, `${titlePrefix} — ${all.length} parts <span style="color:var(--success)">(${nreg} humare paas ✓)</span>`,
+      all, 'Part number ya naam se dhoondo…', head);
+  }
+  function renderVin(){
+    const vr=vinResult||{};
+    const crumb=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> › <b>Gaadi se parts</b></div>`;
+    const veh=vehCardHTML(vr.vehicle, vr._reg);
+    if(vr.resolved){
+      const head=veh+`<div class="vinmodel">✅ Model milgaya: <b>${esc(vr.model_code||'')}</b>${vr.desc?' · '+esc(vr.desc):''}</div>`;
+      fetchAndMount(crumb, 'Aapki gaadi ke parts', vr.model_ids, head);
+      return;
+    }
+    if(vr.needs_filter){
+      const q=vr.question||{};
+      let html=crumb+veh+`<div class="vinask">${esc(q.ask||'Ek baat batao')}</div><div class="vgrid">`;
+      (q.options||[]).forEach((o,i)=>{
+        html+=`<div class="vcard vcard-var" onclick="H.vinPick(${i})"><b>${esc(o.label||('Option '+(i+1)))}</b>
+          <small>${(o.model_ids||[]).length} model</small></div>`;
+      });
+      $('main').innerHTML=html+`</div>`;
+      return;
+    }
+    $('main').innerHTML=crumb+veh+`<div class="empty">${esc(vr.error||'Kuch galat hua. Dubara try karo.')}</div>
+      <div style="text-align:center;margin-top:14px"><button class="padd" onclick="H.home()">↩ Wapas jao</button></div>`;
+  }
+  function vinPick(i){
+    const vr=vinResult||{}; const o=(vr.question&&vr.question.options||[])[i]; if(!o) return;
+    const crumb=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
+      <span style="cursor:pointer" onclick="H.reopenVin()">Gaadi se parts</span> › <b>${esc(o.label||'')}</b></div>`;
+    fetchAndMount(crumb, esc(o.label||'Aapki gaadi ke parts'), o.model_ids,
+      vehCardHTML(vr.vehicle, vr._reg));
   }
 
   // ── search (Aerostar-style: live dropdown + Enter for full results) ──
@@ -610,6 +687,7 @@ const H = (() => {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
     openFamily:(f)=>go('family',f,true),
     openVariant:(f,s,v)=>go('variant',f+'|'+s+'|'+v,true),
+    lookupVin, vinPick, reopenVin:()=>go('vin',null,true),
     filterGroup, filterModels,
     openAll:()=>go('all',null,true), openCommon:()=>go('common',null,true), openNew:()=>go('new',null,true),
     onSearch, onSearchKey, focusDD, clearSearch, pick,

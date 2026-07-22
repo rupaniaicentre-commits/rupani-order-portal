@@ -477,6 +477,64 @@ def honda_common():
     parts.sort(key=lambda p: (-(p.get('n_models') or 0), p.get('pn') or ''))
     return jsonify({'parts': parts, 'total': len(parts), 'min': mn})
 
+_REG_RE = re.compile(r'^[A-Z]{2}[0-9]{1,2}[A-Z]{0,3}[0-9]{1,4}$')
+
+@app.route('/api/honda/resolve-vehicle', methods=['POST'])
+def honda_resolve_vehicle():
+    """Customer flow: number plate -> VAHAN -> exact Honda model -> its parts.
+
+    Returns one of:
+      {resolved:True, model_ids:[...], model_code, desc, family, year, vehicle}
+      {needs_filter:True, question:{ask, options:[{label, model_ids}]}, vehicle}
+      {resolved:False, error}
+    Parts are fetched separately via /api/honda/group-parts (tick + price + cart).
+    """
+    d = request.json or {}
+    reg = (d.get('reg_number') or '').strip().upper().replace(' ', '').replace('-', '')
+    if not reg:
+        return jsonify({'resolved': False, 'error': 'Gaadi ka number daalo.'})
+    if not _REG_RE.match(reg):
+        return jsonify({'resolved': False, 'error': 'Number sahi format me daalo (jaise MH31AB1234).'})
+    # credit guard: per-IP hourly + daily caps on VAHAN lookups
+    if rate_limit('vahan_pub_hr', 10, 3600) or rate_limit('vahan_pub_day', 30, 86400):
+        return jsonify({'resolved': False, 'error': 'Bahut zyada lookups. Thodi der baad try karo.'}), 429
+    try:
+        import vds_resolver as R
+    except Exception as e:
+        return jsonify({'resolved': False, 'error': f'resolver load failed: {e}'})
+
+    info = _fetch_vehicle_info(reg)
+    firm = (d.get('firm') or '').strip()
+    mobile = (d.get('contact') or '').strip()
+    log_event('vin', portal='honda', firm=firm, mobile=mobile, detail=reg)
+    if not info:
+        return jsonify({'resolved': False,
+                        'error': 'Is number ki detail VAHAN se nahi aayi. Number check karo.'})
+    make = (info.get('make') or '').upper()
+    vehicle = {'model': info.get('maker_model'), 'year': info.get('year'),
+               'colour': info.get('colour'), 'chassis': info.get('chassis'),
+               'owner': info.get('owner_name')}
+    if make and 'HONDA' not in make:
+        return jsonify({'resolved': False, 'vehicle': vehicle,
+                        'error': f'Yeh Honda gaadi nahi hai ({info.get("make")}). Abhi sirf Honda parts available hain.'})
+    res = R.resolve(chassis=info.get('chassis'), maker_model=info.get('maker_model'),
+                    mfg_year=int(info['year']) if str(info.get('year') or '').isdigit() else None,
+                    norms=info.get('norms_type'), cubic_capacity=info.get('cubic_capacity'))
+    if not res.get('ok'):
+        return jsonify({'resolved': False, 'vehicle': vehicle,
+                        'error': res.get('reason') or 'Is gaadi ka exact model nahi mila.'})
+    if res.get('needs_filter'):
+        q = res.get('question') or {}
+        opts = [{'label': o.get('label'), 'model_ids': [m for m in (o.get('model_ids') or []) if m]}
+                for o in q.get('options', [])]
+        return jsonify({'needs_filter': True, 'vehicle': vehicle, 'family': res.get('family'),
+                        'year': res.get('year'), 'question': {'ask': q.get('ask'), 'options': opts}})
+    code = res.get('model_code')
+    return jsonify({'resolved': True, 'vehicle': vehicle, 'family': res.get('family'),
+                    'year': res.get('year'), 'model_code': code, 'desc': _code_desc(code),
+                    'model_ids': [res.get('model_id')], 'note': res.get('note')})
+
+
 @app.route('/api/honda/group-parts')
 def honda_group_parts():
     ids = [i for i in (request.args.get('ids', '') or '').split(',') if i.strip()][:40]
