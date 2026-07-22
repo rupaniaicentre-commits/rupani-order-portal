@@ -321,6 +321,73 @@ def honda_feedback():
     return jsonify({'success': True})
 
 
+# ── Full Honda catalogue (30k parts): classification + tagged parts ───
+_SCOOTER_FAMS = {'Activa','Activa i','Activa125','Aviator','CLIQ','Dio','Dio 125',
+                 'Eterno','GRAZIA','Navi'}
+_hc_catalog = None
+_hc_procured = None
+
+def _load_procured():
+    """{normalised part_no: mrp} for the parts we regularly procure (company list)."""
+    global _hc_procured
+    if _hc_procured is not None: return _hc_procured
+    m = {}
+    try:
+        d = json.load(open(os.path.join(BASE_DIR, 'honda_parts.json')))
+        for p in d.get('parts', []):
+            n = re.sub(r'[^A-Z0-9]', '', (p.get('part_no') or '').upper())
+            if n: m[n] = p.get('price')
+    except Exception as e:
+        print(f"[procured] {e}", flush=True)
+    _hc_procured = m
+    return m
+
+def _load_catalog():
+    """category -> [{family, name, groups:[{gen, years, codes, model_ids}]}]"""
+    global _hc_catalog
+    if _hc_catalog is not None: return _hc_catalog
+    try:
+        vv = json.load(open(os.path.join(BASE_DIR, 'vehicle_variants.json')))
+    except Exception as e:
+        print(f"[catalog] {e}", flush=True); _hc_catalog = {'scooters': [], 'motorcycles': []}; return _hc_catalog
+    scoot, moto = [], []
+    for fam, obj in vv.items():
+        entry = {'family': fam, 'name': obj.get('name', fam), 'groups': obj.get('groups', [])}
+        (scoot if fam in _SCOOTER_FAMS else moto).append(entry)
+    scoot.sort(key=lambda x: x['name']); moto.sort(key=lambda x: x['name'])
+    _hc_catalog = {'scooters': scoot, 'motorcycles': moto}
+    return _hc_catalog
+
+@app.route('/api/honda/catalog')
+def honda_catalog():
+    return jsonify(_load_catalog())
+
+@app.route('/api/honda/group-parts')
+def honda_group_parts():
+    ids = [i for i in (request.args.get('ids', '') or '').split(',') if i.strip()][:40]
+    if not ids:
+        return jsonify({'parts': []})
+    dbp = os.path.join(BASE_DIR, 'epc_parts.db')
+    if not os.path.exists(dbp):
+        return jsonify({'parts': [], 'error': 'catalogue not found'})
+    procured = _load_procured()
+    conn = sqlite3.connect(dbp)
+    ph = ','.join('?' * len(ids))
+    rows = conn.execute(
+        f'SELECT pn, descr, section, illus FROM parts WHERE model_id IN ({ph})', ids).fetchall()
+    conn.close()
+    seen = {}
+    for pn, descr, section, illus in rows:
+        if not pn: continue
+        n = re.sub(r'[^A-Z0-9]', '', pn.upper())
+        if pn not in seen:
+            seen[pn] = {'pn': pn, 'desc': descr, 'section': section, 'illus': illus,
+                        'regular': n in procured, 'mrp': procured.get(n)}
+    parts = sorted(seen.values(), key=lambda p: (0 if p['regular'] else 1, p['section'], p['illus'], p['pn']))
+    return jsonify({'parts': parts, 'total': len(parts),
+                    'regular': sum(1 for p in parts if p['regular'])})
+
+
 # ── server-side order history (cross-device, keyed by mobile) ─────────
 # Uses SQLite. Set ORDERS_DB to a path on a Railway *volume* (e.g.
 # /data/orders.db) so history survives redeploys; otherwise it falls back
