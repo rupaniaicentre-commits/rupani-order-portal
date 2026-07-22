@@ -164,13 +164,19 @@ const H = (() => {
     if(!CATALOG) return null;
     return (CATALOG.scooters||[]).concat(CATALOG.motorcycles||[]).find(f=>f.family===fam);
   }
+  // small chips listing the distinct derived descriptions in a generation group
+  function variantChips(g){
+    const descs=[...new Set((g.variants||[]).map(v=>v.desc).filter(Boolean))];
+    if(!descs.length) return '';
+    return `<div class="vchips">`+descs.slice(0,6).map(d=>`<span class="vchip">${esc(d)}</span>`).join('')+`</div>`;
+  }
   function renderFamily(fam){
     const f=findFamily(fam); if(!f){ home(); return; }
     let html=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> › <b>${esc(f.name)}</b></div>
       <div class="sectitle">${esc(f.name)} — apni gaadi chuno</div>
       <div class="vgrid">`+
       (f.groups||[]).map((g,i)=>`<div class="vcard" onclick="H.openGroup('${esc(fam)}','${i}')">
-        <b>${esc(g.gen)}</b><small>${esc(g.years)}</small></div>`).join('')+`</div>`;
+        <b>${esc(g.gen)}</b><small>${esc(g.years)}</small>${variantChips(g)}</div>`).join('')+`</div>`;
     $('main').innerHTML=html;
   }
 
@@ -192,8 +198,12 @@ const H = (() => {
       }catch(e){ $('main').innerHTML=crumb+'<div class="empty">Parts load nahi hue. Refresh karo.</div>'; return; }
     }
     const gc=groupCache[key];
+    const vlist=(g.variants||[]).filter(v=>v.desc);
+    const vhtml=vlist.length?`<div class="vmodels">`+vlist.map(v=>
+      `<div class="vmodel"><span class="vmcode">${esc(v.code)}</span><span class="vmdesc">${esc(v.desc)}</span></div>`).join('')+`</div>`:'';
     $('main').innerHTML=crumb+`
       <div class="sectitle">${esc(gc.name)} — ${gc.all.length} parts <span style="color:var(--success)">(${gc.nreg} humare paas ✓)</span></div>
+      ${vhtml}
       <div class="searchbox" style="margin-bottom:12px"><span class="si">🔍</span>
         <input id="grpSearch" placeholder="Part number ya naam se dhoondo…" oninput="H.filterGroup()"></div>
       <div class="plist" id="grpList"></div>

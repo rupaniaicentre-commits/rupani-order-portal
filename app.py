@@ -326,6 +326,32 @@ _SCOOTER_FAMS = {'Activa','Activa i','Activa125','Aviator','CLIQ','Dio','Dio 125
                  'Eterno','GRAZIA','Navi'}
 _hc_catalog = None
 _hc_procured = None
+_hc_feats = None
+
+def _load_feats():
+    """{model_code: {fuel,start,brake,cbs,abs,wheel}} — features we derived per code."""
+    global _hc_feats
+    if _hc_feats is not None: return _hc_feats
+    try:
+        _hc_feats = json.load(open(os.path.join(BASE_DIR, 'model_features.json')))
+    except Exception as e:
+        print(f"[feats] {e}", flush=True); _hc_feats = {}
+    return _hc_feats
+
+def _code_desc(code):
+    """Retailer-friendly variant description e.g. 'Disc Brake, CBS, FI, Kick Start'."""
+    f = _load_feats().get(code) or {}
+    bits = []
+    b = f.get('brake')
+    if b: bits.append(b + ' Brake')          # Disc Brake / Drum Brake
+    if f.get('wheel') == 'Spoke': bits.append('Spoke Wheel')
+    if f.get('cbs') == 'Yes': bits.append('CBS')
+    if f.get('abs') == 'ABS': bits.append('ABS')
+    fu = f.get('fuel')
+    if fu: bits.append('FI' if fu == 'FI' else 'Carburettor')
+    st = f.get('start')
+    if st in ('Kick', 'Silent'): bits.append(st + ' Start')
+    return ', '.join(bits)
 
 def _load_procured():
     """{normalised part_no: mrp} for the parts we regularly procure (company list)."""
@@ -380,7 +406,17 @@ def _load_catalog():
     scoot, moto = [], []
     for fam, obj in vv.items():
         name, alias = NAMES.get(fam, (obj.get('name', fam), ''))
-        entry = {'family': fam, 'name': name, 'groups': obj.get('groups', []),
+        groups = []
+        for g in obj.get('groups', []):
+            codes = g.get('codes', []); mids = g.get('model_ids', [])
+            variants = []
+            for i, code in enumerate(codes):
+                variants.append({'code': code,
+                                 'model_id': mids[i] if i < len(mids) else None,
+                                 'desc': _code_desc(code)})
+            gg = dict(g); gg['variants'] = variants
+            groups.append(gg)
+        entry = {'family': fam, 'name': name, 'groups': groups,
                  'q': (name + ' ' + fam + ' ' + alias).lower()}
         (scoot if fam in _SCOOTER_FAMS else moto).append(entry)
     scoot.sort(key=lambda x: x['name']); moto.sort(key=lambda x: x['name'])
@@ -403,7 +439,7 @@ def honda_group_parts():
     conn = sqlite3.connect(dbp)
     ph = ','.join('?' * len(ids))
     rows = conn.execute(
-        f'SELECT pn, descr, section, illus FROM parts WHERE model_id IN ({ph})', ids).fetchall()
+        f"SELECT pn, descr, section, illus FROM parts WHERE model_id IN ({ph}) AND ns != 'NS'", ids).fetchall()
     conn.close()
     seen = {}
     for pn, descr, section, illus in rows:
@@ -589,9 +625,9 @@ def _epc_parts_for_model(model_id, limit=400):
     if not os.path.exists(dbp):
         return None, 0
     conn = sqlite3.connect(dbp)
-    total = conn.execute('SELECT COUNT(*) FROM parts WHERE model_id=?', (str(model_id),)).fetchone()[0]
+    total = conn.execute("SELECT COUNT(*) FROM parts WHERE model_id=? AND ns != 'NS'", (str(model_id),)).fetchone()[0]
     rows = conn.execute(
-        'SELECT section,illus,pn,descr,qty,ns FROM parts WHERE model_id=? ORDER BY section,illus LIMIT ?',
+        "SELECT section,illus,pn,descr,qty,ns FROM parts WHERE model_id=? AND ns != 'NS' ORDER BY section,illus LIMIT ?",
         (str(model_id), limit)).fetchall()
     conn.close()
     groups = {}

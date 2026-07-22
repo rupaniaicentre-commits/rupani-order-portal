@@ -90,6 +90,15 @@
     .vcard.vcard-new b,.vcard.vcard-new small{color:#fff}
     .vcard-new:hover{border-color:#fff}
     .chip.newc{background:#059669;color:#fff}
+    /* derived variant descriptions (Disc Brake, CBS, FI ...) */
+    .vchips{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:9px}
+    .vchip{font-size:10.5px;font-weight:600;color:var(--red-dark,#990000);background:#fee2e2;
+      border-radius:20px;padding:2px 8px;line-height:1.4}
+    .vmodels{display:flex;flex-direction:column;gap:6px;margin:0 0 14px}
+    .vmodel{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);
+      border-radius:9px;padding:7px 12px;font-size:13px}
+    .vmcode{font-weight:800;color:var(--navy);min-width:92px;font-family:ui-monospace,monospace;font-size:12px}
+    .vmdesc{color:var(--text)}
     .batch-line{font-size:13px;font-weight:700;color:var(--navy);margin:6px 0 10px;padding:7px 12px;background:#ecfdf5;border-radius:8px;border:1px solid #a7f3d0}
     .vcard b{display:block;font-size:15px;color:var(--navy)}
     .vcard small{color:var(--muted);font-size:12px}
@@ -290,6 +299,6 @@
   </div>
 </div>
 
-<script src="/static/honda.js?v=20260720-catalog2"></script>
+<script src="/static/honda.js?v=20260722-variants"></script>
 </body>
 </html>
