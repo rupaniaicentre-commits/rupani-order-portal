@@ -14,6 +14,9 @@ const H = (() => {
   let session = { firm:'', contact:'' };
   let basket = {};           // part_no -> {part, qty}
   let stack = [];            // view history: {view, arg}
+  let CATALOG = null;        // {scooters:[{family,name,groups}], motorcycles:[...]}
+  let partIndex = {};        // part_no -> part object (1500 + catalogue parts)
+  let groupCache = {};       // group key -> {all:[parts], regular:[parts]}
 
   const FAMILY_ICON = {
     ACTIVA:'🛵', SHINE:'🏍️', UNICORN:'🏍️', DREAM:'🏍️', DIO:'🛵', LIVO:'🏍️',
@@ -85,6 +88,8 @@ const H = (() => {
         const r=await fetch('/api/honda/data?v=20260623-8'); DATA=await r.json();
         parts=DATA.parts||[];
         searchIndex=parts.map(p=>({p, s:normHay(p)}));
+        parts.forEach(p=>partIndex[p.part_no]=p);
+        try{ CATALOG=await (await fetch('/api/honda/catalog')).json(); }catch(_){ CATALOG=null; }
       }catch(e){ $('main').innerHTML='<div class="empty">Failed to load parts. Please refresh.</div>'; return; }
     }
     loadBasket();     // restore this user's saved basket (parts are loaded now)
@@ -99,6 +104,8 @@ const H = (() => {
   function go(view, arg, push=true){
     if(push) stack.push({view, arg});
     if(view==='home') renderHome();
+    else if(view==='family') renderFamily(arg);
+    else if(view==='group') renderGroup(arg);
     else if(view==='vehicle') renderVehicle(arg);
     else if(view==='search') renderSearch(arg);
     else if(view==='all') renderAll();
@@ -128,18 +135,82 @@ const H = (() => {
         ${nCommon?`<div class="vcard" onclick="H.openVehicle('ALL MODELS')">
           <div class="vic">🔧</div><b>Common to all</b><small>${nCommon} universal part${nCommon!==1?'s':''}</small></div>`:''}
       </div>`;
-    for(const g of groups){
-      const fam=g.family;
-      const label = fam==='OTHER' ? 'Universal / Other' : fam;
-      html+=`<div class="sectitle">${FAMILY_ICON[fam]||'🏍️'} ${esc(label)}</div>
-        <div class="vgrid" style="margin-bottom:20px">`+
-        g.vehicles.map(v=>`
-          <div class="vcard" onclick="H.openVehicle('${esc(v.name)}')">
-            <b>${esc(v.name==='OTHER'?'Universal parts':v.name)}</b>
-            <small>${v.part_count} part${v.part_count!==1?'s':''}</small>
-          </div>`).join('')+`</div>`;
+    // New catalogue browse: Scooters / Motorcycles → family
+    if(CATALOG){
+      for(const [cat,label,icon] of [['scooters','Scooters','🛵'],['motorcycles','Motorcycles','🏍️']]){
+        const fams=CATALOG[cat]||[];
+        html+=`<div class="sectitle">${icon} ${label}</div><div class="vgrid" style="margin-bottom:20px">`+
+          fams.map(f=>`<div class="vcard" onclick="H.openFamily('${esc(f.family)}')">
+            <div class="vic">${icon}</div><b>${esc(f.name)}</b>
+            <small>${(f.groups||[]).length} model${(f.groups||[]).length!==1?'s':''}</small></div>`).join('')+`</div>`;
+      }
     }
     $('main').innerHTML=html;
+  }
+
+  // family -> its generation groups (Activa 6G, 5G ...)
+  function findFamily(fam){
+    if(!CATALOG) return null;
+    return (CATALOG.scooters||[]).concat(CATALOG.motorcycles||[]).find(f=>f.family===fam);
+  }
+  function renderFamily(fam){
+    const f=findFamily(fam); if(!f){ home(); return; }
+    let html=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> › <b>${esc(f.name)}</b></div>
+      <div class="sectitle">${esc(f.name)} — apni gaadi chuno</div>
+      <div class="vgrid">`+
+      (f.groups||[]).map((g,i)=>`<div class="vcard" onclick="H.openGroup('${esc(fam)}','${i}')">
+        <b>${esc(g.gen)}</b><small>${esc(g.years)}</small></div>`).join('')+`</div>`;
+    $('main').innerHTML=html;
+  }
+
+  // generation group -> parts (procured first, then "search all")
+  async function renderGroup(arg){
+    const [fam,idx]=arg.split('|'); const f=findFamily(fam);
+    const g=f&&(f.groups||[])[+idx]; if(!g){ home(); return; }
+    const key=fam+'|'+idx;
+    $('main').innerHTML=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
+      <span style="cursor:pointer" onclick="H.openFamily('${esc(fam)}')">${esc(f.name)}</span> › <b>${esc(g.gen)}</b></div>
+      <div class="empty">Parts la rahe hain…</div>`;
+    if(!groupCache[key]){
+      try{
+        const d=await (await fetch('/api/honda/group-parts?ids='+encodeURIComponent((g.model_ids||[]).join(',')))).json();
+        const all=(d.parts||[]).map(adaptPart);
+        all.forEach(p=>{ if(!partIndex[p.part_no]) partIndex[p.part_no]=p; });
+        groupCache[key]={all, regular:all.filter(p=>p._regular), name:g.gen};
+      }catch(e){ $('main').innerHTML='<div class="empty">Parts load nahi hue. Refresh karo.</div>'; return; }
+    }
+    const gc=groupCache[key];
+    $('main').innerHTML=`<div class="crumb"><span style="cursor:pointer" onclick="H.home()">Home</span> ›
+      <span style="cursor:pointer" onclick="H.openFamily('${esc(fam)}')">${esc(f.name)}</span> › <b>${esc(g.gen)}</b></div>
+      <div class="sectitle">${esc(gc.name)} — hamare paas ${gc.regular.length} parts</div>
+      <div class="plist" id="grpRegular">${gc.regular.length?gc.regular.map(p=>rowHTML(p)).join(''):'<div class="empty">Is model ke liye regular part nahi — neeche saare Honda parts search karo</div>'}</div>
+      <div style="text-align:center;margin:18px 0">
+        <button class="padd" style="padding:11px 20px;font-size:14px" onclick="H.showAllGroup('${esc(key)}')">🔍 Saare Honda parts dekho (${gc.all.length})</button>
+      </div>
+      <div id="grpAll"></div>`;
+  }
+  const GRP_CAP=80;
+  function showAllGroup(key){
+    const gc=groupCache[key]; if(!gc) return;
+    const first=gc.all.slice(0,GRP_CAP);
+    $('grpAll').innerHTML=`<div class="sectitle">Saare parts (${gc.all.length}) — search karo</div>
+      <div class="searchbox" style="margin-bottom:12px"><span class="si">🔍</span>
+      <input id="grpSearch" placeholder="Part number ya naam se dhoondo…" oninput="H.filterGroup('${esc(key)}')"></div>
+      <div class="plist" id="grpAllList">${first.map(p=>rowHTML(p)).join('')}</div>
+      ${gc.all.length>GRP_CAP?`<div class="empty" id="grpMore">Aur ${gc.all.length-GRP_CAP} parts — upar search karo</div>`:''}`;
+    $('grpAll').scrollIntoView({behavior:'smooth'});
+  }
+  function filterGroup(key){
+    const gc=groupCache[key]; if(!gc) return;
+    const q=($('grpSearch').value||'').toLowerCase().trim();
+    const list=(q?gc.all.filter(p=>matchQ(p,q)):gc.all).slice(0,GRP_CAP);
+    const more=$('grpMore'); if(more) more.style.display=q?'none':'block';
+    $('grpAllList').innerHTML=list.length?list.map(p=>rowHTML(p)).join(''):'<div class="empty">Koi part nahi mila</div>';
+  }
+  // catalogue part {pn,desc,section,illus,regular,mrp} -> internal part shape
+  function adaptPart(p){
+    return {part_no:p.pn, name:p.desc, price:p.mrp, unit:'', vehicles:[],
+            common_all:false, _regular:!!p.regular, _section:p.section, _illus:p.illus};
   }
 
   // ── new arrivals ────────────────────────────────────
@@ -291,9 +362,10 @@ const H = (() => {
     const chips=newChip+vehicles.filter(v=>v!=='OTHER')
       .map(v=>`<span class="chip${v==='ALL MODELS'?' all':''}">${esc(v)}</span>`).join('');
     const ctrl = inCart ? qstepHTML(p) : `<button class="padd" onclick="H.add('${esc(p.part_no)}')">+ Add</button>`;
+    const tick = p._regular ? '<span class="rtick" title="Hum yeh part regular rakhte hain">✓</span> ' : '';
     return `<div class="prow ${inCart?'in':''}" id="row-${cssid(p.part_no)}">
       <div class="pinfo">
-        <div class="pname">${esc(p.name)}</div>
+        <div class="pname">${tick}${esc(p.name)}</div>
         <div class="pmeta"><span class="pn">${esc(p.part_no)}</span>${chips}${p.unit?`<span>· ${esc(p.unit)}</span>`:''}
           <button class="flagbtn" title="Report wrong fitment / add vehicles"
             onclick="H.openFeedback('${esc(p.part_no)}')">🚩</button></div>
@@ -336,7 +408,7 @@ const H = (() => {
   }
 
   // ── basket ──────────────────────────────────────────
-  function findPart(pn){ return parts.find(p=>p.part_no===pn); }
+  function findPart(pn){ return partIndex[pn] || parts.find(p=>p.part_no===pn); }
   function add(pn){ const p=findPart(pn); if(!p) return; basket[pn]={part:p,qty:1}; refreshRow(pn); updateBadge(); saveBasket(); toast('Added to order'); }
   function inc(pn){ if(basket[pn]){ basket[pn].qty++; refreshRow(pn); updateBadge(); saveBasket(); } }
   function dec(pn){ if(basket[pn]){ basket[pn].qty--; if(basket[pn].qty<=0) delete basket[pn]; refreshRow(pn); updateBadge(); saveBasket(); } }
@@ -492,6 +564,8 @@ const H = (() => {
 
   return {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
+    openFamily:(f)=>go('family',f,true), openGroup:(f,i)=>go('group',f+'|'+i,true),
+    showAllGroup, filterGroup,
     openAll:()=>go('all',null,true), openNew:()=>go('new',null,true), toggleSort, filterAll,
     onSearch, onSearchKey, focusDD, clearSearch, pick,
     filterVehicle, add, inc, dec, setQty, remove,
