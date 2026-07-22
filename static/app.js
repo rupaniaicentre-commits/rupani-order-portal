@@ -112,11 +112,13 @@ const App = (() => {
     }
   }
 
+  let _loginLogged = false;
   function showApp() {
     document.getElementById('loginScreen').classList.remove('active');
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('appScreen').classList.remove('hidden');
     document.getElementById('appScreen').classList.add('active');
+    if (!_loginLogged) { _loginLogged = true; track('login'); }   // count every entry (incl. remembered)
     loadBasketFromStorage();   // restore this user's saved basket
     loadProducts();
     loadSettings();
@@ -146,7 +148,6 @@ const App = (() => {
       localStorage.removeItem('ra_remember');
       localStorage.setItem('ra_prefill', JSON.stringify(session));
     }
-    track('login', { firm, mobile: contact });
     showApp();
   }
 

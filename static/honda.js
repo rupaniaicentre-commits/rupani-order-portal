@@ -54,7 +54,6 @@ const H = (() => {
     if(!$('remember') || $('remember').checked){
       localStorage.setItem('ra_remember', JSON.stringify(session));
     }
-    track('login', {firm, mobile:mob});
     enter();
   }
   let _searchLogTimer=null;
@@ -64,8 +63,10 @@ const H = (() => {
         firm:(session&&session.firm)||'', mobile:(session&&session.contact)||''}, extra||{})),
       keepalive:true}).catch(()=>{}); }catch(e){}
   }
+  let _loginLogged=false;
   function enter(){
     $('login').classList.add('hidden'); $('app').classList.remove('hidden');
+    if(!_loginLogged){ _loginLogged=true; track('login'); }   // count every entry (incl. remembered)
     boot();
   }
 
