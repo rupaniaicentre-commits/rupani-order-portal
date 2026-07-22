@@ -1,0 +1,3516 @@
+{
+  "AS-01B": [
+    "Super Splendor"
+  ],
+  "AS-02A": [
+    "Glamour"
+  ],
+  "AS-02D": [
+    "Glamour"
+  ],
+  "AS-03B": [
+    "CB Unicorn"
+  ],
+  "AS-03D": [
+    "CB Unicorn"
+  ],
+  "AS-04A": [
+    "Fiero"
+  ],
+  "AS-06B": [
+    "Samurai"
+  ],
+  "AS-07A": [
+    "CD Dawn"
+  ],
+  "AS-07E": [
+    "CD Dawn"
+  ],
+  "AS-08C": [
+    "Victor"
+  ],
+  "AS-100": [
+    "Gusto",
+    "Duro",
+    "Splendor"
+  ],
+  "AS-1000": [
+    "Jupiter"
+  ],
+  "AS-1000D": [
+    "Jupiter"
+  ],
+  "AS-1001": [
+    "Aviator"
+  ],
+  "AS-1002B": [
+    "Jupiter"
+  ],
+  "AS-1002F": [
+    "Jupiter"
+  ],
+  "AS-1003C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1005B": [
+    "Activa"
+  ],
+  "AS-1006A": [
+    "HF Deluxe"
+  ],
+  "AS-1009C": [
+    "Shine"
+  ],
+  "AS-1011": [
+    "Shine"
+  ],
+  "AS-1011D": [
+    "SP 125"
+  ],
+  "AS-1012B": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1013A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1014": [
+    "Maestro"
+  ],
+  "AS-1014D": [
+    "Maestro"
+  ],
+  "AS-1018C": [
+    "Pleasure"
+  ],
+  "AS-101A": [
+    "Splendor"
+  ],
+  "AS-101E": [
+    "Splendor"
+  ],
+  "AS-1023": [
+    "Dio BS4"
+  ],
+  "AS-1027": [
+    "Splendor",
+    "Passion",
+    "Pleasure",
+    "Activa"
+  ],
+  "AS-1028": [
+    "Jupiter"
+  ],
+  "AS-102D": [
+    "Splendor Plus"
+  ],
+  "AS-102H": [
+    "Splendor"
+  ],
+  "AS-1033": [
+    "Jupiter"
+  ],
+  "AS-1038C": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-1039A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-1042A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-1043A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-1045C": [
+    "Fascino"
+  ],
+  "AS-1046A": [
+    "Aviator"
+  ],
+  "AS-1047C": [
+    "Activa 6G"
+  ],
+  "AS-1047G": [
+    "Activa 6G"
+  ],
+  "AS-1048A": [
+    "Activa 6G"
+  ],
+  "AS-1048E": [
+    "Activa 6G"
+  ],
+  "AS-1048I": [
+    "Activa 6G"
+  ],
+  "AS-104A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-1050": [
+    "Splendor"
+  ],
+  "AS-1053": [
+    "Splendor"
+  ],
+  "AS-105A": [
+    "Splendor"
+  ],
+  "AS-105E": [
+    "Splendor"
+  ],
+  "AS-1068C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1069": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1069C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-106D": [
+    "Splendor"
+  ],
+  "AS-1071": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1071D": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1072": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad",
+    "Access 125"
+  ],
+  "AS-1072D": [
+    "Access 125"
+  ],
+  "AS-1072H": [
+    "Access 125"
+  ],
+  "AS-1073B": [
+    "Access 125"
+  ],
+  "AS-1073F": [
+    "Access 125"
+  ],
+  "AS-1074": [
+    "Aviator",
+    "Activa 3G"
+  ],
+  "AS-1074D": [
+    "Activa 3G"
+  ],
+  "AS-1075": [
+    "Activa 5G"
+  ],
+  "AS-1075D": [
+    "Activa 5G"
+  ],
+  "AS-1076A": [
+    "Activa",
+    "Activa 6G"
+  ],
+  "AS-1076E": [
+    "Activa"
+  ],
+  "AS-1076I": [
+    "Activa 6G"
+  ],
+  "AS-1077": [
+    "Activa"
+  ],
+  "AS-1077D": [
+    "Activa"
+  ],
+  "AS-1078-GR": [
+    "CBZ Xtreme"
+  ],
+  "AS-1079B": [
+    "Access 125",
+    "Activa"
+  ],
+  "AS-1081A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1082": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1083A": [
+    "Splendor Plus XTEC",
+    "Splendor",
+    "Splendor Plus"
+  ],
+  "AS-1083B": [
+    "Splendor",
+    "Splendor Plus"
+  ],
+  "AS-1084A": [
+    "Splendor Plus"
+  ],
+  "AS-1085": [
+    "Splendor Plus"
+  ],
+  "AS-1087": [
+    "SP 125"
+  ],
+  "AS-1087D": [
+    "SP 125"
+  ],
+  "AS-1089A": [
+    "Passion Plus"
+  ],
+  "AS-1104": [
+    "Jupiter"
+  ],
+  "AS-1106B": [
+    "SP 125"
+  ],
+  "AS-1107B": [
+    "SP 125"
+  ],
+  "AS-1108B": [
+    "Star City CVTI"
+  ],
+  "AS-1109B": [
+    "Maestro"
+  ],
+  "AS-1109F": [
+    "Maestro"
+  ],
+  "AS-1111": [
+    "SP 125"
+  ],
+  "AS-1121C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1122L": [
+    "Jupiter"
+  ],
+  "AS-1124C": [
+    "Pleasure Plus"
+  ],
+  "AS-1125A": [
+    "Pleasure Plus"
+  ],
+  "AS-1126A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1127": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1127D": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1128B": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1129": [
+    "Platina"
+  ],
+  "AS-113": [
+    "CT 100",
+    "Platina",
+    "Discover"
+  ],
+  "AS-1131": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-1133A": [
+    "Activa"
+  ],
+  "AS-1134C": [
+    "Access 125"
+  ],
+  "AS-1134G": [
+    "Access 125"
+  ],
+  "AS-1135B": [
+    "Pleasure Plus"
+  ],
+  "AS-1136B": [
+    "Maestro"
+  ],
+  "AS-1137B": [
+    "Maestro Edge"
+  ],
+  "AS-1139B": [
+    "SP 125",
+    "CB Trigger"
+  ],
+  "AS-1140A": [
+    "Access 125"
+  ],
+  "AS-1140E": [
+    "Access 125"
+  ],
+  "AS-1140J": [
+    "Access 125"
+  ],
+  "AS-1141A": [
+    "Splendor Plus XTEC",
+    "Passion Plus",
+    "Access 125"
+  ],
+  "AS-1145": [
+    "Splendor Plus"
+  ],
+  "AS-1146A": [
+    "Splendor Plus",
+    "Splendor"
+  ],
+  "AS-1147": [
+    "Splendor Plus",
+    "Splendor Plus XTEC",
+    "Access 125"
+  ],
+  "AS-1151D": [
+    "SP 125"
+  ],
+  "AS-1152A": [
+    "Splendor Plus XTEC",
+    "SP 125"
+  ],
+  "AS-1154C": [
+    "Activa"
+  ],
+  "AS-1155B": [
+    "Activa"
+  ],
+  "AS-1156A": [
+    "Splendor Plus",
+    "Passion Plus"
+  ],
+  "AS-1158": [
+    "Shine"
+  ],
+  "AS-1158A": [
+    "Shine"
+  ],
+  "AS-1158B": [
+    "Shine"
+  ],
+  "AS-1158C": [
+    "Shine"
+  ],
+  "AS-1163": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1163A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1163B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1164": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1164A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1164B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1165": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1165A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1165B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-1166": [
+    "Shine"
+  ],
+  "AS-1166A": [
+    "Shine"
+  ],
+  "AS-1168": [
+    "Shine"
+  ],
+  "AS-1168A": [
+    "Shine"
+  ],
+  "AS-1169": [
+    "Platina"
+  ],
+  "AS-1169A": [
+    "Platina"
+  ],
+  "AS-1169B": [
+    "Platina"
+  ],
+  "AS-1170": [
+    "Platina"
+  ],
+  "AS-1170A": [
+    "Platina"
+  ],
+  "AS-1170B": [
+    "Platina"
+  ],
+  "AS-1171": [
+    "Platina"
+  ],
+  "AS-1171A": [
+    "Platina"
+  ],
+  "AS-1171B": [
+    "Platina"
+  ],
+  "AS-11B": [
+    "Glamour"
+  ],
+  "AS-120A": [
+    "CB Unicorn",
+    "Shine"
+  ],
+  "AS-120D": [
+    "Shine"
+  ],
+  "AS-121A": [
+    "Libero"
+  ],
+  "AS-121E": [
+    "Libero"
+  ],
+  "AS-123": [
+    "Crux"
+  ],
+  "AS-125A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-125E": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-126J": [
+    "FZ",
+    "FZS"
+  ],
+  "AS-128": [
+    "Passion"
+  ],
+  "AS-129B": [
+    "Hunk"
+  ],
+  "AS-12B": [
+    "CBZ Star"
+  ],
+  "AS-130A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-131H": [
+    "Splendor",
+    "Splendor Plus"
+  ],
+  "AS-132H": [
+    "Splendor"
+  ],
+  "AS-133A": [
+    "Super Splendor"
+  ],
+  "AS-133E": [
+    "Super Splendor"
+  ],
+  "AS-134D": [
+    "Shine"
+  ],
+  "AS-136A": [
+    "CD Dawn"
+  ],
+  "AS-137A": [
+    "CT 100",
+    "Platina"
+  ],
+  "AS-138B": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-139B": [
+    "SP 125",
+    "Pulsar DTSi"
+  ],
+  "AS-13B": [
+    "CBZ Xtreme",
+    "Karizma"
+  ],
+  "AS-13G": [
+    "Karizma"
+  ],
+  "AS-144C": [
+    "Star"
+  ],
+  "AS-146C": [
+    "Crux"
+  ],
+  "AS-147B": [
+    "Libero"
+  ],
+  "AS-148": [
+    "Libero"
+  ],
+  "AS-15-WP": [
+    "CT 110"
+  ],
+  "AS-150E": [
+    "Libero"
+  ],
+  "AS-151C": [
+    "Libero"
+  ],
+  "AS-152C": [
+    "Super Splendor"
+  ],
+  "AS-157A": [
+    "Shine"
+  ],
+  "AS-157D": [
+    "Shine"
+  ],
+  "AS-158C": [
+    "Super Splendor"
+  ],
+  "AS-159A": [
+    "Passion"
+  ],
+  "AS-159F": [
+    "Passion"
+  ],
+  "AS-15C": [
+    "Platina"
+  ],
+  "AS-15F": [
+    "Platina"
+  ],
+  "AS-16": [
+    "Samurai"
+  ],
+  "AS-160": [
+    "Super Splendor"
+  ],
+  "AS-160D": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-161C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-162B": [
+    "Discover"
+  ],
+  "AS-163A": [
+    "Fazer"
+  ],
+  "AS-165A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-168": [
+    "Discover"
+  ],
+  "AS-168B": [
+    "Discover"
+  ],
+  "AS-168F": [
+    "Discover"
+  ],
+  "AS-169A": [
+    "Activa"
+  ],
+  "AS-169E": [
+    "Activa"
+  ],
+  "AS-170B": [
+    "Victor GX",
+    "Victor"
+  ],
+  "AS-172": [
+    "Victor"
+  ],
+  "AS-172D": [
+    "Victor"
+  ],
+  "AS-175D": [
+    "Passion"
+  ],
+  "AS-176B": [
+    "Passion Plus"
+  ],
+  "AS-176F": [
+    "Passion Plus"
+  ],
+  "AS-17A": [
+    "Platina",
+    "CT 100"
+  ],
+  "AS-180C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-184": [
+    "Activa"
+  ],
+  "AS-184A": [
+    "Activa"
+  ],
+  "AS-184F": [
+    "Activa"
+  ],
+  "AS-185A": [
+    "CB Unicorn"
+  ],
+  "AS-185F": [
+    "CB Unicorn"
+  ],
+  "AS-186A-WP": [
+    "Passion Pro"
+  ],
+  "AS-186C-WP": [
+    "Passion Pro"
+  ],
+  "AS-186F-WP": [
+    "Passion Pro"
+  ],
+  "AS-188D": [
+    "Hunk"
+  ],
+  "AS-189C": [
+    "Discover"
+  ],
+  "AS-18B": [
+    "Glamour"
+  ],
+  "AS-190C": [
+    "Discover"
+  ],
+  "AS-192B": [
+    "Platina"
+  ],
+  "AS-194C": [
+    "Passion"
+  ],
+  "AS-195B": [
+    "Passion Pro"
+  ],
+  "AS-195F": [
+    "Passion Pro"
+  ],
+  "AS-196": [
+    "Passion Pro"
+  ],
+  "AS-196D": [
+    "Passion Pro"
+  ],
+  "AS-197": [
+    "Platina"
+  ],
+  "AS-198": [
+    "Star City CVTI"
+  ],
+  "AS-199B": [
+    "Platina"
+  ],
+  "AS-200": [
+    "Star"
+  ],
+  "AS-203": [
+    "Glamour"
+  ],
+  "AS-203D": [
+    "Glamour"
+  ],
+  "AS-204A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-206A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-207A-WP": [
+    "CB Shine"
+  ],
+  "AS-209A": [
+    "Ignitor"
+  ],
+  "AS-210": [
+    "CB Unicorn"
+  ],
+  "AS-211": [
+    "Glamour"
+  ],
+  "AS-212C": [
+    "Glamour"
+  ],
+  "AS-213D": [
+    "Activa"
+  ],
+  "AS-221": [
+    "Caliber"
+  ],
+  "AS-222C": [
+    "Glamour"
+  ],
+  "AS-225A": [
+    "Activa"
+  ],
+  "AS-225F": [
+    "Activa"
+  ],
+  "AS-225H": [
+    "Activa 3G",
+    "Activa"
+  ],
+  "AS-227C": [
+    "Splendor"
+  ],
+  "AS-227F": [
+    "Splendor"
+  ],
+  "AS-228B": [
+    "Splendor"
+  ],
+  "AS-229G": [
+    "Splendor Pro"
+  ],
+  "AS-22B": [
+    "Caliber"
+  ],
+  "AS-230B-WP": [
+    "Super Splendor"
+  ],
+  "AS-230F": [
+    "Super Splendor"
+  ],
+  "AS-231B": [
+    "Splendor"
+  ],
+  "AS-232B-PP": [
+    "CB Shine"
+  ],
+  "AS-233": [
+    "Splendor",
+    "Splendor NXG"
+  ],
+  "AS-233D": [
+    "Splendor"
+  ],
+  "AS-234-WP": [
+    "Super Splendor"
+  ],
+  "AS-234D": [
+    "Super Splendor"
+  ],
+  "AS-239A": [
+    "CD Deluxe"
+  ],
+  "AS-243A": [
+    "Karizma"
+  ],
+  "AS-244": [
+    "Hunk",
+    "Pleasure"
+  ],
+  "AS-244C": [
+    "Pleasure"
+  ],
+  "AS-244F": [
+    "Pleasure"
+  ],
+  "AS-245B": [
+    "Pleasure"
+  ],
+  "AS-245F": [
+    "Pleasure"
+  ],
+  "AS-246": [
+    "Grazia",
+    "Stunner"
+  ],
+  "AS-246D": [
+    "Stunner"
+  ],
+  "AS-247D": [
+    "CB Twister"
+  ],
+  "AS-247F": [
+    "Dream Neo",
+    "Dream Yuga",
+    "CB Twister"
+  ],
+  "AS-249A": [
+    "Aviator"
+  ],
+  "AS-249D": [
+    "Aviator"
+  ],
+  "AS-24E": [
+    "Star City"
+  ],
+  "AS-250A": [
+    "Victor"
+  ],
+  "AS-257A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-258E": [
+    "Dio"
+  ],
+  "AS-259A": [
+    "Activa"
+  ],
+  "AS-25C": [
+    "Star City"
+  ],
+  "AS-26": [
+    "Victor"
+  ],
+  "AS-260D": [
+    "Activa"
+  ],
+  "AS-261C": [
+    "Shine"
+  ],
+  "AS-262B": [
+    "Shine"
+  ],
+  "AS-263A": [
+    "Shine"
+  ],
+  "AS-263E": [
+    "CB Shine"
+  ],
+  "AS-267C": [
+    "Glamour"
+  ],
+  "AS-268-WP": [
+    "Shine",
+    "CB Shine"
+  ],
+  "AS-268C-WP": [
+    "CB Shine"
+  ],
+  "AS-269C": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-270B": [
+    "Discover"
+  ],
+  "AS-271": [
+    "Star"
+  ],
+  "AS-271C": [
+    "Star"
+  ],
+  "AS-272B": [
+    "Star",
+    "Star City CVTI"
+  ],
+  "AS-273C": [
+    "Star"
+  ],
+  "AS-274A": [
+    "Star"
+  ],
+  "AS-275A": [
+    "Star",
+    "Star City CVTI"
+  ],
+  "AS-276": [
+    "Star City CVTI",
+    "Star"
+  ],
+  "AS-276D": [
+    "Star"
+  ],
+  "AS-27B": [
+    "Platina"
+  ],
+  "AS-27F": [
+    "Caliber"
+  ],
+  "AS-280": [
+    "Boxer AR"
+  ],
+  "AS-281C": [
+    "Ambition"
+  ],
+  "AS-282D": [
+    "Aviator"
+  ],
+  "AS-283E": [
+    "Passion XPro"
+  ],
+  "AS-284A": [
+    "Hunk"
+  ],
+  "AS-285A": [
+    "Dio"
+  ],
+  "AS-285F": [
+    "Dio"
+  ],
+  "AS-286A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-286E": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-287A": [
+    "Dio"
+  ],
+  "AS-287E": [
+    "Dio"
+  ],
+  "AS-287G": [
+    "Dio"
+  ],
+  "AS-288": [
+    "Aviator",
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-288D": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-289B": [
+    "CBZ Xtreme"
+  ],
+  "AS-293D": [
+    "Star"
+  ],
+  "AS-293H": [
+    "Star"
+  ],
+  "AS-294A-WP": [
+    "CB Shine"
+  ],
+  "AS-294D": [
+    "CB Shine"
+  ],
+  "AS-294G": [
+    "CB Shine"
+  ],
+  "AS-296": [
+    "Pleasure Plus"
+  ],
+  "AS-298": [
+    "Activa"
+  ],
+  "AS-300C": [
+    "Star City CVTI"
+  ],
+  "AS-300G": [
+    "Star City CVTI"
+  ],
+  "AS-302-VG": [
+    "Discover"
+  ],
+  "AS-302B": [
+    "Discover"
+  ],
+  "AS-303C": [
+    "Star"
+  ],
+  "AS-303G": [
+    "Star"
+  ],
+  "AS-304A": [
+    "Star",
+    "Star City CVTI"
+  ],
+  "AS-304E": [
+    "Star City CVTI",
+    "Star"
+  ],
+  "AS-309D": [
+    "Glamour"
+  ],
+  "AS-30B": [
+    "Shine"
+  ],
+  "AS-310A": [
+    "Discover"
+  ],
+  "AS-311": [
+    "Discover"
+  ],
+  "AS-313": [
+    "Discover"
+  ],
+  "AS-315": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-315D": [
+    "XL Super HD"
+  ],
+  "AS-316A": [
+    "Passion XPro",
+    "Passion"
+  ],
+  "AS-316E": [
+    "Passion"
+  ],
+  "AS-31C": [
+    "Fiero"
+  ],
+  "AS-321A": [
+    "CBZ Xtreme"
+  ],
+  "AS-322B": [
+    "Splendor"
+  ],
+  "AS-323B": [
+    "Pleasure Plus",
+    "Maestro"
+  ],
+  "AS-323E": [
+    "Maestro"
+  ],
+  "AS-324": [
+    "CB Trigger"
+  ],
+  "AS-325": [
+    "Access 125",
+    "Hayate"
+  ],
+  "AS-325D": [
+    "Hayate"
+  ],
+  "AS-326A": [
+    "Freedom",
+    "Centuro"
+  ],
+  "AS-328D": [
+    "Dream Neo"
+  ],
+  "AS-329F": [
+    "Activa"
+  ],
+  "AS-330C": [
+    "Jupiter"
+  ],
+  "AS-330G": [
+    "Jupiter"
+  ],
+  "AS-330K": [
+    "Jupiter"
+  ],
+  "AS-331C": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-334": [
+    "Discover"
+  ],
+  "AS-335B": [
+    "Glamour"
+  ],
+  "AS-337A": [
+    "Splendor Pro"
+  ],
+  "AS-337E": [
+    "Splendor Pro"
+  ],
+  "AS-338-WP": [
+    "Splendor Plus"
+  ],
+  "AS-338D": [
+    "Splendor Plus"
+  ],
+  "AS-345E": [
+    "Pleasure"
+  ],
+  "AS-346B": [
+    "Dream Yuga"
+  ],
+  "AS-347A": [
+    "Activa 6G",
+    "Activa"
+  ],
+  "AS-347B": [
+    "Activa"
+  ],
+  "AS-348C": [
+    "Phoenix"
+  ],
+  "AS-349C": [
+    "Pleasure"
+  ],
+  "AS-34B": [
+    "CBZ"
+  ],
+  "AS-350B": [
+    "Splendor",
+    "Ignitor"
+  ],
+  "AS-351A": [
+    "Activa"
+  ],
+  "AS-351B": [
+    "Activa"
+  ],
+  "AS-351I": [
+    "Activa"
+  ],
+  "AS-352B": [
+    "Dream Yuga"
+  ],
+  "AS-353C": [
+    "Discover"
+  ],
+  "AS-354B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-355-VI": [
+    "SP Shine",
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-356A": [
+    "Star",
+    "Star City"
+  ],
+  "AS-357B": [
+    "Jupiter",
+    "Wego"
+  ],
+  "AS-358": [
+    "Hayate"
+  ],
+  "AS-358D": [
+    "Hayate"
+  ],
+  "AS-359B": [
+    "Splendor Pro"
+  ],
+  "AS-359F": [
+    "Splendor Pro"
+  ],
+  "AS-35B": [
+    "CBZ Star",
+    "CBZ"
+  ],
+  "AS-36": [
+    "Discover"
+  ],
+  "AS-360B": [
+    "Splendor Plus"
+  ],
+  "AS-361A": [
+    "Splendor"
+  ],
+  "AS-361E": [
+    "Splendor"
+  ],
+  "AS-362B": [
+    "Super Splendor"
+  ],
+  "AS-362F": [
+    "Super Splendor"
+  ],
+  "AS-363A": [
+    "Splendor"
+  ],
+  "AS-363E": [
+    "Splendor"
+  ],
+  "AS-364C": [
+    "Splendor NXG"
+  ],
+  "AS-366A": [
+    "CBZ",
+    "CBZ Star",
+    "CBZ Xtreme"
+  ],
+  "AS-368": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-369C": [
+    "Star"
+  ],
+  "AS-369G": [
+    "Star"
+  ],
+  "AS-36D": [
+    "Caliber"
+  ],
+  "AS-370C": [
+    "Splendor"
+  ],
+  "AS-370G": [
+    "Splendor"
+  ],
+  "AS-371A": [
+    "Splendor Plus"
+  ],
+  "AS-371E": [
+    "Splendor"
+  ],
+  "AS-373C": [
+    "Splendor NXG"
+  ],
+  "AS-374A": [
+    "Splendor"
+  ],
+  "AS-375B": [
+    "Splendor"
+  ],
+  "AS-376B": [
+    "Stunner"
+  ],
+  "AS-377": [
+    "Stunner",
+    "CB Twister",
+    "Dream Yuga"
+  ],
+  "AS-377D": [
+    "Dream Yuga"
+  ],
+  "AS-378A": [
+    "Star"
+  ],
+  "AS-378E": [
+    "Star"
+  ],
+  "AS-379C": [
+    "Pleasure"
+  ],
+  "AS-37D": [
+    "Victor GLX"
+  ],
+  "AS-380D": [
+    "Hunk"
+  ],
+  "AS-384A": [
+    "Maestro"
+  ],
+  "AS-384E": [
+    "Maestro"
+  ],
+  "AS-385": [
+    "Destini",
+    "Pleasure"
+  ],
+  "AS-385D": [
+    "Pleasure"
+  ],
+  "AS-389A": [
+    "CT 100",
+    "Platina"
+  ],
+  "AS-38C": [
+    "Victor"
+  ],
+  "AS-390B": [
+    "Splendor NXG"
+  ],
+  "AS-391B-WP": [
+    "Super Splendor"
+  ],
+  "AS-392-WP": [
+    "CT 100"
+  ],
+  "AS-392C": [
+    "CT 100"
+  ],
+  "AS-393A": [
+    "Platina"
+  ],
+  "AS-394C": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-395B": [
+    "Splendor NXG"
+  ],
+  "AS-396B": [
+    "CT 100"
+  ],
+  "AS-397B": [
+    "Star",
+    "Star City CVTI"
+  ],
+  "AS-397F": [
+    "Star City CVTI"
+  ],
+  "AS-398C": [
+    "Star City CVTI"
+  ],
+  "AS-399": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-39B": [
+    "Victor"
+  ],
+  "AS-39F": [
+    "Victor GL"
+  ],
+  "AS-400C": [
+    "Splendor"
+  ],
+  "AS-401C": [
+    "CT 100"
+  ],
+  "AS-403": [
+    "Fascino"
+  ],
+  "AS-404A": [
+    "Platina"
+  ],
+  "AS-404E": [
+    "Platina",
+    "CT 100"
+  ],
+  "AS-405B": [
+    "Maestro Edge"
+  ],
+  "AS-405F": [
+    "Activa"
+  ],
+  "AS-406C": [
+    "Activa"
+  ],
+  "AS-407A": [
+    "Aviator",
+    "Grazia",
+    "Jupiter"
+  ],
+  "AS-407E": [
+    "Jupiter"
+  ],
+  "AS-407I": [
+    "Jupiter"
+  ],
+  "AS-408": [
+    "Jupiter"
+  ],
+  "AS-408D": [
+    "Jupiter"
+  ],
+  "AS-408H": [
+    "Jupiter"
+  ],
+  "AS-408L": [
+    "Jupiter"
+  ],
+  "AS-409": [
+    "Maestro"
+  ],
+  "AS-409D": [
+    "Maestro"
+  ],
+  "AS-410": [
+    "Aviator"
+  ],
+  "AS-410E": [
+    "Aviator"
+  ],
+  "AS-412": [
+    "Dio",
+    "Shine",
+    "SP Shine",
+    "Dream Yuga",
+    "Livo",
+    "Dream Neo"
+  ],
+  "AS-414A": [
+    "Splendor Pro"
+  ],
+  "AS-415A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-416B": [
+    "Pleasure"
+  ],
+  "AS-416F": [
+    "Pleasure"
+  ],
+  "AS-41C": [
+    "Star City"
+  ],
+  "AS-422C": [
+    "Glamour"
+  ],
+  "AS-423A": [
+    "Glamour"
+  ],
+  "AS-423E": [
+    "Glamour"
+  ],
+  "AS-425A": [
+    "Glamour"
+  ],
+  "AS-425E": [
+    "Glamour"
+  ],
+  "AS-426B": [
+    "Glamour"
+  ],
+  "AS-427B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-428B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-429C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-42B": [
+    "Platina"
+  ],
+  "AS-430B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-431F": [
+    "Activa 4G"
+  ],
+  "AS-433D": [
+    "CB Twister"
+  ],
+  "AS-433F": [
+    "CB Twister"
+  ],
+  "AS-434-WP": [
+    "Dream Neo"
+  ],
+  "AS-434B": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-434H": [
+    "Dream Neo"
+  ],
+  "AS-436": [
+    "Avenger"
+  ],
+  "AS-436B": [
+    "Avenger"
+  ],
+  "AS-437B": [
+    "Glamour"
+  ],
+  "AS-439C": [
+    "Glamour"
+  ],
+  "AS-440A": [
+    "Glamour"
+  ],
+  "AS-440E": [
+    "Glamour"
+  ],
+  "AS-441C": [
+    "Dio"
+  ],
+  "AS-442A": [
+    "Passion Pro"
+  ],
+  "AS-442C": [
+    "Passion Pro",
+    "Passion"
+  ],
+  "AS-443A": [
+    "HF Dawn"
+  ],
+  "AS-444": [
+    "Discover"
+  ],
+  "AS-445": [
+    "Discover"
+  ],
+  "AS-446B": [
+    "Discover"
+  ],
+  "AS-448": [
+    "Splendor Plus"
+  ],
+  "AS-450A": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-454": [
+    "Activa"
+  ],
+  "AS-454D": [
+    "Activa"
+  ],
+  "AS-454H": [
+    "Activa"
+  ],
+  "AS-455": [
+    "Activa"
+  ],
+  "AS-455B": [
+    "Activa"
+  ],
+  "AS-455D": [
+    "Activa"
+  ],
+  "AS-455G": [
+    "Activa"
+  ],
+  "AS-458-PP": [
+    "CB Shine"
+  ],
+  "AS-458D": [
+    "CB Shine"
+  ],
+  "AS-459C": [
+    "Splendor"
+  ],
+  "AS-46": [
+    "Caliber"
+  ],
+  "AS-460": [
+    "Discover"
+  ],
+  "AS-461": [
+    "Access 125",
+    "Passion",
+    "Pleasure",
+    "Duet"
+  ],
+  "AS-462D": [
+    "Passion Pro"
+  ],
+  "AS-463A": [
+    "Dream Yuga"
+  ],
+  "AS-464B": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-466C": [
+    "Passion Pro"
+  ],
+  "AS-466G": [
+    "Passion Pro"
+  ],
+  "AS-467A": [
+    "Passion XPro"
+  ],
+  "AS-467E": [
+    "Passion"
+  ],
+  "AS-468B": [
+    "Splendor Pro"
+  ],
+  "AS-468F": [
+    "Splendor"
+  ],
+  "AS-470A": [
+    "Centuro",
+    "Splendor",
+    "Duro"
+  ],
+  "AS-471B": [
+    "Saluto 125",
+    "Saluto RX"
+  ],
+  "AS-473D": [
+    "Aviator"
+  ],
+  "AS-474": [
+    "Activa"
+  ],
+  "AS-474D": [
+    "Activa"
+  ],
+  "AS-475C": [
+    "Maestro Edge"
+  ],
+  "AS-475G": [
+    "Maestro",
+    "Maestro Edge"
+  ],
+  "AS-476A": [
+    "Splendor"
+  ],
+  "AS-477A": [
+    "Victor",
+    "Vikrant"
+  ],
+  "AS-478C": [
+    "Livo"
+  ],
+  "AS-478D": [
+    "Livo"
+  ],
+  "AS-48": [
+    "Star",
+    "Star City Plus"
+  ],
+  "AS-480-VG": [
+    "Shine"
+  ],
+  "AS-480C": [
+    "Stunner"
+  ],
+  "AS-481A": [
+    "YBR"
+  ],
+  "AS-483C": [
+    "Jupiter"
+  ],
+  "AS-483F": [
+    "Jupiter"
+  ],
+  "AS-483L": [
+    "Jupiter"
+  ],
+  "AS-484D": [
+    "Splendor"
+  ],
+  "AS-485A": [
+    "Splendor NXG"
+  ],
+  "AS-485E": [
+    "Splendor"
+  ],
+  "AS-487A": [
+    "Wego",
+    "Pep Plus"
+  ],
+  "AS-487E": [
+    "Pep Plus"
+  ],
+  "AS-487I": [
+    "Star"
+  ],
+  "AS-488": [
+    "Maestro",
+    "Achiever"
+  ],
+  "AS-489B": [
+    "Activa 3G"
+  ],
+  "AS-48D": [
+    "Centra"
+  ],
+  "AS-491B": [
+    "CB Shine"
+  ],
+  "AS-491E": [
+    "CB Shine"
+  ],
+  "AS-493": [
+    "Dream Neo"
+  ],
+  "AS-494F": [
+    "Pleasure"
+  ],
+  "AS-495": [
+    "Pleasure"
+  ],
+  "AS-495E": [
+    "Pleasure"
+  ],
+  "AS-496L": [
+    "Jupiter",
+    "Activa"
+  ],
+  "AS-498A": [
+    "Maestro",
+    "Maestro Edge"
+  ],
+  "AS-498E": [
+    "Maestro Edge"
+  ],
+  "AS-499": [
+    "Pep Plus",
+    "Phoenix"
+  ],
+  "AS-499D": [
+    "Phoenix"
+  ],
+  "AS-49B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-500": [
+    "Centuro"
+  ],
+  "AS-502B": [
+    "Dio"
+  ],
+  "AS-503C": [
+    "Maestro Edge"
+  ],
+  "AS-504C": [
+    "Fascino"
+  ],
+  "AS-507": [
+    "Splendor"
+  ],
+  "AS-508A": [
+    "Passion"
+  ],
+  "AS-508E": [
+    "Passion"
+  ],
+  "AS-509A": [
+    "Passion"
+  ],
+  "AS-509E": [
+    "Passion"
+  ],
+  "AS-51": [
+    "Pulsar 150",
+    "Pulsar 180",
+    "Discover"
+  ],
+  "AS-510A": [
+    "Splendor Pro"
+  ],
+  "AS-510E": [
+    "Splendor Pro"
+  ],
+  "AS-511E": [
+    "Pleasure"
+  ],
+  "AS-512C": [
+    "CB Shine"
+  ],
+  "AS-513C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-514B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-515C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-516B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-517B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-518B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-519A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-51D": [
+    "Discover"
+  ],
+  "AS-520A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-521A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-522A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-524": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-524C": [
+    "Super Splendor"
+  ],
+  "AS-525C": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-526B": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-527A": [
+    "Pleasure"
+  ],
+  "AS-527E": [
+    "Pleasure"
+  ],
+  "AS-529E": [
+    "Pleasure"
+  ],
+  "AS-52B": [
+    "Discover"
+  ],
+  "AS-534B": [
+    "Discover"
+  ],
+  "AS-535B": [
+    "Discover"
+  ],
+  "AS-536": [
+    "Activa 5G"
+  ],
+  "AS-537": [
+    "Activa 3G",
+    "Super Splendor"
+  ],
+  "AS-539": [
+    "CT 100",
+    "Jupiter",
+    "Star City",
+    "Star"
+  ],
+  "AS-541F": [
+    "Pleasure"
+  ],
+  "AS-542": [
+    "Star City Plus"
+  ],
+  "AS-543": [
+    "Access 125"
+  ],
+  "AS-543D": [
+    "Access 125"
+  ],
+  "AS-543H": [
+    "Access 125"
+  ],
+  "AS-544": [
+    "Activa"
+  ],
+  "AS-544D": [
+    "Activa"
+  ],
+  "AS-544H": [
+    "Activa"
+  ],
+  "AS-545B": [
+    "Access 125",
+    "Fascino"
+  ],
+  "AS-546A": [
+    "CB Trigger",
+    "Livo"
+  ],
+  "AS-546D": [
+    "Livo"
+  ],
+  "AS-547C": [
+    "Activa 4G"
+  ],
+  "AS-547G": [
+    "Activa 4G"
+  ],
+  "AS-548C": [
+    "Duet"
+  ],
+  "AS-551A": [
+    "Fascino"
+  ],
+  "AS-551D": [
+    "Fascino"
+  ],
+  "AS-552": [
+    "Glamour"
+  ],
+  "AS-552-VG": [
+    "Glamour"
+  ],
+  "AS-552C": [
+    "Glamour"
+  ],
+  "AS-553B": [
+    "Glamour"
+  ],
+  "AS-553F": [
+    "Glamour"
+  ],
+  "AS-553G": [
+    "Glamour"
+  ],
+  "AS-554": [
+    "Victor"
+  ],
+  "AS-556": [
+    "CB Shine",
+    "Shine"
+  ],
+  "AS-556D": [
+    "Shine"
+  ],
+  "AS-556F": [
+    "Shine"
+  ],
+  "AS-557C": [
+    "Shine"
+  ],
+  "AS-557D": [
+    "Shine"
+  ],
+  "AS-564": [
+    "Pleasure"
+  ],
+  "AS-567": [
+    "Platina"
+  ],
+  "AS-568B": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-570": [
+    "Dream Neo"
+  ],
+  "AS-572-WP": [
+    "Platina"
+  ],
+  "AS-572D": [
+    "Platina"
+  ],
+  "AS-573A": [
+    "Dio"
+  ],
+  "AS-573E": [
+    "Dio"
+  ],
+  "AS-574A": [
+    "Maestro"
+  ],
+  "AS-574E": [
+    "Maestro"
+  ],
+  "AS-575B": [
+    "Platina"
+  ],
+  "AS-577": [
+    "Maestro",
+    "Hunk"
+  ],
+  "AS-577D": [
+    "Maestro"
+  ],
+  "AS-578B": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-579A": [
+    "Super Splendor"
+  ],
+  "AS-57C": [
+    "Passion"
+  ],
+  "AS-580C": [
+    "Dio"
+  ],
+  "AS-581C": [
+    "Dio"
+  ],
+  "AS-583A": [
+    "Star"
+  ],
+  "AS-584A": [
+    "Star City CVTI"
+  ],
+  "AS-584E": [
+    "Star City CVTI"
+  ],
+  "AS-585C": [
+    "Duet"
+  ],
+  "AS-586B": [
+    "Centuro",
+    "Gusto"
+  ],
+  "AS-588C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-58A": [
+    "Passion"
+  ],
+  "AS-58I": [
+    "Passion Plus"
+  ],
+  "AS-590": [
+    "CB Shine SP",
+    "SP 125"
+  ],
+  "AS-590D": [
+    "CB Shine"
+  ],
+  "AS-591B": [
+    "CB Shine"
+  ],
+  "AS-591F": [
+    "CB Shine"
+  ],
+  "AS-593": [
+    "CBZ Star",
+    "Achiever"
+  ],
+  "AS-593D": [
+    "Achiever"
+  ],
+  "AS-594": [
+    "Passion"
+  ],
+  "AS-594D": [
+    "Passion"
+  ],
+  "AS-595B": [
+    "Discover"
+  ],
+  "AS-596B": [
+    "Dio"
+  ],
+  "AS-598B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-599A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-60": [
+    "Pulsar 150",
+    "Pulsar 180",
+    "Discover"
+  ],
+  "AS-602C": [
+    "Splendor Pro"
+  ],
+  "AS-602G": [
+    "Splendor Pro"
+  ],
+  "AS-603": [
+    "Activa",
+    "Activa 5G"
+  ],
+  "AS-603B": [
+    "Activa 5G",
+    "Activa"
+  ],
+  "AS-603E": [
+    "Activa",
+    "Activa 5G"
+  ],
+  "AS-605B": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-606A": [
+    "Avenger"
+  ],
+  "AS-607C": [
+    "Star City"
+  ],
+  "AS-607G": [
+    "Star City Plus"
+  ],
+  "AS-608A": [
+    "Avenger",
+    "Vikrant"
+  ],
+  "AS-609": [
+    "Victor",
+    "Victor GLX"
+  ],
+  "AS-60D": [
+    "Discover"
+  ],
+  "AS-613": [
+    "Platina"
+  ],
+  "AS-614B": [
+    "Platina"
+  ],
+  "AS-617C": [
+    "Shine"
+  ],
+  "AS-618": [
+    "Shine"
+  ],
+  "AS-618D": [
+    "Shine"
+  ],
+  "AS-619": [
+    "Shine"
+  ],
+  "AS-61B": [
+    "Discover"
+  ],
+  "AS-620": [
+    "Splendor Plus"
+  ],
+  "AS-620D": [
+    "Splendor Plus"
+  ],
+  "AS-621A": [
+    "Splendor Plus"
+  ],
+  "AS-621D": [
+    "Splendor Plus",
+    "Splendor"
+  ],
+  "AS-622": [
+    "Splendor Plus"
+  ],
+  "AS-622D": [
+    "Splendor Plus"
+  ],
+  "AS-623": [
+    "Splendor Plus"
+  ],
+  "AS-628E": [
+    "Shine"
+  ],
+  "AS-629A": [
+    "Shine"
+  ],
+  "AS-630": [
+    "CD 110 Dream"
+  ],
+  "AS-631B": [
+    "Livo"
+  ],
+  "AS-631F": [
+    "Livo"
+  ],
+  "AS-633B": [
+    "Maestro"
+  ],
+  "AS-633F": [
+    "Maestro"
+  ],
+  "AS-634B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-636B": [
+    "CT 100"
+  ],
+  "AS-639": [
+    "Dream Neo"
+  ],
+  "AS-63A-WP": [
+    "Splendor"
+  ],
+  "AS-63D": [
+    "Splendor"
+  ],
+  "AS-64": [
+    "Splendor Plus"
+  ],
+  "AS-640": [
+    "Dio"
+  ],
+  "AS-640D": [
+    "Dio"
+  ],
+  "AS-640H": [
+    "Dio"
+  ],
+  "AS-644": [
+    "Gixxer",
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-645": [
+    "Radeon"
+  ],
+  "AS-646A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-649": [
+    "Dio"
+  ],
+  "AS-64C": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-652B": [
+    "Platina"
+  ],
+  "AS-653": [
+    "Platina"
+  ],
+  "AS-655B": [
+    "Access 125"
+  ],
+  "AS-656": [
+    "Shine",
+    "CB Shine",
+    "Passion"
+  ],
+  "AS-657-VG": [
+    "Phoenix"
+  ],
+  "AS-657B": [
+    "Saluto 125",
+    "Saluto RX"
+  ],
+  "AS-658": [
+    "Pleasure"
+  ],
+  "AS-658D": [
+    "Pleasure"
+  ],
+  "AS-659A": [
+    "Pleasure"
+  ],
+  "AS-659E": [
+    "Pleasure"
+  ],
+  "AS-65A": [
+    "Passion"
+  ],
+  "AS-65D": [
+    "Passion"
+  ],
+  "AS-65G": [
+    "Passion"
+  ],
+  "AS-65J": [
+    "Passion"
+  ],
+  "AS-65M": [
+    "Passion Pro"
+  ],
+  "AS-663B": [
+    "Shine"
+  ],
+  "AS-663F": [
+    "Shine"
+  ],
+  "AS-664B": [
+    "Victor"
+  ],
+  "AS-664F": [
+    "Victor"
+  ],
+  "AS-665A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-666B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-667A": [
+    "Glamour"
+  ],
+  "AS-668A": [
+    "Passion"
+  ],
+  "AS-669B": [
+    "Star City"
+  ],
+  "AS-672C": [
+    "Maestro"
+  ],
+  "AS-673B": [
+    "CBZ Star",
+    "CBZ Xtreme"
+  ],
+  "AS-675A": [
+    "Stunner",
+    "Livo"
+  ],
+  "AS-675E": [
+    "Livo"
+  ],
+  "AS-678": [
+    "Activa",
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-67C": [
+    "CBZ Star"
+  ],
+  "AS-680": [
+    "Splendor"
+  ],
+  "AS-682B": [
+    "Pleasure"
+  ],
+  "AS-683B": [
+    "Pleasure"
+  ],
+  "AS-684": [
+    "CB Unicorn",
+    "Shine"
+  ],
+  "AS-685A": [
+    "Splendor"
+  ],
+  "AS-686-VG": [
+    "CBZ Xtreme"
+  ],
+  "AS-686A": [
+    "Achiever"
+  ],
+  "AS-688": [
+    "Activa",
+    "Activa 5G"
+  ],
+  "AS-69": [
+    "Caliber"
+  ],
+  "AS-690B": [
+    "Access 125"
+  ],
+  "AS-691-GR": [
+    "Radeon"
+  ],
+  "AS-691C": [
+    "Radeon"
+  ],
+  "AS-692A": [
+    "CD 110 Dream"
+  ],
+  "AS-694B": [
+    "Radeon"
+  ],
+  "AS-695": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-696B": [
+    "Livo"
+  ],
+  "AS-699C": [
+    "Aviator"
+  ],
+  "AS-69C": [
+    "Caliber"
+  ],
+  "AS-69G": [
+    "CT 100"
+  ],
+  "AS-69H": [
+    "CT 100"
+  ],
+  "AS-700": [
+    "Jupiter",
+    "Scooty Pep"
+  ],
+  "AS-700D": [
+    "Scooty Pep"
+  ],
+  "AS-700H": [
+    "Scooty Pep"
+  ],
+  "AS-700I": [
+    "Dio",
+    "Scooty Pep Plus"
+  ],
+  "AS-705C": [
+    "Maestro"
+  ],
+  "AS-706A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-706E": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-707G": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-708B": [
+    "Shine"
+  ],
+  "AS-709": [
+    "Shine"
+  ],
+  "AS-70B": [
+    "CT 100",
+    "Platina"
+  ],
+  "AS-70F": [
+    "CT 100",
+    "Platina"
+  ],
+  "AS-710A": [
+    "Splendor Plus"
+  ],
+  "AS-710D": [
+    "Splendor Plus"
+  ],
+  "AS-711B": [
+    "Splendor Plus"
+  ],
+  "AS-712B": [
+    "Splendor"
+  ],
+  "AS-712F": [
+    "Splendor"
+  ],
+  "AS-715A": [
+    "Activa 5G"
+  ],
+  "AS-715I": [
+    "Activa"
+  ],
+  "AS-716C": [
+    "Activa 6G"
+  ],
+  "AS-716G": [
+    "Activa 6G"
+  ],
+  "AS-717A": [
+    "Activa 4G"
+  ],
+  "AS-717E": [
+    "Activa"
+  ],
+  "AS-717I": [
+    "Activa"
+  ],
+  "AS-717M": [
+    "Activa"
+  ],
+  "AS-719E": [
+    "CD 100",
+    "Super Splendor",
+    "Shine",
+    "Discover"
+  ],
+  "AS-71A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-71C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-72": [
+    "Pulsar 150",
+    "Pulsar 180",
+    "Discover"
+  ],
+  "AS-720G": [
+    "HF Deluxe"
+  ],
+  "AS-724": [
+    "Dio"
+  ],
+  "AS-726C": [
+    "Shine"
+  ],
+  "AS-727-VI": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad",
+    "Passion Pro"
+  ],
+  "AS-728A": [
+    "Passion Pro"
+  ],
+  "AS-72C": [
+    "Discover"
+  ],
+  "AS-732A": [
+    "Super Splendor"
+  ],
+  "AS-733": [
+    "Splendor"
+  ],
+  "AS-733C": [
+    "Splendor Plus"
+  ],
+  "AS-737C": [
+    "Activa"
+  ],
+  "AS-738A": [
+    "Splendor Plus"
+  ],
+  "AS-73D": [
+    "Victor"
+  ],
+  "AS-74": [
+    "Star"
+  ],
+  "AS-741A": [
+    "Splendor"
+  ],
+  "AS-742": [
+    "CT 100"
+  ],
+  "AS-743D": [
+    "CT 100"
+  ],
+  "AS-744": [
+    "CT 100"
+  ],
+  "AS-744D": [
+    "CT 100"
+  ],
+  "AS-745C": [
+    "Glamour"
+  ],
+  "AS-747A": [
+    "Boxer CT"
+  ],
+  "AS-748C": [
+    "Shine"
+  ],
+  "AS-749C": [
+    "CT 110"
+  ],
+  "AS-750": [
+    "Passion"
+  ],
+  "AS-750D": [
+    "Passion Pro"
+  ],
+  "AS-752A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-753A": [
+    "Platina"
+  ],
+  "AS-754A": [
+    "Dio"
+  ],
+  "AS-754E": [
+    "Dio"
+  ],
+  "AS-756A": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-759A": [
+    "Saluto 125",
+    "Saluto RX"
+  ],
+  "AS-760A": [
+    "Fascino"
+  ],
+  "AS-761A": [
+    "FZ Fi"
+  ],
+  "AS-763C": [
+    "Glamour"
+  ],
+  "AS-764B": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-764F": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-764J": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-764N": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-765A": [
+    "Fascino"
+  ],
+  "AS-765E": [
+    "Fascino"
+  ],
+  "AS-767A": [
+    "Passion"
+  ],
+  "AS-768C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-768G": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-769C": [
+    "Shine"
+  ],
+  "AS-76A": [
+    "Fiero"
+  ],
+  "AS-771B": [
+    "Passion Pro"
+  ],
+  "AS-772A": [
+    "Passion"
+  ],
+  "AS-773A": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-774A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-776A": [
+    "FZS"
+  ],
+  "AS-778": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-778-VI": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-779C": [
+    "Apache RTR 160 4V",
+    "Apache RTR 200 4V"
+  ],
+  "AS-781": [
+    "Discover"
+  ],
+  "AS-781D": [
+    "Discover"
+  ],
+  "AS-783C": [
+    "Shine"
+  ],
+  "AS-786C": [
+    "Activa i"
+  ],
+  "AS-786G": [
+    "Activa i"
+  ],
+  "AS-787C": [
+    "Fascino"
+  ],
+  "AS-788B": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad",
+    "Jupiter"
+  ],
+  "AS-788F": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-78A": [
+    "Splendor"
+  ],
+  "AS-78E": [
+    "Splendor"
+  ],
+  "AS-791C": [
+    "Fascino"
+  ],
+  "AS-792A": [
+    "CB Shine",
+    "SP 125"
+  ],
+  "AS-793A": [
+    "Xtreme 160R",
+    "CBZ Xtreme"
+  ],
+  "AS-796": [
+    "Swish 125"
+  ],
+  "AS-797B": [
+    "Fascino"
+  ],
+  "AS-799": [
+    "Gixxer"
+  ],
+  "AS-79C": [
+    "Splendor"
+  ],
+  "AS-80-WP": [
+    "Splendor"
+  ],
+  "AS-800": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-802": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-803C": [
+    "Pleasure"
+  ],
+  "AS-804A": [
+    "Stunner"
+  ],
+  "AS-805B": [
+    "Karizma"
+  ],
+  "AS-806E": [
+    "Shine"
+  ],
+  "AS-807C": [
+    "Glamour"
+  ],
+  "AS-808B": [
+    "Hayate"
+  ],
+  "AS-809A": [
+    "Hayate",
+    "Centuro"
+  ],
+  "AS-80D": [
+    "Splendor"
+  ],
+  "AS-810B": [
+    "CT 110"
+  ],
+  "AS-811-VI": [
+    "Livo"
+  ],
+  "AS-811C": [
+    "Livo"
+  ],
+  "AS-813B": [
+    "CB Unicorn"
+  ],
+  "AS-814B": [
+    "Super Splendor"
+  ],
+  "AS-815C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-816D": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-817A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-819A": [
+    "Maestro",
+    "Maestro Edge"
+  ],
+  "AS-81A-WP": [
+    "Splendor Plus"
+  ],
+  "AS-81C-WP": [
+    "Splendor Plus",
+    "Splendor"
+  ],
+  "AS-82": [
+    "Splendor NXG",
+    "Super Splendor"
+  ],
+  "AS-820C": [
+    "Livo"
+  ],
+  "AS-823D": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-824B": [
+    "Livo"
+  ],
+  "AS-825": [
+    "Passion",
+    "Passion XPro"
+  ],
+  "AS-825D": [
+    "Passion"
+  ],
+  "AS-826B": [
+    "Star"
+  ],
+  "AS-826F": [
+    "Star"
+  ],
+  "AS-827": [
+    "Star"
+  ],
+  "AS-827D": [
+    "Star"
+  ],
+  "AS-828B": [
+    "Star"
+  ],
+  "AS-828F": [
+    "Star"
+  ],
+  "AS-829": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-82D": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-830": [
+    "CT 100"
+  ],
+  "AS-831": [
+    "Pleasure"
+  ],
+  "AS-831D": [
+    "Pleasure Plus"
+  ],
+  "AS-835G": [
+    "Activa 5G"
+  ],
+  "AS-836C": [
+    "Activa 6G"
+  ],
+  "AS-836G": [
+    "Activa 6G"
+  ],
+  "AS-837A": [
+    "Activa"
+  ],
+  "AS-837E": [
+    "Activa"
+  ],
+  "AS-838F": [
+    "Jupiter"
+  ],
+  "AS-838J": [
+    "Jupiter"
+  ],
+  "AS-83A": [
+    "Passion"
+  ],
+  "AS-83E": [
+    "Passion"
+  ],
+  "AS-841I": [
+    "Activa"
+  ],
+  "AS-841J": [
+    "Destini"
+  ],
+  "AS-842A": [
+    "CB Unicorn"
+  ],
+  "AS-843D": [
+    "Splendor iSmart"
+  ],
+  "AS-844A": [
+    "Apache RTR 160 4V",
+    "Apache RTR 200 4V"
+  ],
+  "AS-845B": [
+    "Glamour"
+  ],
+  "AS-847A": [
+    "CB Unicorn"
+  ],
+  "AS-848": [
+    "CB Unicorn"
+  ],
+  "AS-849C": [
+    "Hornet"
+  ],
+  "AS-850": [
+    "Radeon",
+    "Phoenix"
+  ],
+  "AS-850D": [
+    "Phoenix"
+  ],
+  "AS-851": [
+    "Splendor Plus",
+    "Splendor"
+  ],
+  "AS-852C": [
+    "Unicorn"
+  ],
+  "AS-853": [
+    "CB Unicorn"
+  ],
+  "AS-853D": [
+    "CB Unicorn"
+  ],
+  "AS-854A": [
+    "Passion Pro"
+  ],
+  "AS-855C": [
+    "Glamour"
+  ],
+  "AS-856D": [
+    "Aviator"
+  ],
+  "AS-857A": [
+    "Radeon"
+  ],
+  "AS-857E": [
+    "Radeon"
+  ],
+  "AS-858C": [
+    "Livo"
+  ],
+  "AS-859": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-859D": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-85A": [
+    "Passion"
+  ],
+  "AS-85D": [
+    "Passion"
+  ],
+  "AS-85H": [
+    "Passion Plus",
+    "Passion"
+  ],
+  "AS-860": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-860D": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-861B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-862": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-864B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-865": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-866C": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-867B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-868A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-869": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-86A": [
+    "Passion"
+  ],
+  "AS-86D": [
+    "Passion Plus"
+  ],
+  "AS-870A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-871B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-872A": [
+    "Activa"
+  ],
+  "AS-872E": [
+    "Activa"
+  ],
+  "AS-873A": [
+    "Activa",
+    "Activa 3G"
+  ],
+  "AS-873E": [
+    "Activa 4G",
+    "Activa 3G"
+  ],
+  "AS-874C": [
+    "Livo"
+  ],
+  "AS-876A": [
+    "Activa"
+  ],
+  "AS-877A": [
+    "CB Unicorn"
+  ],
+  "AS-879A": [
+    "CB Unicorn"
+  ],
+  "AS-88-WP": [
+    "CD Deluxe"
+  ],
+  "AS-880C": [
+    "Activa"
+  ],
+  "AS-881C": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-881G": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-882C": [
+    "Dio"
+  ],
+  "AS-883A": [
+    "Glamour"
+  ],
+  "AS-885": [
+    "Glamour"
+  ],
+  "AS-886": [
+    "Glamour"
+  ],
+  "AS-887C": [
+    "Saluto 125",
+    "Saluto RX"
+  ],
+  "AS-889": [
+    "CB Unicorn"
+  ],
+  "AS-889D": [
+    "CB Unicorn"
+  ],
+  "AS-88D": [
+    "CD Deluxe"
+  ],
+  "AS-890": [
+    "Maestro Edge"
+  ],
+  "AS-890D": [
+    "Maestro Edge"
+  ],
+  "AS-893A": [
+    "Splendor Plus"
+  ],
+  "AS-894": [
+    "Splendor"
+  ],
+  "AS-894D": [
+    "Splendor"
+  ],
+  "AS-895C": [
+    "Splendor"
+  ],
+  "AS-896B": [
+    "HF Deluxe"
+  ],
+  "AS-899A": [
+    "Shine"
+  ],
+  "AS-900": [
+    "Dream Yuga"
+  ],
+  "AS-900D": [
+    "Dream Yuga"
+  ],
+  "AS-901C": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-902B": [
+    "Dream Neo",
+    "Dream Yuga"
+  ],
+  "AS-903": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-904B": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-905": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-905D": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-906D": [
+    "Activa 3G"
+  ],
+  "AS-906H": [
+    "Activa 3G"
+  ],
+  "AS-907": [
+    "Shine"
+  ],
+  "AS-909": [
+    "Dio"
+  ],
+  "AS-910": [
+    "Splendor",
+    "Splendor Plus"
+  ],
+  "AS-914": [
+    "Splendor Plus",
+    "Splendor"
+  ],
+  "AS-915": [
+    "Splendor Plus"
+  ],
+  "AS-919": [
+    "Super Splendor",
+    "Super Splendor XTEC"
+  ],
+  "AS-920A": [
+    "Splendor Plus XTEC",
+    "Super Splendor"
+  ],
+  "AS-921B": [
+    "Platina"
+  ],
+  "AS-922": [
+    "Passion"
+  ],
+  "AS-923": [
+    "Passion"
+  ],
+  "AS-926": [
+    "Glamour"
+  ],
+  "AS-927A": [
+    "Glamour XTEC"
+  ],
+  "AS-928A": [
+    "Activa 6G"
+  ],
+  "AS-928E": [
+    "Activa 6G"
+  ],
+  "AS-928I": [
+    "Activa 6G"
+  ],
+  "AS-929A": [
+    "Super Splendor"
+  ],
+  "AS-92A": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-92E": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-930": [
+    "Super Splendor"
+  ],
+  "AS-930D": [
+    "Super Splendor"
+  ],
+  "AS-933": [
+    "HF Deluxe"
+  ],
+  "AS-934C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-935A": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-936C": [
+    "Apache RTR 160",
+    "Apache RTR 180"
+  ],
+  "AS-938C": [
+    "Shine"
+  ],
+  "AS-939C": [
+    "Shine"
+  ],
+  "AS-940C": [
+    "Star"
+  ],
+  "AS-941A": [
+    "Star City CVTI",
+    "Star"
+  ],
+  "AS-942B": [
+    "Star"
+  ],
+  "AS-944B": [
+    "Shine"
+  ],
+  "AS-944F": [
+    "Shine"
+  ],
+  "AS-946": [
+    "Raider 125",
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-946D": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-946H": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-948F": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-948J": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-949D": [
+    "Shine 100"
+  ],
+  "AS-94A": [
+    "Discover",
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-94E": [
+    "Discover"
+  ],
+  "AS-950A": [
+    "Activa"
+  ],
+  "AS-950E": [
+    "Activa"
+  ],
+  "AS-951B": [
+    "Activa"
+  ],
+  "AS-951F": [
+    "Activa"
+  ],
+  "AS-952B": [
+    "Activa 6G"
+  ],
+  "AS-952F": [
+    "Activa 6G"
+  ],
+  "AS-952J": [
+    "Activa 6G"
+  ],
+  "AS-953A": [
+    "Passion"
+  ],
+  "AS-956": [
+    "Platina"
+  ],
+  "AS-956D": [
+    "Platina"
+  ],
+  "AS-957C": [
+    "Platina"
+  ],
+  "AS-958A": [
+    "Platina"
+  ],
+  "AS-958E": [
+    "Platina"
+  ],
+  "AS-95C": [
+    "Discover"
+  ],
+  "AS-96": [
+    "Discover"
+  ],
+  "AS-960": [
+    "CB Shine SP"
+  ],
+  "AS-960D": [
+    "SP 125"
+  ],
+  "AS-963B": [
+    "Glamour"
+  ],
+  "AS-965D": [
+    "Pleasure Plus"
+  ],
+  "AS-966A": [
+    "Apache RTR 160 4V",
+    "Apache RTR 200 4V"
+  ],
+  "AS-967A": [
+    "Activa 6G"
+  ],
+  "AS-967E": [
+    "Activa 6G"
+  ],
+  "AS-968B": [
+    "Activa 3G"
+  ],
+  "AS-968F": [
+    "Activa 6G"
+  ],
+  "AS-969C": [
+    "Phoenix"
+  ],
+  "AS-96D": [
+    "CT 100"
+  ],
+  "AS-970C": [
+    "Star"
+  ],
+  "AS-971": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-974B": [
+    "Pulsar 150",
+    "Pulsar 180"
+  ],
+  "AS-975A": [
+    "Splendor Plus",
+    "Splendor Plus XTEC"
+  ],
+  "AS-979": [
+    "Splendor Plus XTEC"
+  ],
+  "AS-97F": [
+    "Victor"
+  ],
+  "AS-982": [
+    "Radeon",
+    "Raider 125"
+  ],
+  "AS-983": [
+    "Maestro Edge"
+  ],
+  "AS-986": [
+    "HF Deluxe"
+  ],
+  "AS-98C": [
+    "Victor GL"
+  ],
+  "AS-990B": [
+    "Star City",
+    "Star City Plus"
+  ],
+  "AS-991": [
+    "Dio"
+  ],
+  "AS-996": [
+    "Splendor"
+  ],
+  "AS-997A": [
+    "Dio",
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-998C": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-999C": [
+    "Ntorq 125",
+    "Ntorq 125 Race Edition",
+    "Ntorq 125 XT",
+    "Ntorq 125 Super Squad"
+  ],
+  "AS-99A": [
+    "Victor",
+    "Victor GL"
+  ]
+}

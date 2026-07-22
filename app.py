@@ -427,6 +427,56 @@ def _load_catalog():
 def honda_catalog():
     return jsonify(_load_catalog())
 
+# ── consolidated catalogue v2 (super-families + per-description variants) ──
+_hc_catalog2 = None
+_hc_full = None
+
+def _load_catalog2():
+    global _hc_catalog2
+    if _hc_catalog2 is not None: return _hc_catalog2
+    try:
+        _hc_catalog2 = json.load(open(os.path.join(BASE_DIR, 'honda_catalog2.json')))
+    except Exception as e:
+        print(f"[catalog2] {e}", flush=True); _hc_catalog2 = {'scooters': [], 'motorcycles': []}
+    return _hc_catalog2
+
+def _load_full():
+    """All unique Honda parts (30k) with fitment count + procured flag + mrp."""
+    global _hc_full
+    if _hc_full is not None: return _hc_full
+    try:
+        _hc_full = json.load(open(os.path.join(BASE_DIR, 'honda_catalog_full.json')))
+    except Exception as e:
+        print(f"[full] {e}", flush=True); _hc_full = []
+    return _hc_full
+
+@app.route('/api/honda/catalog2')
+def honda_catalog2():
+    cat = _load_catalog2()
+    full = _load_full()
+    common = sum(1 for p in full if (p.get('n_models') or 0) >= _COMMON_MIN)
+    return jsonify({'scooters': cat.get('scooters', []),
+                    'motorcycles': cat.get('motorcycles', []),
+                    'meta': {'total': len(full), 'common': common}})
+
+_COMMON_MIN = 4   # a part "common to multiple vehicles" fits >= this many models
+
+@app.route('/api/honda/allparts')
+def honda_allparts():
+    """Full product range — the TOTAL catalogue, not just the parts we keep."""
+    return jsonify({'parts': _load_full()})
+
+@app.route('/api/honda/common')
+def honda_common():
+    """Parts common across multiple vehicles, most-shared first, ✓ = we keep it."""
+    try:
+        mn = max(2, int(request.args.get('min', _COMMON_MIN)))
+    except Exception:
+        mn = _COMMON_MIN
+    parts = [p for p in _load_full() if (p.get('n_models') or 0) >= mn]
+    parts.sort(key=lambda p: (-(p.get('n_models') or 0), p.get('pn') or ''))
+    return jsonify({'parts': parts, 'total': len(parts), 'min': mn})
+
 @app.route('/api/honda/group-parts')
 def honda_group_parts():
     ids = [i for i in (request.args.get('ids', '') or '').split(',') if i.strip()][:40]
