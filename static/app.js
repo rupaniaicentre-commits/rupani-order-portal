@@ -146,7 +146,18 @@ const App = (() => {
       localStorage.removeItem('ra_remember');
       localStorage.setItem('ra_prefill', JSON.stringify(session));
     }
+    track('login', { firm, mobile: contact });
     showApp();
+  }
+
+  // fire-and-forget analytics event
+  function track(event, extra) {
+    try {
+      fetch('/api/track', { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(Object.assign({ event, portal:'aerostar',
+          firm:(session&&session.firm)||'', mobile:(session&&session.contact)||'' }, extra||{})),
+        keepalive:true }).catch(()=>{});
+    } catch(e){}
   }
 
   function showLoginError(msg) {
@@ -596,8 +607,13 @@ const App = (() => {
     _searchTimer = setTimeout(() => runSearch(val.trim()), 0);  // instant, no debounce delay
   }
 
+  let _searchLogTimer = null;
   function runSearch(query) {
     if (!query) { hideSearchDropdown(); return; }
+    if (query.trim().length >= 3) {                 // debounced search logging
+      clearTimeout(_searchLogTimer);
+      _searchLogTimer = setTimeout(() => track('search', { detail: query.trim().slice(0,60) }), 1000);
+    }
     const MAX   = 40;
     // Split into words — ALL words must match (like Tally)
     const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);

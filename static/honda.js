@@ -48,7 +48,15 @@ const H = (() => {
     if(!$('remember') || $('remember').checked){
       localStorage.setItem('ra_remember', JSON.stringify(session));
     }
+    track('login', {firm, mobile:mob});
     enter();
+  }
+  let _searchLogTimer=null;
+  function track(event, extra){
+    try{ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Object.assign({event, portal:'honda',
+        firm:(session&&session.firm)||'', mobile:(session&&session.contact)||''}, extra||{})),
+      keepalive:true}).catch(()=>{}); }catch(e){}
   }
   function enter(){
     $('login').classList.add('hidden'); $('app').classList.remove('hidden');
@@ -220,6 +228,8 @@ const H = (() => {
     const q=($('search').value||'').trim();
     const clr=$('searchClear'); if(clr) clr.classList.toggle('show', !!q);
     if(!q){ hideDD(); return; }
+    if(q.length>=3){ clearTimeout(_searchLogTimer);
+      _searchLogTimer=setTimeout(()=>track('search',{detail:q.slice(0,60)}),1000); }
     renderDD(searchHits(q).slice(0,40), q);
   }
   function renderDD(results, q){

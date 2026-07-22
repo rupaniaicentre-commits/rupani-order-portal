@@ -221,11 +221,27 @@ def landing():
 
 @app.route('/aerostar')
 def index():
+    log_event('view', portal='aerostar')
     return render_template('index.html')
+
+
+@app.route('/api/track', methods=['POST'])
+def track():
+    """Lightweight client event logger (login / search) — public, rate-limited."""
+    if rate_limit('track', 120, 60):
+        return jsonify({'ok': False}), 429
+    d = request.json or {}
+    ev = (d.get('event') or '').strip()[:24]
+    if ev not in ('login', 'search'):
+        return jsonify({'ok': False})
+    log_event(ev, portal=(d.get('portal') or '')[:20], firm=d.get('firm', ''),
+              mobile=d.get('mobile', ''), detail=d.get('detail', ''))
+    return jsonify({'ok': True})
 
 
 @app.route('/honda')
 def honda():
+    log_event('view', portal='honda')
     return render_template('honda.html')
 
 
@@ -341,7 +357,23 @@ def _orders_conn():
     conn.execute('''CREATE TABLE IF NOT EXISTS honda_registry(
         part_no TEXT PRIMARY KEY, name TEXT, price REAL, vehicles TEXT,
         first_seen REAL, batch TEXT)''')
+    # portal analytics events (logins, page views, searches, orders)
+    conn.execute('''CREATE TABLE IF NOT EXISTS analytics(
+        ts INTEGER, event TEXT, portal TEXT, firm TEXT, mobile TEXT, detail TEXT, ip TEXT)''')
+    conn.execute('CREATE INDEX IF NOT EXISTS idx_an_ts ON analytics(ts)')
+    conn.execute('CREATE INDEX IF NOT EXISTS idx_an_event ON analytics(event)')
     return conn
+
+def log_event(event, portal='', firm='', mobile='', detail=''):
+    """Record a portal analytics event (best-effort, never breaks a request)."""
+    try:
+        conn = _orders_conn()
+        conn.execute('INSERT INTO analytics(ts,event,portal,firm,mobile,detail,ip) VALUES(?,?,?,?,?,?,?)',
+                     (int(time.time()), event, portal, (firm or '')[:80],
+                      (mobile or '')[:20], (detail or '')[:200], _client_ip()))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[analytics] {e}", flush=True)
 
 def _order_status(items):
     total = sum(int(i.get('qty', 0) or 0) for i in items)
@@ -805,6 +837,38 @@ def admin_pending_export():
     return send_file(path, as_attachment=True, download_name=fname)
 
 
+@app.route('/api/admin/portal-analytics')
+def admin_portal_analytics():
+    auth = _admin_auth(request.args.get('token', ''))
+    if not auth or auth.get('role') != 'admin':
+        return jsonify({'success': False, 'error': 'unauthorized — admin only'}), 401
+    conn = _orders_conn()
+    q = conn.execute
+    # logins per day (last 14 days)
+    logins = [{'day': d, 'count': c} for d, c in q(
+        "SELECT date(ts,'unixepoch','localtime') d, COUNT(*) c FROM analytics "
+        "WHERE event='login' AND ts > strftime('%s','now','-14 days') GROUP BY d ORDER BY d").fetchall()]
+    # unique visitors (by mobile) per portal + total views
+    portal_rows = q("SELECT portal, COUNT(*) views, COUNT(DISTINCT mobile) users FROM analytics "
+                    "WHERE event IN ('view','login') GROUP BY portal").fetchall()
+    portals = [{'portal': p or 'other', 'views': v, 'users': u} for p, v, u in portal_rows]
+    # most-searched terms
+    top_search = [{'term': t, 'count': c} for t, c in q(
+        "SELECT detail, COUNT(*) c FROM analytics WHERE event='search' AND detail<>'' "
+        "GROUP BY lower(detail) ORDER BY c DESC LIMIT 25").fetchall()]
+    # searched but never ordered (by mobile)
+    no_order = [{'mobile': m, 'firm': f, 'searches': c} for m, f, c in q(
+        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='search' AND mobile<>'' "
+        "AND mobile NOT IN (SELECT DISTINCT mobile FROM analytics WHERE event='order') "
+        "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
+    totals = dict(logins_total=q("SELECT COUNT(*) FROM analytics WHERE event='login'").fetchone()[0],
+                  orders_total=q("SELECT COUNT(*) FROM analytics WHERE event='order'").fetchone()[0],
+                  searches_total=q("SELECT COUNT(*) FROM analytics WHERE event='search'").fetchone()[0])
+    conn.close()
+    return jsonify({'success': True, 'logins_by_day': logins, 'portals': portals,
+                    'top_search': top_search, 'searched_no_order': no_order, 'totals': totals})
+
+
 @app.route('/api/admin/analytics')
 def admin_analytics():
     auth = _admin_auth(request.args.get('token', ''))
@@ -933,6 +997,8 @@ def checkout():
 
     # persist to cross-device order history (keyed by mobile)
     save_order_db(oid, portal, firm_name, contact_number, items)
+    log_event('order', portal=portal, firm=firm_name, mobile=contact_number,
+              detail=f'{len(items)} items')
 
     wb = _build_excel(firm_name, contact_number, items, portal)
 

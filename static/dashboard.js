@@ -35,6 +35,8 @@ const D = (() => {
     $('who').textContent = `${auth.user} · ${auth.role==='admin'?'Admin':'Sales Manager'} · ${scopeLabel}`;
     // New Items tab is Honda-only
     if(auth.scope==='all'||auth.scope==='honda'){ $('tabNew').classList.remove('hidden'); loadNewBadge(); }
+    // Traffic tab is admin-only
+    if(auth.role==='admin'){ $('tabTraffic').classList.remove('hidden'); }
     tab('orders');
   }
   async function loadNewBadge(){
@@ -56,8 +58,35 @@ const D = (() => {
     curTab=t;
     $('tabOrders').classList.toggle('on',t==='orders');
     $('tabAnalytics').classList.toggle('on',t==='analytics');
+    if($('tabTraffic')) $('tabTraffic').classList.toggle('on',t==='traffic');
     $('tabNew').classList.toggle('on',t==='new');
-    if(t==='orders') renderOrders(); else if(t==='analytics') renderAnalytics(); else renderNew();
+    if(t==='orders') renderOrders(); else if(t==='analytics') renderAnalytics();
+    else if(t==='traffic') renderTraffic(); else renderNew();
+  }
+  async function renderTraffic(){
+    const wrap=$('main');
+    wrap.innerHTML='<div class="empty">Loading traffic…</div>';
+    let d; try{ const r=await fetch('/api/admin/portal-analytics?token='+encodeURIComponent(auth.token));
+      if(r.status===401){ logout(); return; } d=await r.json(); }catch(e){ wrap.innerHTML='<div class="empty">Error</div>'; return; }
+    if(!d.success){ wrap.innerHTML='<div class="empty">'+esc(d.error||'Error')+'</div>'; return; }
+    const t=d.totals||{};
+    const kpi=(label,val)=>`<div class="kpi"><div class="k-l">${label}</div><div class="k-v">${val}</div></div>`;
+    const maxDay=Math.max(1,...(d.logins_by_day||[]).map(x=>x.count));
+    wrap.innerHTML=`
+      <div class="kpis">${kpi('Total logins',t.logins_total||0)}${kpi('Searches',t.searches_total||0)}${kpi('Orders',t.orders_total||0)}</div>
+      <div class="card"><h3>Logins per day (14 days)</h3>
+        <table><thead><tr><th>Day</th><th>Logins</th><th></th></tr></thead><tbody>
+        ${(d.logins_by_day||[]).map(x=>`<tr><td>${esc(x.day)}</td><td class="num">${x.count}</td>
+          <td><div style="background:#1f3864;height:10px;border-radius:5px;width:${Math.round(x.count/maxDay*160)}px"></div></td></tr>`).join('')||'<tr><td colspan=3 class="empty">No logins yet</td></tr>'}</tbody></table></div>
+      <div class="card"><h3>Aerostar vs Honda</h3>
+        <table><thead><tr><th>Portal</th><th class="num">Visits</th><th class="num">Users</th></tr></thead><tbody>
+        ${(d.portals||[]).map(p=>`<tr><td>${esc(p.portal)}</td><td class="num">${p.views}</td><td class="num">${p.users}</td></tr>`).join('')||'<tr><td colspan=3 class="empty">No data</td></tr>'}</tbody></table></div>
+      <div class="card"><h3>Most searched</h3>
+        <table><thead><tr><th>Search term</th><th class="num">Times</th></tr></thead><tbody>
+        ${(d.top_search||[]).map(s=>`<tr><td>${esc(s.term)}</td><td class="num">${s.count}</td></tr>`).join('')||'<tr><td colspan=2 class="empty">No searches yet</td></tr>'}</tbody></table></div>
+      <div class="card"><h3>Searched but never ordered</h3>
+        <table><thead><tr><th>Firm</th><th>Mobile</th><th class="num">Searches</th></tr></thead><tbody>
+        ${(d.searched_no_order||[]).map(u=>`<tr><td>${esc(u.firm||'—')}</td><td>${esc(u.mobile)}</td><td class="num">${u.searches}</td></tr>`).join('')||'<tr><td colspan=3 class="empty">Everyone who searched has ordered 🎉</td></tr>'}</tbody></table></div>`;
   }
   function setPortal(p){ portal=p; if(curTab==='orders') renderOrders(); else renderAnalytics(); }
 
