@@ -955,6 +955,19 @@ const App = (() => {
 
   function saveBasketToStorage() {
     try { localStorage.setItem(basketStoreKey(), JSON.stringify(basket)); } catch(_) {}
+    syncCart();
+  }
+  let _cartTimer = null;
+  function syncCart() {
+    if (!session || !session.firm) return;
+    clearTimeout(_cartTimer);
+    _cartTimer = setTimeout(() => {
+      const items = Object.values(basket).map(b => ({
+        part_no: b.as_part_number, name: b.description, qty: b.qty, price: (Number(b.mrp)||null) }));
+      try { fetch('/api/cart-sync', { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ portal:'aerostar', firm:session.firm, contact:session.contact, items }),
+        keepalive:true }).catch(()=>{}); } catch(e){}
+    }, 1200);
   }
 
   function loadBasketFromStorage() {

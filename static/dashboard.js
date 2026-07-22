@@ -73,7 +73,7 @@ const D = (() => {
     const kpi=(label,val)=>`<div class="kpi"><div class="k-l">${label}</div><div class="k-v">${val}</div></div>`;
     const maxDay=Math.max(1,...(d.logins_by_day||[]).map(x=>x.count));
     wrap.innerHTML=`
-      <div class="kpis">${kpi('Total logins',t.logins_total||0)}${kpi('Searches',t.searches_total||0)}${kpi('Vehicle-no. lookups',t.vin_total||0)}${kpi('Orders',t.orders_total||0)}</div>
+      <div class="kpis">${kpi('Total logins',t.logins_total||0)}${kpi('Searches',t.searches_total||0)}${kpi('Vehicle-no. lookups',t.vin_total||0)}${kpi('Open baskets',t.carts_total||0)}${kpi('Orders',t.orders_total||0)}</div>
       <div class="card"><h3>Logins per day — unique users (14 days)</h3>
         <table><thead><tr><th>Day</th><th class="num">Users</th><th></th></tr></thead><tbody>
         ${(d.logins_by_day||[]).map((x,i)=>`
@@ -89,6 +89,21 @@ const D = (() => {
       <div class="card"><h3>Aerostar vs Honda</h3>
         <table><thead><tr><th>Portal</th><th class="num">Visits</th><th class="num">Users</th></tr></thead><tbody>
         ${(d.portals||[]).map(p=>`<tr><td>${esc(p.portal)}</td><td class="num">${p.views}</td><td class="num">${p.users}</td></tr>`).join('')||'<tr><td colspan=3 class="empty">No data</td></tr>'}</tbody></table></div>
+      <div class="card"><h3>🛒 Baskets not yet ordered — follow up</h3>
+        <table><thead><tr><th>Firm</th><th>Mobile</th><th class="num">Items</th><th class="num">Value ₹</th><th>Last active</th><th></th></tr></thead><tbody>
+        ${(d.open_carts||[]).map((c,i)=>`
+          <tr class="lg-day" style="cursor:pointer" onclick="D.toggleCart(${i})">
+            <td><span id="ct-ar-${i}">▸</span> ${esc(c.firm||'—')}${c.portal?` <span class="pill">${esc(c.portal)}</span>`:''}</td>
+            <td>${esc(c.mobile||'—')}</td>
+            <td class="num">${c.qty}</td>
+            <td class="num">${Math.round(c.amt||0).toLocaleString('en-IN')}</td>
+            <td>${ago(c.age_hrs)}</td>
+            <td>${c.mobile?`<a href="https://wa.me/91${esc(String(c.mobile).replace(/\\D/g,''))}?text=${encodeURIComponent('Namaste '+(c.firm||'')+', aapke basket me '+c.qty+' items pending hain. Order confirm karein?')}" target="_blank" onclick="event.stopPropagation()" class="wa-link">💬 WhatsApp</a>`:''}</td></tr>
+          <tr id="ct-u-${i}" class="hidden"><td colspan="6" style="padding:0 10px 10px">
+            <table style="width:100%;background:#f7f9fc;border-radius:8px;margin:0">
+              <thead><tr><th>Part No</th><th>Description</th><th class="num">Qty</th><th class="num">₹</th></tr></thead>
+              <tbody>${(c.items||[]).map(it=>`<tr><td>${esc(it.part_no)}</td><td>${esc(it.name||'—')}</td><td class="num">${it.qty}</td><td class="num">${it.price?Math.round(it.price).toLocaleString('en-IN'):'—'}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">—</td></tr>'}</tbody>
+            </table></td></tr>`).join('')||'<tr><td colspan=6 class="empty">No open baskets right now 🎉</td></tr>'}</tbody></table></div>
       <div class="card"><h3>Vehicle-number lookups per retailer (VAHAN API)</h3>
         <table><thead><tr><th>Firm</th><th>Mobile</th><th class="num">Lookups</th></tr></thead><tbody>
         ${(d.vin_by_retailer||[]).map(u=>`<tr><td>${esc(u.firm||'—')}</td><td>${esc(u.mobile)}</td><td class="num">${u.searches}</td></tr>`).join('')||'<tr><td colspan=3 class="empty">No vehicle-number lookups yet</td></tr>'}</tbody></table></div>
@@ -253,5 +268,17 @@ const D = (() => {
     const nowHidden=el.classList.toggle('hidden');
     if(ar) ar.textContent=nowHidden?'▸':'▾';
   }
-  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending, toggleDay };
+  function toggleCart(i){
+    const el=document.getElementById('ct-u-'+i), ar=document.getElementById('ct-ar-'+i);
+    if(!el) return;
+    const nowHidden=el.classList.toggle('hidden');
+    if(ar) ar.textContent=nowHidden?'▸':'▾';
+  }
+  function ago(hrs){
+    hrs=Number(hrs)||0;
+    if(hrs<1) return Math.max(1,Math.round(hrs*60))+'m ago';
+    if(hrs<24) return Math.round(hrs)+'h ago';
+    return Math.round(hrs/24)+'d ago';
+  }
+  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending, toggleDay, toggleCart };
 })();

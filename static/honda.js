@@ -77,7 +77,18 @@ const H = (() => {
   function saveBasket(){ try{
     const slim={}; for(const k in basket){ const b=basket[k]; slim[k]={part_no:b.part.part_no, qty:b.qty}; }
     localStorage.setItem(basketKey(), JSON.stringify(slim));
-  }catch(e){} }
+  }catch(e){} syncCart(); }
+  let _cartTimer=null;
+  function syncCart(){
+    if(!session||!session.firm) return;
+    clearTimeout(_cartTimer);
+    _cartTimer=setTimeout(()=>{
+      const items=Object.values(basket).map(b=>({part_no:b.part.part_no, name:b.part.name, qty:b.qty, price:b.part.price}));
+      try{ fetch('/api/cart-sync',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({portal:'honda', firm:session.firm, contact:session.contact, items}),
+        keepalive:true}).catch(()=>{}); }catch(e){}
+    }, 1200);
+  }
   function loadBasket(){ try{
     const raw=JSON.parse(localStorage.getItem(basketKey())||'null'); basket={};
     if(raw && parts.length){ for(const k in raw){ const p=findPart(k); if(p) basket[k]={part:p,qty:raw[k].qty}; } }

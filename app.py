@@ -243,6 +243,60 @@ def track():
     return jsonify({'ok': True})
 
 
+def _cart_key(portal, mobile, firm):
+    uid = re.sub(r'\D', '', mobile or '') or (firm or '').strip().lower() or 'anon'
+    return f'{(portal or "").lower()}|{uid}'
+
+def _clear_cart(portal, mobile, firm):
+    """Remove a customer's saved basket (e.g. once they place the order)."""
+    try:
+        conn = _orders_conn()
+        conn.execute('DELETE FROM carts WHERE ckey=?', (_cart_key(portal, mobile, firm),))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[cart clear] {e}", flush=True)
+
+@app.route('/api/cart-sync', methods=['POST'])
+def cart_sync():
+    """Persist a customer's current basket so admins can follow up on unplaced carts."""
+    if rate_limit('cartsync', 120, 60):
+        return jsonify({'ok': False}), 429
+    d = request.json or {}
+    portal = (d.get('portal') or '')[:20].lower()
+    firm = (d.get('firm') or '').strip()[:80]
+    mobile = (d.get('contact') or d.get('mobile') or '').strip()[:20]
+    if not firm and not mobile:
+        return jsonify({'ok': False})           # anonymous — nothing to follow up on
+    raw = d.get('items') or []
+    items, qty, amt = [], 0, 0.0
+    for it in raw[:400]:
+        pn = (str(it.get('part_no') or '')).strip()[:40]
+        if not pn:
+            continue
+        q = int(it.get('qty') or 0)
+        if q <= 0:
+            continue
+        pr = _num(it.get('price')) or 0
+        items.append({'part_no': pn, 'name': (str(it.get('name') or ''))[:120],
+                      'qty': q, 'price': pr})
+        qty += q; amt += pr * q
+    ckey = _cart_key(portal, mobile, firm)
+    try:
+        conn = _orders_conn()
+        if not items:
+            conn.execute('DELETE FROM carts WHERE ckey=?', (ckey,))
+        else:
+            conn.execute('INSERT OR REPLACE INTO carts(ckey,portal,firm,mobile,items,qty,amt,updated) '
+                         'VALUES(?,?,?,?,?,?,?,?)',
+                         (ckey, portal, firm, mobile, json.dumps(items, ensure_ascii=False),
+                          qty, round(amt, 2), int(time.time())))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[cart sync] {e}", flush=True)
+        return jsonify({'ok': False})
+    return jsonify({'ok': True})
+
+
 @app.route('/honda')
 def honda():
     log_event('view', portal='honda')
@@ -690,6 +744,10 @@ def _orders_conn():
     # image-CAPTCHA answers (shared across gunicorn workers via the DB)
     conn.execute('''CREATE TABLE IF NOT EXISTS captcha(
         token TEXT PRIMARY KEY, answer TEXT, exp REAL)''')
+    # live baskets not yet ordered (for follow-up) — one row per customer/portal
+    conn.execute('''CREATE TABLE IF NOT EXISTS carts(
+        ckey TEXT PRIMARY KEY, portal TEXT, firm TEXT, mobile TEXT,
+        items TEXT, qty INTEGER, amt REAL, updated INTEGER)''')
     return conn
 
 def log_event(event, portal='', firm='', mobile='', detail=''):
@@ -1203,14 +1261,29 @@ def admin_portal_analytics():
     vin_by_retailer = [{'mobile': m, 'firm': f, 'searches': c} for m, f, c in q(
         "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='vin' AND mobile<>'' "
         "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
+    # baskets not yet placed as orders — for follow-up
+    open_carts = []
+    now = int(time.time())
+    for firm, mobile, portal_c, qty, amt, upd, items_j in q(
+            "SELECT firm, mobile, portal, qty, amt, updated, items FROM carts "
+            "WHERE qty > 0 ORDER BY updated DESC LIMIT 100").fetchall():
+        try:
+            items = json.loads(items_j)
+        except Exception:
+            items = []
+        open_carts.append({'firm': firm or '—', 'mobile': mobile or '', 'portal': portal_c or '',
+                           'qty': qty, 'amt': amt, 'updated': upd,
+                           'age_hrs': round((now - (upd or now)) / 3600, 1), 'items': items})
+    carts_total = q("SELECT COUNT(*) FROM carts WHERE qty > 0").fetchone()[0]
     totals = dict(logins_total=q("SELECT COUNT(*) FROM analytics WHERE event='login'").fetchone()[0],
                   orders_total=q("SELECT COUNT(*) FROM analytics WHERE event='order'").fetchone()[0],
                   searches_total=q("SELECT COUNT(*) FROM analytics WHERE event='search'").fetchone()[0],
-                  vin_total=q("SELECT COUNT(*) FROM analytics WHERE event='vin'").fetchone()[0])
+                  vin_total=q("SELECT COUNT(*) FROM analytics WHERE event='vin'").fetchone()[0],
+                  carts_total=carts_total)
     conn.close()
     return jsonify({'success': True, 'logins_by_day': logins, 'portals': portals,
                     'top_search': top_search, 'searched_no_order': no_order,
-                    'vin_by_retailer': vin_by_retailer, 'totals': totals})
+                    'vin_by_retailer': vin_by_retailer, 'open_carts': open_carts, 'totals': totals})
 
 
 @app.route('/api/admin/analytics')
@@ -1341,6 +1414,7 @@ def checkout():
 
     # persist to cross-device order history (keyed by mobile)
     save_order_db(oid, portal, firm_name, contact_number, items)
+    _clear_cart(portal, contact_number, firm_name)   # ordered -> no longer a pending cart
     log_event('order', portal=portal, firm=firm_name, mobile=contact_number,
               detail=f'{len(items)} items')
 
