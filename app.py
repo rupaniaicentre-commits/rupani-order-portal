@@ -25,6 +25,10 @@ except ImportError:
 import urllib.request
 import urllib.parse
 import threading
+import base64
+import io
+import random
+import secrets
 
 # ── Surepass RC config ────────────────────────────────────────────
 # Use the endpoint your token is SCOPED for. Our sandbox token has scope for
@@ -479,6 +483,83 @@ def honda_common():
 
 _REG_RE = re.compile(r'^[A-Z]{2}[0-9]{1,2}[A-Z]{0,3}[0-9]{1,4}$')
 
+# ── image CAPTCHA (protects the credit-costly VAHAN lookup from bots) ──
+_CAPTCHA_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'   # no 0/O, 1/I/L ambiguity
+
+def _captcha_image(text):
+    """Render distorted letters to a PNG (bytes) so bots can't read the DOM."""
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = 200, 70
+    img = Image.new('RGB', (W, H), (247, 240, 240))
+    draw = ImageDraw.Draw(img)
+    try:
+        font = ImageFont.load_default(size=42)
+    except TypeError:
+        font = ImageFont.load_default()
+    # noise: faint lines + dots
+    for _ in range(6):
+        draw.line([(random.randint(0, W), random.randint(0, H)),
+                   (random.randint(0, W), random.randint(0, H))],
+                  fill=(random.randint(180, 220),) * 3, width=1)
+    for _ in range(120):
+        draw.point((random.randint(0, W), random.randint(0, H)),
+                   fill=(random.randint(150, 210),) * 3)
+    x = 18
+    for ch in text:
+        col = (random.randint(0, 90), random.randint(0, 90), random.randint(90, 170))
+        glyph = Image.new('RGBA', (44, 60), (0, 0, 0, 0))
+        gd = ImageDraw.Draw(glyph)
+        gd.text((6, 4), ch, font=font, fill=col + (255,))
+        glyph = glyph.rotate(random.randint(-28, 28), expand=1, resample=Image.BICUBIC)
+        img.paste(glyph, (x, random.randint(2, 12)), glyph)
+        x += 34
+    buf = io.BytesIO()
+    img.save(buf, format='PNG')
+    return buf.getvalue()
+
+def _captcha_purge(conn):
+    try:
+        conn.execute('DELETE FROM captcha WHERE exp < ?', (time.time(),))
+    except Exception:
+        pass
+
+def _captcha_verify(token, answer):
+    if not token or not answer:
+        return False
+    try:
+        conn = _orders_conn()
+        _captcha_purge(conn)
+        row = conn.execute('SELECT answer, exp FROM captcha WHERE token=?', (token,)).fetchone()
+        if row:
+            conn.execute('DELETE FROM captcha WHERE token=?', (token,))   # one-time use
+            conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"[captcha verify] {e}", flush=True)
+        return False
+    if not row or row[1] < time.time():
+        return False
+    return (answer or '').strip().upper() == (row[0] or '').upper()
+
+@app.route('/api/honda/captcha')
+def honda_captcha():
+    """Issue a fresh image CAPTCHA for the vehicle-number lookup."""
+    if rate_limit('captcha', 60, 300):
+        return jsonify({'error': 'Thodi der baad try karo.'}), 429
+    text = ''.join(random.choice(_CAPTCHA_CHARS) for _ in range(5))
+    token = secrets.token_urlsafe(18)
+    try:
+        conn = _orders_conn()
+        _captcha_purge(conn)
+        conn.execute('INSERT OR REPLACE INTO captcha(token, answer, exp) VALUES(?,?,?)',
+                     (token, text, time.time() + 300))       # valid 5 min
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[captcha issue] {e}", flush=True)
+        return jsonify({'error': 'captcha error'}), 500
+    img = base64.b64encode(_captcha_image(text)).decode()
+    return jsonify({'token': token, 'img': 'data:image/png;base64,' + img})
+
 @app.route('/api/honda/resolve-vehicle', methods=['POST'])
 def honda_resolve_vehicle():
     """Customer flow: number plate -> VAHAN -> exact Honda model -> its parts.
@@ -495,6 +576,10 @@ def honda_resolve_vehicle():
         return jsonify({'resolved': False, 'error': 'Gaadi ka number daalo.'})
     if not _REG_RE.match(reg):
         return jsonify({'resolved': False, 'error': 'Number sahi format me daalo (jaise MH31AB1234).'})
+    # bot guard: valid image CAPTCHA required BEFORE we spend a VAHAN credit
+    if not _captcha_verify(d.get('captcha_token'), d.get('captcha_answer')):
+        return jsonify({'resolved': False, 'captcha_fail': True,
+                        'error': 'CAPTCHA galat ya expire ho gaya. Naya code padho aur dubara daalo.'})
     # credit guard: per-IP hourly + daily caps on VAHAN lookups
     if rate_limit('vahan_pub_hr', 10, 3600) or rate_limit('vahan_pub_day', 30, 86400):
         return jsonify({'resolved': False, 'error': 'Bahut zyada lookups. Thodi der baad try karo.'}), 429
@@ -602,6 +687,9 @@ def _orders_conn():
         ts INTEGER, event TEXT, portal TEXT, firm TEXT, mobile TEXT, detail TEXT, ip TEXT)''')
     conn.execute('CREATE INDEX IF NOT EXISTS idx_an_ts ON analytics(ts)')
     conn.execute('CREATE INDEX IF NOT EXISTS idx_an_event ON analytics(event)')
+    # image-CAPTCHA answers (shared across gunicorn workers via the DB)
+    conn.execute('''CREATE TABLE IF NOT EXISTS captcha(
+        token TEXT PRIMARY KEY, answer TEXT, exp REAL)''')
     return conn
 
 def log_event(event, portal='', firm='', mobile='', detail=''):
@@ -1101,12 +1189,18 @@ def admin_portal_analytics():
         "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='search' AND mobile<>'' "
         "AND mobile NOT IN (SELECT DISTINCT mobile FROM analytics WHERE event='order') "
         "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
+    # VAHAN (vehicle-number) lookups per retailer — how many API searches each made
+    vin_by_retailer = [{'mobile': m, 'firm': f, 'searches': c} for m, f, c in q(
+        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='vin' AND mobile<>'' "
+        "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
     totals = dict(logins_total=q("SELECT COUNT(*) FROM analytics WHERE event='login'").fetchone()[0],
                   orders_total=q("SELECT COUNT(*) FROM analytics WHERE event='order'").fetchone()[0],
-                  searches_total=q("SELECT COUNT(*) FROM analytics WHERE event='search'").fetchone()[0])
+                  searches_total=q("SELECT COUNT(*) FROM analytics WHERE event='search'").fetchone()[0],
+                  vin_total=q("SELECT COUNT(*) FROM analytics WHERE event='vin'").fetchone()[0])
     conn.close()
     return jsonify({'success': True, 'logins_by_day': logins, 'portals': portals,
-                    'top_search': top_search, 'searched_no_order': no_order, 'totals': totals})
+                    'top_search': top_search, 'searched_no_order': no_order,
+                    'vin_by_retailer': vin_by_retailer, 'totals': totals})
 
 
 @app.route('/api/admin/analytics')

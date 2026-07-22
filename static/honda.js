@@ -137,7 +137,13 @@ const H = (() => {
             onkeydown="if(event.key==='Enter')H.lookupVin()">
           <button id="vinBtn" class="vinbtn" onclick="H.lookupVin()">Parts dekho</button>
         </div>
-        <div class="vinnote">Number plate se aapki Honda ka exact model apne aap mil jayega</div>
+        <div class="caprow">
+          <img id="capImg" class="capimg" alt="CAPTCHA">
+          <button type="button" class="capref" onclick="H.reloadCaptcha()" title="Naya code">↻</button>
+          <input id="capInput" class="capin" autocomplete="off" placeholder="Upar ke letters likho"
+            onkeydown="if(event.key==='Enter')H.lookupVin()">
+        </div>
+        <div class="vinnote">Bot rok-thaam ke liye CAPTCHA letters daalo · phir number plate se exact model milega</div>
       </div>
       <div class="crumb"><b>Ya browse karo</b> — full range, vehicle, ya part search</div>
       <div class="vgrid" style="margin-bottom:22px">
@@ -157,6 +163,7 @@ const H = (() => {
         <div id="modelResults">${catalogFamiliesHTML('')}</div>`;
     }
     $('main').innerHTML=html;
+    loadCaptcha();
   }
   function catalogFamiliesHTML(q){
     q=(q||'').toLowerCase().trim();
@@ -336,6 +343,16 @@ const H = (() => {
     return qWords(q).every(w=>hay.includes(w));
   }
 
+  // ── image CAPTCHA (bot guard before the credit-costly VAHAN lookup) ──
+  let capToken=null;
+  async function loadCaptcha(){
+    const img=$('capImg'); if(!img) return;
+    capToken=null; img.removeAttribute('src');
+    try{ const d=await (await fetch('/api/honda/captcha')).json();
+      if(d&&d.img){ img.src=d.img; capToken=d.token; } }catch(e){}
+  }
+  function reloadCaptcha(){ const i=$('capInput'); if(i) i.value=''; loadCaptcha(); }
+
   // ── vehicle-number lookup (VAHAN -> exact model -> parts) ──
   let vinResult=null;
   function vehCardHTML(v, reg){
@@ -349,15 +366,19 @@ const H = (() => {
     const el=$('vinInput'); if(!el) return;
     const reg=(el.value||'').trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
     if(!reg){ toast('Gaadi ka number daalo'); return; }
+    const cap=(($('capInput')&&$('capInput').value)||'').trim();
+    if(!cap){ toast('Pehle CAPTCHA ke letters likho'); return; }
     const btn=$('vinBtn'); if(btn){ btn.disabled=true; btn.textContent='Dhoond rahe hain…'; }
     try{
       const r=await fetch('/api/honda/resolve-vehicle',{method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({reg_number:reg, firm:session.firm, contact:session.contact})});
+        body:JSON.stringify({reg_number:reg, firm:session.firm, contact:session.contact,
+          captcha_token:capToken, captcha_answer:cap})});
       vinResult=await r.json();
     }catch(e){ vinResult={resolved:false, error:'Network problem. Dubara try karo.'}; }
     vinResult._reg=reg;
     if(btn){ btn.disabled=false; btn.textContent='Parts dekho'; }
+    if(vinResult.captcha_fail){ toast('CAPTCHA galat — naya code padho'); reloadCaptcha(); return; }
     go('vin',null,true);
   }
   async function fetchAndMount(crumb, titlePrefix, model_ids, head){
@@ -688,7 +709,7 @@ const H = (() => {
     login, home, back, openVehicle:(v)=>go('vehicle',v,true),
     openFamily:(f)=>go('family',f,true),
     openVariant:(f,s,v)=>go('variant',f+'|'+s+'|'+v,true),
-    lookupVin, vinPick, reopenVin:()=>go('vin',null,true),
+    lookupVin, vinPick, reopenVin:()=>go('vin',null,true), reloadCaptcha,
     filterGroup, filterModels,
     openAll:()=>go('all',null,true), openCommon:()=>go('common',null,true), openNew:()=>go('new',null,true),
     onSearch, onSearchKey, focusDD, clearSearch, pick,
