@@ -176,18 +176,37 @@ const D = (() => {
     det.innerHTML=`
       <table><thead><tr><th>Ordered Part</th><th>Description</th><th>Alternate part sent</th><th class="num">Ordered</th><th class="num">Dispatched</th><th class="num">Pending</th></tr></thead>
       <tbody>${o.items.map((it,i)=>{
-        const disp=Math.min(it.disp||0,it.qty), pend=it.qty-disp;
+        const disp=Math.min(it.disp||0,it.qty), pend=it.qty-disp, full=disp>=it.qty&&it.qty>0;
         return `<tr><td>${esc(it.part_no)}</td><td>${esc(it.name)}</td>
           <td><input class="alti" id="a-${esc(oid)}-${i}" type="text" placeholder="same as ordered" value="${esc(it.alt||'')}"></td>
           <td class="num">${it.qty}</td>
-          <td class="num"><input class="qi" id="q-${esc(oid)}-${i}" type="number" min="0" max="${it.qty}" value="${disp}"></td>
-          <td class="num" style="color:${pend?'#b45309':'#065f46'};font-weight:600">${pend}</td></tr>`;
+          <td class="num"><div class="dispcell">
+            <label class="fullchk" title="Poora ordered qty dispatch"><input type="checkbox" id="f-${esc(oid)}-${i}" ${full?'checked':''} onchange="D.toggleFull('${esc(oid)}',${i},${it.qty})"> full</label>
+            <input class="qi" id="q-${esc(oid)}-${i}" type="number" min="0" max="${it.qty}" value="${disp}" oninput="D.syncFull('${esc(oid)}',${i},${it.qty})"></div></td>
+          <td class="num" id="p-${esc(oid)}-${i}" style="color:${pend?'#b45309':'#065f46'};font-weight:600">${pend}</td></tr>`;
       }).join('')}</tbody></table>
       <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
         <button class="markall" onclick="D.markAll('${esc(oid)}')">✓ Mark all dispatched</button>
         <button class="save" onclick="D.saveDispatch('${esc(oid)}')">Save dispatch</button>
       </div>`;
     det.classList.remove('hidden');
+  }
+  function updatePend(oid,i,qty){
+    const v=Math.min(parseInt($(`q-${oid}-${i}`)?.value)||0, qty);
+    const cell=$(`p-${oid}-${i}`); if(!cell) return;
+    const pend=qty-v; cell.textContent=pend; cell.style.color=pend?'#b45309':'#065f46';
+  }
+  // tick "full" -> fill the whole ordered qty; untick -> clear to 0
+  function toggleFull(oid,i,qty){
+    const chk=$(`f-${oid}-${i}`), inp=$(`q-${oid}-${i}`); if(!inp) return;
+    inp.value = (chk&&chk.checked) ? qty : 0;
+    updatePend(oid,i,qty);
+  }
+  // typing the number keeps the tick in sync (full qty -> ticked)
+  function syncFull(oid,i,qty){
+    const chk=$(`f-${oid}-${i}`), inp=$(`q-${oid}-${i}`); if(!chk||!inp) return;
+    chk.checked = (parseInt(inp.value)||0) >= qty && qty>0;
+    updatePend(oid,i,qty);
   }
   async function saveDispatch(oid){
     const o=orders.find(x=>x.oid===oid); if(!o) return;
@@ -280,5 +299,5 @@ const D = (() => {
     if(hrs<24) return Math.round(hrs)+'h ago';
     return Math.round(hrs/24)+'d ago';
   }
-  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending, toggleDay, toggleCart };
+  return { login, logout, tab, setPortal, setStatus, setQ, toggleOrder, saveDispatch, markAll, dlPending, toggleDay, toggleCart, toggleFull, syncFull };
 })();
