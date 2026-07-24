@@ -1245,18 +1245,24 @@ def admin_pending_export():
 @app.route('/api/admin/portal-analytics')
 def admin_portal_analytics():
     auth = _admin_auth(request.args.get('token', ''))
-    if not auth or auth.get('role') != 'admin':
-        return jsonify({'success': False, 'error': 'unauthorized — admin only'}), 401
+    if not auth:                                       # admin + sales managers
+        return jsonify({'success': False, 'error': 'unauthorized'}), 401
+    # sales managers only see their own portal; admin sees everything
+    scope = auth.get('scope')
+    scoped = scope in ('honda', 'aerostar')
+    pc = ' AND portal=?' if scoped else ''            # for WHERE ... clauses
+    pv = [scope] if scoped else []
     conn = _orders_conn()
-    q = conn.execute
+    def q(sql, args=()):
+        return conn.execute(sql, args)
     # logins per day (last 14 days) — count each retailer ONCE per day, plus the
     # list of who signed in that day for the collapsible view
     login_rows = q(
         "SELECT date(ts,'unixepoch','localtime') d, "
         "COALESCE(NULLIF(mobile,''), NULLIF(firm,''), 'unknown') uid, "
         "MAX(firm) firm, MAX(mobile) mobile, COUNT(*) hits "
-        "FROM analytics WHERE event='login' AND ts > strftime('%s','now','-14 days') "
-        "GROUP BY d, uid ORDER BY d DESC, firm").fetchall()
+        "FROM analytics WHERE event='login' AND ts > strftime('%s','now','-14 days')" + pc +
+        " GROUP BY d, uid ORDER BY d DESC, firm", pv).fetchall()
     by_day, day_order = {}, []
     for d, uid, firm, mobile, hits in login_rows:
         if d not in by_day:
@@ -1265,27 +1271,27 @@ def admin_portal_analytics():
     logins = [{'day': d, 'count': len(by_day[d]), 'users': by_day[d]} for d in day_order]
     # unique visitors (by mobile) per portal + total views
     portal_rows = q("SELECT portal, COUNT(*) views, COUNT(DISTINCT mobile) users FROM analytics "
-                    "WHERE event IN ('view','login') GROUP BY portal").fetchall()
+                    "WHERE event IN ('view','login')" + pc + " GROUP BY portal", pv).fetchall()
     portals = [{'portal': p or 'other', 'views': v, 'users': u} for p, v, u in portal_rows]
     # most-searched terms
     top_search = [{'term': t, 'count': c} for t, c in q(
-        "SELECT detail, COUNT(*) c FROM analytics WHERE event='search' AND detail<>'' "
-        "GROUP BY lower(detail) ORDER BY c DESC LIMIT 25").fetchall()]
+        "SELECT detail, COUNT(*) c FROM analytics WHERE event='search' AND detail<>''" + pc +
+        " GROUP BY lower(detail) ORDER BY c DESC LIMIT 25", pv).fetchall()]
     # searched but never ordered (by mobile)
     no_order = [{'mobile': m, 'firm': f, 'searches': c} for m, f, c in q(
-        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='search' AND mobile<>'' "
-        "AND mobile NOT IN (SELECT DISTINCT mobile FROM analytics WHERE event='order') "
-        "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
+        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='search' AND mobile<>''" + pc +
+        " AND mobile NOT IN (SELECT DISTINCT mobile FROM analytics WHERE event='order'" + pc + ")"
+        " GROUP BY mobile ORDER BY c DESC LIMIT 50", pv + pv).fetchall()]
     # VAHAN (vehicle-number) lookups per retailer — how many API searches each made
     vin_by_retailer = [{'mobile': m, 'firm': f, 'searches': c} for m, f, c in q(
-        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='vin' AND mobile<>'' "
-        "GROUP BY mobile ORDER BY c DESC LIMIT 50").fetchall()]
+        "SELECT mobile, MAX(firm), COUNT(*) c FROM analytics WHERE event='vin' AND mobile<>''" + pc +
+        " GROUP BY mobile ORDER BY c DESC LIMIT 50", pv).fetchall()]
     # baskets not yet placed as orders — for follow-up
     open_carts = []
     now = int(time.time())
     for firm, mobile, portal_c, qty, amt, upd, items_j in q(
             "SELECT firm, mobile, portal, qty, amt, updated, items FROM carts "
-            "WHERE qty > 0 ORDER BY updated DESC LIMIT 100").fetchall():
+            "WHERE qty > 0" + pc + " ORDER BY updated DESC LIMIT 100", pv).fetchall():
         try:
             items = json.loads(items_j)
         except Exception:
@@ -1293,14 +1299,13 @@ def admin_portal_analytics():
         open_carts.append({'firm': firm or '—', 'mobile': mobile or '', 'portal': portal_c or '',
                            'qty': qty, 'amt': amt, 'updated': upd,
                            'age_hrs': round((now - (upd or now)) / 3600, 1), 'items': items})
-    carts_total = q("SELECT COUNT(*) FROM carts WHERE qty > 0").fetchone()[0]
-    totals = dict(logins_total=q("SELECT COUNT(*) FROM analytics WHERE event='login'").fetchone()[0],
-                  orders_total=q("SELECT COUNT(*) FROM analytics WHERE event='order'").fetchone()[0],
-                  searches_total=q("SELECT COUNT(*) FROM analytics WHERE event='search'").fetchone()[0],
-                  vin_total=q("SELECT COUNT(*) FROM analytics WHERE event='vin'").fetchone()[0],
+    carts_total = q("SELECT COUNT(*) FROM carts WHERE qty > 0" + pc, pv).fetchone()[0]
+    ev_total = lambda ev: q("SELECT COUNT(*) FROM analytics WHERE event=?" + pc, [ev] + pv).fetchone()[0]
+    totals = dict(logins_total=ev_total('login'), orders_total=ev_total('order'),
+                  searches_total=ev_total('search'), vin_total=ev_total('vin'),
                   carts_total=carts_total)
     conn.close()
-    return jsonify({'success': True, 'logins_by_day': logins, 'portals': portals,
+    return jsonify({'success': True, 'scope': scope, 'logins_by_day': logins, 'portals': portals,
                     'top_search': top_search, 'searched_no_order': no_order,
                     'vin_by_retailer': vin_by_retailer, 'open_carts': open_carts, 'totals': totals})
 

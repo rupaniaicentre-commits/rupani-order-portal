@@ -35,8 +35,8 @@ const D = (() => {
     $('who').textContent = `${auth.user} · ${auth.role==='admin'?'Admin':'Sales Manager'} · ${scopeLabel}`;
     // New Items tab is Honda-only
     if(auth.scope==='all'||auth.scope==='honda'){ $('tabNew').classList.remove('hidden'); loadNewBadge(); }
-    // Traffic tab is admin-only
-    if(auth.role==='admin'){ $('tabTraffic').classList.remove('hidden'); }
+    // Traffic tab: admin + sales managers (managers see only their own portal)
+    if($('tabTraffic')) $('tabTraffic').classList.remove('hidden');
     tab('orders');
   }
   async function loadNewBadge(){
